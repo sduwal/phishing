@@ -1,7 +1,7 @@
 | Date          | Target                                                                | Status                        |
 | ------------- | --------------------------------------------------------------------- | ----------------------------- |
 | **July**      | --                                                                    | [Notes](#monday-july-12-2021) |
-| July 12       | Research Topics, research phishing, ideas on how to start             |                               |
+| July 12       | Research Topics, research phishing, ideas on how to start             | [Notes](#monday-july-19-2021) |
 | July 19       | Finish paper prototype, including all the screens and how to approach |                               |
 | July 26       | Refinement and Start the application                                  |                               |
 | **August**    |                                                                       |                               |
@@ -28,12 +28,22 @@
 - [ ] Read the papers sent by Dr. Phani
 ## Notes on each meetings
 
+### Monday, July 19, 2021
+- Discussion on what.hack paper
+- The gameplay might have to be multi player experience
+- The attacker sole job is to create phishing emails and the victims will differentiate phishing emails with normal emails
+- TODO
+  - [ ] Come up with story line. Example Attacker is trying to get the UNO student user name and password for some malicious intent
+  - [ ] Complete the hacker mail client
+  - [ ] Come up with level progression ideas for hacker and how to differentiate such ideas
+  - [ ] Think of emailing templates to generate 
 
 ### Monday, July 12, 2021
 - Pre survey, post survey and train part
 - Decision on pre and post survey will be made later
 - Work on the black box portion (Train)
 - TODO:
-  - [ ] Come up with learning objectives
-  - [ ] Come up with paper prototype
-  - [ ] Read the papers sent by Dr. Phani
+  - [x] Come up with learning objectives
+  - [x] Come up with paper prototype
+  - [x] Read the papers sent by Dr. Phani
+
