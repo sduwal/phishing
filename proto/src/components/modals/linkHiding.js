@@ -12,20 +12,37 @@ import {
     Link,
     Spacer,
     Image,
+    Box,
+    Heading,
 } from "@chakra-ui/react";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { EmailContext } from "../../AppState";
 
 export default function LinkHiding() {
     const { isOpen, onOpen, onClose } = useDisclosure();
-
+    const [email, dispatch] = useContext(EmailContext);
     function closeModal() {
         setIndex(0);
         onClose();
     }
 
     function insertTemplate() {
-        console.log("Insert a template here");
+        dispatch({
+            type: "CHANGE",
+            email: {
+                subject: "Scheduled Home Delivery Problems",
+                email: `
+                        <p>
+                            Unfortunately, the delivery of your order <a>COS-0077945599</a> was canceled since thespecified address of the recipient was not correct. You are recommended to complete <a href="https://google.com">this form</a> and send it back with yourreply to us.
+                        </p>
+
+                        <p>
+                            Please do this within the period of one week - if wedon't get your timely reply you will be paid your money back less 21% since your order was booked for Christmas.
+                        </p>
+                    `,
+            },
+        });
         closeModal();
     }
 
@@ -47,14 +64,87 @@ export default function LinkHiding() {
                 Here is an example of some creative ways of hiding link. You can
                 hide links behind images, buttons, or even text.
             </Text>
-            <Image src="https://www.itgovernance.co.uk/blog/wp-content/uploads/2019/06/netflix.jpg"></Image>
+            <Image
+                maxH="500px"
+                src="https://www.itgovernance.co.uk/blog/wp-content/uploads/2019/06/netflix.jpg"
+            ></Image>
         </>,
         <>
             <Text>
                 People will generally click on links if they see familiar
                 context such as:
             </Text>
-            <Image src="https://cloudblogs.microsoft.com/uploads/prod/2018/01/tech-support-scams-from-email-2.png" />
+            <Image
+                maxH="500px"
+                src="https://cloudblogs.microsoft.com/uploads/prod/2018/01/tech-support-scams-from-email-2.png"
+            />
+        </>,
+        <>
+            <Box border="1px" borderRadius="10" padding="2">
+                <>
+                    <Heading as="h6">Template</Heading>
+
+                    <Box
+                        border="1px"
+                        borderRadius="10"
+                        marginBottom="10"
+                        padding="5"
+                    >
+                        <Text>
+                            Unfortunately, the delivery of your order{" "}
+                            <Link color="blue">COS-0077945599</Link> was
+                            canceled since the specified address of the
+                            recipient was not correct. You are recommended to
+                            complete{" "}
+                            <Link href="https://google.com" color="blue">
+                                this form
+                            </Link>{" "}
+                            and send it back with your reply to us.
+                        </Text>
+                        <Text>
+                            Please do this within the period of one week - if we
+                            don't get your timely reply you will be paid your
+                            money back less 21% since your order was booked for
+                            Christmas.
+                        </Text>
+                    </Box>
+                </>
+                <Text
+                    border="1px"
+                    borderRadius="10"
+                    background="blue.100"
+                    padding="2"
+                >
+                    Unfortunately, the delivery of your order{" "}
+                    <Link color="blue">COS-0077945599</Link> was canceled since
+                    the specified address of the recipient was not correct. You
+                    are recommended to complete{" "}
+                    <Link href="https://google.com" color="blue">
+                        this form
+                    </Link>{" "}
+                    and send it back with your reply to us.
+                </Text>
+                <Heading as="h5">What this does?</Heading>
+                <Text marginBottom="2">
+                    This make it seems like the user delivery was cancelled. If
+                    the user had an actual delivery the user might have clicked
+                    this link.{" "}
+                </Text>
+                <Text
+                    border="1px"
+                    borderRadius="10"
+                    background="red.100"
+                    padding="2"
+                >
+                    Please do this within the period of one week - if we don't
+                    get your timely reply you will be paid your money back less
+                    21% since your order was booked for Christmas.
+                </Text>
+                <Heading as="h6">What this does?</Heading>
+                <Text marginBottom="2">
+                    Create a sense of urgency and danger.
+                </Text>
+            </Box>
         </>,
     ];
     return (

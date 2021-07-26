@@ -1,13 +1,19 @@
 import React, { createContext, useReducer } from "react";
-export const EmailContext = createContext({
-    subject: "",
-    email: "",
-});
+
+const initialState = {
+    email: { subject: "", email: "" },
+};
+
+export const EmailContext = createContext();
 
 export function EmailReducer(state, action) {
     switch (action.type) {
         case "CHANGE":
-            return action.email;
+            return {
+                ...state,
+                subject: action.email.subject,
+                email: action.email.email,
+            };
         default:
             return state;
     }

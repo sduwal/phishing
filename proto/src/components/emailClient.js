@@ -1,5 +1,5 @@
 import { Editor } from "@tinymce/tinymce-react";
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import "../css/emailClient.css";
 import {
     Box,
@@ -12,14 +12,24 @@ import {
 } from "@chakra-ui/react";
 
 import { Send } from "react-feather";
+import { EmailContext } from "../AppState";
+
 export default function EmailClient() {
     const editorRef = useRef(null);
+    const [email, dispatch] = useContext(EmailContext);
     const log = () => {
         if (editorRef.current) {
             console.log(editorRef.current.getContent());
         }
     };
 
+    const onChangeBody = function (value) {
+        dispatch({
+            type: "CHANGE",
+            email: value,
+            subject: "",
+        });
+    };
     return (
         <Box>
             <InputGroup>
@@ -57,7 +67,9 @@ export default function EmailClient() {
             <Editor
                 apiKey={process.env.REACT_APP_TINY_API}
                 onInit={(evt, editor) => (editorRef.current = editor)}
-                initialValue=""
+                // initialValue={email.email}
+                value={email.email}
+                onEditorChange={onChangeBody}
                 init={{
                     height: 350,
                     branding: false,
@@ -72,7 +84,7 @@ export default function EmailClient() {
                     ],
                     toolbar:
                         "undo redo | formatselect | " +
-                        "bold italic backcolor | fontsizeselect | alignleft aligncenter " +
+                        "bold italic backcolor | fontsizeselect | link | alignleft aligncenter " +
                         "alignright alignjustify | bullist numlist outdent indent | " +
                         "removeformat |image| help",
                     content_style:
@@ -87,7 +99,7 @@ export default function EmailClient() {
                 alignItems="right"
             >
                 <Spacer />
-                <Button mx="10px" background="blue.400">
+                <Button mx="10px" background="blue.400" onClick={log}>
                     Send
                     <Send size="1em" />
                 </Button>
