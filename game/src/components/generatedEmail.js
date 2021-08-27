@@ -25,6 +25,110 @@ import {
 
 import { useDisclosure } from "@chakra-ui/hooks";
 
+function Header() {
+    return <ModalHeader>Generated Email</ModalHeader>;
+}
+
+function Footer({ onClose }) {
+    return (
+        <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+                Close
+            </Button>
+        </ModalFooter>
+    );
+}
+
+function EmailTop() {
+    return (
+        <>
+            <Flex direction="row" alignContent="center" alignItems="center">
+                <Text fontWeight="bold">To:&nbsp;&nbsp;&nbsp;&nbsp;</Text>
+                <Input value="sarose012@gmail.com" mx="15px" isReadOnly />
+            </Flex>
+            <Flex
+                direction="row"
+                alignContent="center"
+                alignItems="center"
+                my="10px"
+            >
+                <Text fontWeight="bold">From:</Text>
+                <Input value="sarose012@gmail.com" mx="15px" isReadOnly />
+            </Flex>
+            <Flex
+                direction="row"
+                alignContent="center"
+                alignItems="center"
+                my="10px"
+            >
+                <Text fontWeight="bold">Subject:</Text>
+                <Input
+                    value="RE:IMMEDIATE CONTRACT/INHERITANCE PAYMENT"
+                    mx="15px"
+                    isReadOnly
+                />
+            </Flex>
+        </>
+    );
+}
+function Content({ onClose }) {
+    return (
+        <ModalContent minW="70vw">
+            <Header />
+            <ModalCloseButton />
+            <ModalBody>
+                Here is what your helper has sent. Hover over the boxes to see
+                what he did.
+                <Container
+                    border="2px solid"
+                    px="15px"
+                    py="10px"
+                    my="10px"
+                    minW="60vw"
+                >
+                    <EmailTop />
+                    <Flex
+                        direction="column"
+                        alignContent="center"
+                        alignItems="start"
+                        my="10px"
+                    >
+                        <Text fontWeight="bold">Body:</Text>
+                        <Box>
+                            <CreatePopUp
+                                display={`South Africa Reserve Bank
+                    370 Helen Joseph Street,
+                    Pretoria, 002, Sourth Africa`}
+                            />
+                        </Box>
+                    </Flex>
+                </Container>
+            </ModalBody>
+            <Footer onClose={onClose} />
+        </ModalContent>
+    );
+}
+
+function CreatePopUp({ display, explain }) {
+    return (
+        <Popover trigger="click">
+            <PopoverTrigger>
+                {/* <Text color="red.400">display.split('\n").map</Text> */}
+            </PopoverTrigger>
+            <PopoverContent bg="tomato" color="white">
+                <PopoverHeader fontWeight="semibold">Address</PopoverHeader>
+                <PopoverArrow bg="pink.500" />
+                <PopoverCloseButton bg="purple.500" />
+                <PopoverBody>
+                    Providing a random address, so that the email looks
+                    official. Official emails usually have their address to
+                    start the email.
+                </PopoverBody>
+            </PopoverContent>
+        </Popover>
+    );
+}
+
 function GeneratedEmail() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
@@ -33,124 +137,7 @@ function GeneratedEmail() {
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
-                <ModalContent minW="70vw">
-                    <ModalHeader>GeneratedEmail</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        Here is what your helper has sent. Hover over the boxes
-                        to see what he did.
-                        <Container
-                            border="2px solid"
-                            px="15px"
-                            py="10px"
-                            my="10px"
-                            minW="60vw"
-                        >
-                            <Flex
-                                direction="row"
-                                alignContent="center"
-                                alignItems="center"
-                            >
-                                <Text fontWeight="bold">
-                                    To:&nbsp;&nbsp;&nbsp;&nbsp;
-                                </Text>
-                                <Input
-                                    value="sarose012@gmail.com"
-                                    mx="15px"
-                                    isReadOnly
-                                />
-                            </Flex>
-                            <Flex
-                                direction="row"
-                                alignContent="center"
-                                alignItems="center"
-                                my="10px"
-                            >
-                                <Text fontWeight="bold">From:</Text>
-                                <Input
-                                    value="sarose012@gmail.com"
-                                    mx="15px"
-                                    isReadOnly
-                                />
-                            </Flex>
-                            <Flex
-                                direction="column"
-                                alignContent="center"
-                                alignItems="start"
-                                my="10px"
-                            >
-                                <Text fontWeight="bold">Body:</Text>
-                                <Box>
-                                    <Popover trigger="click">
-                                        <PopoverTrigger>
-                                            <Box
-                                                tabIndex="0"
-                                                role="button"
-                                                aria-label="Some box"
-                                                p={5}
-                                                w="120px"
-                                                bg="gray.300"
-                                                children="Hover"
-                                            />
-                                        </PopoverTrigger>
-                                        <PopoverContent
-                                            bg="tomato"
-                                            color="white"
-                                        >
-                                            <PopoverHeader fontWeight="semibold">
-                                                Customization
-                                            </PopoverHeader>
-                                            <PopoverArrow bg="pink.500" />
-                                            <PopoverCloseButton bg="purple.500" />
-                                            <PopoverBody>
-                                                Tadaa!! The arrow color and
-                                                background color is customized.
-                                                Check the props for each
-                                                component.
-                                            </PopoverBody>
-                                        </PopoverContent>
-                                    </Popover>
-                                    <Popover trigger="click">
-                                        <PopoverTrigger>
-                                            <Box
-                                                tabIndex="0"
-                                                role="button"
-                                                aria-label="Some box"
-                                                p={5}
-                                                w="120px"
-                                                bg="gray.300"
-                                                children="Hover"
-                                            />
-                                        </PopoverTrigger>
-                                        <PopoverContent
-                                            bg="tomato"
-                                            color="white"
-                                        >
-                                            <PopoverHeader fontWeight="semibold">
-                                                Customization
-                                            </PopoverHeader>
-                                            <PopoverArrow bg="pink.500" />
-                                            <PopoverCloseButton bg="purple.500" />
-                                            <PopoverBody>
-                                                Tadaa!! The arrow color and
-                                                background color is customized.
-                                                Check the props for each
-                                                component.
-                                            </PopoverBody>
-                                        </PopoverContent>
-                                    </Popover>
-                                </Box>
-                            </Flex>
-                        </Container>
-                    </ModalBody>
-
-                    <ModalFooter>
-                        <Button colorScheme="blue" mr={3} onClick={onClose}>
-                            Close
-                        </Button>
-                        <Button variant="ghost">Secondary Action</Button>
-                    </ModalFooter>
-                </ModalContent>
+                <Content onClose={onClose} />
             </Modal>
         </>
     );
