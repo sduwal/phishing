@@ -11,14 +11,16 @@ import {
     Radio,
     Stack
 } from "@chakra-ui/react";
+
 import AttackerCard from "../components/attackerCard";
-import GeneratedEmail from "../components/generatedEmail";
+import GeneratedEmail from "../components/main/generatedEmail";
+import DomainButton from "../components/main/openDomainModel";
 
 function TopBar() {
     return (
         <Container py="20px">
             <Flex direction="row" align="center" justify="space-between">
-                <Button>Change Domain</Button>
+                <DomainButton />
                 <Timer second="60" />
                 <Button>Change Landing Page</Button>
             </Flex>
@@ -51,10 +53,20 @@ function EmailType() {
             <Text>What kind of email do you want to compose?</Text>
             <RadioGroup defaultValue="1">
                 <Stack spacing={5} direction="row">
-                    <Radio size="md" colorScheme="green" value="1">
+                    <Radio
+                        size="md"
+                        colorScheme="green"
+                        value="1"
+                        backgroundColor="red.200"
+                    >
                         Helpful
                     </Radio>
-                    <Radio size="md" colorScheme="red" value="2">
+                    <Radio
+                        size="md"
+                        colorScheme="red"
+                        value="2"
+                        backgroundColor="red.200"
+                    >
                         Threatening
                     </Radio>
                 </Stack>
@@ -69,16 +81,36 @@ function HideLink() {
             <Text>Hide Links?</Text>
             <RadioGroup defaultValue="1">
                 <Stack spacing={5} direction="row">
-                    <Radio size="md" colorScheme="green" value="1">
+                    <Radio
+                        size="md"
+                        colorScheme="green"
+                        value="1"
+                        backgroundColor="red.200"
+                    >
                         No
                     </Radio>
-                    <Radio size="md" colorScheme="red" value="2">
+                    <Radio
+                        size="md"
+                        colorScheme="red"
+                        value="2"
+                        backgroundColor="red.200"
+                    >
                         Url Shortner
                     </Radio>
-                    <Radio size="md" colorScheme="red" value="3">
+                    <Radio
+                        size="md"
+                        colorScheme="red"
+                        value="3"
+                        backgroundColor="red.200"
+                    >
                         &lt;a&gt; tags
                     </Radio>
-                    <Radio size="md" colorScheme="red" value="4">
+                    <Radio
+                        size="md"
+                        colorScheme="red"
+                        value="4"
+                        backgroundColor="red.200"
+                    >
                         Domain Confusion
                     </Radio>
                 </Stack>

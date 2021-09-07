@@ -1,4 +1,8 @@
+import { IconButton } from "@chakra-ui/button";
+import { Box, Flex, Text } from "@chakra-ui/layout";
 import { useEffect, useState } from "react";
+import { AddIcon } from "@chakra-ui/icons";
+import { Spacer } from "@chakra-ui/react";
 
 function Timer({ second }) {
     const [time, setTime] = useState(second);
@@ -10,7 +14,21 @@ function Timer({ second }) {
         const timer = setInterval(() => tick(), 1000);
         return () => clearInterval(timer);
     });
-    return <>{formatTime(time)}</>;
+    return (
+        <Box border="1px solid" pl="2">
+            <Flex direction="row" align="center">
+                <Text
+                    fontSize="24"
+                    fontWeight="semibold"
+                    lineHeight="110%"
+                    mr="3"
+                >
+                    {formatTime(time)}
+                </Text>
+                <IconButton aria-label="add time" icon={<AddIcon />} />
+            </Flex>
+        </Box>
+    );
 }
 
 function formatTime(seconds) {
