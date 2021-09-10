@@ -1,19 +1,29 @@
 import { IconButton } from "@chakra-ui/button";
 import { Box, Flex, Text } from "@chakra-ui/layout";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { AddIcon } from "@chakra-ui/icons";
-import { Spacer } from "@chakra-ui/react";
+
+import { useSelector, useDispatch } from "react-redux";
+import { decrement, increment } from "../store/timer";
 
 function Timer({ second }) {
-    const [time, setTime] = useState(second);
+    const time = useSelector((state) => state.timer.value);
+    const dispatch = useDispatch();
 
     const tick = () => {
-        if (time != 0) setTime(time - 1);
+        if (time != 0) dispatch(decrement());
     };
+
+    // TODO: handle the time adding logic
+    const addTime = () => {
+        dispatch(increment());
+    };
+
     useEffect(() => {
         const timer = setInterval(() => tick(), 1000);
         return () => clearInterval(timer);
     });
+
     return (
         <Box border="1px solid" pl="2">
             <Flex direction="row" align="center">
@@ -25,7 +35,11 @@ function Timer({ second }) {
                 >
                     {formatTime(time)}
                 </Text>
-                <IconButton aria-label="add time" icon={<AddIcon />} />
+                <IconButton
+                    aria-label="add time"
+                    icon={<AddIcon />}
+                    onClick={addTime}
+                />
             </Flex>
         </Box>
     );

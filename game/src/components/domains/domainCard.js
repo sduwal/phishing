@@ -1,10 +1,11 @@
-import { Container, Text } from "@chakra-ui/layout";
+import { Box, Text } from "@chakra-ui/layout";
 
 import {
     AccordionItem,
     AccordionButton,
     AccordionPanel,
-    AccordionIcon
+    AccordionIcon,
+    Spacer
 } from "@chakra-ui/react";
 
 export default function DomainCard({ name, price, description }) {
@@ -12,11 +13,12 @@ export default function DomainCard({ name, price, description }) {
         <AccordionItem>
             <h2>
                 <AccordionButton _expanded={{ bg: "red.100", color: "black" }}>
-                    <Container flex="1" textAlign="left">
+                    <Box flex="1" textAlign="left">
                         {name}
-                    </Container>
+                    </Box>
+                    <Spacer></Spacer>
                     <Text>{price}</Text>
-                    {/* <AccordionIcon /> */}
+                    {/* <AccordionIcon></AccordionIcon> */}
                 </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>{description}</AccordionPanel>

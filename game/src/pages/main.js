@@ -12,10 +12,12 @@ import {
     Stack
 } from "@chakra-ui/react";
 
-import AttackerCard from "../components/attackerCard";
+import AttackerCard from "../components/attackers/attackerCard";
 import GeneratedEmail from "../components/main/generatedEmail";
 import DomainButton from "../components/main/openDomainModel";
 
+import { useSelector } from "react-redux";
+import attacker from "../store/attacker";
 function TopBar() {
     return (
         <Container py="20px">
@@ -29,14 +31,17 @@ function TopBar() {
 }
 
 function SideBar() {
+    const attacker = useSelector((state) => state.attacker.value);
+    console.log(attacker);
     return (
         <Flex direction="column" justify="space-between" borderLeft="2px solid">
             <Container maxW="fit-content">
                 <AttackerCard
-                    name="Name 1"
-                    efficiency="50"
-                    technicalSkill="30"
-                    cost="2"
+                    name={attacker.name}
+                    efficiency={attacker.efficiency}
+                    technicalSkill={attacker.technicalSkill}
+                    cost={attacker.cost}
+                    image={attacker.image}
                 />
             </Container>
             <Spacer />

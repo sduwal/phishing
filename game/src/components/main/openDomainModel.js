@@ -15,7 +15,7 @@ export default function DomainButton() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <>
-            <Button onClick={onOpen}>Open Modal</Button>
+            <Button onClick={onOpen}>Domain</Button>
 
             <Modal
                 isOpen={isOpen}
