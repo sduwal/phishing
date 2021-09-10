@@ -7,7 +7,11 @@ import {
     Progress
 } from "@chakra-ui/react";
 
+import { useSelector } from "react-redux";
+
 function AttackerCard({ name, efficiency, technicalSkill, cost, image }) {
+    const attackerStore = useSelector((state) => state.attacker.value);
+
     return (
         <Container
             margin="5"
@@ -17,6 +21,9 @@ function AttackerCard({ name, efficiency, technicalSkill, cost, image }) {
             borderRadius="lg"
             minW="250"
             shadow="inner"
+            backgroundColor={
+                attackerStore.name == name ? "green.200" : "transparent"
+            }
         >
             <Center>
                 <Image width="100px" src={image} borderRadius="full" />

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const moneySlice = createSlice({
     name: "money",
     initialState: {
-        value: 1000
+        value: 90
     },
     reducers: {
         increment: (state) => {

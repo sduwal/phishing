@@ -1,53 +1,25 @@
 import DomainCard from "./domainCard";
-import {
-    Accordion,
-    Container,
-    AccordionItem,
-    AccordionButton,
-    AccordionPanel,
-    AccordionIcon,
-    Box,
-    Spacer
-} from "@chakra-ui/react";
+import { Accordion, Container } from "@chakra-ui/react";
+import domains from "./domains";
+import { useSelector } from "react-redux";
 
 function ChooseDomain() {
+    domains.sort((a, b) => a.price - b.price);
+
+    const data = domains.map((domain) => {
+        return (
+            <DomainCard
+                key={domain.name}
+                name={domain.name}
+                price={domain.price}
+                description={domain.description}
+            />
+        );
+    });
     return (
-        <Accordion defaultIndex={[0]}>
-            <AccordionItem>
-                <h2>
-                    <AccordionButton>
-                        <Box flex="1" textAlign="left">
-                            Section 1 title
-                        </Box>
-                        <Spacer></Spacer>
-                        <AccordionIcon />
-                    </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </AccordionPanel>
-            </AccordionItem>{" "}
-            <AccordionItem>
-                <h2>
-                    <AccordionButton>
-                        <Box flex="1" textAlign="left">
-                            Section 1 title
-                        </Box>
-                        <Spacer></Spacer>
-                        <AccordionIcon />
-                    </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </AccordionPanel>
-            </AccordionItem>
-        </Accordion>
+        <Container minW="xl">
+            <Accordion allowToggle>{data}</Accordion>
+        </Container>
     );
 }
 

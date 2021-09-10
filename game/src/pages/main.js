@@ -17,7 +17,7 @@ import GeneratedEmail from "../components/main/generatedEmail";
 import DomainButton from "../components/main/openDomainModel";
 
 import { useSelector } from "react-redux";
-import attacker from "../store/attacker";
+
 function TopBar() {
     return (
         <Container py="20px">
@@ -32,10 +32,16 @@ function TopBar() {
 
 function SideBar() {
     const attacker = useSelector((state) => state.attacker.value);
-    console.log(attacker);
+    const money = useSelector((state) => state.money.value);
+    const domain = useSelector((state) => state.domain.value);
+
     return (
         <Flex direction="column" justify="space-between" borderLeft="2px solid">
+            <Container>
+                <Text>Money: {money}</Text>
+            </Container>
             <Container maxW="fit-content">
+                <Text>Current Helper:</Text>
                 <AttackerCard
                     name={attacker.name}
                     efficiency={attacker.efficiency}
@@ -43,6 +49,7 @@ function SideBar() {
                     cost={attacker.cost}
                     image={attacker.image}
                 />
+                <Text>{JSON.stringify(domain)}</Text>
             </Container>
             <Spacer />
             <Center>

@@ -19,7 +19,7 @@ export default function DomainButton() {
 
             <Modal
                 isOpen={isOpen}
-                size="xl"
+                size="2xl"
                 scrollBehavior="inside"
                 onClose={onClose}
                 isCentered

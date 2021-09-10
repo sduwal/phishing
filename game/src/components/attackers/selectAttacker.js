@@ -2,12 +2,13 @@ import { Flex, Text, Box } from "@chakra-ui/react";
 import AttackerCard from "./attackerCard.js";
 import attackers from "./attackers";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeAttacker } from "../../store/attacker.js";
 import { useClickable } from "@chakra-ui/clickable";
 
 function SelectAttacker() {
     const dispatch = useDispatch();
+    const money = useSelector((state) => state.money.value);
 
     const Clickable = (props) => {
         const clickable = useClickable(props);
@@ -15,10 +16,8 @@ function SelectAttacker() {
             <Box
                 display="inline-flex"
                 {...clickable}
-                _active={{ bg: "blue", color: "white" }}
+                _hover={{ bg: "blue", color: "white" }}
                 _disabled={{ opacity: 0.4, pointerEvents: "none" }}
-                _selected={{ bg: "blue", color: "white" }}
-                _hover={{ bg: "yellow", color: "white" }}
             />
         );
     };
@@ -28,9 +27,9 @@ function SelectAttacker() {
                 key={attacker.name}
                 as="div"
                 onClick={() => {
-                    console.log(attacker);
                     dispatch(changeAttacker(attacker));
                 }}
+                isDisabled={money < attacker.cost}
             >
                 <AttackerCard
                     key={attacker.name}

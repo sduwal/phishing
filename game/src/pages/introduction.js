@@ -2,8 +2,11 @@
 import { Container, Square, Flex, Text, Button } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import SelectAttacker from "../components/attackers/selectAttacker";
 import ChooseDomain from "../components/domains/chooseDomain";
+
 // import SelectDomain from "../components/selectDomain";
 
 const details = [
@@ -22,6 +25,8 @@ const details = [
 function Introduction() {
     const [index, setIndex] = useState(0);
     const description = details[index];
+    const attacker = useSelector((state) => state.attacker.value);
+
     return (
         <>
             <Square height="100vh">
@@ -44,7 +49,10 @@ function Introduction() {
                     </Flex>
 
                     {index != details.length - 1 ? (
-                        <Button onClick={() => setIndex(index + 1)}>
+                        <Button
+                            isDisabled={!attacker.name && index == 2}
+                            onClick={() => setIndex(index + 1)}
+                        >
                             Next
                         </Button>
                     ) : (
