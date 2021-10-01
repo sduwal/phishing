@@ -1,7 +1,7 @@
 import DomainCard from "./domainCard";
 import { Accordion, Container } from "@chakra-ui/react";
 import domains from "./domains";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 function ChooseDomain() {
     domains.sort((a, b) => a.price - b.price);

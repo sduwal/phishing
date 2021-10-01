@@ -26,6 +26,7 @@ function Introduction() {
     const [index, setIndex] = useState(0);
     const description = details[index];
     const attacker = useSelector((state) => state.attacker.value);
+    const domain = useSelector((state) => state.domain.value);
 
     return (
         <>
@@ -57,7 +58,12 @@ function Introduction() {
                         </Button>
                     ) : (
                         <Link to="/main">
-                            <Button>Done</Button>
+                            <Button
+                                isDisabled={domain.name === "NONE"}
+                                onClick={() => console.log("do this")}
+                            >
+                                Done
+                            </Button>
                         </Link>
                     )}
                 </Container>

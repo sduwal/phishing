@@ -16,7 +16,10 @@ function SelectAttacker() {
             <Box
                 display="inline-flex"
                 {...clickable}
-                _hover={{ bg: "blue", color: "white" }}
+                _hover={{
+                    bg: "blue.100",
+                    rounded: "lg"
+                }}
                 _disabled={{ opacity: 0.4, pointerEvents: "none" }}
             />
         );
@@ -47,7 +50,9 @@ function SelectAttacker() {
     return (
         <>
             <Text>Click on any card to select attacker</Text>
-            <Flex direction="row">{data}</Flex>
+            <Flex direction="row" alignItems="center" justifyContent="center">
+                {data}
+            </Flex>
         </>
     );
 }
