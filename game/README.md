@@ -1,3 +1,7 @@
+THIS WEEK TODO
+- [ ] Add step by step process for the email creation
+- [ ]
+
 TODO
 
 - [ ] Create landing pages
