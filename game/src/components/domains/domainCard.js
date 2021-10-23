@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeDomain } from "../../store/domain";
+
 export default function DomainCard({ name, price, description }) {
     const money = useSelector((state) => state.money.value);
     const dispatch = useDispatch();

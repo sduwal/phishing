@@ -9,7 +9,7 @@ import {
     ModalBody,
     ModalCloseButton
 } from "@chakra-ui/react";
-import ChooseDomain from "../domains/chooseDomain";
+import ChooseDomain from "../domains/marketplace";
 
 export default function DomainButton() {
     const { isOpen, onOpen, onClose } = useDisclosure();

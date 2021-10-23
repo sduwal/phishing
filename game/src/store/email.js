@@ -2,14 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const emailSlice = createSlice({
     name: "email",
-    initialState: {},
+    initialState: { value: {} },
     reducers: {
         spoofEmail: (state, action) => {
-            state.value = { ...action.payload, from: action.payload.from };
+            state.value = { ...state.value, from: action.payload.from };
+        },
+        changeEmail: (state, action) => {
+            state.value = { ...action.payload };
         }
     }
 });
 
-export const { spoofEmail } = emailSlice.actions;
+export const { spoofEmail, changeEmail } = emailSlice.actions;
 
 export default emailSlice.reducer;

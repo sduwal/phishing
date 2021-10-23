@@ -1,17 +1,22 @@
 /* eslint-disable operator-linebreak */
-import { Box } from "@chakra-ui/react";
 import Browser, { Chrome } from "react-browser-ui";
 import { useState, useEffect } from "react";
+import { Box, Text } from "@chakra-ui/react";
+import EmailClient from "./emailClient";
+
+import _ from "lodash";
+
+import { useSelector, useDispatch } from "react-redux";
 
 function BrowserCustom({ showHeader = false }) {
     const { Tab } = Chrome;
-
-    const email = {};
+    const email = useSelector((state) => state.email.value);
+    // const email = {};
     const [body, setBody] = useState("Waiting for changes");
 
     useEffect(() => {
         setBody(
-            Object.keys(email).length > 0
+            _.isEmpty(email) > 0
                 ? "This si after the change. I dont see the change yert"
                 : "Wating"
         );
@@ -54,16 +59,20 @@ function BrowserCustom({ showHeader = false }) {
                         console.log("cannot close this one");
                     }}
                 >
-                    <Box
-                        p="10px"
-                        minH="500px"
-                        background="green.100"
-                        overflowY="auto"
-                    >
-                        {body}
-                    </Box>
+                    {_.isEmpty(email) ? (
+                        <Text>Waiting for email</Text>
+                    ) : (
+                        <EmailClient
+                            title={email.subject}
+                            name={email.name}
+                            from={email.from}
+                            to={email.to}
+                            body={email.body}
+                            linkType={email.linkType}
+                        />
+                    )}
                 </Tab>
-                {tabs.map((tab, index) => tab)};
+                {/* {tabs.map((tab, index) => tab)}; */}
             </Browser>
         </Box>
     );

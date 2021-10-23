@@ -1,9 +1,10 @@
 class Email {
-    constructor(to, from, subject, body) {
+    constructor({ to, from, subject, body, name }) {
         this.to = to;
         this.from = from;
         this.subject = subject;
         this.body = body;
+        this.name = name;
     }
 
     generate() {
