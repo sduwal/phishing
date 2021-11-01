@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import SelectAttacker from "../components/attackers/selectAttacker";
-import ChooseDomain from "../components/domains/marketplace";
+import ChooseDomain from "../components/domains";
 
 // import SelectDomain from "../components/selectDomain";
 

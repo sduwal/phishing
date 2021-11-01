@@ -20,9 +20,13 @@
     ],
     "rules": {
         "require-jsdoc": "off",
+        "valid-jsdoc": "off",
         "indent": [
             "error",
-            4
+            4,
+            {
+                "SwitchCase": 1
+            }
         ],
         "quotes": [
             "error",
