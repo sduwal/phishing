@@ -1,0 +1,123 @@
+import {
+    VStack,
+    Box,
+    Text,
+    Tooltip,
+    Image,
+    Center,
+    Button
+} from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/hooks";
+import {
+    Modal,
+    ModalOverlay,
+    ModalHeader,
+    ModalContent,
+    ModalBody,
+    ModalCloseButton
+} from "@chakra-ui/react";
+
+import MarketPlace from "../../domains/index";
+import SelectAttacker from "../../attackers/selectAttacker";
+import { EmailClient } from "../../email";
+
+import websiteImage from "./images/website.jpg";
+import domainImage from "./images/domain.jpg";
+import attackerImage from "./images/attacker.png";
+import emailImage from "./images/mail.png";
+
+function SideButtons({ title, desc, image, color = "red", onClick, modal }) {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    return (
+        <>
+            <Tooltip shouldWrapChildren label={desc} openDelay={300}>
+                <Box
+                    px="2"
+                    pt="2"
+                    m="0"
+                    background={color}
+                    rounded="10"
+                    minW="200px"
+                    alignContent="center"
+                    _hover={{
+                        cursor: "pointer",
+                        backgroundColor: "black"
+                    }}
+                    onClick={onOpen}
+                >
+                    <Image
+                        src={image}
+                        background="transparent"
+                        h={140}
+                        w={200}
+                        objectFit="cover"
+                    />
+                    <Center>
+                        <Text py="2" fontWeight="bold" color="white">
+                            {title}
+                        </Text>
+                    </Center>
+                </Box>
+            </Tooltip>
+
+            <Modal isOpen={isOpen} onClose={onClose} size="full">
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>{title}</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>{modal}</ModalBody>
+
+                    {/* <ModalFooter>
+                        <Button colorScheme="blue" mr={3} onClick={onClose}>
+                            Close
+                        </Button>
+                    </ModalFooter> */}
+                </ModalContent>
+            </Modal>
+        </>
+    );
+}
+
+export default function SideBar() {
+    const side = [
+        {
+            title: "Email",
+            desc: "Generate new email",
+            image: emailImage,
+            color: "blue.500",
+            modal: <EmailClient />
+        },
+        {
+            title: "Domain",
+            desc: "Open Domain Marketplace",
+            image: domainImage,
+            color: "green.400",
+            modal: <MarketPlace />
+        },
+        {
+            title: "Attackers",
+            desc: "Change Attackers",
+            image: attackerImage,
+            color: "red.500",
+            modal: <SelectAttacker />
+        },
+        {
+            title: "Website",
+            desc: "Change the landing page",
+            image: websiteImage,
+            color: "blue.400",
+            modal: <Text>This is test</Text>
+        }
+    ];
+
+    return (
+        <Box width="fit-content" px={"10"} overflowY="auto" maxH="90vh">
+            <VStack spacing="10">
+                {side.map((item, index) => (
+                    <SideButtons key={item.title} {...side[index]} />
+                ))}
+            </VStack>
+        </Box>
+    );
+}

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { AddIcon } from "@chakra-ui/icons";
 
 import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment } from "../store/timer";
+import { decrement, increment } from "../../../store/timer";
 
 function Timer({ second }) {
     const time = useSelector((state) => state.timer.value);

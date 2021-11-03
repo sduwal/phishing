@@ -48,12 +48,12 @@ function SelectAttacker() {
     });
 
     return (
-        <>
+        <Box>
             <Text>Click on any card to select attacker</Text>
             <Flex direction="row" alignItems="center" justifyContent="center">
                 {data}
             </Flex>
-        </>
+        </Box>
     );
 }
 

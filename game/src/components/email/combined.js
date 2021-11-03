@@ -1,10 +1,8 @@
-/* eslint-disable operator-linebreak */
-// import React, { useEffect, useState } from "react";
 import { Flex, Box } from "@chakra-ui/react";
 
-import BrowserCustom from "../components/main/browser";
-import Questions from "../components/main/questions";
-import getRandomEmails from "../model/emailData";
+import BrowserCustom from "./browser";
+import Questions from "./questions";
+// import getRandomEmails from "../model/emailData";
 
 function main() {
     return (
