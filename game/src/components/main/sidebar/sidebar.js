@@ -1,13 +1,7 @@
-import {
-    VStack,
-    Box,
-    Text,
-    Tooltip,
-    Image,
-    Center,
-    Button
-} from "@chakra-ui/react";
+import { VStack, Box, Text, Tooltip, Image, Center } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/hooks";
+import { useRef } from "react";
+
 import {
     Modal,
     ModalOverlay,
@@ -28,9 +22,10 @@ import emailImage from "./images/mail.png";
 
 function SideButtons({ title, desc, image, color = "red", onClick, modal }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
-
+    const finalRef = useRef();
     return (
         <>
+            <Box margin={0} padding={0} height={0} ref={finalRef}></Box>
             <Tooltip shouldWrapChildren label={desc} openDelay={300}>
                 <Box
                     px="2"
@@ -49,8 +44,8 @@ function SideButtons({ title, desc, image, color = "red", onClick, modal }) {
                     <Image
                         src={image}
                         background="transparent"
-                        h={140}
-                        w={200}
+                        h={130}
+                        w={190}
                         objectFit="cover"
                     />
                     <Center>
@@ -61,7 +56,12 @@ function SideButtons({ title, desc, image, color = "red", onClick, modal }) {
                 </Box>
             </Tooltip>
 
-            <Modal isOpen={isOpen} onClose={onClose} size="full">
+            <Modal
+                finalFocusRef={finalRef}
+                isOpen={isOpen}
+                onClose={onClose}
+                size="full"
+            >
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>{title}</ModalHeader>
@@ -113,7 +113,7 @@ export default function SideBar() {
 
     return (
         <Box width="fit-content" px={"10"} overflowY="auto" maxH="90vh">
-            <VStack spacing="10">
+            <VStack spacing="4">
                 {side.map((item, index) => (
                     <SideButtons key={item.title} {...side[index]} />
                 ))}
