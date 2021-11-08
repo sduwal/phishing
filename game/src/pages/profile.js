@@ -11,7 +11,14 @@ export default function App() {
     }
 
     return (
-        <Box h="100vh" bg="#eee8d5" overflow="hidden" py={"5"} px={0}>
+        <Box
+            h="100vh"
+            bg="#eee8d5"
+            overflowY="scroll"
+            overflowX="hidden"
+            py={"5"}
+            px={0}
+        >
             <VStack>
                 <Top />
                 <Flex>

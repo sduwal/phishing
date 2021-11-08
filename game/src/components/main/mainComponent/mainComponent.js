@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 
 import { MdEmail, MdPeopleAlt } from "react-icons/md";
+import Website from "../../websites/index";
 
 function StatusBar() {
     return (
@@ -82,9 +83,7 @@ export default function mainComponent(props) {
                     This is for the landing
                 </Box>
                 <GridItem colSpan={2}>
-                    <Box w="100%" h="10" bg="blue.500">
-                        This is for the domains
-                    </Box>
+                    <Website />
                 </GridItem>
             </Grid>
         </Box>

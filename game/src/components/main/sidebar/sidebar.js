@@ -11,7 +11,7 @@ import {
     ModalCloseButton
 } from "@chakra-ui/react";
 
-import MarketPlace from "../../domains/index";
+import MarketPlace from "../../marketplace/index";
 import SelectAttacker from "../../attackers/selectAttacker";
 import { EmailClient } from "../../email";
 
@@ -101,13 +101,6 @@ export default function SideBar() {
             image: attackerImage,
             color: "red.500",
             modal: <SelectAttacker />
-        },
-        {
-            title: "Website",
-            desc: "Change the landing page",
-            image: websiteImage,
-            color: "blue.400",
-            modal: <Text>This is test</Text>
         }
     ];
 
