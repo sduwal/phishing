@@ -6,12 +6,10 @@ import {
     Center,
     Icon,
     Tooltip,
-    Grid,
-    GridItem
+    Grid
 } from "@chakra-ui/react";
 
 import { MdEmail, MdPeopleAlt } from "react-icons/md";
-import Website from "../../websites/index";
 
 function StatusBar() {
     return (
@@ -82,9 +80,9 @@ export default function mainComponent(props) {
                 <Box w="100%" h="10" bg="blue.500">
                     This is for the landing
                 </Box>
-                <GridItem colSpan={2}>
+                {/* <GridItem colSpan={2}>
                     <Website />
-                </GridItem>
+                </GridItem> */}
             </Grid>
         </Box>
     );
