@@ -1,79 +1,104 @@
 /* eslint-disable operator-linebreak */
 import Browser, { Chrome } from "react-browser-ui";
-import { useState, useEffect } from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { Box, Flex, Button, Spacer, Text } from "@chakra-ui/react";
 import EmailClient from "./emailClient";
 
 import _ from "lodash";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
 
+// styles
+const Dots = styled.span`
+    &::after {
+        display: inline-block;
+        animation: ellipsis 1.25s infinite;
+        content: ".";
+        width: 1em;
+        text-align: left;
+    }
+    @keyframes ellipsis {
+        0% {
+            content: ".";
+        }
+        33% {
+            content: "..";
+        }
+        66% {
+            content: "...";
+        }
+    }
+`;
 function BrowserCustom({ showHeader = false }) {
     const { Tab } = Chrome;
+
     const email = useSelector((state) => state.email.value);
-    // const email = {};
-    const [body, setBody] = useState("Waiting for changes");
-
-    useEffect(() => {
-        setBody(
-            _.isEmpty(email) > 0
-                ? "This si after the change. I dont see the change yert"
-                : "Wating"
-        );
-        console.log(body);
-    }, [email]);
-
-    const [activeTab, setActiveTab] = useState("main");
-    const [tabs, setTabs] = useState([
-        <Tab
-            key={"test"}
-            imageUrl={""}
-            imageAlt={"green tab image"}
-            title={"blue"}
-            onClose={() => {
-                const newTabs = [...tabs];
-                newTabs.splice(0, 1);
-                setTabs(newTabs);
-            }}
-        >
-            <Box p="10px" minH="600px" background="green.100" overflowY="auto">
-                {body}
-            </Box>
-        </Tab>
-    ]);
+    const [number, setNumber] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
         <Box w="100%">
-            <Browser
-                type={"chrome"}
-                showHeader={showHeader}
-                activeTabKey={activeTab}
-            >
-                {/* {Object.keys(tabs).map((key, value) => tabs[key])} */}
-                <Tab
-                    key={"main"}
-                    imageUrl={""}
-                    imageAlt={"green tab image"}
-                    title={"Green"}
-                    onClose={() => {
-                        console.log("cannot close this one");
+            {console.log(email)}
+            <Box minH={"50vh"}>
+                <Browser
+                    type={"chrome"}
+                    showHeader={showHeader}
+                    activeTabKey={"main"}
+                >
+                    <Tab
+                        key={"main"}
+                        imageUrl={""}
+                        imageAlt={"green tab image"}
+                        title={"Email"}
+                        onClose={() => {
+                            console.log("cannot close this one");
+                        }}
+                    >
+                        {_.isEmpty(email) || isLoading ? (
+                            // <Text> {"Waiting..."}</Text>
+                            <Dots>Loading</Dots>
+                        ) : (
+                            <EmailClient
+                                title={email.subject}
+                                name={email.name}
+                                from={email.from}
+                                to={email.to}
+                                body={{
+                                    ...email.body.text[number],
+                                    link: email.body.link
+                                }}
+                                linkType={email.linkType}
+                            />
+                        )}
+                    </Tab>
+                </Browser>
+            </Box>
+            <Flex>
+                <Button
+                    isDisabled={_.isEmpty(email)}
+                    onClick={() => {
+                        setIsLoading(true);
+                        const randomNumber = Math.floor(
+                            Math.random() * email.body.text.length
+                        );
+                        setTimeout(() => {
+                            setNumber(randomNumber);
+                            setIsLoading(false);
+                        }, 5000);
                     }}
                 >
-                    {_.isEmpty(email) ? (
-                        <Text>Waiting for email</Text>
-                    ) : (
-                        <EmailClient
-                            title={email.subject}
-                            name={email.name}
-                            from={email.from}
-                            to={email.to}
-                            body={email.body}
-                            linkType={email.linkType}
-                        />
-                    )}
-                </Tab>
-                {/* {tabs.map((tab, index) => tab)}; */}
-            </Browser>
+                    Revise the email
+                </Button>
+                <Spacer></Spacer>
+                <Button
+                    // TODO: Change this later
+                    isDisabled={_.isEmpty(email) || true}
+                    onClick={() => console.log("Sent clicked")}
+                >
+                    Send Email
+                </Button>
+            </Flex>
         </Box>
     );
 }

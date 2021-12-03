@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeEmail, spoofEmail } from "../../store/email";
 
-import getRandomEmail from "../../model/emailData";
+import getRandomEmail from "../emailsData/index";
 
 function Questions() {
     const email = useSelector((state) => state.email.value);
@@ -50,7 +50,7 @@ function SpoofSender(props) {
     const email = useSelector((state) => state.email.value);
     const dispatch = useDispatch();
 
-    const current = email.from;
+    // const current = email.from;
 
     function change(value) {
         if (value === "true") {
@@ -107,9 +107,10 @@ function LinkHiding(props) {
 }
 function TargetAnOrganization() {
     const [value, setValue] = useState("");
+
     function change(value) {
         setValue(value);
-        console.log("this is just here");
+
         if (value) {
             console.log("THis is value");
         } else {
@@ -148,9 +149,9 @@ function TargetIndividual(props) {
 
     function change(value) {
         if (value === "1") {
-            dispatch(
-                changeEmail({ ...getRandomEmail(true), linkType: "normal" })
-            );
+            const test = getRandomEmail(true);
+            console.log("This is a test" + test);
+            dispatch(changeEmail({ ...test, linkType: "normal" }));
             props.setDisplayQuestion({
                 ...props.displayQuestion,
                 targeted: false,

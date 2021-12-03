@@ -8,7 +8,7 @@ function EmailClient({ title, name, from, to, body, linkType }) {
                 templateColumns="repeat(100,1fr)"
             >
                 <GridItem rowSpan={1} colStart={2} colSpan={50}>
-                    <Text fontsize="1.2rem" fontWeight="bold" py={2} px={2}>
+                    <Text fontWeight="bold" py={2} px={2}>
                         {title}
                     </Text>
                 </GridItem>
