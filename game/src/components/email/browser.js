@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 import Browser, { Chrome } from "react-browser-ui";
 import { useState } from "react";
-import { Box, Flex, Button, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, Button, Spacer } from "@chakra-ui/react";
 import EmailClient from "./emailClient";
 
 import _ from "lodash";
@@ -39,7 +39,6 @@ function BrowserCustom({ showHeader = false }) {
 
     return (
         <Box w="100%">
-            {console.log(email)}
             <Box minH={"50vh"}>
                 <Browser
                     type={"chrome"}

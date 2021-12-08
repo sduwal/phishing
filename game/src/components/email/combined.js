@@ -1,7 +1,7 @@
 import { Flex, Box } from "@chakra-ui/react";
 
 import BrowserCustom from "./browser";
-import Questions from "./questions";
+import Questions from "./questions/questions";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -9,9 +9,9 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 function main() {
     return (
-        <DndProvider backend={HTML5Backend}>
+        <DndProvider backend={HTML5Backend} height="100vh">
             {/* Here, render a component that uses DND inside it */}
-            <Box p="20px" background="white" height="100vh">
+            <Box p="20px" background="white">
                 {/* {JSON.stringify(getRandomEmails())} */}
                 <Flex direction="row">
                     <Box flex="2">

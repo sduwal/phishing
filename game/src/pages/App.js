@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Introduction from "./introduction";
-import Main from "./main";
 import StartGame from "./startGame";
 
 function App() {
@@ -15,9 +14,6 @@ function App() {
                     </Route>
                     <Route path="/introduction">
                         <Introduction />
-                    </Route>
-                    <Route path="/main">
-                        <Main />
                     </Route>
                 </Switch>
             </Router>

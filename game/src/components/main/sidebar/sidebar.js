@@ -15,7 +15,6 @@ import MarketPlace from "../../marketplace/index";
 import SelectAttacker from "../../attackers/selectAttacker";
 import { EmailClient } from "../../email";
 
-import websiteImage from "./images/website.jpg";
 import domainImage from "./images/domain.jpg";
 import attackerImage from "./images/attacker.png";
 import emailImage from "./images/mail.png";
