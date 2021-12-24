@@ -3,17 +3,23 @@ import { createSlice } from "@reduxjs/toolkit";
 export const domainSlice = createSlice({
     name: "domain",
     initialState: {
-        value: {
-            name: "NONE"
-        }
+        name: "NONE",
+        subdomains: []
     },
     reducers: {
         changeDomain: (state, action) => {
-            state.value = { ...action.payload };
+            state.name = action.payload;
+        },
+        addSubDomain: (state, action) => {
+            state.subdomains = [...state.subdomains, action.payload];
+        },
+        clearSubDomains: (state) => {
+            state.subdomains = [];
         }
     }
 });
 
-export const { changeDomain } = domainSlice.actions;
+export const { changeDomain, addSubDomain, clearSubDomains } =
+    domainSlice.actions;
 
 export default domainSlice.reducer;

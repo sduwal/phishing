@@ -21,6 +21,7 @@
     "rules": {
         "require-jsdoc": "off",
         "valid-jsdoc": "off",
+        "max-len": "off",
         "indent": [
             "error",
             4,
@@ -33,6 +34,9 @@
             "double"
         ],
         "no-trailing-spaces": "error",
+        "operator-linebreak": [
+            "off"
+        ],
         "no-unused-vars": "warn",
         "comma-dangle": [
             "error",

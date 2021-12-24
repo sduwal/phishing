@@ -1,44 +1,10 @@
-/* eslint-disable operator-linebreak */
-import {
-    Flex,
-    Container,
-    Center,
-    Image,
-    Text,
-    Spacer,
-    Button,
-    Progress,
-    CircularProgress,
-    CircularProgressLabel
-} from "@chakra-ui/react";
+import { Container, Center, Image, Text, Progress } from "@chakra-ui/react";
 
-import { StarIcon } from "@chakra-ui/icons";
-import { changeAttacker } from "../../store/attacker.js";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-function AttackerCard({ attacker }) {
-    const [hiring, setHiring] = useState(false);
-    const [value, setValue] = useState(0);
-
-    const attackerStore = useSelector((state) => state.attacker.value);
-    const money = useSelector((state) => state.money.value);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setValue((value) => {
-                if (value === 100) {
-                    setHiring(false);
-                    clearInterval(timer);
-                    return 0;
-                }
-                return value + 1;
-            });
-        }, 10);
-        return () => clearInterval(timer);
-    }, [hiring]);
-
+function AttackerCard() {
+    const attacker = useSelector((state) => state.attacker);
+    // console.log(attacker.trainingProgress);
     return (
         <Container
             margin="5"
@@ -49,82 +15,60 @@ function AttackerCard({ attacker }) {
             minW="250"
             maxW="300"
             shadow="inner"
-            backgroundColor={
-                attackerStore.name == attacker.name
-                    ? "green.200"
-                    : "transparent"
-            }
             _hover={{
                 bg: "blue.100",
                 rounded: "lg"
             }}
         >
             <Center>
-                <Image width="100px" src={attacker.image} borderRadius="full" />
+                <Image width="120px" src={attacker.image} borderRadius="full" />
             </Center>
-
             <Center mt="6">
-                <Flex direction="row">
-                    {[...Array(attacker.level)].map((x, i) => (
-                        <StarIcon key={i * -1} color="gold" h={6} w={6} m={1} />
-                    ))}
-                </Flex>
+                <Text>Cost: {attacker.totalAmount}</Text>
+            </Center>
+            <Center>
+                <Text>Time: {attacker.trainingTime}</Text>
             </Center>
             <Text width="100%" fontWeight="bold" pt="10px">
                 Efficiency
             </Text>
             <Progress
                 hasStripe
-                value={attacker.efficiency}
+                value={calculateEfficiency(attacker)}
                 size="sm"
                 margin="2px"
             />
-
-            <Text width="100%" fontWeight="bold" pt="10px">
-                Tech Skill
-            </Text>
-            <Progress
-                hasStripe
-                value={attacker.technicalSkill}
-                size="sm"
-                margin="2px"
-            />
-
-            <Flex direction="row" pt="10px">
-                <Text width="100%" fontWeight="bold">
-                    Cost
-                </Text>
-                <Text fontWeight="bold">{attacker.cost}</Text>
-            </Flex>
-            <Flex>
-                <Spacer></Spacer>
-                {hiring ? (
-                    <CircularProgress mt={3}>
-                        <CircularProgressLabel>{value}%</CircularProgressLabel>
-                    </CircularProgress>
-                ) : (
-                    <Button
-                        onClick={() => {
-                            dispatch(changeAttacker());
-                            setHiring(true);
-                            dispatch(changeAttacker(attacker));
-                        }}
-                        mt="3"
-                        isDisabled={
-                            attackerStore.name == attacker.name ||
-                            money < attacker.cost
-                        }
-                    >
-                        <Text>
-                            {attackerStore.name == attacker.name
-                                ? "Selected"
-                                : "Hire"}
-                        </Text>
-                    </Button>
-                )}
-            </Flex>
+            {attacker.isTraining && (
+                <>
+                    <Center mt={4}>
+                        <Text>Training...</Text>
+                    </Center>
+                    <Progress
+                        hasStripe
+                        value={attacker.trainingProgress}
+                        size={"sm"}
+                    />
+                </>
+            )}
         </Container>
     );
+}
+
+function calculateEfficiency(attacker) {
+    let languageEfficiency = attacker.languageSkills.reduce(
+        (acc, curr) => acc + curr.efficiency,
+        0
+    );
+
+    let techEfficiency = attacker.techSkills.reduce(
+        (acc, curr) => acc + curr.efficiency,
+        0
+    );
+
+    if (isNaN(languageEfficiency)) languageEfficiency = 0;
+    if (isNaN(techEfficiency)) techEfficiency = 0;
+
+    return Math.max(5, 0.4 * languageEfficiency + 0.6 * techEfficiency);
 }
 
 export { AttackerCard as default };

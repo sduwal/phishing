@@ -13,6 +13,7 @@ import {
 
 import MarketPlace from "../../marketplace/index";
 import SelectAttacker from "../../attackers/selectAttacker";
+import Attacker from "../../attackers";
 import { EmailClient } from "../../email";
 
 import domainImage from "./images/domain.jpg";
@@ -88,7 +89,7 @@ export default function SideBar() {
             modal: <EmailClient />
         },
         {
-            title: "Domain",
+            title: "Marketplace",
             desc: "Open Domain Marketplace",
             image: domainImage,
             color: "green.400",
@@ -99,7 +100,7 @@ export default function SideBar() {
             desc: "Change Attackers",
             image: attackerImage,
             color: "red.500",
-            modal: <SelectAttacker />
+            modal: <Attacker />
         }
     ];
 

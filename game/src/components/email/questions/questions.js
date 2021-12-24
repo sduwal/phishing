@@ -1,6 +1,8 @@
+/* eslint-disable indent */
 /* eslint-disable operator-linebreak */
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
+import { useSelector } from "react-redux";
 
 import { useDrop } from "react-dnd";
 import { QuestionCard } from "./QuestionCard";
@@ -16,6 +18,7 @@ import {
     Button,
     Spinner
 } from "@chakra-ui/react";
+
 import questionsData from "./questionsData";
 
 const MAX_LEVEL = 4;
@@ -23,6 +26,9 @@ const MAX_LEVEL = 4;
 const Basket = () => {
     const [basket, setBasket] = useState([]);
     const [level, setLevel] = useState(1);
+
+    let attacker = useSelector((state) => state.attacker.techSkills);
+    attacker = Object.keys(attacker).map((key) => attacker[key].display);
 
     const [researchTime, setResearchTime] = useState(0);
 
@@ -89,6 +95,8 @@ const Basket = () => {
 
             {researchTime > 0 ? (
                 <Loading researchTime={researchTime} />
+            ) : level === 3 && !attacker.includes("Spoof the sender") ? (
+                setLevel(level + 1)
             ) : (
                 level < MAX_LEVEL && (
                     <Container
@@ -111,7 +119,11 @@ const Basket = () => {
 
                         {questionsData.map(
                             (q) =>
-                                level === q.displayLevel && (
+                                level === q.displayLevel &&
+                                (!q.requirement ||
+                                    attacker.some((a) =>
+                                        q.requirement.includes(a)
+                                    )) && (
                                     <QuestionCard
                                         key={q.display}
                                         display={q.display}

@@ -23,6 +23,7 @@ function Marketplace() {
      * 4 - When the top level domain is not present
      */
     const [userState, setUserState] = useState(0);
+
     const handleUserLink = (e) => {
         setUserLink(e.target.value);
         setUserState(0);
@@ -34,7 +35,7 @@ function Marketplace() {
                     <InputGroup>
                         <Input
                             type="text"
-                            placeholder="Enter domain name"
+                            placeholder="Enter domain name: example.com"
                             onChange={handleUserLink}
                             onKeyDown={(event) => {
                                 if (event.key === "Enter") processClick();

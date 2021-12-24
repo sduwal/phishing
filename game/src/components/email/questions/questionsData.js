@@ -7,7 +7,8 @@ const targeted = [
         attackerLevel: 3,
         value: "targeted",
         color: "red.100",
-        researchTime: 5
+        researchTime: 5,
+        requirement: ["Research Individuals"]
     },
     {
         display: "Generate email specific to a group",
@@ -16,7 +17,8 @@ const targeted = [
         attackerLevel: 2,
         value: "group",
         color: "green.100",
-        researchTime: 3
+        researchTime: 3,
+        requirement: ["Research Targeted group"]
     },
     {
         display: "Generate a generic email",
@@ -36,7 +38,8 @@ const linkHiding = [
         displayLevel: 2,
         attackerLevel: 1,
         value: "generic",
-        color: "blue.100"
+        color: "blue.100",
+        requirement: ["Links"]
     },
     {
         display: "Shortner",
@@ -44,7 +47,8 @@ const linkHiding = [
         displayLevel: 2,
         attackerLevel: 1,
         value: "generic",
-        color: "red.100"
+        color: "red.100",
+        requirement: ["Links"]
     },
     {
         display: "Confusion",
@@ -52,6 +56,7 @@ const linkHiding = [
         displayLevel: 2,
         attackerLevel: 1,
         value: "generic",
+        requirement: ["Links"],
         color: "yellow.100"
     },
     {
