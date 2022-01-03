@@ -34,6 +34,7 @@ function BrowserCustom({ showHeader = false }) {
     const { Tab } = Chrome;
 
     const email = useSelector((state) => state.email.value);
+
     const [number, setNumber] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -55,7 +56,6 @@ function BrowserCustom({ showHeader = false }) {
                         }}
                     >
                         {_.isEmpty(email) || isLoading ? (
-                            // <Text> {"Waiting..."}</Text>
                             <Dots>Loading</Dots>
                         ) : (
                             <EmailClient
@@ -92,7 +92,7 @@ function BrowserCustom({ showHeader = false }) {
                 <Spacer></Spacer>
                 <Button
                     // TODO: Change this later
-                    isDisabled={_.isEmpty(email) || true}
+                    isDisabled={_.isEmpty(email)}
                     onClick={() => console.log("Sent clicked")}
                 >
                     Send Email

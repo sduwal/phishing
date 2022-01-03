@@ -5,9 +5,20 @@ import Questions from "./questions/questions";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
+import { changeEmail } from "../../store/email";
+
 // import getRandomEmails from "../model/emailData";
 
 function main() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        return dispatch(changeEmail({}));
+    });
+
     return (
         <DndProvider backend={HTML5Backend} height="100vh">
             {/* Here, render a component that uses DND inside it */}

@@ -1,6 +1,7 @@
 import { Text, Grid, GridItem, Avatar, Stack, Box } from "@chakra-ui/react";
 
 function EmailClient({ title, name, from, to, body, linkType }) {
+    console.log(from);
     return (
         <>
             <Grid

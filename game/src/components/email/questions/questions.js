@@ -2,7 +2,7 @@
 /* eslint-disable operator-linebreak */
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useDrop } from "react-dnd";
 import { QuestionCard } from "./QuestionCard";
@@ -16,16 +16,28 @@ import {
     Text,
     Heading,
     Button,
-    Spinner
+    Spinner,
+    Input,
+    Select
 } from "@chakra-ui/react";
+import { toast } from "react-toastify";
 
 import questionsData from "./questionsData";
+import getRandomEmail from "../emailsData";
+import { changeEmail, changeLinkType, spoofEmail } from "../../../store/email";
+import { changeActiveDomain } from "../../../store/domain";
 
 const MAX_LEVEL = 4;
 
 const Basket = () => {
+    const dispatch = useDispatch();
+    let domains = useSelector((state) => state.domain);
+    const activeDomain = useSelector((state) => state.domain.activeDomain);
+    domains = [domains.name, ...domains.subdomains];
+
     const [basket, setBasket] = useState([]);
     const [level, setLevel] = useState(1);
+    const [newEmail, setNewEmail] = useState("");
 
     let attacker = useSelector((state) => state.attacker.techSkills);
     attacker = Object.keys(attacker).map((key) => attacker[key].display);
@@ -42,14 +54,45 @@ const Basket = () => {
         return () => clearInterval(intervalID);
     }, [researchTime]);
 
+    useEffect(() => {
+        if (basket.length == 1) {
+            setTimeout(() => {
+                const randomEmail = getRandomEmail(basket, activeDomain);
+                dispatch(changeEmail(randomEmail));
+            }, researchTime);
+        } else if (basket.length == 2) {
+            dispatch(changeLinkType(basket[1].value));
+        } else if (basket.length == 3 && basket[2].value) {
+            dispatch(spoofEmail(newEmail));
+            setNewEmail("");
+        }
+    }, [basket.length]);
+
+    const validate = (email) => {
+        return email.match("/^S+@S+.S+$/");
+    };
+
     const [{ canDrop }, dropRef] = useDrop({
         accept: "QUESTION",
         drop: (item) => {
-            _.has(basket, item.displayLevel)
-                ? basket
-                : setBasket([...basket, item]);
-
+            if (level == 3 && item.value) {
+                if (!newEmail || validate(newEmail)) {
+                    toast.error("Please enter a valid email address", {
+                        pauseOnHover: false,
+                        autoClose: 2000,
+                        position: "bottom-center",
+                        theme: "colored"
+                    });
+                    return;
+                }
+            }
             setResearchTime(item.researchTime ? item.researchTime : 0);
+            setTimeout(() => {
+                _.has(basket, item.displayLevel)
+                    ? basket
+                    : setBasket([...basket, item]);
+            }, item.researchTime * 1000);
+
             setLevel(level + 1);
         },
         collect: (monitor) => ({
@@ -59,6 +102,21 @@ const Basket = () => {
 
     return (
         <>
+            <Container mb="5">
+                <Select
+                    defaultValue={domains[0]}
+                    variant="filled"
+                    onChange={(e) =>
+                        dispatch(changeActiveDomain(e.target.value))
+                    }
+                >
+                    {domains.map((domain) => (
+                        <option key={domain} value={domain}>
+                            {domain}
+                        </option>
+                    ))}
+                </Select>
+            </Container>
             <Container
                 border="2px solid"
                 width="100%"
@@ -117,6 +175,21 @@ const Basket = () => {
                             If you want to learn more, click on the options!!
                         </Text>
 
+                        {level === 3 && (
+                            <Box mt="3">
+                                <Input
+                                    varianty="flushed"
+                                    placeholder="spoof@newemail.com"
+                                    onChange={(event) =>
+                                        setNewEmail(event.target.value)
+                                    }
+                                />
+                                <Text fontSize="0.8em">
+                                    Enter valid email address. DEFAULT:
+                                    sarose012@gmail.com
+                                </Text>
+                            </Box>
+                        )}
                         {questionsData.map(
                             (q) =>
                                 level === q.displayLevel &&
@@ -130,6 +203,7 @@ const Basket = () => {
                                         hint={q.hint}
                                         displayLevel={q.displayLevel}
                                         attackerLevel={q.attackerLevel}
+                                        value={q.value}
                                         color={q.color}
                                         researchTime={
                                             q.researchTime ? q.researchTime : 0

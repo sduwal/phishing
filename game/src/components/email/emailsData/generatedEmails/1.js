@@ -1,10 +1,11 @@
 import { Box, Center, Text, Button, Image } from "@chakra-ui/react";
 
-export default {
+const email = {
     to: "sarose012@gmail.com",
     from: "someone@gmail.com",
     subject: "Netflix scheduled payment",
     name: "Saroj Duwal",
+    linkType: "normal",
     body: {
         text: [
             {
@@ -168,4 +169,10 @@ export default {
             )
         }
     }
+};
+
+export default {
+    email: email,
+    properties: [],
+    targeted: "generic"
 };

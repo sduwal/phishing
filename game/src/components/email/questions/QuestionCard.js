@@ -9,7 +9,7 @@ export const QuestionCard = ({
     displayLevel,
     attackerLevel,
     color,
-    researchTime
+    researchTime, value
 }) => {
     const [show, setShow] = useState(false);
     const handleToggle = () => setShow(!show);
@@ -22,6 +22,7 @@ export const QuestionCard = ({
             displayLevel,
             attackerLevel,
             color,
+            value,
             researchTime,
             displayMessage:
                 (displayLevel == 2 ? "Linked Displayed using: " : "") + display

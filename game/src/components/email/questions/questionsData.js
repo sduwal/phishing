@@ -37,7 +37,7 @@ const linkHiding = [
         hint: "<a> Tags </a>",
         displayLevel: 2,
         attackerLevel: 1,
-        value: "generic",
+        value: "hidden",
         color: "blue.100",
         requirement: ["Links"]
     },
@@ -46,7 +46,7 @@ const linkHiding = [
         hint: "Shortner",
         displayLevel: 2,
         attackerLevel: 1,
-        value: "generic",
+        value: "shortner",
         color: "red.100",
         requirement: ["Links"]
     },
@@ -55,7 +55,7 @@ const linkHiding = [
         hint: "Shortner",
         displayLevel: 2,
         attackerLevel: 1,
-        value: "generic",
+        value: "confused",
         requirement: ["Links"],
         color: "yellow.100"
     },
@@ -64,7 +64,7 @@ const linkHiding = [
         hint: "Shortner",
         displayLevel: 2,
         attackerLevel: 1,
-        value: "generic",
+        value: "normal",
         color: "green.100"
     }
 ];
@@ -75,7 +75,7 @@ const spoofing = [
         hint: "Use <a> tags </a> to hide your link behing the text.",
         displayLevel: 3,
         attackerLevel: 3,
-        value: "<a>link</a>",
+        value: true,
         color: "red.100"
     },
     {
@@ -83,7 +83,7 @@ const spoofing = [
         hint: "Use <a> tags </a> to hide your link behing the text.",
         displayLevel: 3,
         attackerLevel: 3,
-        value: "<a>link</a>",
+        value: false,
         color: "green.100"
     }
 ];

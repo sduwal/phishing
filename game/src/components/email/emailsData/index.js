@@ -1,22 +1,57 @@
-import { targetedEmails } from "./level1";
+import a1 from "./generatedEmails/1";
 
-export default function getRandomEmails(
-    targeted = false,
-    group = false,
-    individual = true,
-    level = 1
-) {
-    if (targeted) {
-        return targetedEmails[
-            Math.floor(Math.random() * targetedEmails.length)
-        ];
-    }
+import { Button, Center, Text } from "@chakra-ui/react";
 
-    if (group) {
-        return groupEmails[Math.floor(Math.random() * groupEmails.length)];
-    }
+function generateLinks(email, link) {
+    const links = {
+        normal: (
+            <Button background="transparent" _hover p="0">
+                {link}
+            </Button>
+        ),
+        shortner: (
+            <Button
+                // animation={fadeAnimation}
+                background="transparent"
+                _hover
+                p="0"
+            >
+                {"https://tinylink.com"}
+            </Button>
+        ),
+        confused: (
+            <Center>
+                <Button
+                    // animation={fadeAnimation}
+                    background="transparent"
+                    _hover
+                    p="0"
+                >
+                    {"https://randomconfusinglink.com"}
+                </Button>
+            </Center>
+        ),
+        hidden: (
+            <Center>
+                <Button
+                    background="blue"
+                    width="fit-content"
+                    borderRadius="10px"
+                    // animation={fadeAnimation}
+                >
+                    <Text color="white">Click here</Text>
+                </Button>
+            </Center>
+        )
+    };
+    const body = { ...email.body, link: links };
 
-    if (individual) {
-        return generalEmails[Math.floor(Math.random() * generalEmails.length)];
-    }
+    const newEmail = { ...email, body: body };
+    return { ...newEmail };
+}
+export default function getRandomEmail(properties, link) {
+    if (properties.length === 0) return {};
+
+    console.log(link);
+    return generateLinks(a1.email, link);
 }

@@ -5,14 +5,17 @@ export const emailSlice = createSlice({
     initialState: { value: {} },
     reducers: {
         spoofEmail: (state, action) => {
-            state.value = { ...state.value, from: action.payload.from };
+            state.value = { ...state.value, from: action.payload };
         },
         changeEmail: (state, action) => {
             state.value = { ...action.payload };
+        },
+        changeLinkType: (state, action) => {
+            state.value = { ...state.value, linkType: action.payload };
         }
     }
 });
 
-export const { spoofEmail, changeEmail } = emailSlice.actions;
+export const { spoofEmail, changeEmail, changeLinkType } = emailSlice.actions;
 
 export default emailSlice.reducer;
