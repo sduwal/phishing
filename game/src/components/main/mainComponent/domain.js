@@ -32,6 +32,10 @@ function SubDomainAdd({ domain }) {
             return "Subdomain cannot contain spaces";
         }
 
+        if (!/^[a-zA-Z0-9-\.]*$/.test(value)) {
+            return "Domain can only contain letters, numbers and dashes";
+        }
+
         const subDomain = value + "." + domain;
         let error;
 
@@ -117,15 +121,14 @@ function Domain() {
             p={5}
             border="2px solid black"
             rounded="2xl"
-            width="100%"
+            width="90%"
             minH="40vh"
         >
             <Center>
                 <Heading>Domain</Heading>
             </Center>
-            {/* <Divider marginBottom={5} /> */}
             <Text fontSize={"0.9em"} opacity={"0.8"}>
-                {description}{" "}
+                {description}
             </Text>
             <Divider my={"3"} />
             <HStack>

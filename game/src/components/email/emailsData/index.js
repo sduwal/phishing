@@ -1,7 +1,6 @@
 import a1 from "./generatedEmails/1";
 
 import { Button, Center, Text } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
 
 export function generateLinks(email, link) {
     const links = {

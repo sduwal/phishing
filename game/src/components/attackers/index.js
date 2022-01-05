@@ -21,7 +21,6 @@ import {
     setLanguageSkills,
     setTechSkills,
     setIsTraining,
-    setTrainingEnd,
     setCurrentTraining
 } from "../../store/attacker";
 

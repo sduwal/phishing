@@ -1,5 +1,5 @@
 import invalidImage from "../images/invalid.jpg";
-import { Image, Text, VStack, Box, Center } from "@chakra-ui/react";
+import { Image, Text, VStack, Center } from "@chakra-ui/react";
 
 export default function invalidTop() {
     return (

@@ -1,4 +1,4 @@
-import { VStack, Box, Text, Tooltip, Image, Center } from "@chakra-ui/react";
+import { VStack, Box, Text, Image, Center } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { useRef } from "react";
 
@@ -18,6 +18,9 @@ import { EmailClient } from "../../email";
 import domainImage from "./images/domain.jpg";
 import attackerImage from "./images/attacker.png";
 import emailImage from "./images/mail.png";
+import sentImage from "./images/sent.gif";
+
+import PrevEmails from "./prevEmails";
 
 function SideButtons({
     title,
@@ -72,9 +75,10 @@ function SideButtons({
                     <ModalHeader>{title}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        {id == 1 && <EmailClient />}
+                        {id == 1 && <EmailClient onClose={onClose} />}
                         {id == 2 && <MarketPlace onClose={onClose} />}
                         {id == 3 && <Attacker />}
+                        {id == 4 && <PrevEmails />}
                     </ModalBody>
                 </ModalContent>
             </Modal>
@@ -107,6 +111,14 @@ export default function SideBar() {
             color: "red.500",
             modal: <Attacker />,
             id: 3
+        },
+        {
+            title: "Prev Emails",
+            desc: "Change Attackers",
+            image: sentImage,
+            color: "grey",
+            modal: <PrevEmails />,
+            id: 4
         }
     ];
 

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const emailSlice = createSlice({
     name: "email",
-    initialState: { value: {} },
+    initialState: { value: {}, prevEmails: [] },
     reducers: {
         spoofEmail: (state, action) => {
             state.value = { ...state.value, from: action.payload };
@@ -12,10 +12,14 @@ export const emailSlice = createSlice({
         },
         changeLinkType: (state, action) => {
             state.value = { ...state.value, linkType: action.payload };
+        },
+        addSentEmail: (state, action) => {
+            state.prevEmails = [...state.prevEmails, action.payload];
         }
     }
 });
 
-export const { spoofEmail, changeEmail, changeLinkType } = emailSlice.actions;
+export const { spoofEmail, changeEmail, changeLinkType, addSentEmail } =
+    emailSlice.actions;
 
 export default emailSlice.reducer;

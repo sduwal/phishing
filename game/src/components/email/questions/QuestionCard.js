@@ -9,7 +9,8 @@ export const QuestionCard = ({
     displayLevel,
     attackerLevel,
     color,
-    researchTime, value
+    researchTime,
+    value
 }) => {
     const [show, setShow] = useState(false);
     const handleToggle = () => setShow(!show);

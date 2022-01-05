@@ -8,12 +8,15 @@ import _ from "lodash";
 
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 import {
     incrementTotalEmails,
     setIsUpdating,
     updateSuccess
 } from "../../store/status";
+
+import { addSentEmail } from "../../store/email";
 
 // styles
 const Dots = styled.span`
@@ -36,7 +39,7 @@ const Dots = styled.span`
         }
     }
 `;
-function BrowserCustom({ showHeader = false }) {
+function BrowserCustom({ onClose, showHeader = false }) {
     const { Tab } = Chrome;
 
     const email = useSelector((state) => state.email.value);
@@ -47,12 +50,27 @@ function BrowserCustom({ showHeader = false }) {
     const [isLoading, setIsLoading] = useState(false);
 
     function send({ totalSend }) {
-        const successrate = Math.random();
+        const successrate = Math.random() * 0.4;
         let number = totalSend;
 
         const interval = setInterval(() => {
-            if (number < 0) {
+            if (number <= 0) {
                 clearInterval(interval);
+                toast.info(
+                    `Email: ${
+                        email.subject
+                    } has finished sending. 🎉 Success rate: ${Math.round(
+                        successrate * 100
+                    )}%`
+                );
+
+                dispatch(
+                    addSentEmail({
+                        subject: email.subject,
+                        successrate: successrate,
+                        properties: ["Spellings", "Grammar", "Vocabulary"] // TODO: change this
+                    })
+                );
             }
 
             if (!isUpdating) {
@@ -70,7 +88,7 @@ function BrowserCustom({ showHeader = false }) {
                 );
                 dispatch(setIsUpdating(false));
             }
-        }, 5000);
+        }, 100);
     }
 
     return (
@@ -131,6 +149,11 @@ function BrowserCustom({ showHeader = false }) {
                     onClick={() => {
                         dispatch(incrementTotalEmails(email.totalSend));
                         send({ totalSend: email.totalSend });
+                        onClose();
+                        toast.success(
+                            "Email sent. Your stats will be updated when the users open them.",
+                            { autoClose: 2000 }
+                        );
                     }}
                 >
                     Send Email

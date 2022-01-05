@@ -7,6 +7,8 @@ const email = {
     name: "Saroj Duwal",
     linkType: "normal",
     totalSend: 1000,
+    languageProperties: [],
+    techincalProperties: [],
     body: {
         text: [
             {

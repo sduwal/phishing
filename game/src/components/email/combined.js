@@ -12,7 +12,7 @@ import { changeEmail } from "../../store/email";
 
 // import getRandomEmails from "../model/emailData";
 
-function main() {
+function main({ onClose }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -29,7 +29,7 @@ function main() {
                         <Questions></Questions>
                     </Box>
                     <Box flex="2">
-                        <BrowserCustom></BrowserCustom>
+                        <BrowserCustom onClose={onClose} />
                     </Box>
                 </Flex>
             </Box>

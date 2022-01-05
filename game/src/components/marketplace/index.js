@@ -1,4 +1,4 @@
-import { Box, Text, Input, Center, InputGroup, Button } from "@chakra-ui/react";
+import { Box, Text, Input, Center, InputGroup } from "@chakra-ui/react";
 import { domains } from "./data/topDomains";
 import { topLevel } from "./data/toplevel";
 
@@ -92,7 +92,7 @@ function Marketplace({ onClose }) {
     );
 
     function processClick() {
-        if (userLink.includes(" ")) {
+        if (userLink.includes(" ") || !/^[a-zA-Z0-9-.]*$/.test(userLink)) {
             setUserState(4);
             return;
         }

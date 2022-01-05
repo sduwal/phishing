@@ -1,4 +1,4 @@
-import { Box, Center, Text } from "@chakra-ui/react";
+import { Box, Center } from "@chakra-ui/react";
 
 import StatusBar from "./StatusBar";
 import Domain from "./domain";
@@ -10,7 +10,7 @@ export default function mainComponent(props) {
                 <StatusBar />
             </Center>
             <Center>
-                <Domain domain="paypal.com" />
+                <Domain />
             </Center>
         </Box>
     );
