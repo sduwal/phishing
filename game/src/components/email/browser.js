@@ -6,8 +6,14 @@ import EmailClient from "./emailClient";
 
 import _ from "lodash";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+
+import {
+    incrementTotalEmails,
+    setIsUpdating,
+    updateSuccess
+} from "../../store/status";
 
 // styles
 const Dots = styled.span`
@@ -34,9 +40,38 @@ function BrowserCustom({ showHeader = false }) {
     const { Tab } = Chrome;
 
     const email = useSelector((state) => state.email.value);
+    const isUpdating = useSelector((state) => state.status.isUpdating);
+    const dispatch = useDispatch();
 
     const [number, setNumber] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+
+    function send({ totalSend }) {
+        const successrate = Math.random();
+        let number = totalSend;
+
+        const interval = setInterval(() => {
+            if (number < 0) {
+                clearInterval(interval);
+            }
+
+            if (!isUpdating) {
+                dispatch(setIsUpdating(true));
+                const victimNumber = Math.floor(Math.random() * (number + 1));
+
+                number -= victimNumber;
+
+                const success = Math.ceil(victimNumber * successrate);
+                dispatch(
+                    updateSuccess({
+                        successful: success,
+                        unsuccessful: victimNumber - success
+                    })
+                );
+                dispatch(setIsUpdating(false));
+            }
+        }, 5000);
+    }
 
     return (
         <Box w="100%">
@@ -93,7 +128,10 @@ function BrowserCustom({ showHeader = false }) {
                 <Button
                     // TODO: Change this later
                     isDisabled={_.isEmpty(email)}
-                    onClick={() => console.log("Sent clicked")}
+                    onClick={() => {
+                        dispatch(incrementTotalEmails(email.totalSend));
+                        send({ totalSend: email.totalSend });
+                    }}
                 >
                     Send Email
                 </Button>

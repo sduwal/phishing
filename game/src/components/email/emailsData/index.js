@@ -1,8 +1,9 @@
 import a1 from "./generatedEmails/1";
 
 import { Button, Center, Text } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
-function generateLinks(email, link) {
+export function generateLinks(email, link) {
     const links = {
         normal: (
             <Button background="transparent" _hover p="0">
@@ -46,12 +47,14 @@ function generateLinks(email, link) {
     };
     const body = { ...email.body, link: links };
 
-    const newEmail = { ...email, body: body };
+    const newEmail = {
+        ...email,
+        body: body,
+        from: "contact@" + link
+    };
     return { ...newEmail };
 }
 export default function getRandomEmail(properties, link) {
     if (properties.length === 0) return {};
-
-    console.log(link);
     return generateLinks(a1.email, link);
 }

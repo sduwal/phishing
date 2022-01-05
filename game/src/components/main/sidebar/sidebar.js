@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 
 import MarketPlace from "../../marketplace/index";
-import SelectAttacker from "../../attackers/selectAttacker";
 import Attacker from "../../attackers";
 import { EmailClient } from "../../email";
 
@@ -20,41 +19,47 @@ import domainImage from "./images/domain.jpg";
 import attackerImage from "./images/attacker.png";
 import emailImage from "./images/mail.png";
 
-function SideButtons({ title, desc, image, color = "red", onClick, modal }) {
+function SideButtons({
+    title,
+    desc,
+    image,
+    color = "red",
+    onClick,
+    modal,
+    id
+}) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const finalRef = useRef();
     return (
         <>
             <Box margin={0} padding={0} height={0} ref={finalRef}></Box>
-            <Tooltip shouldWrapChildren label={desc} openDelay={300}>
-                <Box
-                    px="2"
-                    pt="2"
-                    m="0"
-                    background={color}
-                    rounded="10"
-                    minW="200px"
-                    alignContent="center"
-                    _hover={{
-                        cursor: "pointer",
-                        backgroundColor: "black"
-                    }}
-                    onClick={onOpen}
-                >
-                    <Image
-                        src={image}
-                        background="transparent"
-                        h={130}
-                        w={190}
-                        objectFit="cover"
-                    />
-                    <Center>
-                        <Text py="2" fontWeight="bold" color="white">
-                            {title}
-                        </Text>
-                    </Center>
-                </Box>
-            </Tooltip>
+            <Box
+                px="2"
+                pt="2"
+                m="0"
+                background={color}
+                rounded="10"
+                minW="200px"
+                alignContent="center"
+                _hover={{
+                    cursor: "pointer",
+                    backgroundColor: "black"
+                }}
+                onClick={onOpen}
+            >
+                <Image
+                    src={image}
+                    background="transparent"
+                    h={130}
+                    w={190}
+                    objectFit="cover"
+                />
+                <Center>
+                    <Text py="2" fontWeight="bold" color="white">
+                        {title}
+                    </Text>
+                </Center>
+            </Box>
 
             <Modal
                 finalFocusRef={finalRef}
@@ -66,13 +71,11 @@ function SideButtons({ title, desc, image, color = "red", onClick, modal }) {
                 <ModalContent>
                     <ModalHeader>{title}</ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody>{modal}</ModalBody>
-
-                    {/* <ModalFooter>
-                        <Button colorScheme="blue" mr={3} onClick={onClose}>
-                            Close
-                        </Button>
-                    </ModalFooter> */}
+                    <ModalBody>
+                        {id == 1 && <EmailClient />}
+                        {id == 2 && <MarketPlace onClose={onClose} />}
+                        {id == 3 && <Attacker />}
+                    </ModalBody>
                 </ModalContent>
             </Modal>
         </>
@@ -86,21 +89,24 @@ export default function SideBar() {
             desc: "Generate new email",
             image: emailImage,
             color: "blue.500",
-            modal: <EmailClient />
+            modal: <EmailClient />,
+            id: 1
         },
         {
             title: "Marketplace",
             desc: "Open Domain Marketplace",
             image: domainImage,
             color: "green.400",
-            modal: <MarketPlace />
+            modal: <MarketPlace />,
+            id: 2
         },
         {
             title: "Attackers",
             desc: "Change Attackers",
             image: attackerImage,
             color: "red.500",
-            modal: <Attacker />
+            modal: <Attacker />,
+            id: 3
         }
     ];
 

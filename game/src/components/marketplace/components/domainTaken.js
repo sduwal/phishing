@@ -6,7 +6,6 @@ import notAvailable from "../images/notAvailable.png";
 import DomainCard from "./domainCard";
 
 function domainTaken({ domainName }) {
-    console.log(domainName);
     const alternatives = getAlternateDomain(domainName.split(".")[0]);
 
     return (

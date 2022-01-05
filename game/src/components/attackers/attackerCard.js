@@ -1,10 +1,10 @@
 import { Container, Center, Image, Text, Progress } from "@chakra-ui/react";
 
 import { useSelector } from "react-redux";
+import helper from "./helper.png";
 
 function AttackerCard() {
     const attacker = useSelector((state) => state.attacker);
-    // console.log(attacker.trainingProgress);
     return (
         <Container
             margin="5"
@@ -21,7 +21,7 @@ function AttackerCard() {
             }}
         >
             <Center>
-                <Image width="120px" src={attacker.image} borderRadius="full" />
+                <Image height="150px" src={helper} borderRadius="full" />
             </Center>
             <Center mt="6">
                 <Text>Cost: {attacker.totalAmount}</Text>

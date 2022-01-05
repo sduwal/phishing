@@ -7,8 +7,8 @@ export default function invalidTop() {
             <VStack>
                 <Image src={invalidImage} height="300" />
                 <Text fontWeight="bold" fontSize="1.3em">
-                    The top level domain you entered is incorrect. Examples:
-                    com, org, gov
+                    Something went wrong. Either you entered an invalid domain
+                    name or invalid top domain (com, org).
                 </Text>
             </VStack>
         </Center>

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeDomain, clearSubDomains } from "../../../store/domain";
 import { toast } from "react-toastify";
 
-export default function domainAvailable({ name }) {
+export default function domainAvailable({ name, onClick }) {
     const dispatch = useDispatch();
     const domain = useSelector((state) => state.domain.name);
     const cost = determineCost(name);
@@ -14,6 +14,7 @@ export default function domainAvailable({ name }) {
     const handleClick = () => {
         dispatch(changeDomain(name));
         dispatch(clearSubDomains());
+        onClick();
         toast.success("Domain has been changed successfully");
     };
     return (

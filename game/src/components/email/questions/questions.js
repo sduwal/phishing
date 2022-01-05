@@ -23,7 +23,7 @@ import {
 import { toast } from "react-toastify";
 
 import questionsData from "./questionsData";
-import getRandomEmail from "../emailsData";
+import getRandomEmail, { generateLinks } from "../emailsData";
 import { changeEmail, changeLinkType, spoofEmail } from "../../../store/email";
 import { changeActiveDomain } from "../../../store/domain";
 
@@ -31,9 +31,12 @@ const MAX_LEVEL = 4;
 
 const Basket = () => {
     const dispatch = useDispatch();
+    const email = useSelector((state) => state.email.value);
+
     let domains = useSelector((state) => state.domain);
-    const activeDomain = useSelector((state) => state.domain.activeDomain);
     domains = [domains.name, ...domains.subdomains];
+
+    const activeDomain = useSelector((state) => state.domain.activeDomain);
 
     const [basket, setBasket] = useState([]);
     const [level, setLevel] = useState(1);
@@ -106,9 +109,17 @@ const Basket = () => {
                 <Select
                     defaultValue={domains[0]}
                     variant="filled"
-                    onChange={(e) =>
-                        dispatch(changeActiveDomain(e.target.value))
-                    }
+                    onChange={(e) => {
+                        dispatch(changeActiveDomain(e.target.value));
+
+                        if (Object.keys(email).length > 0) {
+                            const newEmail = generateLinks(
+                                email,
+                                e.target.value
+                            );
+                            dispatch(changeEmail(newEmail));
+                        }
+                    }}
                 >
                     {domains.map((domain) => (
                         <option key={domain} value={domain}>
@@ -225,6 +236,7 @@ const Basket = () => {
 };
 
 function StartOver({ setLevel, setBasket, setResearchTime }) {
+    const dispatch = useDispatch();
     return (
         <Container>
             <Button
@@ -233,6 +245,7 @@ function StartOver({ setLevel, setBasket, setResearchTime }) {
                     setLevel(1);
                     setBasket([]);
                     setResearchTime(0);
+                    dispatch(changeEmail({}));
                 }}
             >
                 Start Over

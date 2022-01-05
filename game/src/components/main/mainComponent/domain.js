@@ -28,6 +28,10 @@ function SubDomainAdd({ domain }) {
     const ref = useRef(null);
 
     const validate = (value) => {
+        if (value.split(" ").length > 1) {
+            return "Subdomain cannot contain spaces";
+        }
+
         const subDomain = value + "." + domain;
         let error;
 

@@ -8,7 +8,6 @@ export const attackerSlice = createSlice({
         techSkills: [],
         isTraining: false,
         totalAmount: 0,
-        image: "https://picsum.photos/200",
         trainingTime: 0,
         trainingEnd: "",
         currentTraining: ""

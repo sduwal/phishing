@@ -6,6 +6,7 @@ const email = {
     subject: "Netflix scheduled payment",
     name: "Saroj Duwal",
     linkType: "normal",
+    totalSend: 1000,
     body: {
         text: [
             {

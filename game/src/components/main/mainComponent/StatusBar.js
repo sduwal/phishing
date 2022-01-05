@@ -1,4 +1,4 @@
-import { MdEmail, MdPeopleAlt } from "react-icons/md";
+import { MdEmail, MdPeopleAlt, MdAttachMoney } from "react-icons/md";
 import {
     Box,
     Text,
@@ -9,7 +9,10 @@ import {
     Tooltip
 } from "@chakra-ui/react";
 
+import { useSelector } from "react-redux";
+
 export default function StatusBar() {
+    const status = useSelector((state) => state.status);
     return (
         <Box
             border="3px solid"
@@ -19,7 +22,9 @@ export default function StatusBar() {
             width="fit-content"
         >
             <Center>
-                <Text>Stats</Text>
+                <Text fontStyle={"bold"} fontSize={"1.5em"}>
+                    Stats
+                </Text>
             </Center>
             <Center>
                 <HStack spacing={10}>
@@ -33,7 +38,7 @@ export default function StatusBar() {
                         >
                             <Icon as={MdPeopleAlt} color="red" w={10} h={10} />
                         </Tooltip>
-                        <Text>1</Text>
+                        <Text>{status.totalEmails}</Text>
                     </VStack>
                     <VStack>
                         <Tooltip
@@ -45,7 +50,7 @@ export default function StatusBar() {
                         >
                             <Icon as={MdEmail} color="red" w={10} h={10} />
                         </Tooltip>
-                        <Text>1</Text>
+                        <Text>{status.successEmails}</Text>
                     </VStack>
                     <VStack>
                         <Tooltip
@@ -57,7 +62,24 @@ export default function StatusBar() {
                         >
                             <Icon as={MdEmail} color="green" w={10} h={10} />
                         </Tooltip>
-                        <Text>1</Text>
+                        <Text>{status.unsuccessfulEmails}</Text>
+                    </VStack>
+                    <VStack>
+                        <Tooltip
+                            shouldWrapChildren
+                            hasArrow
+                            label="Money"
+                            fontSize="md"
+                            placement="bottom"
+                        >
+                            <Icon
+                                as={MdAttachMoney}
+                                color="green"
+                                w={10}
+                                h={10}
+                            />
+                        </Tooltip>
+                        <Text>{status.money}</Text>
                     </VStack>
                 </HStack>
             </Center>

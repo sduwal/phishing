@@ -1,4 +1,4 @@
-import { Box, Text, Input, Center, InputGroup } from "@chakra-ui/react";
+import { Box, Text, Input, Center, InputGroup, Button } from "@chakra-ui/react";
 import { domains } from "./data/topDomains";
 import { topLevel } from "./data/toplevel";
 
@@ -11,7 +11,7 @@ import Incomplete from "./components/incomplete";
 import Invalid from "./components/invalidTop";
 import DomainAvailable from "./components/domainAvailable";
 
-function Marketplace() {
+function Marketplace({ onClose }) {
     // const [data, setData] = useState([]);
     const [userLink, setUserLink] = useState("");
 
@@ -65,7 +65,12 @@ function Marketplace() {
                             return <DomainTaken domainName={userLink} />;
                             break;
                         case 2:
-                            return <DomainAvailable name={userLink} />;
+                            return (
+                                <DomainAvailable
+                                    name={userLink}
+                                    onClick={onClose}
+                                />
+                            );
                             break;
                         case 3:
                             return <Incomplete />;
@@ -87,6 +92,11 @@ function Marketplace() {
     );
 
     function processClick() {
+        if (userLink.includes(" ")) {
+            setUserState(4);
+            return;
+        }
+
         if (userLink.split(".").length == 1) {
             setUserState(3);
             return;
