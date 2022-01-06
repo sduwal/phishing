@@ -56,13 +56,13 @@ function BrowserCustom({ onClose, showHeader = false }) {
         const interval = setInterval(() => {
             if (number <= 0) {
                 clearInterval(interval);
-                toast.info(
-                    `Email: ${
-                        email.subject
-                    } has finished sending. 🎉 Success rate: ${Math.round(
-                        successrate * 100
-                    )}%`
-                );
+                // toast.info(
+                //     `Email: ${
+                //         email.subject
+                //     } has finished sending. 🎉 Success rate: ${Math.round(
+                //         successrate * 100
+                //     )}%`
+                // );
 
                 dispatch(
                     addSentEmail({
