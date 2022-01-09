@@ -34,11 +34,14 @@ function EmailClient({ title, name, from, to, body, linkType }) {
                     </Stack>
                 </GridItem>
             </Grid>
-            <Box w="100%" h="50vh">
+            <Box w="100%" h="50vh" overflowY={"auto"} mb={"10px"}>
                 {body.start}
-                <Box py="5" width="fit-content">
-                    {body.link[linkType]}
-                </Box>
+                {console.log(body)}
+                {
+                    <Box py="1" width="fit-content">
+                        {body.link[linkType]}
+                    </Box>
+                }
                 {body.end}
             </Box>
         </>

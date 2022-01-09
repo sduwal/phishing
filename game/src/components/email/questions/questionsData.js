@@ -27,7 +27,7 @@ const targeted = [
         attackerLevel: 1,
         value: "generic",
         color: "blue.100",
-        researchTime: 1
+        researchTime: 0
     }
 ];
 
