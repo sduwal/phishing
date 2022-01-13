@@ -38,7 +38,7 @@ function EmailClient({ title, name, from, to, body, linkType }) {
                 {body.start}
                 {console.log(body)}
                 {
-                    <Box py="1" width="fit-content">
+                    <Box py="1" width="100%">
                         {body.link[linkType]}
                     </Box>
                 }

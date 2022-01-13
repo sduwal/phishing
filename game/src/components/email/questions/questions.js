@@ -23,7 +23,8 @@ import {
 import { toast } from "react-toastify";
 
 import questionsData from "./questionsData";
-import getRandomEmail, { generateLinks } from "../emailsData";
+import getRandomEmail from "../emailsData";
+import generateLinks from "../emailsData/generateLinks";
 import { changeEmail, changeLinkType, spoofEmail } from "../../../store/email";
 import { changeActiveDomain } from "../../../store/domain";
 
@@ -42,8 +43,10 @@ const Basket = () => {
     const [level, setLevel] = useState(1);
     const [newEmail, setNewEmail] = useState("");
 
-    let attacker = useSelector((state) => state.attacker.techSkills);
-    attacker = Object.keys(attacker).map((key) => attacker[key].display);
+    const storeAttacker = useSelector((state) => state.attacker);
+    const attacker = Object.keys(storeAttacker.techSkills).map(
+        (key) => attacker.techSkills[key].display
+    );
 
     const [researchTime, setResearchTime] = useState(0);
 
@@ -60,7 +63,11 @@ const Basket = () => {
     useEffect(() => {
         if (basket.length == 1) {
             setTimeout(() => {
-                const randomEmail = getRandomEmail(basket, activeDomain);
+                const randomEmail = getRandomEmail(
+                    basket,
+                    activeDomain,
+                    storeAttacker
+                );
                 dispatch(changeEmail(randomEmail));
             }, researchTime);
         } else if (basket.length == 2) {

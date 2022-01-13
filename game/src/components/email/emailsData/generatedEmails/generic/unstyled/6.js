@@ -1,7 +1,6 @@
 // no special properties
 
 import { Text } from "@chakra-ui/react";
-import { m } from "framer-motion";
 
 const email = {
     to: "jane_doe@gmail.com",

@@ -20,7 +20,7 @@ import attackerImage from "./images/attacker.png";
 import emailImage from "./images/mail.png";
 import sentImage from "./images/sent.gif";
 
-import PrevEmails from "./prevEmails";
+import PrevEmails from "../prevEmails";
 
 function SideButtons({
     title,
