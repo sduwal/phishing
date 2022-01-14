@@ -50,7 +50,7 @@ export default function StatusBar() {
                         >
                             <Icon as={MdEmail} color="red" w={10} h={10} />
                         </Tooltip>
-                        <Text>{status.successEmails}</Text>
+                        <Text>{status.unsuccessfulEmails}</Text>
                     </VStack>
                     <VStack>
                         <Tooltip
@@ -62,7 +62,7 @@ export default function StatusBar() {
                         >
                             <Icon as={MdEmail} color="green" w={10} h={10} />
                         </Tooltip>
-                        <Text>{status.unsuccessfulEmails}</Text>
+                        <Text>{status.successEmails}</Text>
                     </VStack>
                     <VStack>
                         <Tooltip

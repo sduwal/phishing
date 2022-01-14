@@ -13,7 +13,8 @@ import { toast } from "react-toastify";
 import {
     incrementTotalEmails,
     setIsUpdating,
-    updateSuccess
+    updateSuccess,
+    incrementByAmount
 } from "../../store/status";
 
 import { addSentEmail } from "../../store/email";
@@ -57,19 +58,19 @@ function BrowserCustom({ onClose, showHeader = false }) {
         const interval = setInterval(() => {
             if (sendNumber <= 0) {
                 clearInterval(interval);
-                // toast.info(
-                //     `Email: ${
-                //         email.subject
-                //     } has finished sending. 🎉 Success rate: ${Math.round(
-                //         successrate * 100
-                //     )}%`
-                // );
+                toast.info(
+                    `Email: ${
+                        email.subject
+                    } has stopped receiving traction. 🎉 Success rate: ${Math.round(
+                        successrate * 100
+                    )}%`
+                );
 
                 dispatch(
                     addSentEmail({
                         subject: email.subject,
-                        successrate: successrate,
-                        properties: ["Spellings", "Grammar", "Vocabulary"] // TODO: change this
+                        successrate: successrate
+                        // properties: []
                     })
                 );
             }
@@ -84,6 +85,12 @@ function BrowserCustom({ onClose, showHeader = false }) {
 
                 const success = Math.ceil(victimNumber * successrate);
                 dispatch(
+                    // The amount is 10 for each successful email
+                    incrementByAmount(
+                        Math.round(successrate * 100 * success) * 10
+                    )
+                );
+                dispatch(
                     updateSuccess({
                         successful: success,
                         unsuccessful: victimNumber - success
@@ -91,7 +98,7 @@ function BrowserCustom({ onClose, showHeader = false }) {
                 );
                 dispatch(setIsUpdating(false));
             }
-        }, 100);
+        }, (1 + Math.round(Math.random * 10)) * 1000);
     }
 
     return (

@@ -21,8 +21,12 @@ function domainTaken({ domainName }) {
                         Consider the following alternatives with different
                         endings
                     </Text>
-                    {alternatives.map((alternative) => (
-                        <DomainCard key={alternative} link={alternative} />
+                    {alternatives.map((alternative, index) => (
+                        <DomainCard
+                            key={alternative}
+                            link={alternative}
+                            index={index}
+                        />
                     ))}
                 </VStack>
             </Center>

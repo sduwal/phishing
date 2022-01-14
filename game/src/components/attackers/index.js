@@ -24,6 +24,8 @@ import {
     setCurrentTraining
 } from "../../store/attacker";
 
+import { decrementByAmount } from "../../store/status";
+
 import AttackerCard from "./attackerCard";
 import { language, skills } from "./trainingData";
 
@@ -39,6 +41,7 @@ function CollapseTrainingOptions({
     efficiency
 }) {
     const attacker = useSelector((state) => state.attacker);
+    const money = useSelector((state) => state.status.money);
 
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
@@ -84,6 +87,7 @@ function CollapseTrainingOptions({
                       })
                   );
 
+            dispatch(decrementByAmount(cost));
             dispatch(setIsTraining(false));
 
             toast("Training complete", {
@@ -119,7 +123,11 @@ function CollapseTrainingOptions({
                 {
                     <Center>
                         <Button
-                            disabled={attacker.isTraining || containsSkill}
+                            disabled={
+                                attacker.isTraining ||
+                                containsSkill ||
+                                money < cost
+                            }
                             onClick={handleClick}
                         >
                             {containsSkill ? "Complete" : "Train"}

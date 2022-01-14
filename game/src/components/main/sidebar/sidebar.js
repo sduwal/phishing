@@ -10,7 +10,6 @@ import {
     ModalContent,
     ModalBody,
     ModalCloseButton,
-    Button,
     Tooltip
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/hooks";
@@ -40,9 +39,6 @@ function SideButtons({
     id,
     isDisabled = false
 }) {
-    {
-        console.log(isDisabled);
-    }
     const { isOpen, onOpen, onClose } = useDisclosure();
     const finalRef = useRef();
     return (

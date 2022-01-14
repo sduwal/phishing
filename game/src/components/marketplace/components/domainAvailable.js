@@ -5,15 +5,18 @@ import determineCost from "../utils/similarity";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDomain, clearSubDomains } from "../../../store/domain";
 import { toast } from "react-toastify";
+import { decrementByAmount } from "../../../store/status";
 
 export default function domainAvailable({ name, onClick }) {
     const dispatch = useDispatch();
     const domain = useSelector((state) => state.domain.name);
+    const money = useSelector((state) => state.status.money);
     const cost = determineCost(name);
 
     const handleClick = () => {
         dispatch(changeDomain(name));
         dispatch(clearSubDomains());
+        dispatch(decrementByAmount(cost));
         onClick();
         toast.success("Domain has been changed successfully");
     };
@@ -34,7 +37,12 @@ export default function domainAvailable({ name, onClick }) {
                         color="white"
                         p="6"
                         onClick={handleClick}
-                        isDisabled={domain === name}
+                        _disabled={{
+                            background: "grey",
+                            color: "black",
+                            cursor: "not-allowed"
+                        }}
+                        isDisabled={domain === name || money < cost}
                     >
                         <Text fontSize="1.2em">Get It</Text>
                     </Button>

@@ -2,19 +2,8 @@ import { VStack, Box, Flex, Spacer } from "@chakra-ui/react";
 import { Timer, Sidebar, MainComponent } from "../components/main";
 
 import { ToastContainer } from "react-toastify";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 export default function App() {
-    const money = useSelector((state) => state.status.money);
-
-    useEffect(() => {
-        if (money === 0) {
-            // TODO: navigate to game over
-            console.log("do something");
-        }
-    }, [money]);
-
     function Top() {
         return (
             <>
