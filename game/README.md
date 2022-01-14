@@ -2,8 +2,8 @@
 ---
 - [ ] Add more emails
 - [X] Filter emails
-- [x] similarity for sent emails
-- [ ] marketplace currency and other economy
+- [X] similarity for sent emails
+- [X] marketplace currency and other economy
 - [ ] Onboarding screen
 
 ## concerns

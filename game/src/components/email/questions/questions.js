@@ -1,7 +1,6 @@
 /* eslint-disable indent */
 /* eslint-disable operator-linebreak */
 import React, { useEffect, useState } from "react";
-import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useDrop } from "react-dnd";
@@ -18,7 +17,8 @@ import {
     Button,
     Spinner,
     Input,
-    Select
+    Select,
+    VStack
 } from "@chakra-ui/react";
 import { toast } from "react-toastify";
 
@@ -51,33 +51,53 @@ const Basket = () => {
 
     const [researchTime, setResearchTime] = useState(0);
 
-    useEffect(() => {
-        const intervalID = setInterval(() => {
-            if (researchTime == 0) {
-                clearInterval(intervalID);
-            } else setResearchTime(researchTime - 1);
-        }, 1000);
+    // useEffect(() => {
+    //     const randomEmail = getRandomEmail(
+    //         ["generic"],
+    //         activeDomain,
+    //         storeAttacker
+    //     );
+    //     dispatch(changeEmail(randomEmail));
+    //     console.log("MOUNT", email);
+    // }, []);
+    // useEffect(() => {
+    //     if (researchTime != 0) {
+    //         setTimeout(() => {
+    //             setResearchTime(0);
+    //         }, 1000 * researchTime);
+    //     }
+    //     // const intervalID = setTimeout(() => {
+    //     //     if (researchTime <= 0) {
+    //     //         clearInterval(intervalID);
+    //     //     } else {
+    //     //         setResearchTime(researchTime - 1);
+    //     //     }
+    //     // }, 1000);
 
-        return () => clearInterval(intervalID);
-    }, [researchTime]);
+    //     // return () => clearInterval(intervalID);
+    // }, [researchTime]);
 
     useEffect(() => {
         if (basket.length == 1) {
-            setTimeout(() => {
-                const randomEmail = getRandomEmail(
-                    basket,
-                    activeDomain,
-                    storeAttacker
-                );
-                dispatch(changeEmail(randomEmail));
-            }, researchTime);
+            const randomEmail = getRandomEmail(
+                basket,
+                activeDomain,
+                storeAttacker
+            );
+
+            dispatch(changeEmail(randomEmail));
         } else if (basket.length == 2) {
             dispatch(changeLinkType(basket[1].value));
         } else if (basket.length == 3 && basket[2].value) {
             dispatch(spoofEmail(newEmail));
             setNewEmail("");
         }
-    }, [basket.length]);
+        if (basket.length != 0) {
+            console.log("Test");
+            setResearchTime(0);
+            setLevel(level + 1);
+        }
+    }, [basket.length, dispatch]);
 
     const validate = (email) => {
         return email.match("/^S+@S+.S+$/");
@@ -86,6 +106,7 @@ const Basket = () => {
     const [{ canDrop }, dropRef] = useDrop({
         accept: "QUESTION",
         drop: (item) => {
+            console.log(item);
             if (level == 3 && item.value) {
                 if (!newEmail || validate(newEmail)) {
                     toast.error("Please enter a valid email address", {
@@ -97,14 +118,15 @@ const Basket = () => {
                     return;
                 }
             }
-            setResearchTime(item.researchTime ? item.researchTime : 0);
-            setTimeout(() => {
-                _.has(basket, item.displayLevel)
-                    ? basket
-                    : setBasket([...basket, item]);
-            }, item.researchTime * 1000);
 
-            setLevel(level + 1);
+            if (level == 1) {
+                setResearchTime(item.researchTime ? item.researchTime : 0);
+                setTimeout(() => {
+                    setBasket([...basket, item]);
+                }, item.researchTime * 1000);
+            } else {
+                setBasket([...basket, item]);
+            }
         },
         collect: (monitor) => ({
             canDrop: monitor.canDrop()
@@ -252,7 +274,7 @@ function StartOver({ setLevel, setBasket, setResearchTime }) {
                 onClick={() => {
                     setLevel(1);
                     setBasket([]);
-                    setResearchTime(0);
+                    // setResearchTime(0);
                     dispatch(changeEmail({}));
                 }}
             >
@@ -264,10 +286,16 @@ function StartOver({ setLevel, setBasket, setResearchTime }) {
 function Loading({ researchTime }) {
     return (
         <>
-            <Center mt="3">
+            {/* <Center mt="3">
                 <Spinner size="xl" />
             </Center>
-            <Center mt="3">Email will be ready in {researchTime}</Center>
+            <Center mt="3">Email will be ready in {researchTime}</Center> */}
+            <Center mt="3">
+                <VStack>
+                    <Spinner size={"xl"} />
+                    <Text>Generating email..</Text>
+                </VStack>
+            </Center>
         </>
     );
 }

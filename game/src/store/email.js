@@ -8,6 +8,7 @@ export const emailSlice = createSlice({
             state.value = { ...state.value, from: action.payload };
         },
         changeEmail: (state, action) => {
+            console.log({ ...action.payload });
             state.value = { ...action.payload };
         },
         changeLinkType: (state, action) => {

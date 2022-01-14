@@ -1,6 +1,6 @@
 /* eslint-disable operator-linebreak */
 import Browser, { Chrome } from "react-browser-ui";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Flex, Button, Spacer } from "@chakra-ui/react";
 import EmailClient from "./emailClient";
 
@@ -45,6 +45,11 @@ function BrowserCustom({ onClose, showHeader = false }) {
     const { Tab } = Chrome;
 
     const email = useSelector((state) => state.email.value);
+
+    useEffect(() => {
+        console.log("From browser", email);
+    }, [email]);
+
     const isUpdating = useSelector((state) => state.status.isUpdating);
     const dispatch = useDispatch();
 
@@ -87,7 +92,7 @@ function BrowserCustom({ onClose, showHeader = false }) {
                 dispatch(
                     // The amount is 10 for each successful email
                     incrementByAmount(
-                        Math.round(successrate * 100 * success) * 10
+                        Math.round(successrate * 100 * success) * 3
                     )
                 );
                 dispatch(

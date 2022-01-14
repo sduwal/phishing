@@ -55,18 +55,18 @@ function CollapseTrainingOptions({
             display: display
         });
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            if (!attacker.isTraining || attacker.currentTraining !== display) {
-                dispatch(setCurrentTraining(""));
-                clearInterval(timer);
-            } else {
-                // dispatch(setTrainingProgress(100 / time));
-            }
-        }, 1000);
+    // useEffect(() => {
+    //     const timer = setInterval(() => {
+    //         if (!attacker.isTraining || attacker.currentTraining !== display) {
+    //             dispatch(setCurrentTraining(""));
+    //             clearInterval(timer);
+    //         } else {
+    //             // dispatch(setTrainingProgress(100 / time));
+    //         }
+    //     }, 1000);
 
-        return () => clearInterval(timer);
-    }, [attacker.isTraining]);
+    //     return () => clearInterval(timer);
+    // }, [attacker.isTraining]);
 
     function handleClick() {
         dispatch(setIsTraining(true));

@@ -15,30 +15,34 @@ export const QuestionCard = ({
     const [show, setShow] = useState(false);
     const handleToggle = () => setShow(!show);
 
-    const [{ isDragging, opacity }, dragRef] = useDrag({
-        type: "QUESTION",
-        item: {
-            display,
-            hint,
-            displayLevel,
-            attackerLevel,
-            color,
-            value,
-            researchTime,
-            displayMessage:
-                (displayLevel == 2 ? "Linked Displayed using: " : "") + display
+    const [{ isDragging, opacity }, dragRef] = useDrag(
+        {
+            type: "QUESTION",
+            item: {
+                display,
+                hint,
+                displayLevel,
+                attackerLevel,
+                color,
+                value,
+                researchTime,
+                displayMessage:
+                    (displayLevel == 2 ? "Linked Displayed using: " : "") +
+                    display
+            }
+            // collect: (monitor) => ({
+            //     opacity: monitor.isDragging() ? 0.2 : 1,
+            //     isDragging: monitor.isDragging()
+            // })
         },
-        collect: (monitor) => ({
-            opacity: monitor.isDragging() ? 0.2 : 1,
-            isDragging: monitor.isDragging()
-        })
-    });
+        []
+    );
 
-    useEffect(() => {
-        if (isDragging) {
-            setShow(false);
-        }
-    }, [isDragging]);
+    // useEffect(() => {
+    //     if (isDragging) {
+    //         setShow(false);
+    //     }
+    // }, [isDragging]);
 
     return (
         <>
