@@ -25,6 +25,7 @@ import { toast } from "react-toastify";
 import questionsData from "./questionsData";
 import getRandomEmail from "../emailsData";
 import generateLinks from "../emailsData/generateLinks";
+
 import { changeEmail, changeLinkType, spoofEmail } from "../../../store/email";
 import { changeActiveDomain } from "../../../store/domain";
 
@@ -45,7 +46,7 @@ const Basket = () => {
 
     const storeAttacker = useSelector((state) => state.attacker);
     const attacker = Object.keys(storeAttacker.techSkills).map(
-        (key) => attacker.techSkills[key].display
+        (key) => storeAttacker.techSkills[key].display
     );
 
     const [researchTime, setResearchTime] = useState(0);

@@ -1,67 +1,52 @@
 /* eslint-disable max-len */
 const targeted = [
     {
-        display: "Generate targeted email",
-        hint: "Generate a email targeted to a specific user. This will require some additional time to research specific individual.",
+        display: "Generate Targeted Emails",
+        hint: "Generate email targeted to a specific group of users. This will take a while, but will generate personalized emails (maybe name, address, etc).",
         displayLevel: 1,
-        attackerLevel: 3,
-        value: "targeted",
-        color: "red.100",
-        researchTime: 5,
-        requirement: ["Research Individuals"]
-    },
-    {
-        display: "Generate email specific to a group",
-        hint: "Generate a email targeted to a specific group. This will require some additional time to research specific group, but will be faster than researching specific individual.",
-        displayLevel: 1,
-        attackerLevel: 2,
         value: "group",
         color: "green.100",
-        researchTime: 3,
+        researchTime: 10,
         requirement: ["Research Targeted group"]
     },
     {
         display: "Generate a generic email",
-        hint: "Generate emajasdha kjsdhaskjdh aksjdh aksjdhaksjdhajksh alksdhsdkjfh alfhakl jsfhaksdh aweyioqhdklash qwoi kszjdhqaodasl haodhaklsdh asdhailsey laskdbnhajksydhjkashdaodhasjkldh qiowalsd aopdlakseh qopwdnakl hqpawdalskeqwpdnal qwopdj pqwodjal ksjopqwdlask;djqopw l;aksjl;il",
+        hint: "Generate a generic email that might be valid for large group of individual.",
         displayLevel: 1,
-        attackerLevel: 1,
         value: "generic",
         color: "blue.100",
-        researchTime: 0
+        researchTime: 1
     }
 ];
 
 const linkHiding = [
     {
-        display: "<a> Tags </a>",
-        hint: "<a> Tags </a>",
+        display: "Hide Links",
+        hint: "Hide the link under button or text.",
         displayLevel: 2,
-        attackerLevel: 1,
         value: "hidden",
         color: "blue.100",
         requirement: ["Links"]
     },
     {
         display: "Shortner",
-        hint: "Shortner",
+        hint: "Use link shortner service to hide the link.",
         displayLevel: 2,
-        attackerLevel: 1,
         value: "shortner",
         color: "red.100",
         requirement: ["Links"]
     },
     {
         display: "Confusion",
-        hint: "Shortner",
+        hint: "Confuse the user with a link that redirects to a different page.",
         displayLevel: 2,
-        attackerLevel: 1,
         value: "confused",
         requirement: ["Links"],
         color: "yellow.100"
     },
     {
         display: "None",
-        hint: "Shortner",
+        hint: "Display the link as is.",
         displayLevel: 2,
         attackerLevel: 1,
         value: "normal",

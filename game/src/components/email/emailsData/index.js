@@ -52,6 +52,8 @@ export default function getRandomEmail(properties, link, attacker) {
      * 1. The email address might be from the domain name or random domain
      * 2. Fix the links for the email. We will generate different tiny urls, and such for each iteration of email to have variety in the email links
      */
+
+    // TODO: reset this
     email = { ...email, name: "Netflix", linkType: "normal" };
     email = changeFrom(email, link);
 

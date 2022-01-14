@@ -24,7 +24,7 @@ function main({ onClose }) {
                     <Box flex="2">
                         <Questions></Questions>
                     </Box>
-                    <Box flex="2">
+                    <Box flex="2" maxWidth={"50vw"}>
                         <BrowserCustom onClose={onClose} />
                     </Box>
                 </Flex>
