@@ -36,7 +36,6 @@ function EmailClient({ title, name, from, to, body, linkType }) {
             </Grid>
             <Box w="100%" h="50vh" overflowY={"auto"} mb={"10px"}>
                 {body.start}
-                {console.log(body)}
                 {
                     <Box py="1" width="100%">
                         {body.link[linkType]}

@@ -42,10 +42,9 @@ export default function getRandomEmail(properties, link, attacker) {
     required = required.filter((email) =>
         email.properties.every((property) => languageSkills.includes(property))
     );
-    console.log(required);
 
     // Gets the required email that fulfils all the requirements
-    let email = required[Math.floor(Math.random() * required.length)].email;
+    let email = required[Math.floor(Math.random() * required.length)];
 
     /**
      * Once the email is generated perform the following operations to have randomness in the game:
@@ -53,8 +52,12 @@ export default function getRandomEmail(properties, link, attacker) {
      * 2. Fix the links for the email. We will generate different tiny urls, and such for each iteration of email to have variety in the email links
      */
 
-    // TODO: reset this
-    email = { ...email, name: "Netflix", linkType: "normal" };
+    email = {
+        ...email.email,
+        name: "Netflix",
+        linkType: "normal",
+        styled: email.styled
+    };
     email = changeFrom(email, link);
 
     return generateLinks(email, link);

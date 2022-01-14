@@ -77,7 +77,7 @@ function createHiddenLink(link) {
             <Button backgroundColor={"blue.400"} _hover={{}} color="white">
                 {
                     buttonOptions[
-                        Math.round(Math.random() * buttonOptions.length)
+                        Math.floor(Math.random() * buttonOptions.length)
                     ]
                 }
             </Button>

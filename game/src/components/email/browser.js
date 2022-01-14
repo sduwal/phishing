@@ -17,6 +17,7 @@ import {
 } from "../../store/status";
 
 import { addSentEmail } from "../../store/email";
+import calculateSuccess from "./utils/calculateSuccess";
 
 // styles
 const Dots = styled.span`
@@ -50,11 +51,11 @@ function BrowserCustom({ onClose, showHeader = false }) {
     const [isLoading, setIsLoading] = useState(false);
 
     function send({ totalSend }) {
-        const successrate = Math.random() * 0.4;
-        let number = totalSend;
+        const successrate = calculateSuccess(email, number);
+        let sendNumber = totalSend;
 
         const interval = setInterval(() => {
-            if (number <= 0) {
+            if (sendNumber <= 0) {
                 clearInterval(interval);
                 // toast.info(
                 //     `Email: ${
@@ -75,9 +76,11 @@ function BrowserCustom({ onClose, showHeader = false }) {
 
             if (!isUpdating) {
                 dispatch(setIsUpdating(true));
-                const victimNumber = Math.floor(Math.random() * (number + 1));
+                const victimNumber = Math.floor(
+                    Math.random() * (sendNumber + 1)
+                );
 
-                number -= victimNumber;
+                sendNumber -= victimNumber;
 
                 const success = Math.ceil(victimNumber * successrate);
                 dispatch(
