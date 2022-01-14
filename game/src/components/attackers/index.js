@@ -112,7 +112,7 @@ function CollapseTrainingOptions({
                             <Text fontWeight="bold" pt="2">
                                 Cost: ${cost}
                             </Text>
-                            <Text fontWeight="bold">Time: {time} </Text>
+                            <Text fontWeight="bold">Time: {time} sec</Text>
                         </Container>
                     </Collapse>
                 </Box>

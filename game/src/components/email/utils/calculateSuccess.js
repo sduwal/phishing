@@ -78,7 +78,6 @@ export default function calculateSuccess(email, number, domain) {
         "styled": 2
     };
 
-    console.log(email);
     const totalPoints = Object.keys(points).reduce((acc, key) => {
         return acc + points[key];
     }, 0);
@@ -90,6 +89,5 @@ export default function calculateSuccess(email, number, domain) {
         (email.styled ? 2 : 0);
 
     const successRate = Math.min(Math.max(0.05, userPoints / totalPoints), 0.5);
-    console.log(successRate);
     return successRate;
 }

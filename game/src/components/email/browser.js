@@ -108,7 +108,7 @@ function BrowserCustom({ onClose, showHeader = false }) {
                         imageAlt={"green tab image"}
                         title={"Email"}
                         onClose={() => {
-                            console.log("cannot close this one");
+                            // console.log("cannot close this one");
                         }}
                     >
                         {_.isEmpty(email) || isLoading ? (

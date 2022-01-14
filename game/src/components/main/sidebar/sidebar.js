@@ -1,15 +1,20 @@
-import { VStack, Box, Text, Image, Center } from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/hooks";
-import { useRef } from "react";
-
 import {
+    VStack,
+    Box,
+    Text,
+    Image,
+    Center,
     Modal,
     ModalOverlay,
     ModalHeader,
     ModalContent,
     ModalBody,
-    ModalCloseButton
+    ModalCloseButton,
+    Button,
+    Tooltip
 } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/hooks";
+import { useRef } from "react";
 
 import MarketPlace from "../../marketplace/index";
 import Attacker from "../../attackers";
@@ -19,8 +24,11 @@ import domainImage from "./images/domain.jpg";
 import attackerImage from "./images/attacker.png";
 import emailImage from "./images/mail.png";
 import sentImage from "./images/sent.gif";
+import trainingImage from "./images/training.gif";
 
 import PrevEmails from "../prevEmails";
+
+import { useSelector } from "react-redux";
 
 function SideButtons({
     title,
@@ -29,40 +37,54 @@ function SideButtons({
     color = "red",
     onClick,
     modal,
-    id
+    id,
+    isDisabled = false
 }) {
+    {
+        console.log(isDisabled);
+    }
     const { isOpen, onOpen, onClose } = useDisclosure();
     const finalRef = useRef();
     return (
         <>
             <Box margin={0} padding={0} height={0} ref={finalRef}></Box>
-            <Box
-                px="2"
-                pt="2"
-                m="0"
-                background={color}
-                rounded="10"
-                minW="200px"
-                alignContent="center"
-                _hover={{
-                    cursor: "pointer",
-                    backgroundColor: "black"
-                }}
-                onClick={onOpen}
+
+            <Tooltip
+                label={
+                    isDisabled
+                        ? "Can not do this while attacker is training."
+                        : ""
+                }
             >
-                <Image
-                    src={image}
-                    background="transparent"
-                    h={130}
-                    w={190}
-                    objectFit="cover"
-                />
-                <Center>
-                    <Text py="2" fontWeight="bold" color="white">
-                        {title}
-                    </Text>
-                </Center>
-            </Box>
+                <Box
+                    px="2"
+                    pt="2"
+                    m="0"
+                    background={color}
+                    rounded="10"
+                    minW="200px"
+                    alignContent="center"
+                    _hover={{
+                        cursor: isDisabled ? "wait" : "pointer",
+                        backgroundColor: "black"
+                    }}
+                    onClick={isDisabled ? () => {} : onOpen}
+                >
+                    <Image
+                        src={image}
+                        background="transparent"
+                        h={130}
+                        w={190}
+                        objectFit="cover"
+                        color={"white"}
+                    />
+                    <Center>
+                        <Text py="2" fontWeight="bold" color="white">
+                            {title}
+                        </Text>
+                    </Center>
+                </Box>
+            </Tooltip>
 
             <Modal
                 finalFocusRef={finalRef}
@@ -87,14 +109,16 @@ function SideButtons({
 }
 
 export default function SideBar() {
+    const isTraining = useSelector((state) => state.attacker.isTraining);
     const side = [
         {
             title: "Email",
             desc: "Generate new email",
-            image: emailImage,
-            color: "blue.500",
+            image: isTraining ? trainingImage : emailImage,
+            color: isTraining ? "grey" : "blue.500",
             modal: <EmailClient />,
-            id: 1
+            id: 1,
+            isDisabled: isTraining
         },
         {
             title: "Marketplace",
@@ -116,7 +140,7 @@ export default function SideBar() {
             title: "Prev Emails",
             desc: "Change Attackers",
             image: sentImage,
-            color: "grey",
+            color: "purple.200",
             modal: <PrevEmails />,
             id: 4
         }

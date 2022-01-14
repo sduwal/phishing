@@ -2,7 +2,7 @@
 ---
 - [ ] Add more emails
 - [X] Filter emails
-- [ ] similarity for sent emails
+- [x] similarity for sent emails
 - [ ] marketplace currency and other economy
 - [ ] Onboarding screen
 
@@ -13,3 +13,7 @@
 
 ## Nice to have
 - [ ] Go back button in email generation
+
+
+## Resources
+- https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient

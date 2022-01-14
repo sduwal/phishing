@@ -10,6 +10,7 @@ export default function App() {
 
     useEffect(() => {
         if (money === 0) {
+            // TODO: navigate to game over
             console.log("do something");
         }
     }, [money]);

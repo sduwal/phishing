@@ -86,7 +86,6 @@ const Basket = () => {
     const [{ canDrop }, dropRef] = useDrop({
         accept: "QUESTION",
         drop: (item) => {
-            console.log(item);
             if (level == 3 && item.value) {
                 if (!newEmail || validate(newEmail)) {
                     toast.error("Please enter a valid email address", {
