@@ -66,14 +66,16 @@ function SideButtons({
                     }}
                     onClick={isDisabled ? () => {} : onOpen}
                 >
-                    <Image
-                        src={image}
-                        background="transparent"
-                        h={130}
-                        w={190}
-                        objectFit="cover"
-                        color={"white"}
-                    />
+                    <div className={title.split(" ")[0].toLowerCase()}>
+                        <Image
+                            src={image}
+                            background="transparent"
+                            h={130}
+                            w={190}
+                            objectFit="cover"
+                            color={"white"}
+                        />
+                    </div>
                     <Center>
                         <Text py="2" fontWeight="bold" color="white">
                             {title}

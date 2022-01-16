@@ -5,18 +5,25 @@ import { AddIcon } from "@chakra-ui/icons";
 
 import { useSelector, useDispatch } from "react-redux";
 import { decrement, increment } from "../../../store/timer";
+import { decrementByAmount } from "../../../store/status";
+
+const TIMECOST = 10_000;
 
 function Timer({ second }) {
     const time = useSelector((state) => state.timer.value);
+    const money = useSelector((state) => state.status.money);
+    const stepsEnabled = useSelector((state) => state.steps.stepsEnabled);
+
     const dispatch = useDispatch();
 
     const tick = () => {
-        if (time != 0) dispatch(decrement());
+        if (time != 0 && !stepsEnabled) dispatch(decrement());
     };
 
     // TODO: handle the time adding logic
     const addTime = () => {
         dispatch(increment());
+        dispatch(decrementByAmount(TIMECOST));
     };
 
     useEffect(() => {
@@ -35,11 +42,14 @@ function Timer({ second }) {
                 >
                     {formatTime(time)}
                 </Text>
-                <IconButton
-                    aria-label="add time"
-                    icon={<AddIcon />}
-                    onClick={addTime}
-                />
+                <div className="addTime">
+                    <IconButton
+                        aria-label="add time"
+                        icon={<AddIcon />}
+                        onClick={addTime}
+                        isDisabled={money < TIMECOST}
+                    />
+                </div>
             </Flex>
         </Box>
     );

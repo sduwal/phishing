@@ -4,6 +4,7 @@ import moneyReducer from "./status";
 import attackerReducer from "./attacker";
 import domainReducer from "./domain";
 import emailReducer from "./email";
+import stepsReducer from "./steps";
 
 export default configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export default configureStore({
         status: moneyReducer,
         attacker: attackerReducer,
         domain: domainReducer,
-        email: emailReducer
+        email: emailReducer,
+        steps: stepsReducer
     }
 });

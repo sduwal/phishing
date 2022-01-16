@@ -28,7 +28,7 @@ export default function StatusBar() {
             </Center>
             <Center>
                 <HStack spacing={10}>
-                    <VStack>
+                    <VStack alignContent={"center"}>
                         <Tooltip
                             shouldWrapChildren
                             hasArrow
@@ -36,7 +36,14 @@ export default function StatusBar() {
                             fontSize="md"
                             placement="bottom"
                         >
-                            <Icon as={MdPeopleAlt} color="red" w={10} h={10} />
+                            <div className="total">
+                                <Icon
+                                    as={MdPeopleAlt}
+                                    color="red"
+                                    w={10}
+                                    h={10}
+                                />
+                            </div>
                         </Tooltip>
                         <Text>{status.totalEmails}</Text>
                     </VStack>
@@ -44,11 +51,13 @@ export default function StatusBar() {
                         <Tooltip
                             shouldWrapChildren
                             hasArrow
-                            label="Number of email sent"
+                            label="Number of failed email"
                             fontSize="md"
                             placement="bottom"
                         >
-                            <Icon as={MdEmail} color="red" w={10} h={10} />
+                            <div className="failed">
+                                <Icon as={MdEmail} color="red" w={10} h={10} />{" "}
+                            </div>
                         </Tooltip>
                         <Text>{status.unsuccessfulEmails}</Text>
                     </VStack>
@@ -60,7 +69,15 @@ export default function StatusBar() {
                             fontSize="md"
                             placement="bottom"
                         >
-                            <Icon as={MdEmail} color="green" w={10} h={10} />
+                            {" "}
+                            <div className="success">
+                                <Icon
+                                    as={MdEmail}
+                                    color="green"
+                                    w={10}
+                                    h={10}
+                                />{" "}
+                            </div>
                         </Tooltip>
                         <Text>{status.successEmails}</Text>
                     </VStack>
@@ -72,12 +89,15 @@ export default function StatusBar() {
                             fontSize="md"
                             placement="bottom"
                         >
-                            <Icon
-                                as={MdAttachMoney}
-                                color="green"
-                                w={10}
-                                h={10}
-                            />
+                            {" "}
+                            <div className="money">
+                                <Icon
+                                    as={MdAttachMoney}
+                                    color="green"
+                                    w={10}
+                                    h={10}
+                                />{" "}
+                            </div>
                         </Tooltip>
                         <Text>{status.money}</Text>
                     </VStack>

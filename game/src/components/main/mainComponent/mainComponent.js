@@ -7,10 +7,14 @@ export default function mainComponent(props) {
     return (
         <Box width="85vw" height="100%" p={5}>
             <Center mb="10">
-                <StatusBar />
+                <div className="stats">
+                    <StatusBar />
+                </div>
             </Center>
             <Center>
-                <Domain />
+                <div className="domain">
+                    <Domain />
+                </div>
             </Center>
         </Box>
     );

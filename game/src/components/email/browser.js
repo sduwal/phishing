@@ -44,7 +44,6 @@ const Dots = styled.span`
 function BrowserCustom({ onClose, email, showHeader = false }) {
     const { Tab } = Chrome;
 
-    console.log("EMAIL", email);
     const isUpdating = useSelector((state) => state.status.isUpdating);
     const dispatch = useDispatch();
 
