@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const moneySlice = createSlice({
     name: "status",
     initialState: {
-        money: 1000,
+        money: 1_000_000_000,
         totalEmails: 0,
         successEmails: 0,
         unsuccessfulEmails: 0,

@@ -2,25 +2,32 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const emailSlice = createSlice({
     name: "email",
-    initialState: { value: {}, prevEmails: [] },
+    initialState: {
+        prevEmails: [],
+        key: "",
+        linkType: "normal",
+        from: ""
+    },
     reducers: {
         spoofEmail: (state, action) => {
-            state.value = { ...state.value, from: action.payload };
-        },
-        changeEmail: (state, action) => {
-            console.log({ ...action.payload });
-            state.value = { ...action.payload };
+            state.from = action.payload;
         },
         changeLinkType: (state, action) => {
-            state.value = { ...state.value, linkType: action.payload };
+            state.linkType = action.payload;
         },
         addSentEmail: (state, action) => {
             state.prevEmails = [...state.prevEmails, action.payload];
+        },
+        changeKey: (state, action) => {
+            state.key = action.payload;
+        },
+        resetKey: (state, action) => {
+            state.key = "";
         }
     }
 });
 
-export const { spoofEmail, changeEmail, changeLinkType, addSentEmail } =
+export const { spoofEmail, changeLinkType, addSentEmail, changeKey, resetKey } =
     emailSlice.actions;
 
 export default emailSlice.reducer;

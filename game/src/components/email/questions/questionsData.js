@@ -15,7 +15,7 @@ const targeted = [
         displayLevel: 1,
         value: "generic",
         color: "blue.100",
-        researchTime: 3
+        researchTime: 1
     }
 ];
 

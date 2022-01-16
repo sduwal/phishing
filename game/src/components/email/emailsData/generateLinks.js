@@ -99,7 +99,7 @@ function createHiddenLink(link) {
     return Math.random() > 0.5 ? button : aTag;
 }
 
-export default function generateLinks(email, link) {
+export default function generateLinks(link) {
     const links = {
         normal: (
             <Center>
@@ -122,11 +122,5 @@ export default function generateLinks(email, link) {
         ),
         hidden: <Center>{createHiddenLink(link)}</Center>
     };
-    const body = { ...email.body, link: links };
-
-    const newEmail = {
-        ...email,
-        body: body
-    };
-    return { ...newEmail };
+    return links;
 }

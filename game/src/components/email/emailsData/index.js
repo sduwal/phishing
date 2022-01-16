@@ -1,6 +1,4 @@
-import emails from "./generatedEmails";
-import generateLinks from "./generateLinks";
-export default function getRandomEmail(properties, link, attacker) {
+export default function getRandomEmail({ emails, properties, link, attacker }) {
     if (properties.length === 0) return {};
 
     const filters = properties.reduce((acc, curr) => {
@@ -18,55 +16,49 @@ export default function getRandomEmail(properties, link, attacker) {
         return acc;
     }, []);
 
-    let required = emails;
+    let required = [];
 
     // styled
     if (techSkills.includes("styling")) {
-        required = required.filter((email) => email.styled);
+        required = Object.keys(emails).filter((key) => emails[key].styled);
     } else {
-        required = required.filter((email) => !email.styled);
+        required = Object.keys(emails).filter((key) => emails[key].styled);
     }
 
     // generic or targeted
     if (filters.includes("targeted")) {
-        required = required.filter((email) => {
-            return email.targeted == "targeted";
-        });
+        required = required.filter(
+            (key) => required[key].targeted == "targeted"
+        );
     } else {
-        required = required.filter((email) => {
-            return email.targeted == "generic";
-        });
+        required = required.filter((key) => emails[key].targeted == "generic");
     }
 
     // filter with properties
-    required = required.filter((email) =>
-        email.properties.every((property) => languageSkills.includes(property))
+    required = required.filter((key) =>
+        emails[key].properties.every((property) =>
+            languageSkills.includes(property)
+        )
     );
 
     // Gets the required email that fulfils all the requirements
-    let email = required[Math.floor(Math.random() * required.length)];
+    const requiredKey = required[Math.floor(Math.random() * required.length)];
 
     /**
      * Once the email is generated perform the following operations to have randomness in the game:
      * 1. The email address might be from the domain name or random domain
      * 2. Fix the links for the email. We will generate different tiny urls, and such for each iteration of email to have variety in the email links
      */
-
-    email = {
-        ...email.email,
-        name: "Netflix",
-        linkType: "normal",
-        styled: email.styled
-    };
-    email = changeFrom(email, link);
-
-    return generateLinks(email, link);
+    changeFrom({ emails, key: requiredKey, link });
+    return requiredKey;
 }
 
-function changeFrom(email, link) {
+function changeFrom({ emails, key, link }) {
     const random = Math.random();
-    if (random < 0.5) return email;
+    if (random < 0.5) return emails;
 
-    const from = email.to.split("@")[0] + "@" + link;
-    return { ...email, from };
+    const currentEmail = emails[key];
+    currentEmail.from = currentEmail.from.split("@")[0] + "@" + link;
+
+    return { ...emails, currentEmail };
 }

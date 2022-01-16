@@ -53,7 +53,7 @@ const email = {
 };
 
 export default {
-    email: email,
+    ...email,
     properties: [],
     targeted: "generic",
     styled: false

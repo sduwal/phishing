@@ -105,7 +105,7 @@ const email = {
 };
 
 export default {
-    email: email,
+    ...email,
     properties: [],
     targeted: "targeted",
     styled: false

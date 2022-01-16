@@ -125,7 +125,7 @@ const email = {
 };
 
 export default {
-    email: email,
+    ...email,
     properties: ["spelling", "grammar"],
     targeted: "targeted",
     styled: false

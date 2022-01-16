@@ -41,15 +41,10 @@ const Dots = styled.span`
         }
     }
 `;
-function BrowserCustom({ onClose, showHeader = false }) {
+function BrowserCustom({ onClose, email, showHeader = false }) {
     const { Tab } = Chrome;
 
-    const email = useSelector((state) => state.email.value);
-
-    useEffect(() => {
-        console.log("From browser", email);
-    }, [email]);
-
+    console.log("EMAIL", email);
     const isUpdating = useSelector((state) => state.status.isUpdating);
     const dispatch = useDispatch();
 

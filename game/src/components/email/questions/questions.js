@@ -26,14 +26,19 @@ import questionsData from "./questionsData";
 import getRandomEmail from "../emailsData";
 import generateLinks from "../emailsData/generateLinks";
 
-import { changeEmail, changeLinkType, spoofEmail } from "../../../store/email";
+import {
+    changeEmail,
+    changeKey,
+    changeLinkType,
+    resetKey,
+    spoofEmail
+} from "../../../store/email";
 import { changeActiveDomain } from "../../../store/domain";
 
 const MAX_LEVEL = 4;
 
-const Basket = () => {
+const Basket = ({ emails }) => {
     const dispatch = useDispatch();
-    const email = useSelector((state) => state.email.value);
 
     let domains = useSelector((state) => state.domain);
     domains = [domains.name, ...domains.subdomains];
@@ -51,49 +56,24 @@ const Basket = () => {
 
     const [researchTime, setResearchTime] = useState(0);
 
-    // useEffect(() => {
-    //     const randomEmail = getRandomEmail(
-    //         ["generic"],
-    //         activeDomain,
-    //         storeAttacker
-    //     );
-    //     dispatch(changeEmail(randomEmail));
-    //     console.log("MOUNT", email);
-    // }, []);
-    // useEffect(() => {
-    //     if (researchTime != 0) {
-    //         setTimeout(() => {
-    //             setResearchTime(0);
-    //         }, 1000 * researchTime);
-    //     }
-    //     // const intervalID = setTimeout(() => {
-    //     //     if (researchTime <= 0) {
-    //     //         clearInterval(intervalID);
-    //     //     } else {
-    //     //         setResearchTime(researchTime - 1);
-    //     //     }
-    //     // }, 1000);
-
-    //     // return () => clearInterval(intervalID);
-    // }, [researchTime]);
-
     useEffect(() => {
         if (basket.length == 1) {
-            const randomEmail = getRandomEmail(
-                basket,
-                activeDomain,
-                storeAttacker
-            );
+            const randomKey = getRandomEmail({
+                emails: emails,
+                properties: basket,
+                link: activeDomain,
+                attacker: storeAttacker
+            });
 
-            dispatch(changeEmail(randomEmail));
+            dispatch(changeKey(randomKey));
         } else if (basket.length == 2) {
             dispatch(changeLinkType(basket[1].value));
         } else if (basket.length == 3 && basket[2].value) {
+            console.log(newEmail);
             dispatch(spoofEmail(newEmail));
             setNewEmail("");
         }
         if (basket.length != 0) {
-            console.log("Test");
             setResearchTime(0);
             setLevel(level + 1);
         }
@@ -106,7 +86,6 @@ const Basket = () => {
     const [{ canDrop }, dropRef] = useDrop({
         accept: "QUESTION",
         drop: (item) => {
-            console.log(item);
             if (level == 3 && item.value) {
                 if (!newEmail || validate(newEmail)) {
                     toast.error("Please enter a valid email address", {
@@ -141,14 +120,6 @@ const Basket = () => {
                     variant="filled"
                     onChange={(e) => {
                         dispatch(changeActiveDomain(e.target.value));
-
-                        if (Object.keys(email).length > 0) {
-                            const newEmail = generateLinks(
-                                email,
-                                e.target.value
-                            );
-                            dispatch(changeEmail(newEmail));
-                        }
                     }}
                 >
                     {domains.map((domain) => (
@@ -275,7 +246,9 @@ function StartOver({ setLevel, setBasket, setResearchTime }) {
                     setLevel(1);
                     setBasket([]);
                     // setResearchTime(0);
-                    dispatch(changeEmail({}));
+                    dispatch(resetKey());
+                    dispatch(changeLinkType("normal"));
+                    dispatch(spoofEmail(""));
                 }}
             >
                 Start Over

@@ -56,7 +56,7 @@ const email = {
 };
 
 export default {
-    email: email,
+    ...email,
     properties: ["spelling", "grammar"],
     targeted: "generic",
     styled: false
