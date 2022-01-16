@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const stepsSlice = createSlice({
     name: "steps",
     initialState: {
-        stepsEnabled: true,
+        stepsEnabled: false,
         initialStep: 0,
         steps: [
             {
