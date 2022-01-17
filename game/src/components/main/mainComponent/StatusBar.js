@@ -69,14 +69,13 @@ export default function StatusBar() {
                             fontSize="md"
                             placement="bottom"
                         >
-                            {" "}
                             <div className="success">
                                 <Icon
                                     as={MdEmail}
                                     color="green"
                                     w={10}
                                     h={10}
-                                />{" "}
+                                />
                             </div>
                         </Tooltip>
                         <Text>{status.successEmails}</Text>
@@ -89,7 +88,6 @@ export default function StatusBar() {
                             fontSize="md"
                             placement="bottom"
                         >
-                            {" "}
                             <div className="money">
                                 <Icon
                                     as={MdAttachMoney}

@@ -121,7 +121,7 @@ function Domain() {
             p={5}
             border="2px solid black"
             rounded="2xl"
-            width="90%"
+            // width="90%"
             minH="40vh"
         >
             <Center>
