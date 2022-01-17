@@ -24,10 +24,8 @@ import { toast } from "react-toastify";
 
 import questionsData from "./questionsData";
 import getRandomEmail from "../emailsData";
-import generateLinks from "../emailsData/generateLinks";
 
 import {
-    changeEmail,
     changeKey,
     changeLinkType,
     resetKey,

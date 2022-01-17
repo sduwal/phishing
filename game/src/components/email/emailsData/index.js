@@ -22,17 +22,16 @@ export default function getRandomEmail({ emails, properties, link, attacker }) {
     if (techSkills.includes("styling")) {
         required = Object.keys(emails).filter((key) => emails[key].styled);
     } else {
-        required = Object.keys(emails).filter((key) => emails[key].styled);
+        required = Object.keys(emails).filter((key) => !emails[key].styled);
     }
 
     // generic or targeted
     if (filters.includes("targeted")) {
-        required = required.filter(
-            (key) => required[key].targeted == "targeted"
-        );
+        required = required.filter((key) => emails[key].targeted == "targeted");
     } else {
         required = required.filter((key) => emails[key].targeted == "generic");
     }
+    console.log(required);
 
     // filter with properties
     required = required.filter((key) =>

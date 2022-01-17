@@ -4,17 +4,8 @@ export const attackerSlice = createSlice({
     name: "attacker",
 
     initialState: {
-        languageSkills: [
-            // { "display": "Spellings", "efficiency": 1 },
-            // { "display": "Grammar", "efficiency": 1 },
-            // { "display": "Writing mails", "efficiency": 1 }
-        ],
-        techSkills: [
-            // { "display": "Styling", "efficiency": 1 },
-            // { "display": "Links", "efficiency": 1 },
-            // { "display": "Spoof the sender", "efficiency": 1 },
-            // { "display": "Research Targeted group", "efficiency": 1 }
-        ],
+        languageSkills: [],
+        techSkills: [],
         isTraining: false,
         totalAmount: 0,
         trainingTime: 0,

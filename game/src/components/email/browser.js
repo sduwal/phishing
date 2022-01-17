@@ -69,9 +69,9 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
                     addSentEmail({
                         subject: email.subject,
                         successrate: successrate
-                        // properties: []
                     })
                 );
+                return;
             }
 
             if (!isUpdating) {
@@ -86,7 +86,7 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
                 dispatch(
                     // The amount is 10 for each successful email
                     incrementByAmount(
-                        Math.round(successrate * 100 * success) * 3
+                        Math.round(successrate * 100 * success) * 2
                     )
                 );
                 dispatch(
@@ -97,7 +97,7 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
                 );
                 dispatch(setIsUpdating(false));
             }
-        }, (1 + Math.round(Math.random * 10)) * 1000);
+        }, (1 + Math.round(Math.random() * 10)) * 1000);
     }
 
     return (
