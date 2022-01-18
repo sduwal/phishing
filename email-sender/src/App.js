@@ -9,6 +9,7 @@ import {
     Container,
     FormHelperText,
 } from "@chakra-ui/react";
+import axios from "axios";
 
 function App() {
     function validateEmail(email) {
@@ -26,6 +27,11 @@ function App() {
             <Formik
                 initialValues={{ email: "" }}
                 onSubmit={(values, { setSubmitting }) => {
+                    axios.get("https:/localhost:8080/sendEmail").then(() => {
+                        console.log("done");
+                        setSubmitting(false);
+                    });
+
                     // send({ to: values.email }).then(() => {
                     //     setSubmitting(false);
                     //     console.log("success");

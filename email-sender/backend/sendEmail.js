@@ -1,29 +1,30 @@
-module.exports = async function () {
-    let nodemailer = require("nodemailer");
+// https://app-smtp.sendinblue.com/real-time
 
-    let transporter = nodemailer.createTransport({
-        service: "gmail",
+module.exports = async function () {
+    const nodemailer = require("nodemailer");
+
+    const transporter = nodemailer.createTransport({
+        host: "smtp-relay.sendinblue.com", // hostname
+        port: 587, // port for secure SMTP
         auth: {
-            type: "OAuth2",
-            user: process.env.EMAIL,
-            pass: process.env.WORD,
-            clientId: process.env.OAUTH_CLIENTID,
-            clientSecret: process.env.OAUTH_CLIENT_SECRET,
-            refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+            user: process.env.USER,
+            pass: process.env.PASS,
         },
     });
 
-    let info = await transporter.sendMail({
-        from: '"Fred Foo 👻" <foo@example.com>', // sender address
-        to: "sarose012@gmail.com", // list of receivers
-        subject: "Hello ✔", // Subject line
-        text: "Hello world?", // plain text body
-        html: "<b>Hello world?</b>", // html body
+    const mailOptions = {
+        from: "Text <axuj@sroff.com>",
+        to: "axuj@sroff.com",
+        subject: "Hello from Node.js",
+        text: "Hello world!",
+    };
+
+    transporter.sendMail(mailOptions, (err, info) => {
+        console.log("TEst");
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(info);
+        }
     });
-
-    console.log("Message sent: %s", info.messageId);
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-    // Preview only available when sending through an Ethereal account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 };

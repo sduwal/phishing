@@ -1,4 +1,6 @@
 async function main() {
+    require("dotenv").config();
+
     const express = require("express");
     const sendMail = require("./sendEmail");
 
@@ -16,5 +18,5 @@ async function main() {
 }
 
 main().then(() => {
-    console.log("done");
+    // console.log("done");
 });
