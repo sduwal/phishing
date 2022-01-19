@@ -9,7 +9,11 @@ import {
     IconButton
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
-import { changeDomain, clearSubDomains } from "../../../store/domain";
+import {
+    changeDomain,
+    clearSubDomains,
+    changeActiveDomain
+} from "../../../store/domain";
 import { decrementByAmount } from "../../../store/status";
 
 export default function domainCard({ link, price, index }) {
@@ -21,6 +25,7 @@ export default function domainCard({ link, price, index }) {
         dispatch(changeDomain(name));
         dispatch(clearSubDomains());
         dispatch(decrementByAmount(cost));
+        dispatch(changeActiveDomain(name));
         onClick();
         toast.success("Domain has been changed successfully");
     };

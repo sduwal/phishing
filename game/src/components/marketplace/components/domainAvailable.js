@@ -3,7 +3,11 @@ import { Text, Center, Image, VStack, Button } from "@chakra-ui/react";
 import determineCost from "../utils/similarity";
 
 import { useDispatch, useSelector } from "react-redux";
-import { changeDomain, clearSubDomains } from "../../../store/domain";
+import {
+    changeDomain,
+    clearSubDomains,
+    changeActiveDomain
+} from "../../../store/domain";
 import { toast } from "react-toastify";
 import { decrementByAmount } from "../../../store/status";
 
@@ -15,6 +19,7 @@ export default function domainAvailable({ name, onClick }) {
 
     const handleClick = () => {
         dispatch(changeDomain(name));
+        dispatch(changeActiveDomain(name));
         dispatch(clearSubDomains());
         dispatch(decrementByAmount(cost));
         onClick();
