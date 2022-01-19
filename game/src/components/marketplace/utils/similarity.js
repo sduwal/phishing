@@ -1,25 +1,31 @@
 import { domains } from "../data/topDomains";
-import { topLevel } from "../data/toplevel";
+// import { topLevel } from "../data/toplevel";
 import stringSimilarty from "string-similarity";
 
 export default function determineCost(link) {
-    let min = 0;
+    let max = 0;
 
     const name = link.split(".")[0];
 
+    let mostSim = "";
     for (let i = 0; i < domains.length; i++) {
         const d = domains[i].split(".")[0];
-        if (Math.abs(d.length - link.length) > 3) continue;
+
         if (d.length < 4) continue;
 
         // The similarity is computed based on dice cofficient
         const sim = stringSimilarty.compareTwoStrings(d, name);
 
-        min = Math.max(sim, min);
+        if (max < sim) {
+            mostSim = d;
+        }
+        max = Math.max(sim, max);
     }
 
-    if (min < 0.3) min = 0;
-    return Math.round(1000 + Math.pow(min * 100, 3));
+    if (max < 0.6) max = 0;
+    console.log(max);
+    console.log(mostSim);
+    return Math.round(1000 + Math.pow(max * 100, 2) * 15);
 }
 
 /**

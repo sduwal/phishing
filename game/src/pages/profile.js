@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { setStepsEnabled } from "../store/steps";
 
 import { Steps } from "intro.js-react";
-
 import "intro.js/introjs.css";
 
 export default function App() {

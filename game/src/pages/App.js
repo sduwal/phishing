@@ -3,10 +3,11 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Introduction from "./introduction";
 import StartGame from "./startGame";
+import Profile from "./profile";
 
 function App() {
     return (
-        <Box minW="100vw" minH="100vh" bg="#eee8d5">
+        <Box w="100vw" h="100vh">
             <Router>
                 <Switch>
                     <Route path="/" exact>
@@ -14,6 +15,9 @@ function App() {
                     </Route>
                     <Route path="/introduction">
                         <Introduction />
+                    </Route>
+                    <Route path="/main">
+                        <Profile />
                     </Route>
                 </Switch>
             </Router>
