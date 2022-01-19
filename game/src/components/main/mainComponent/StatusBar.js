@@ -9,10 +9,25 @@ import {
     Tooltip
 } from "@chakra-ui/react";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { setGameWon } from "../../../store/status";
 
 export default function StatusBar() {
+    const dispatch = useDispatch();
     const status = useSelector((state) => state.status);
+    const history = useHistory();
+
+    const money = useSelector((state) => state.status.money);
+
+    useEffect(() => {
+        if (money === 1_000_000_000) {
+            dispatch(setGameWon(true));
+            history.push("/gameover");
+        }
+    }, [money]);
+
     return (
         <Box
             border="3px solid"

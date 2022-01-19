@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Introduction from "./introduction";
 import StartGame from "./startGame";
 import Profile from "./profile";
+import GameOver from "./gameover";
 
 function App() {
     return (
@@ -18,6 +19,9 @@ function App() {
                     </Route>
                     <Route path="/main">
                         <Profile />
+                    </Route>
+                    <Route path="/gameover">
+                        <GameOver />
                     </Route>
                 </Switch>
             </Router>

@@ -4,7 +4,7 @@
 - [X] Filter emails
 - [X] similarity for sent emails
 - [X] marketplace currency and other economy
-- [ ] Onboarding screen
+- [x] Onboarding screen
 
 ## concerns
 - [ ] Can send the same low priority email to complete the game
@@ -13,6 +13,7 @@
 
 ## Nice to have
 - [ ] Go back button in email generation
+- [ ] allow clicks to change certain parts
 
 
 ## Resources

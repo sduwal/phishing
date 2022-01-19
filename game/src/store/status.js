@@ -7,7 +7,8 @@ export const moneySlice = createSlice({
         totalEmails: 0,
         successEmails: 0,
         unsuccessfulEmails: 0,
-        isUpdating: false
+        isUpdating: false,
+        gameWon: false
     },
     reducers: {
         increment: (state) => {
@@ -31,6 +32,9 @@ export const moneySlice = createSlice({
         },
         setIsUpdating: (state, action) => {
             state.isUpdating = action.payload;
+        },
+        setGameWon: (state, action) => {
+            state.gameWon = action.payload;
         }
     }
 });
@@ -42,7 +46,8 @@ export const {
     decrementByAmount,
     incrementTotalEmails,
     updateSuccess,
-    setIsUpdating
+    setIsUpdating,
+    setGameWon
 } = moneySlice.actions;
 
 export default moneySlice.reducer;

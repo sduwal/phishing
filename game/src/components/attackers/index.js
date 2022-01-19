@@ -71,6 +71,7 @@ function CollapseTrainingOptions({
     function handleClick() {
         dispatch(setIsTraining(true));
         dispatch(setCurrentTraining(display));
+        dispatch(decrementByAmount(cost));
         // dispatch(setTrainingEnd(new Date()));
         setTimeout(() => {
             type === "language"
@@ -87,7 +88,6 @@ function CollapseTrainingOptions({
                       })
                   );
 
-            dispatch(decrementByAmount(cost));
             dispatch(setIsTraining(false));
 
             toast("Training complete", {

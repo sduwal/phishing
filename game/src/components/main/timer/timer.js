@@ -2,6 +2,7 @@ import { IconButton } from "@chakra-ui/button";
 import { Box, Flex, Text } from "@chakra-ui/layout";
 import { useEffect } from "react";
 import { AddIcon } from "@chakra-ui/icons";
+import { useHistory } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { decrement, increment } from "../../../store/timer";
@@ -13,10 +14,11 @@ function Timer({ second }) {
     const time = useSelector((state) => state.timer.value);
     const money = useSelector((state) => state.status.money);
     const stepsEnabled = useSelector((state) => state.steps.stepsEnabled);
-
+    const history = useHistory();
     const dispatch = useDispatch();
 
     const tick = () => {
+        if (time == 0) history.push("/gameover");
         if (time != 0 && !stepsEnabled) dispatch(decrement());
     };
 

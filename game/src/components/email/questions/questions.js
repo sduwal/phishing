@@ -112,21 +112,23 @@ const Basket = ({ emails }) => {
 
     return (
         <>
-            <Container mb="5">
-                <Select
-                    defaultValue={domains[0]}
-                    variant="filled"
-                    onChange={(e) => {
-                        dispatch(changeActiveDomain(e.target.value));
-                    }}
-                >
-                    {domains.map((domain) => (
-                        <option key={domain} value={domain}>
-                            {domain}
-                        </option>
-                    ))}
-                </Select>
-            </Container>
+            {level != 1 && (
+                <Container mb="5">
+                    <Select
+                        defaultValue={activeDomain}
+                        variant="filled"
+                        onChange={(e) => {
+                            dispatch(changeActiveDomain(e.target.value));
+                        }}
+                    >
+                        {domains.map((domain) => (
+                            <option key={domain} value={domain}>
+                                {domain}
+                            </option>
+                        ))}
+                    </Select>
+                </Container>
+            )}
             <Container
                 border="2px solid"
                 width="100%"

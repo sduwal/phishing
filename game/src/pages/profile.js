@@ -13,6 +13,7 @@ export default function App() {
     const stepsEnabled = useSelector((state) => state.steps.stepsEnabled);
     const initialStep = useSelector((state) => state.steps.initialStep);
     const steps = useSelector((state) => state.steps.steps);
+
     function Top() {
         return (
             <>
