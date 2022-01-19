@@ -1,8 +1,6 @@
 /* eslint-disable max-len */
-import { Container, Square, Flex, Text, Button } from "@chakra-ui/react";
-import { useState } from "react";
+import { Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 // import SelectDomain from "../components/selectDomain";
 

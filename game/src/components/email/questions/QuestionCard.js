@@ -29,20 +29,20 @@ export const QuestionCard = ({
                 displayMessage:
                     (displayLevel == 2 ? "Linked Displayed using: " : "") +
                     display
-            }
-            // collect: (monitor) => ({
-            //     opacity: monitor.isDragging() ? 0.2 : 1,
-            //     isDragging: monitor.isDragging()
-            // })
+            },
+            collect: (monitor) => ({
+                opacity: monitor.isDragging() ? 0.2 : 1,
+                isDragging: monitor.isDragging()
+            })
         },
         []
     );
 
-    // useEffect(() => {
-    //     if (isDragging) {
-    //         setShow(false);
-    //     }
-    // }, [isDragging]);
+    useEffect(() => {
+        if (isDragging) {
+            setShow(false);
+        }
+    }, [isDragging]);
 
     return (
         <>

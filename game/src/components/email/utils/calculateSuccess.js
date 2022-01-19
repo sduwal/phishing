@@ -20,9 +20,9 @@ function calculateFromPoints(from) {
 
         if (similarity > 0.8) {
             pointEarned += 3;
-        } else if (similarity > 0.5) {
+        } else if (similarity > 0.7) {
             pointEarned += 2;
-        } else if (similarity > 0.3) {
+        } else {
             pointEarned += 1;
         }
     }

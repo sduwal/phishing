@@ -1,6 +1,6 @@
 /* eslint-disable operator-linebreak */
 import Browser, { Chrome } from "react-browser-ui";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Box, Flex, Button, Spacer } from "@chakra-ui/react";
 import EmailClient from "./emailClient";
 
