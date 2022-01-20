@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 
 function App() {
+    const [sent, setSent] = React.useState(false);
     function validateEmail(email) {
         let error;
         if (!email) {
@@ -28,12 +29,12 @@ function App() {
                 initialValues={{ email: "" }}
                 onSubmit={(values, { setSubmitting }) => {
                     axios
-                        .get("sendmail-backend.vercel.app", {
+                        .get("https://sendmail-backend.vercel.app", {
                             params: { to: values.email.trim() },
                         })
                         .then((response) => {
                             setSubmitting(false);
-                            // console.log(response);
+                            setSent(true);
                         });
                 }}
             >
@@ -68,6 +69,7 @@ function App() {
                                 mt={20}
                                 isLoading={isSubmitting}
                                 type="submit"
+                                isDisabled={sent}
                             >
                                 Submit
                             </Button>

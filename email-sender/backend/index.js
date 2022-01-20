@@ -19,11 +19,10 @@ async function main() {
     const port = 8080;
 
     app.get("/", async (req, res) => {
-        console.log("I have been summoned");
         if (!req.query.to) {
             res.status(400).send({
-                ok: false,
-                message: "Missing 'to' parameter",
+                ok: true,
+                message: "OK",
             });
             return;
         }

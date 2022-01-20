@@ -1,5 +1,6 @@
 // https://app-smtp.sendinblue.com/real-time
 const fs = require("fs");
+const path = require("path");
 const nodemailer = require("nodemailer");
 const { promisify } = require("util");
 
@@ -23,7 +24,10 @@ module.exports = async function ({ to }) {
                 from: item.from,
                 to: to,
                 subject: item.subject,
-                html: await readFile(`./data/htmls/${item.file}`, "utf8"),
+                html: await readFile(
+                    path.join(__dirname, `./data/htmls/${item.file}`),
+                    "utf8"
+                ),
             };
 
             transporter.sendMail(mailOptions);
