@@ -1,30 +1,38 @@
 // https://app-smtp.sendinblue.com/real-time
+const fs = require("fs");
+const nodemailer = require("nodemailer");
+const { promisify } = require("util");
 
-module.exports = async function () {
-    const nodemailer = require("nodemailer");
+const readFile = promisify(fs.readFile);
 
-    const transporter = nodemailer.createTransport({
-        host: "smtp-relay.sendinblue.com", // hostname
-        port: 587, // port for secure SMTP
-        auth: {
-            user: process.env.USER,
-            pass: process.env.PASS,
-        },
-    });
+module.exports = async function ({ to }) {
+    let data = require("./data/index");
 
-    const mailOptions = {
-        from: "Text <axuj@sroff.com>",
-        to: "axuj@sroff.com",
-        subject: "Hello from Node.js",
-        text: "Hello world!",
-    };
+    try {
+        const transporter = nodemailer.createTransport({
+            host: "smtp-relay.sendinblue.com", // hostname
+            port: 587, // port for secure SMTP
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+        });
 
-    transporter.sendMail(mailOptions, (err, info) => {
-        console.log("TEst");
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(info);
-        }
-    });
+        data = data.map(async (item) => {
+            const mailOptions = {
+                from: item.from,
+                to: to,
+                subject: item.subject,
+                html: await readFile(`./data/htmls/${item.file}`, "utf8"),
+            };
+
+            transporter.sendMail(mailOptions);
+        });
+
+        await Promise.all(data);
+        return { ok: true, message: "Email sent" };
+    } catch (err) {
+        console.log(err.message);
+        return { ok: false, message: err.message };
+    }
 };

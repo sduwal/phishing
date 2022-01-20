@@ -25,17 +25,22 @@ function App() {
     return (
         <Container mt={"20"}>
             <Formik
-                initialValues={{ email: "" }}
+                initialValues={{ email: "nngyyxscafqdnx@canfga.org" }}
                 onSubmit={(values, { setSubmitting }) => {
-                    axios.get("https:/localhost:8080/sendEmail").then(() => {
-                        console.log("done");
-                        setSubmitting(false);
-                    });
-
-                    // send({ to: values.email }).then(() => {
-                    //     setSubmitting(false);
-                    //     console.log("success");
-                    // });
+                    axios
+                        .get("http://localhost:8080/", {
+                            params: { to: values.email.trim() },
+                        })
+                        .then((response) => {
+                            setSubmitting(false);
+                            // console.log(response);
+                        });
+                    // axios("http://dog-api.kinduff.com/api/facts").then(
+                    //     (res) => {
+                    //         setSubmitting(false);
+                    //         console.log(res.json());
+                    //     }
+                    // );
                 }}
             >
                 {({ isSubmitting }) => (
