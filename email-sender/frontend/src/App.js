@@ -25,22 +25,16 @@ function App() {
     return (
         <Container mt={"20"}>
             <Formik
-                initialValues={{ email: "nngyyxscafqdnx@canfga.org" }}
+                initialValues={{ email: "" }}
                 onSubmit={(values, { setSubmitting }) => {
                     axios
-                        .get("http://localhost:8080/", {
+                        .get("sendmail-backend.vercel.app", {
                             params: { to: values.email.trim() },
                         })
                         .then((response) => {
                             setSubmitting(false);
                             // console.log(response);
                         });
-                    // axios("http://dog-api.kinduff.com/api/facts").then(
-                    //     (res) => {
-                    //         setSubmitting(false);
-                    //         console.log(res.json());
-                    //     }
-                    // );
                 }}
             >
                 {({ isSubmitting }) => (
