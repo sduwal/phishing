@@ -16,7 +16,6 @@ import EmailRow from "../EmailRow/EmailRow";
 import emails from "./emails";
 
 function EmailList() {
-    console.log(emails);
     return (
         <div className="emailList">
             <div className="emailList-settings">

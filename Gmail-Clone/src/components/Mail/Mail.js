@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Mail.css";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import MoveToInboxIcon from "@material-ui/icons/MoveToInbox";
@@ -17,7 +17,6 @@ import { IconButton, Avatar } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { selectOpenMail } from "../../features/mailSlice";
 import { useSelector } from "react-redux";
-import path from "path";
 
 import emails from "./data";
 
