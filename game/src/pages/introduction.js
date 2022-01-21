@@ -23,6 +23,7 @@ import clock from "../assets/images/intro/clock.gif";
 import thief from "../assets/images/intro/thief.gif";
 import stopTime from "../assets/images/intro/stop_time.gif";
 import work from "../assets/images/intro/work.gif";
+import paypal from "../assets/images/intro/paypal.jpeg";
 
 const animation = keyframes`
     0%{background-position:0% 65%}
@@ -50,13 +51,18 @@ function Introduction() {
         {
             "image": work,
             "description":
-                "Earning all you owe through hardwork is difficult. Some might say impossible!"
+                "Earning all you owe through hard work is difficult. Some might say impossible!"
         },
 
         {
             "image": thief,
             "description":
-                "That's why you have hired your helper to help you created phishing emails. He has some skills, but should be trained to create better emails."
+                "That's why you have hired your helper to help you create phishing emails. He has some skills, but should be trained to create better emails."
+        },
+        {
+            "image": paypal,
+            "description":
+                "Your goal is to impersonate PayPal and try to trick people into clicking your links."
         },
         {
             "image": stopTime,

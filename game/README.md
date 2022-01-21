@@ -1,6 +1,10 @@
 ## TODO
 ---
 - [ ] Add more emails
+- [ ] Add paypal to on boarding screen
+- [ ] increase the timer
+- [ ] add timer in all screen
+- [ ] add details in marketplace
 - [X] Filter emails
 - [X] similarity for sent emails
 - [X] marketplace currency and other economy
