@@ -157,6 +157,7 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
                     label={
                         "Not satisfied with this email? Click here to generate a modified email."
                     }
+                    openDelay={1000}
                 >
                     <Button
                         isDisabled={_.isEmpty(email)}

@@ -1,6 +1,5 @@
 import { VStack, Box, Flex, Spacer } from "@chakra-ui/react";
 import { Sidebar, MainComponent } from "../components/main";
-import Timer from "../components/timer";
 import { ToastContainer } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { setStepsEnabled } from "../store/steps";
@@ -13,16 +12,6 @@ export default function App() {
     const stepsEnabled = useSelector((state) => state.steps.stepsEnabled);
     const initialStep = useSelector((state) => state.steps.initialStep);
     const steps = useSelector((state) => state.steps.steps);
-
-    function Top() {
-        return (
-            <>
-                <div className="timer">
-                    <Timer />
-                </div>
-            </>
-        );
-    }
 
     function onExit() {
         dispatch(setStepsEnabled(false));
@@ -52,7 +41,6 @@ export default function App() {
                 <VStack>
                     <ToastContainer />
 
-                    <Top />
                     <Flex>
                         <MainComponent />
                         <Spacer />

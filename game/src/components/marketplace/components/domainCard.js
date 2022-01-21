@@ -17,7 +17,7 @@ import {
 import { decrementByAmount } from "../../../store/status";
 
 export default function domainCard({ link, price, index }) {
-    const cost = Math.round(75 * Math.sqrt(10 - index)) * 1000;
+    const cost = Math.round(50 * Math.sqrt(10 - index)) * 100;
     const money = useSelector((state) => state.status.money);
     const dispatch = useDispatch();
 

@@ -1,16 +1,25 @@
-import { Box, Center } from "@chakra-ui/react";
-
+import { Box, Center, VStack } from "@chakra-ui/react";
 import StatusBar from "./StatusBar";
 import Domain from "./domain";
-
+import Timer from "../../timer";
 export default function mainComponent(props) {
+    function Top() {
+        return (
+            <>
+                <div className="timer">
+                    <Timer />
+                </div>
+            </>
+        );
+    }
     return (
         <Box width="85vw" height="100%" p={5}>
-            <Center mb="10">
+            <VStack alignItems={"center"} mb="10">
+                <Top />
                 <div className="stats">
                     <StatusBar />
                 </div>
-            </Center>
+            </VStack>
             <Center>
                 <div className="domain">
                     <Domain />

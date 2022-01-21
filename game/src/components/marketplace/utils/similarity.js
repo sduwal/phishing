@@ -17,7 +17,7 @@ export default function determineCost(link) {
     }
 
     if (max < 0.6) max = 0;
-    return Math.round(1000 + Math.pow(max * 100, 2) * 15);
+    return Math.round(1000 + Math.pow(max * 100, 2) * 1.5);
 }
 
 // /**

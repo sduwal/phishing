@@ -18,8 +18,8 @@ function Timer({ second }) {
     const dispatch = useDispatch();
 
     const tick = () => {
-        if (time == 0) history.push("/gameover");
-        if (time != 0 && !stepsEnabled) dispatch(decrement());
+        if (time <= 0) history.push("/gameover");
+        if (time > 0 && !stepsEnabled) dispatch(decrement());
     };
 
     // TODO: handle the time adding logic

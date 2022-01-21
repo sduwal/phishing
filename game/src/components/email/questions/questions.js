@@ -117,7 +117,7 @@ const Basket = ({ emails }) => {
     });
 
     return (
-        <>
+        <Box overflow={"auto"} py={2}>
             {level != 1 && (
                 <Container mb="5">
                     <Text fontSize={"0.8em"} opacity={"0.7"}>
@@ -209,8 +209,8 @@ const Basket = ({ emails }) => {
                                     }
                                 />
                                 <Text fontSize="0.8em">
-                                    Enter valid email address. DEFAULT:
-                                    sarose012@gmail.com
+                                    Enter valid email address, then drag the
+                                    option.
                                 </Text>
                             </Box>
                         )}
@@ -244,7 +244,7 @@ const Basket = ({ emails }) => {
                 setBasket={setBasket}
                 setResearchTime={setResearchTime}
             />
-        </>
+        </Box>
     );
 };
 
