@@ -6,7 +6,6 @@ export default function determineCost(link) {
 
     const name = link.split(".")[0];
 
-    let mostSim = "";
     for (let i = 0; i < domains.length; i++) {
         const d = domains[i].split(".")[0];
 
@@ -14,16 +13,10 @@ export default function determineCost(link) {
 
         // The similarity is computed based on dice cofficient
         const sim = stringSimilarty.compareTwoStrings(d, name);
-
-        if (max < sim) {
-            mostSim = d;
-        }
         max = Math.max(sim, max);
     }
 
     if (max < 0.6) max = 0;
-    console.log(max);
-    console.log(mostSim);
     return Math.round(1000 + Math.pow(max * 100, 2) * 15);
 }
 

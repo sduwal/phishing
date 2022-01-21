@@ -31,7 +31,6 @@ export default function getRandomEmail({ emails, properties, link, attacker }) {
     } else {
         required = required.filter((key) => emails[key].targeted == "generic");
     }
-    console.log(required);
 
     // filter with properties
     required = required.filter((key) =>

@@ -1,4 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {
+    MONEY_PER_SUCCESSFUL_EMAIL,
+    BUY_TIME_DURATION,
+    BUY_TIME_COST,
+    GOAL_AMOUNT
+} from "../constants";
 
 export const stepsSlice = createSlice({
     name: "steps",
@@ -12,7 +18,7 @@ export const stepsSlice = createSlice({
             },
             {
                 element: ".addTime",
-                intro: "You can buy time by paying 10,000 for 10 seconds."
+                intro: `You can buy time by paying \$${BUY_TIME_COST} for ${BUY_TIME_DURATION} seconds.`
             },
             {
                 element: ".stats",
@@ -20,7 +26,7 @@ export const stepsSlice = createSlice({
             },
             {
                 element: ".total",
-                intro: "The total number of emails sent. This number updates when you send an email."
+                intro: "The number of vitcims. This number updates when you send an email."
             },
             {
                 element: ".failed",
@@ -32,7 +38,7 @@ export const stepsSlice = createSlice({
             },
             {
                 element: ".money",
-                intro: "You balance. This number updates when your phishing emails are successful. The amount you can get is random."
+                intro: `Your balance. This number updates when your phishing emails are successful. You get \$${MONEY_PER_SUCCESSFUL_EMAIL} for each successful email.`
             },
             {
                 element: ".domain",
@@ -48,14 +54,18 @@ export const stepsSlice = createSlice({
             },
             {
                 element: ".attackers",
-                intro: "Train your helper with different skills. Training helper will increase the effectiveness of the generated emails."
+                intro: "Train your helper with different skills. Training your helper will increase the effectiveness of the generated emails."
             },
             {
                 element: ".prev",
                 intro: "Check stats of sent emails. Emails will appear here after they stop receiving traction."
+            },
+            {
+                element: ".stats",
+                intro: `Start crafting emails and reach \$${GOAL_AMOUNT.toLocaleString()}!`
             }
-        ],
-        hintsEnabled: false
+        ]
+        // hintsEnabled: false
     },
     reducers: {
         setStepsEnabled: (state, action) => {

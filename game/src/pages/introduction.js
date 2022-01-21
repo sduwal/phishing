@@ -24,6 +24,7 @@ import thief from "../assets/images/intro/thief.gif";
 import stopTime from "../assets/images/intro/stop_time.gif";
 import work from "../assets/images/intro/work.gif";
 import paypal from "../assets/images/intro/paypal.jpeg";
+import trick from "../assets/images/intro/trick.gif";
 
 const animation = keyframes`
     0%{background-position:0% 65%}
@@ -63,6 +64,11 @@ function Introduction() {
             "image": paypal,
             "description":
                 "Your goal is to impersonate PayPal and try to trick people into clicking your links."
+        },
+        {
+            "image": trick,
+            "description":
+                "Send emails! Trick people! Spend the money you earn to train your attacker or buy a different domain name!"
         },
         {
             "image": stopTime,

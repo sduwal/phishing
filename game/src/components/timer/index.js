@@ -5,10 +5,10 @@ import { AddIcon } from "@chakra-ui/icons";
 import { useHistory } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment } from "../../../store/timer";
-import { decrementByAmount } from "../../../store/status";
+import { decrement, incrementByAmount } from "../../store/timer";
+import { decrementByAmount } from "../../store/status";
 
-const TIMECOST = 10_000;
+import { BUY_TIME_DURATION, BUY_TIME_COST } from "../../constants";
 
 function Timer({ second }) {
     const time = useSelector((state) => state.timer.value);
@@ -24,8 +24,8 @@ function Timer({ second }) {
 
     // TODO: handle the time adding logic
     const addTime = () => {
-        dispatch(increment());
-        dispatch(decrementByAmount(TIMECOST));
+        dispatch(incrementByAmount(BUY_TIME_DURATION));
+        dispatch(decrementByAmount(BUY_TIME_COST));
     };
 
     useEffect(() => {
@@ -49,7 +49,7 @@ function Timer({ second }) {
                         aria-label="add time"
                         icon={<AddIcon />}
                         onClick={addTime}
-                        isDisabled={money < TIMECOST}
+                        isDisabled={money < BUY_TIME_COST}
                     />
                 </div>
             </Flex>

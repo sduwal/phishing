@@ -18,7 +18,9 @@ import {
     Spinner,
     Input,
     Select,
-    VStack
+    VStack,
+    HStack,
+    Image
 } from "@chakra-ui/react";
 import { toast } from "react-toastify";
 
@@ -32,12 +34,17 @@ import {
     spoofEmail
 } from "../../../store/email";
 import { changeActiveDomain } from "../../../store/domain";
+import helper from "./images/helper.gif";
 
 const MAX_LEVEL = 4;
 
 const Basket = ({ emails }) => {
     const dispatch = useDispatch();
-
+    const optionDetails = [
+        "Do you want targeted emails?",
+        "How to hide the links?",
+        "Pretend to be someone else?"
+    ];
     let domains = useSelector((state) => state.domain);
     domains = [domains.name, ...domains.subdomains];
 
@@ -67,7 +74,6 @@ const Basket = ({ emails }) => {
         } else if (basket.length == 2) {
             dispatch(changeLinkType(basket[1].value));
         } else if (basket.length == 3 && basket[2].value) {
-            console.log(newEmail);
             dispatch(spoofEmail(newEmail));
             setNewEmail("");
         }
@@ -114,6 +120,9 @@ const Basket = ({ emails }) => {
         <>
             {level != 1 && (
                 <Container mb="5">
+                    <Text fontSize={"0.8em"} opacity={"0.7"}>
+                        Think a different domain will work better?
+                    </Text>
                     <Select
                         defaultValue={activeDomain}
                         variant="filled"
@@ -178,14 +187,17 @@ const Basket = ({ emails }) => {
                         overflowY="auto"
                     >
                         <Center marginBottom={"10px"}>
-                            <Text fontSize="1.5em">
-                                Drag option from below.
-                            </Text>
+                            <HStack>
+                                <Image src={helper} maxH={"60px"} />
+                                <Text fontSize="1em" fontWeight={"semibold"}>
+                                    {
+                                        "Hey Boss, Before I create the email, I need you to select what kind the options you want to use. You can drag these options to the basket above. Click on the options to learn more. Train me for more options!"
+                                    }
+                                </Text>
+                            </HStack>
                         </Center>
 
-                        <Text fontSize="0.8em">
-                            If you want to learn more, click on the options!!
-                        </Text>
+                        <Text fontSize="1em">{optionDetails[level - 1]}</Text>
 
                         {level === 3 && (
                             <Box mt="3">

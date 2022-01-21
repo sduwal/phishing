@@ -55,24 +55,10 @@ function CollapseTrainingOptions({
             display: display
         });
 
-    // useEffect(() => {
-    //     const timer = setInterval(() => {
-    //         if (!attacker.isTraining || attacker.currentTraining !== display) {
-    //             dispatch(setCurrentTraining(""));
-    //             clearInterval(timer);
-    //         } else {
-    //             // dispatch(setTrainingProgress(100 / time));
-    //         }
-    //     }, 1000);
-
-    //     return () => clearInterval(timer);
-    // }, [attacker.isTraining]);
-
     function handleClick() {
         dispatch(setIsTraining(true));
         dispatch(setCurrentTraining(display));
         dispatch(decrementByAmount(cost));
-        // dispatch(setTrainingEnd(new Date()));
         setTimeout(() => {
             type === "language"
                 ? dispatch(

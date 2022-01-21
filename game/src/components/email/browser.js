@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 import Browser, { Chrome } from "react-browser-ui";
 import { useState } from "react";
-import { Box, Flex, Button, Spacer } from "@chakra-ui/react";
+import { Box, Flex, Button, Spacer, Progress, Tooltip } from "@chakra-ui/react";
 import EmailClient from "./emailClient";
 
 import _ from "lodash";
@@ -19,6 +19,11 @@ import {
 
 import { addSentEmail } from "../../store/email";
 import calculateSuccess from "./utils/calculateSuccess";
+
+import {
+    MONEY_PER_SUCCESSFUL_EMAIL,
+    TOTAL_EMAIL_REVISE_TIME
+} from "../../constants";
 
 // styles
 const Dots = styled.span`
@@ -41,6 +46,7 @@ const Dots = styled.span`
         }
     }
 `;
+
 function BrowserCustom({ onClose, email, showHeader = false }) {
     const { Tab } = Chrome;
 
@@ -49,6 +55,8 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
 
     const [number, setNumber] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+
+    const [value, setValue] = useState(0);
 
     function send({ totalSend }) {
         const successrate = calculateSuccess(email, number);
@@ -85,14 +93,12 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
                 const success = Math.ceil(victimNumber * successrate);
                 dispatch(
                     // The amount is 10 for each successful email
-                    incrementByAmount(
-                        Math.round(successrate * 100 * success) * 2
-                    )
+                    incrementByAmount(success * MONEY_PER_SUCCESSFUL_EMAIL)
                 );
                 dispatch(
                     updateSuccess({
                         successful: success,
-                        unsuccessful: victimNumber - success
+                        unsuccessful: -success
                     })
                 );
                 dispatch(setIsUpdating(false));
@@ -113,12 +119,23 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
                         imageUrl={""}
                         imageAlt={"green tab image"}
                         title={"Email"}
-                        onClose={() => {
-                            // console.log("cannot close this one");
-                        }}
+                        onClose={() => {}}
                     >
-                        {_.isEmpty(email) || isLoading ? (
-                            <Dots>Loading</Dots>
+                        {_.isEmpty(email) ? (
+                            <Box px={10} py={20}>
+                                <Dots>Waiting for input</Dots>
+                            </Box>
+                        ) : isLoading ? (
+                            <Box px={10} py={20}>
+                                <Dots>Loading</Dots>
+                                <Progress
+                                    value={value}
+                                    max={TOTAL_EMAIL_REVISE_TIME * 1000}
+                                    isAnimated={true}
+                                    hasStripe={true}
+                                    colorScheme={"green"}
+                                />
+                            </Box>
                         ) : (
                             <EmailClient
                                 title={email.subject}
@@ -136,27 +153,47 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
                 </Browser>
             </Box>
             <Flex>
-                <Button
-                    isDisabled={_.isEmpty(email)}
-                    onClick={() => {
-                        setIsLoading(true);
-                        const randomNumber = Math.floor(
-                            Math.random() * email.body.text.length
-                        );
-                        setTimeout(() => {
-                            setNumber(randomNumber);
-                            setIsLoading(false);
-                        }, 5000);
-                    }}
+                <Tooltip
+                    label={
+                        "Not satisfied with this email? Click here to generate a modified email."
+                    }
                 >
-                    Revise the email
-                </Button>
+                    <Button
+                        isDisabled={_.isEmpty(email)}
+                        onClick={() => {
+                            setIsLoading(true);
+
+                            const randomNumber = Math.floor(
+                                Math.random() * email.body.text.length
+                            );
+
+                            const interval = setInterval(() => {
+                                setValue((value) => value + 50);
+                            }, 50);
+
+                            setTimeout(() => {
+                                setNumber(randomNumber);
+                                setIsLoading(false);
+                                clearInterval(interval);
+                                setValue(0);
+                            }, TOTAL_EMAIL_REVISE_TIME * 1000);
+                        }}
+                    >
+                        Revise the email
+                    </Button>
+                </Tooltip>
                 <Spacer></Spacer>
                 <Button
                     // TODO: Change this later
                     isDisabled={_.isEmpty(email)}
                     onClick={() => {
                         dispatch(incrementTotalEmails(email.totalSend));
+                        dispatch(
+                            updateSuccess({
+                                successful: 0,
+                                unsuccessful: email.totalSend
+                            })
+                        );
                         send({ totalSend: email.totalSend });
                         onClose();
                         toast.success(

@@ -7,7 +7,7 @@ export const timerSlice = createSlice({
     },
     reducers: {
         increment: (state) => {
-            state.value += 10;
+            state.value += 120;
         },
         decrement: (state) => {
             state.value -= 1;

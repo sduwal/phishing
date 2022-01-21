@@ -18,7 +18,7 @@ import { useRef } from "react";
 import MarketPlace from "../../marketplace/index";
 import Attacker from "../../attackers";
 import { EmailClient } from "../../email";
-
+import Timer from "./../../timer";
 import domainImage from "./images/domain.jpg";
 import attackerImage from "./images/attacker.png";
 import emailImage from "./images/mail.png";
@@ -92,7 +92,11 @@ function SideButtons({
             >
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>{title}</ModalHeader>
+                    <ModalHeader>
+                        <Center>
+                            <Timer />
+                        </Center>
+                    </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                         {id == 1 && <EmailClient onClose={onClose} />}

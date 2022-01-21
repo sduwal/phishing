@@ -16,6 +16,5 @@ export default function initializeEmails(link) {
         });
     });
 
-    // console.log(emailsWithLinks);
     return emailsWithLinks;
 }

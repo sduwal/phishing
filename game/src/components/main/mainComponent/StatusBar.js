@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { setGameWon } from "../../../store/status";
+import { GOAL_AMOUNT } from "../../../constants";
 
 export default function StatusBar() {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ export default function StatusBar() {
     const money = useSelector((state) => state.status.money);
 
     useEffect(() => {
-        if (money === 1_000_000_000) {
+        if (money >= GOAL_AMOUNT) {
             dispatch(setGameWon(true));
             history.push("/gameover");
         }
@@ -66,7 +67,7 @@ export default function StatusBar() {
                         <Tooltip
                             shouldWrapChildren
                             hasArrow
-                            label="Number of failed email"
+                            label="Number of unsuccessful emails"
                             fontSize="md"
                             placement="bottom"
                         >
@@ -80,7 +81,7 @@ export default function StatusBar() {
                         <Tooltip
                             shouldWrapChildren
                             hasArrow
-                            label="Number of email successful"
+                            label="Number of successful emails"
                             fontSize="md"
                             placement="bottom"
                         >
@@ -99,7 +100,7 @@ export default function StatusBar() {
                         <Tooltip
                             shouldWrapChildren
                             hasArrow
-                            label="Money"
+                            label="Current balance"
                             fontSize="md"
                             placement="bottom"
                         >

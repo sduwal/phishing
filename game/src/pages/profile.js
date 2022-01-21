@@ -1,6 +1,6 @@
 import { VStack, Box, Flex, Spacer } from "@chakra-ui/react";
-import { Timer, Sidebar, MainComponent } from "../components/main";
-
+import { Sidebar, MainComponent } from "../components/main";
+import Timer from "../components/timer";
 import { ToastContainer } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { setStepsEnabled } from "../store/steps";
@@ -27,6 +27,7 @@ export default function App() {
     function onExit() {
         dispatch(setStepsEnabled(false));
     }
+
     return (
         <>
             <Steps
@@ -34,7 +35,11 @@ export default function App() {
                 steps={steps}
                 initialStep={initialStep}
                 onExit={onExit}
+                options={{
+                    exitOnOverlayClick: false
+                }}
             />
+
             <Box
                 h="100vh"
                 bg="#eee8d5"
