@@ -39,6 +39,11 @@ export default function getRandomEmail({ emails, properties, link, attacker }) {
         )
     );
 
+    // get rid of the really obvious bad emails
+    if (languageSkills.length >= 2) {
+        required = required.filter((key) => emails[key].properties.length != 0);
+    }
+
     // Gets the required email that fulfils all the requirements
     const requiredKey = required[Math.floor(Math.random() * required.length)];
 

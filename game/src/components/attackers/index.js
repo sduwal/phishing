@@ -38,6 +38,7 @@ function CollapseTrainingOptions({
     cost,
     time,
     type,
+    value,
     efficiency
 }) {
     const attacker = useSelector((state) => state.attacker);
@@ -64,13 +65,15 @@ function CollapseTrainingOptions({
                 ? dispatch(
                       setLanguageSkills({
                           display: display,
-                          efficiency: efficiency
+                          efficiency: efficiency,
+                          value: value
                       })
                   )
                 : dispatch(
                       setTechSkills({
                           display: display,
-                          efficiency: efficiency
+                          efficiency: efficiency,
+                          value: value
                       })
                   );
 
