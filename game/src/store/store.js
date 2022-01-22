@@ -5,6 +5,7 @@ import attackerReducer from "./attacker";
 import domainReducer from "./domain";
 import emailReducer from "./email";
 import stepsReducer from "./steps";
+import interactionReducer from "./interaction";
 
 export default configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export default configureStore({
         attacker: attackerReducer,
         domain: domainReducer,
         email: emailReducer,
-        steps: stepsReducer
+        steps: stepsReducer,
+        interaction: interactionReducer
     }
 });

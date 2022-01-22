@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const timerSlice = createSlice({
     name: "timer",
     initialState: {
-        value: 600
+        value: 60
     },
     reducers: {
         increment: (state) => {

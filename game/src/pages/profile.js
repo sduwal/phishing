@@ -6,6 +6,7 @@ import { setStepsEnabled } from "../store/steps";
 
 import { Steps } from "intro.js-react";
 import "intro.js/introjs.css";
+import { changeStart } from "../store/interaction";
 
 export default function App() {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export default function App() {
 
     function onExit() {
         dispatch(setStepsEnabled(false));
+        dispatch(changeStart());
     }
 
     return (

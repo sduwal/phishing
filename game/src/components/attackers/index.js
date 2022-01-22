@@ -28,6 +28,7 @@ import { decrementByAmount } from "../../store/status";
 
 import AttackerCard from "./attackerCard";
 import { language, skills } from "./trainingData";
+import { changeTime } from "../../store/interaction";
 
 const trainingMessage =
     "Your attacker will create better emails with better training. You can train your attacker to have better email writing skills and create better looking emails. Training your attacker will cost you money and require some time. Your attacker won't be able to create emails while training.";
@@ -78,7 +79,7 @@ function CollapseTrainingOptions({
                   );
 
             dispatch(setIsTraining(false));
-
+            dispatch(changeTime({ type: value }));
             toast("Training complete", {
                 autoClose: 3000,
                 pauseOnHover: false

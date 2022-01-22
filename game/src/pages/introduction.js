@@ -108,7 +108,7 @@ function Introduction() {
             sx={{
                 "background":
                     "linear-gradient(270deg, #b0f2b4, #baf2e9, #bad7f2, #f2bac9, #f2e2ba)",
-                "background-size": "1000% 1000%",
+                "backgroundSize": "1000% 1000%",
                 "animation": `${animation} 25s ease infinite`
             }}
         >
