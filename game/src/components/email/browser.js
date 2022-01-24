@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 import Browser, { Chrome } from "react-browser-ui";
 import { useState } from "react";
-import { Box, Flex, Button, Spacer, Progress, Tooltip } from "@chakra-ui/react";
+import { Box, Flex, Button, Spacer, Progress, Text } from "@chakra-ui/react";
 import EmailClient from "./emailClient";
 
 import _ from "lodash";
@@ -106,6 +106,20 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
         }, (1 + Math.round(Math.random() * 10)) * 1000);
     }
 
+    function numberButton({ index }) {
+        return (
+            <Button
+                color="white"
+                background={"blue.300"}
+                mx={2}
+                my={2}
+                key={index}
+                onClick={() => setNumber(index)}
+            >
+                {index + 1}
+            </Button>
+        );
+    }
     return (
         <Box w="100%">
             <Box minH={"50vh"}>
@@ -137,23 +151,57 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
                                 />
                             </Box>
                         ) : (
-                            <EmailClient
-                                title={email.subject}
-                                name={email.name}
-                                from={email.from}
-                                to={email.to}
-                                body={{
-                                    ...email.body.text[number],
-                                    link: email.body.link
-                                }}
-                                linkType={email.linkType}
-                            />
+                            <>
+                                <EmailClient
+                                    title={email.subject}
+                                    name={email.name}
+                                    from={email.from}
+                                    to={email.to}
+                                    body={{
+                                        ...email.body.text[number],
+                                        link: email.body.link
+                                    }}
+                                    linkType={email.linkType}
+                                />
+                                <Flex
+                                    justify={"center"}
+                                    alignItems={"center"}
+                                    minW={"100%"}
+                                    direction={"column"}
+                                >
+                                    <Text
+                                        opacity={"0.8"}
+                                        letterSpacing={"-0.5px"}
+                                        fontStyle="italic"
+                                        maxW={"80%"}
+                                    >
+                                        See some problem in the email? Choose a
+                                        different one.
+                                    </Text>
+                                    <Box>
+                                        {(() => {
+                                            const elements = [];
+                                            for (
+                                                let i = 0;
+                                                i < email.body.text.length;
+                                                i++
+                                            ) {
+                                                elements.push(
+                                                    numberButton({ index: i })
+                                                );
+                                            }
+                                            return elements;
+                                        })()}
+                                    </Box>
+                                </Flex>
+                            </>
                         )}
                     </Tab>
                 </Browser>
             </Box>
+
             <Flex>
-                <Tooltip
+                {/* <Tooltip
                     label={
                         "Not satisfied with this email? Click here to generate a modified email."
                     }
@@ -182,10 +230,10 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
                     >
                         Revise the email
                     </Button>
-                </Tooltip>
-                <Spacer></Spacer>
+                </Tooltip> */}
+
+                <Spacer />
                 <Button
-                    // TODO: Change this later
                     isDisabled={_.isEmpty(email)}
                     onClick={() => {
                         dispatch(incrementTotalEmails(email.totalSend));

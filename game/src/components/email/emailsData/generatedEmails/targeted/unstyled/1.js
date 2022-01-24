@@ -12,7 +12,7 @@ const first = {
                 </Text>
                 <Text>
                     {
-                        " Any payments you authorized on this card on or before June 3, 2021 will be completed; however, no new payments will be processed on this card. Learn more:"
+                        "Any payments you authorized on this card on or before June 3, 2021 will be completed; however, no new payments will be processed on this card. Learn more:"
                     }
                 </Text>
             </VStack>

@@ -34,7 +34,13 @@ function EmailClient({ title, name, from, to, body, linkType }) {
                     </Stack>
                 </GridItem>
             </Grid>
-            <Box w="100%" h="50vh" overflowY={"auto"} mb={"10px"}>
+            <Box
+                w="100%"
+                maxH="50vh"
+                minH={"30vh"}
+                overflowY={"auto"}
+                mb={"10px"}
+            >
                 {body.start}
                 {
                     <Box py="1" width="100%">

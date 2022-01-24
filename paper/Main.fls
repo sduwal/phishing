@@ -900,13 +900,13 @@ INPUT ./data/section1.tex
 INPUT data/section1.tex
 INPUT ./data/section1.tex
 INPUT data/section1.tex
+INPUT ./Main.bbl
+INPUT Main.bbl
+INPUT ./Main.bbl
+INPUT Main.bbl
 INPUT /usr/share/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
 INPUT /usr/share/texmf-dist/fonts/vf/adobe/times/ptmri8t.vf
 INPUT /usr/share/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
-INPUT ./Main.bbl
-INPUT Main.bbl
-INPUT ./Main.bbl
-INPUT Main.bbl
 INPUT Main.aux
 INPUT ./data/titlepage.aux
 INPUT data/titlepage.aux

@@ -7,14 +7,8 @@ import {
     Box,
     HStack,
     VStack,
-    Icon,
-    Circle,
-    UnorderedList,
-    ListItem,
-    Link,
     Center
 } from "@chakra-ui/react";
-import { AiFillBank } from "react-icons/ai";
 
 import paypal from "../../../image/paypal.png";
 
