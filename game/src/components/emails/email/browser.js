@@ -1,16 +1,8 @@
 /* eslint-disable operator-linebreak */
 import Browser, { Chrome } from "react-browser-ui";
 import { useState } from "react";
-import {
-    Box,
-    Flex,
-    Button,
-    Spacer,
-    Progress,
-    Text,
-    Divider
-} from "@chakra-ui/react";
-import EmailClient from "./emailClient";
+import { Box, Flex, Button, Spacer, Text, Divider } from "@chakra-ui/react";
+import EmailClient from "../shared/emailClient";
 
 import _ from "lodash";
 
@@ -23,15 +15,12 @@ import {
     setIsUpdating,
     updateSuccess,
     incrementByAmount
-} from "../../store/status";
+} from "@store/status";
 
-import { addSentEmail } from "../../store/email";
+import { addSentEmail } from "@store/email";
 import calculateSuccess from "./utils/calculateSuccess";
 
-import {
-    MONEY_PER_SUCCESSFUL_EMAIL,
-    TOTAL_EMAIL_REVISE_TIME
-} from "../../constants";
+import { MONEY_PER_SUCCESSFUL_EMAIL } from "@constants";
 
 // styles
 const Dots = styled.span`

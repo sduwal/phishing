@@ -27,13 +27,8 @@ import { toast } from "react-toastify";
 import questionsData from "./questionsData";
 import getRandomEmail from "../emailsData";
 
-import {
-    changeKey,
-    changeLinkType,
-    resetKey,
-    spoofEmail
-} from "../../../store/email";
-import { changeActiveDomain } from "../../../store/domain";
+import { changeKey, changeLinkType, resetKey, spoofEmail } from "@store/email";
+import { changeActiveDomain } from "@store/domain";
 import helper from "./images/helper.gif";
 const MAX_LEVEL = 4;
 

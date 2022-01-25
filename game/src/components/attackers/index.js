@@ -22,16 +22,15 @@ import {
     setTechSkills,
     setIsTraining,
     setCurrentTraining
-} from "../../store/attacker";
+} from "@store/attacker";
 
-import { decrementByAmount } from "../../store/status";
+import { decrementByAmount } from "@store/status";
 
 import AttackerCard from "./attackerCard";
 import { language, skills } from "./trainingData";
-import { changeTime } from "../../store/interaction";
+import { changeTime } from "@store/interaction";
 
-const trainingMessage =
-    "Your attacker will create better emails with better training. You can train your attacker to have better email writing skills and create better looking emails. Training your attacker will cost you money and require some time. Your attacker won't be able to create emails while training.";
+import { TRAINING_MESSAGE } from "@constants";
 
 function CollapseTrainingOptions({
     display,
@@ -128,8 +127,17 @@ function CollapseTrainingOptions({
         </>
     );
 }
-function TrainLanguage() {
-    const data = language.map((skill) => (
+
+function TrainLanguage({ canCurrentlyTrain }) {
+    if (canCurrentlyTrain.length === 0) {
+        return <Box></Box>;
+    }
+
+    const required = language.filter((skill) =>
+        canCurrentlyTrain.includes(skill.value)
+    );
+
+    const data = required.map((skill) => (
         <Box m={2} key={skill.display} margin={2}>
             <CollapseTrainingOptions {...skill} type="language" />
         </Box>
@@ -148,7 +156,7 @@ function TrainLanguage() {
     );
 }
 
-function TrainTechnical() {
+function TrainTechnical({ canCurrentlyTrain }) {
     const attacker = useSelector((state) => state.attacker);
 
     const [data, setData] = useState([]);
@@ -170,6 +178,17 @@ function TrainTechnical() {
         setData(temp);
     }, [attacker.techSkills.length]);
 
+    if (canCurrentlyTrain.length < 3) {
+        return (
+            <Center py={4}>
+                <Text fontWeight={"bold"} opacity={"0.8"} color={"teal.400"}>
+                    Send more emails! Will unlock more training skills with more
+                    experience.
+                </Text>
+            </Center>
+        );
+    }
+
     return (
         <Box
             border={"2px solid black"}
@@ -183,6 +202,9 @@ function TrainTechnical() {
 }
 
 function Attacker() {
+    const canCurrentlyTrain = useSelector(
+        (state) => state.status.canCurrentlyTrain
+    );
     return (
         <>
             <Flex>
@@ -204,11 +226,11 @@ function Attacker() {
                         </Text>
                     </Center>
                     <Text fontSize={"0.8em"} color="grey">
-                        {trainingMessage}
+                        {TRAINING_MESSAGE}
                     </Text>
                     <SimpleGrid columns={2} spacing={10}>
-                        <TrainLanguage />
-                        <TrainTechnical />
+                        <TrainLanguage canCurrentlyTrain={canCurrentlyTrain} />
+                        <TrainTechnical canCurrentlyTrain={canCurrentlyTrain} />
                     </SimpleGrid>
                 </Container>
             </Flex>

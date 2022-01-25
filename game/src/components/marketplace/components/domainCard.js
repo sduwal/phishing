@@ -13,8 +13,8 @@ import {
     changeDomain,
     clearSubDomains,
     changeActiveDomain
-} from "../../../store/domain";
-import { decrementByAmount } from "../../../store/status";
+} from "@store/domain";
+import { decrementByAmount } from "@store/status";
 
 export default function domainCard({ link, price, index }) {
     const cost = Math.round(50 * Math.sqrt(10 - index)) * 100;

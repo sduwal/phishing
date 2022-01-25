@@ -15,10 +15,12 @@ import {
 import { useDisclosure } from "@chakra-ui/hooks";
 import { useRef } from "react";
 
-import MarketPlace from "../../marketplace/index";
-import Attacker from "../../attackers";
-import { EmailClient } from "../../email";
-import Timer from "./../../timer";
+import MarketPlace from "@components/marketplace/index";
+import Attacker from "@components/attackers";
+import { EmailClient } from "@components/emails/email";
+import Timer from "@components/timer";
+import NoSkillEmailClient from "@components/emails/noSkillEmails";
+
 import domainImage from "./images/domain.jpg";
 import attackerImage from "./images/attacker.png";
 import emailImage from "./images/mail.png";
@@ -37,6 +39,7 @@ function SideButtons({
     onClick,
     modal,
     id,
+    view = true, // only for the email client
     isDisabled = false
 }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -99,7 +102,11 @@ function SideButtons({
                     </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        {id == 1 && <EmailClient onClose={onClose} />}
+                        {id == 1 && view ? (
+                            <NoSkillEmailClient onClose={onClose} />
+                        ) : (
+                            <EmailClient onClose={onClose} />
+                        )}
                         {id == 2 && <MarketPlace onClose={onClose} />}
                         {id == 3 && <Attacker />}
                         {id == 4 && <PrevEmails />}
@@ -112,12 +119,16 @@ function SideButtons({
 
 export default function SideBar() {
     const isTraining = useSelector((state) => state.attacker.isTraining);
+    const canCurrentlyTrain = useSelector(
+        (state) => state.status.canCurrentlyTrain
+    );
     const side = [
         {
             title: "Email",
             desc: "Generate new email",
             image: isTraining ? trainingImage : emailImage,
             color: isTraining ? "grey" : "blue.500",
+            view: canCurrentlyTrain.length < 3 ? true : false,
             modal: <EmailClient />,
             id: 1,
             isDisabled: isTraining

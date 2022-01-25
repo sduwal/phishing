@@ -12,8 +12,8 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { setGameWon } from "../../../store/status";
-import { GOAL_AMOUNT } from "../../../constants";
+import { setGameWon } from "@store/status";
+import { GOAL_AMOUNT } from "@constants";
 
 export default function StatusBar() {
     const dispatch = useDispatch();

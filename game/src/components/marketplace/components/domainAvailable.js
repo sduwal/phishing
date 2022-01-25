@@ -7,9 +7,9 @@ import {
     changeDomain,
     clearSubDomains,
     changeActiveDomain
-} from "../../../store/domain";
+} from "@store/domain";
 import { toast } from "react-toastify";
-import { decrementByAmount } from "../../../store/status";
+import { decrementByAmount } from "@store/status";
 
 export default function domainAvailable({ name, onClick }) {
     const dispatch = useDispatch();

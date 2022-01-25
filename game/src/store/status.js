@@ -8,15 +8,12 @@ export const moneySlice = createSlice({
         successEmails: 0,
         unsuccessfulEmails: 0,
         isUpdating: false,
-        gameWon: false
+        gameWon: false,
+        canCurrentlyTrain: [],
+        count: { "spelling": 0, "grammar": 0, "email": 0 },
+        currentTrainingMode: "spelling"
     },
     reducers: {
-        increment: (state) => {
-            state.money += 1;
-        },
-        decrement: (state) => {
-            state.money -= 1;
-        },
         incrementByAmount: (state, action) => {
             state.money += action.payload;
         },
@@ -35,19 +32,31 @@ export const moneySlice = createSlice({
         },
         setGameWon: (state, action) => {
             state.gameWon = action.payload;
+        },
+        setCanCurrentlyTrain: (state, action) => {
+            state.canCurrentlyTrain = [
+                ...state.canCurrentlyTrain,
+                action.payload
+            ];
+        },
+        increamentTrainingCount: (state, action) => {
+            state.count[action.payload.type] += 1;
+        },
+        changeCurrentTrainingMode: (state, action) => {
+            state.currentTrainingMode = action.payload;
         }
     }
 });
 
 export const {
-    increment,
-    decrement,
     incrementByAmount,
     decrementByAmount,
     incrementTotalEmails,
     updateSuccess,
     setIsUpdating,
-    setGameWon
+    setGameWon,
+    increamentTrainingCount,
+    changeCurrentTrainingMode
 } = moneySlice.actions;
 
 export default moneySlice.reducer;

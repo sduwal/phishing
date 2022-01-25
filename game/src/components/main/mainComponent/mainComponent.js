@@ -1,7 +1,7 @@
 import { Box, Center, VStack } from "@chakra-ui/react";
 import StatusBar from "./StatusBar";
 import Domain from "./domain";
-import Timer from "../../timer";
+import Timer from "@components/timer";
 export default function mainComponent(props) {
     function Top() {
         return (

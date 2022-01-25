@@ -1,35 +1,22 @@
 import { IconButton } from "@chakra-ui/button";
 import { Box, Flex, Text, Tooltip } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { AddIcon } from "@chakra-ui/icons";
-import { useHistory } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { buyTime, decrement } from "../../store/timer";
-import { decrementByAmount } from "../../store/status";
+import { buyTime } from "@store/timer";
+import { decrementByAmount } from "@store/status";
 
 function Timer({ second }) {
     const time = useSelector((state) => state.timer.value);
     const cost = useSelector((state) => state.timer.price);
     const money = useSelector((state) => state.status.money);
-    const stepsEnabled = useSelector((state) => state.steps.stepsEnabled);
-    const history = useHistory();
-    const dispatch = useDispatch();
 
-    const tick = () => {
-        if (time <= 0) history.push("/gameover");
-        if (time > 0 && !stepsEnabled) dispatch(decrement());
-    };
+    const dispatch = useDispatch();
 
     const addTime = () => {
         dispatch(buyTime());
         dispatch(decrementByAmount(cost));
     };
-
-    useEffect(() => {
-        const timer = setInterval(() => tick(), 1000);
-        return () => clearInterval(timer);
-    });
 
     return (
         <Box border="1px solid" pl="2">

@@ -16,7 +16,7 @@ import {
 import { Formik, Field, Form } from "formik";
 import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addSubDomain } from "../../../store/domain";
+import { addSubDomain } from "@store/domain";
 
 const description =
     "Regular domains are your standard URLs like splashthat.com or splashthat.events. Subdomains are a unique URL that lives on your purchased domain as an extension in front of your regular domain like support.splashthat.com or blockparty.splashthat.com. Subdomains can be used to navaigate to different sections of the website.";
