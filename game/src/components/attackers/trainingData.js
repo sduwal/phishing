@@ -1,6 +1,6 @@
 // NOTE: When you change the key values in the training data, you need to update the emails too.
 
-// TODO: change
+// TODO: change this
 export const language = [
     {
         "display": "Spellings",
