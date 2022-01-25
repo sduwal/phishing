@@ -52,6 +52,8 @@ export default function getRandomEmail({ emails, properties, link, attacker }) {
      * 1. The email address might be from the domain name or random domain
      * 2. Fix the links for the email. We will generate different tiny urls, and such for each iteration of email to have variety in the email links
      */
+    // TODO: remove this line after completion of test
+    // requiredKey = Object.keys(emails)[0];
     changeFrom({ emails, key: requiredKey, link });
     return requiredKey;
 }

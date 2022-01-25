@@ -1,17 +1,16 @@
 import { IconButton } from "@chakra-ui/button";
-import { Box, Flex, Text } from "@chakra-ui/layout";
+import { Box, Flex, Text, Tooltip } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { AddIcon } from "@chakra-ui/icons";
 import { useHistory } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { decrement, incrementByAmount } from "../../store/timer";
+import { buyTime, decrement } from "../../store/timer";
 import { decrementByAmount } from "../../store/status";
-
-import { BUY_TIME_DURATION, BUY_TIME_COST } from "../../constants";
 
 function Timer({ second }) {
     const time = useSelector((state) => state.timer.value);
+    const cost = useSelector((state) => state.timer.price);
     const money = useSelector((state) => state.status.money);
     const stepsEnabled = useSelector((state) => state.steps.stepsEnabled);
     const history = useHistory();
@@ -22,10 +21,9 @@ function Timer({ second }) {
         if (time > 0 && !stepsEnabled) dispatch(decrement());
     };
 
-    // TODO: handle the time adding logic
     const addTime = () => {
-        dispatch(incrementByAmount(BUY_TIME_DURATION));
-        dispatch(decrementByAmount(BUY_TIME_COST));
+        dispatch(buyTime());
+        dispatch(decrementByAmount(cost));
     };
 
     useEffect(() => {
@@ -45,12 +43,14 @@ function Timer({ second }) {
                     {formatTime(time)}
                 </Text>
                 <div className="addTime">
-                    <IconButton
-                        aria-label="add time"
-                        icon={<AddIcon />}
-                        onClick={addTime}
-                        isDisabled={money < BUY_TIME_COST}
-                    />
+                    <Tooltip label={`Cost: \$${cost} for 120 sec`}>
+                        <IconButton
+                            aria-label="add time"
+                            icon={<AddIcon />}
+                            onClick={addTime}
+                            isDisabled={money < cost}
+                        />
+                    </Tooltip>
                 </div>
             </Flex>
         </Box>

@@ -35,15 +35,15 @@ import {
 } from "../../../store/email";
 import { changeActiveDomain } from "../../../store/domain";
 import helper from "./images/helper.gif";
-
 const MAX_LEVEL = 4;
 
 const Basket = ({ emails }) => {
     const dispatch = useDispatch();
     const optionDetails = [
-        "Do you want targeted emails?",
-        "How to hide the links?",
-        "Pretend to be someone else?"
+        "Hey Boss, Before I create the email, I need you to select what kind the options you want to use. You can drag these options to the basket above and click on it to learn more. Let's start with the what kind of email you want?",
+        "Nice! Now let's decide on how to hide the links.",
+
+        "Great! You can pretend to be someone else for better performance. Fill the email below and drag the option to the basket!"
     ];
     let domains = useSelector((state) => state.domain);
     domains = [domains.name, ...domains.subdomains];
@@ -189,15 +189,27 @@ const Basket = ({ emails }) => {
                         <Center marginBottom={"10px"}>
                             <HStack>
                                 <Image src={helper} maxH={"60px"} />
-                                <Text fontSize="1em" fontWeight={"semibold"}>
-                                    {
-                                        "Hey Boss, Before I create the email, I need you to select what kind the options you want to use. You can drag these options to the basket above. Click on the options to learn more. Train me for more options!"
-                                    }
-                                </Text>
+
+                                <VStack>
+                                    <Text
+                                        fontSize="1em"
+                                        fontWeight={"semibold"}
+                                    >
+                                        {optionDetails[level - 1]}
+                                    </Text>
+                                    {level === 2 &&
+                                        !attacker.includes("Links") && (
+                                            <Text color={"gray.400"}>
+                                                {
+                                                    "Don't see options? Train your attacker with links!"
+                                                }
+                                            </Text>
+                                        )}
+                                </VStack>
                             </HStack>
                         </Center>
 
-                        <Text fontSize="1em">{optionDetails[level - 1]}</Text>
+                        {/* <Text fontSize="1em">{optionDetails[level - 1]}</Text> */}
 
                         {level === 3 && (
                             <Box mt="3">
@@ -244,6 +256,8 @@ const Basket = ({ emails }) => {
                 setBasket={setBasket}
                 setResearchTime={setResearchTime}
             />
+
+            <>{level >= MAX_LEVEL && <Hints />}</>
         </Box>
     );
 };
@@ -282,6 +296,33 @@ function Loading({ researchTime }) {
                 </VStack>
             </Center>
         </>
+    );
+}
+
+function Hints() {
+    const hint = [
+        "Email not performing well? Did you try the marketplace?",
+        "Did you know that similar domain has higher chance of tricking the user?",
+        "Emails has lot of problems? Try training the attacker?",
+        "Did you know that the attacker can spoof the sender? Can't see it yet? Train the attacker!",
+        "Running short on time? You can buy some time!"
+    ];
+
+    const number = Math.floor(Math.random() * hint.length);
+    return (
+        <Center>
+            <Container mt={10}>
+                <Text
+                    fontStyle={"italic"}
+                    letterSpacing={"-0.01em"}
+                    fontWeight={"medium"}
+                    opacity={"0.6"}
+                    fontSize={"0.9em"}
+                >
+                    HINT: {hint[number]}
+                </Text>
+            </Container>
+        </Center>
     );
 }
 

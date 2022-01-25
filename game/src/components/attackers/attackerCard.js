@@ -23,12 +23,12 @@ function AttackerCard() {
             <Center>
                 <Image height="150px" src={helper} borderRadius="full" />
             </Center>
-            <Center mt="6">
+            {/* <Center mt="6">
                 <Text>Cost: {attacker.totalAmount}</Text>
             </Center>
             <Center>
                 <Text>Time: {attacker.trainingTime}</Text>
-            </Center>
+            </Center> */}
             <Text width="100%" fontWeight="bold" pt="10px">
                 Efficiency
             </Text>

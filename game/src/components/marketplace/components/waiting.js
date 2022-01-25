@@ -12,7 +12,7 @@ function waiting() {
                 <Box fontStyle="italic" opacity={0.7} color={"grey"}>
                     <Text>
                         HINT: Domain that look similar to your target site will
-                        perform better.
+                        perform better, but might cost more.
                     </Text>
                     <Text>
                         REMEMBER: Subdomains are free and might perform really

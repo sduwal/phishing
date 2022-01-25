@@ -1,6 +1,5 @@
 export const MONEY_PER_SUCCESSFUL_EMAIL = 10;
 export const BUY_TIME_DURATION = 120;
-export const BUY_TIME_COST = 2500;
 export const GOAL_AMOUNT = 100_000;
 
 // FOR EMAILS

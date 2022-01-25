@@ -1,23 +1,24 @@
 import { Text, Grid, GridItem, Avatar, Stack, Box } from "@chakra-ui/react";
 
-function EmailClient({ title, name, from, to, body, linkType }) {
+function EmailClient({ title, name = "Paypal", from, to, body, linkType }) {
     return (
         <>
             <Grid
-                templateRows="repeat(3,1fr)"
+                templateRows="repeat(2,1fr)"
                 templateColumns="repeat(100,1fr)"
+                pb={5}
             >
-                <GridItem rowSpan={1} colStart={2} colSpan={50}>
+                <GridItem rowSpan={1} colStart={2} colSpan={70}>
                     <Text fontWeight="bold" py={2} px={2}>
                         {title}
                     </Text>
                 </GridItem>
-                <GridItem rowSpan={4} rowStart={2}>
+                <GridItem rowSpan={2} rowStart={2}>
                     <Avatar name={name} size="sm" />
                 </GridItem>
 
                 <GridItem
-                    rowSpan={4}
+                    // rowSpan={2}
                     rowStart={2}
                     colStart={2}
                     px={2}

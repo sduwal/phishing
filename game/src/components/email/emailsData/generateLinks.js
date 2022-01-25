@@ -4,7 +4,7 @@ import {
     Text,
     Link,
     HStack,
-    Box,
+    Container,
     Tooltip
 } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
@@ -115,9 +115,9 @@ export default function generateLinks(link) {
         ),
         confused: (
             <Center>
-                <Box width={"100%"}>
+                <Container width={"100%"}>
                     <Link p="0">{createConfusion()}</Link>
-                </Box>
+                </Container>
             </Center>
         ),
         hidden: <Center>{createHiddenLink(link)}</Center>

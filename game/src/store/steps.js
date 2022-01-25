@@ -1,10 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-    MONEY_PER_SUCCESSFUL_EMAIL,
-    BUY_TIME_DURATION,
-    BUY_TIME_COST,
-    GOAL_AMOUNT
-} from "../constants";
+import { MONEY_PER_SUCCESSFUL_EMAIL, GOAL_AMOUNT } from "../constants";
 
 export const stepsSlice = createSlice({
     name: "steps",
@@ -18,7 +13,7 @@ export const stepsSlice = createSlice({
             },
             {
                 element: ".addTime",
-                intro: `You can buy time by paying \$${BUY_TIME_COST} for ${BUY_TIME_DURATION} seconds.`
+                intro: "You can buy time by paying $2500 for 120 seconds. Price will increase everytime you buy by 50%."
             },
             {
                 element: ".stats",

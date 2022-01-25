@@ -88,6 +88,6 @@ export default function calculateSuccess(email, number, domain) {
         calculateBody(email.body.text[number].properties) +
         (email.styled ? 2 : 0);
 
-    const successRate = Math.min(Math.max(0.05, userPoints / totalPoints), 0.5);
+    const successRate = userPoints / totalPoints;
     return successRate;
 }

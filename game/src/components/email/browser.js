@@ -1,7 +1,15 @@
 /* eslint-disable operator-linebreak */
 import Browser, { Chrome } from "react-browser-ui";
 import { useState } from "react";
-import { Box, Flex, Button, Spacer, Progress, Text } from "@chakra-ui/react";
+import {
+    Box,
+    Flex,
+    Button,
+    Spacer,
+    Progress,
+    Text,
+    Divider
+} from "@chakra-ui/react";
 import EmailClient from "./emailClient";
 
 import _ from "lodash";
@@ -47,16 +55,21 @@ const Dots = styled.span`
     }
 `;
 
-function BrowserCustom({ onClose, email, showHeader = false }) {
+function BrowserCustom({
+    onClose,
+    email,
+    showHeader = false,
+    sendDisabled = true
+}) {
     const { Tab } = Chrome;
 
     const isUpdating = useSelector((state) => state.status.isUpdating);
     const dispatch = useDispatch();
 
     const [number, setNumber] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
-    const [value, setValue] = useState(0);
+    // const [value, setValue] = useState(0);
 
     function send({ totalSend }) {
         const successrate = calculateSuccess(email, number);
@@ -84,9 +97,10 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
 
             if (!isUpdating) {
                 dispatch(setIsUpdating(true));
-                const victimNumber = Math.floor(
-                    Math.random() * (sendNumber + 1)
-                );
+                const victimNumber =
+                    sendNumber > 20
+                        ? Math.floor(Math.random() * (sendNumber + 1))
+                        : sendNumber;
 
                 sendNumber -= victimNumber;
 
@@ -135,67 +149,78 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
                         title={"Email"}
                         onClose={() => {}}
                     >
-                        {_.isEmpty(email) ? (
-                            <Box px={10} py={20}>
-                                <Dots>Waiting for input</Dots>
-                            </Box>
-                        ) : isLoading ? (
-                            <Box px={10} py={20}>
-                                <Dots>Loading</Dots>
-                                <Progress
-                                    value={value}
-                                    max={TOTAL_EMAIL_REVISE_TIME * 1000}
-                                    isAnimated={true}
-                                    hasStripe={true}
-                                    colorScheme={"green"}
-                                />
-                            </Box>
-                        ) : (
-                            <>
-                                <EmailClient
-                                    title={email.subject}
-                                    name={email.name}
-                                    from={email.from}
-                                    to={email.to}
-                                    body={{
-                                        ...email.body.text[number],
-                                        link: email.body.link
-                                    }}
-                                    linkType={email.linkType}
-                                />
-                                <Flex
-                                    justify={"center"}
-                                    alignItems={"center"}
-                                    minW={"100%"}
-                                    direction={"column"}
-                                >
-                                    <Text
-                                        opacity={"0.8"}
-                                        letterSpacing={"-0.5px"}
-                                        fontStyle="italic"
-                                        maxW={"80%"}
+                        {
+                            _.isEmpty(email) ? (
+                                <Box px={10} py={20}>
+                                    <Dots>Waiting for input</Dots>
+                                </Box>
+                            ) : (
+                                //     isLoading ? (
+                                //     <Box px={10} py={20}>
+                                //         <Dots>Loading</Dots>
+                                //         <Progress
+                                //             value={value}
+                                //             max={TOTAL_EMAIL_REVISE_TIME * 1000}
+                                //             isAnimated={true}
+                                //             hasStripe={true}
+                                //             colorScheme={"green"}
+                                //         />
+                                //     </Box>
+                                // ) : (
+                                <>
+                                    <EmailClient
+                                        title={email.subject}
+                                        name={email.name}
+                                        from={email.from}
+                                        to={email.to}
+                                        body={{
+                                            ...email.body.text[number],
+                                            link: email.body.link
+                                        }}
+                                        linkType={email.linkType}
+                                    />
+                                    <Divider
+                                        mt={4}
+                                        color={"black"}
+                                        opacity={1}
+                                    />
+                                    <Flex
+                                        justify={"center"}
+                                        alignItems={"center"}
+                                        minW={"100%"}
+                                        direction={"column"}
                                     >
-                                        See some problem in the email? Choose a
-                                        different one.
-                                    </Text>
-                                    <Box>
-                                        {(() => {
-                                            const elements = [];
-                                            for (
-                                                let i = 0;
-                                                i < email.body.text.length;
-                                                i++
-                                            ) {
-                                                elements.push(
-                                                    numberButton({ index: i })
-                                                );
-                                            }
-                                            return elements;
-                                        })()}
-                                    </Box>
-                                </Flex>
-                            </>
-                        )}
+                                        <Text
+                                            opacity={"0.8"}
+                                            letterSpacing={"-0.5px"}
+                                            fontStyle="italic"
+                                            maxW={"80%"}
+                                        >
+                                            See some problem in the email?
+                                            Choose a different one.
+                                        </Text>
+                                        <Box>
+                                            {(() => {
+                                                const elements = [];
+                                                for (
+                                                    let i = 0;
+                                                    i < email.body.text.length;
+                                                    i++
+                                                ) {
+                                                    elements.push(
+                                                        numberButton({
+                                                            index: i
+                                                        })
+                                                    );
+                                                }
+                                                return elements;
+                                            })()}
+                                        </Box>
+                                    </Flex>
+                                </>
+                            )
+                            // )
+                        }
                     </Tab>
                 </Browser>
             </Box>
