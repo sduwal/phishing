@@ -1,7 +1,9 @@
 ## TODO
 ---
 - [ ] Add more emails
-- [ ] add details in marketplace
+- [ ] Logger using supabase (create new table and log every action)
+
+- [x] add details in marketplace
 - [x] add timer in all screen
 - [x] Helper in questions page
 - [x] Add paypal to on boarding screen
