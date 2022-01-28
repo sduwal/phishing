@@ -102,11 +102,12 @@ function SideButtons({
                     </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        {id == 1 && view ? (
-                            <NoSkillEmailClient onClose={onClose} />
-                        ) : (
-                            <EmailClient onClose={onClose} />
-                        )}
+                        {id == 1 &&
+                            (view ? (
+                                <NoSkillEmailClient onClose={onClose} />
+                            ) : (
+                                <EmailClient onClose={onClose} />
+                            ))}
                         {id == 2 && <MarketPlace onClose={onClose} />}
                         {id == 3 && <Attacker />}
                         {id == 4 && <PrevEmails />}
@@ -128,7 +129,7 @@ export default function SideBar() {
             desc: "Generate new email",
             image: isTraining ? trainingImage : emailImage,
             color: isTraining ? "grey" : "blue.500",
-            view: canCurrentlyTrain.length < 3 ? true : false,
+            view: canCurrentlyTrain.length < 2 ? true : false,
             modal: <EmailClient />,
             id: 1,
             isDisabled: isTraining

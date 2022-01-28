@@ -1,6 +1,13 @@
 import { Text, Grid, GridItem, Avatar, Stack, Box } from "@chakra-ui/react";
 
-function EmailClient({ title, name = "Paypal", from, to, body, linkType }) {
+function EmailClient({
+    title,
+    name = "Paypal",
+    from,
+    to,
+    body,
+    linkType = "normal"
+}) {
     return (
         <>
             <Grid

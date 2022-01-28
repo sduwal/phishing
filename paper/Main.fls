@@ -916,6 +916,12 @@ INPUT ./figures//./browser_cues.png
 INPUT /usr/share/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
 INPUT /usr/share/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
 INPUT /usr/share/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
+INPUT /usr/share/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+INPUT /usr/share/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+INPUT /usr/share/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+INPUT /usr/share/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+INPUT /usr/share/texmf-dist/fonts/tfm/adobe/times/ptmr8c.tfm
+INPUT /usr/share/texmf-dist/fonts/vf/adobe/times/ptmr8c.vf
 INPUT ./Main.bbl
 INPUT Main.bbl
 INPUT ./Main.bbl

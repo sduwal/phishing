@@ -178,7 +178,7 @@ function TrainTechnical({ canCurrentlyTrain }) {
         setData(temp);
     }, [attacker.techSkills.length]);
 
-    if (canCurrentlyTrain.length < 3) {
+    if (canCurrentlyTrain.length < 2) {
         return (
             <Center py={4}>
                 <Text fontWeight={"bold"} opacity={"0.8"} color={"teal.400"}>

@@ -10,7 +10,7 @@ export const moneySlice = createSlice({
         isUpdating: false,
         gameWon: false,
         canCurrentlyTrain: [],
-        count: { "spelling": 0, "grammar": 0, "email": 0 },
+        count: { "spelling": 0, "grammar": 0 },
         currentTrainingMode: "spelling"
     },
     reducers: {
@@ -40,7 +40,7 @@ export const moneySlice = createSlice({
             ];
         },
         increamentTrainingCount: (state, action) => {
-            state.count[action.payload.type] += 1;
+            state.count[action.payload] += 1;
         },
         changeCurrentTrainingMode: (state, action) => {
             state.currentTrainingMode = action.payload;
@@ -55,6 +55,7 @@ export const {
     updateSuccess,
     setIsUpdating,
     setGameWon,
+    setCanCurrentlyTrain,
     increamentTrainingCount,
     changeCurrentTrainingMode
 } = moneySlice.actions;

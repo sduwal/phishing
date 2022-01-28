@@ -42,23 +42,30 @@ The final step to avoid phishing emails is user training. A study done by Proofp
 Although these training help users recognize phishing attacks, simply knowing does not provide helpful strategies for identifying phishing attacks. In addition, the lack of contextual information in these videos leaves room for improvement. Therefore, an interactive user program that conveys the information with a better approach is necessary. Our approach to using the game to spread awareness tries to tackle this problem.
 
 \section{Litearature Review}
-The gaming approach to train users is not novel. Hendrix et al. \cite{hendrix_al_sherbaz_bloom_2016} investigated whether games can be effective cyber security training tools with some of the popular games designed for cyber security training. Their study indicated positive signs, although there was insufficient evidence to draw definite conclusions.
+The gaming approach in education endeavors is not novel and has been used for over a decade \cite{almeida_2012}. There have been arguments for gaming in education. Prensky \cite{prensky} in "Digital game-based learning" shows that playing "action" video and computer games has a positive impact on enhancing students' visual selective attention. He further argues that video games are the best opportunity to engage kids in real learning. This argument was further studied by Almeida \cite{almeida_2012} and verified that when games are used against the control group, significant increases in factual knowledge occur.
 
-\subsection{Educational Games}
-\subsection{Board Game}
-ctrlalthack
+Several studies have used different gaming approaches to train phishing campaigns again. Hendrix et al. \cite{hendrix_al_sherbaz_bloom_2016} investigated whether games can be effective cyber security training tools with some of the popular games designed for cyber security training. Their study indicated positive signs, although there was insufficient evidence to draw definite conclusions. We will look at some popular work below, separated by category.
 
-smells phishy
+\subsection{Board and card games}
+There have been some studies based on non-computer-based games. For example, Control-Alt-Hack \cite{control_alt_hack} tries to educate the user with the help of a card game. Similarly, "Smells Phishy?" is another non-computer-based game that tries to raise awareness about online phishing scams. Both these game depends on cards to divide the task and learn skills. Although both the games had shown promise in their approach, non-computer-based games have some inherent limitations. The games require pre-setup (with the need for the cards and boards) and make it harder to use than computer-based games. Furthermore, the current approaches only teach users about phishing attacks. The limited skills these games provide may not be best suited as an individual training module.
 
 \subsection{Phishing Link training}
-antiphishing phil
-
-phish phinder - same as antiphishing phil
-
-gamified approach - shooting game
-
+There have been numerous computer games about phishing. One common category many studies focus on is training users to verify phishing links. Anti-Phishing Phil \cite{anti_phishing_phil} is one of the pioneers in this field. Their gameplay puts the user as a fish. The goal of the fish is to grow larger by eating the good bugs (non-phishing links). Phish Phinder \cite{phish_phinder} is another example of link based training game that has similar gameplay and story to Anti-Phishing Phil but builds upon the game with more levels and interaction. Baral et al. \cite{gamified_appraoch} has a similar concept with a balloon shooting game. The goal of these games is to differentiate the phishing links and actual links. However, these games do not consider the context of the email. Attackers use psychological manipulation such as creating a sense of urgency, fake giveaways or making it seem like an email from somebody you know to trick people into clicking these links.
 
 \subsection{Role playing game}
-what dot hack
+"What.Hack" \cite{what_hack} saw the shortcomings of the link-based game and developed gameplay that train the user on links as well as email context. "What.Hack" puts the user as a player required to process emails to acquire contracts and protect their network from cybercriminals. It approaches the training by having the user role play as a victim and look at different techniques that could be found in actual attacks.
+
+The contextual emails addressed one of the most significant shortcomings of link-based games. The game successfully educated users with similar concepts as link-based games and added context to the links. The result from "What.Hack" clearly shows users' preference for their gameplay compared to Anti-Phishing Phil. Moreover, the game demonstrated significant improvement compared to other games in detecting phishing emails \cite{what_hack}.
 
 \section{Objective}
+"What.Hack" clearly demonstrated that role-playing games with contextual emails were more effective than existing gameplays. Unfortunately, we could not find any other significant study that tried to build upon this finding. Therefore, we have developed gameplay inspired by "What.Hack" but approached the role-playing aspect as an attacker instead of a victim.
+
+General phishing training such as videos and reading materials has taught users what to look for as victims. However, we believe looking at the attacker's perspective will help users understand what the attacker might look for while creating a phishing email. This will also help complement the currently available training games.
+
+Our goals for the study can be summarized as:
+
+\begin{itemize}
+    \setlength\itemsep{-0.6em}
+    \item Develop a role-playing game to train the users about phishing through an attackers perspective
+    \item Compare our results with the existing study
+\end{itemize}
