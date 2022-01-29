@@ -163,7 +163,7 @@ export default function createEmail(spelling, grammar) {
                     </VStack>
                 </>
             ),
-            properties: ["spelling", "grammar", "good email"]
+            properties
         });
     }
 

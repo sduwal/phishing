@@ -58,10 +58,6 @@ function BrowserCustom({
 
             if (required <= 0) {
                 dispatch(setCanCurrentlyTrain(currentTrainingModule));
-                // const next =
-                //     currentTrainingModule === "spelling"
-                //         ? "grammar"
-                //         : "good email";
                 dispatch(changeCurrentTrainingMode("grammar"));
             }
         } else {

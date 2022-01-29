@@ -63,9 +63,7 @@ function calculateLinkType(link) {
 function calculateBody(properties) {
     const points =
         (properties.includes("spelling") ? 2 : 0) +
-        (properties.includes("grammar") ? 2 : 0) +
-        (properties.includes("good email") ? 2 : 0);
-
+        (properties.includes("grammar") ? 2 : 0);
     return points;
 }
 export default function calculateSuccess(email, number, domain) {
@@ -74,7 +72,6 @@ export default function calculateSuccess(email, number, domain) {
         "linkType": 3,
         "spelling": 2,
         "grammar": 2,
-        "good email": 2,
         "styled": 2
     };
 

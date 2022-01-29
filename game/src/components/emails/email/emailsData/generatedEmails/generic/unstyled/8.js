@@ -1,6 +1,6 @@
 // no special properties
 
-import { Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 import {
     spellingAndGrammarErrors,
@@ -64,7 +64,7 @@ export default function createMail(spelling, grammar) {
                 <>
                     <Text pt={3}>Sincerly,</Text>
                     <Text py={4}>PayPal</Text>
-                    <Text lineHeight={1.5} fontSize={"0.9em"}>
+                    <Box lineHeight={1.5} fontSize={"0.9em"}>
                         <Text>{"Not sure why you received this email?"}</Text>
                         <Text>{"Learn more"}</Text>
                         <Text color={"blue"} decoration={"underline"}>
@@ -74,7 +74,7 @@ export default function createMail(spelling, grammar) {
                         </Text>
                         <Text>{currentEnd[endIndex++]}</Text>
                         <Text mt={6}>PayPal PPX000771:N/A:f2225892a3283</Text>
-                    </Text>
+                    </Box>
                 </>
             ),
             properties

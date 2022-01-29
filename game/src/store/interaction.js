@@ -8,7 +8,6 @@ export const interactionSlice = createSlice({
         "time": {
             "spelling": 0,
             "grammar": 0,
-            "good email": 0,
             "styling": 0,
             "spoof": 0,
             "links": 0,

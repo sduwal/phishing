@@ -90,7 +90,7 @@ export default function createEmail(spelling, grammar) {
                     </Center>
                 </Box>
             ),
-            "properties": ["spelling", "grammar", "good email"]
+            properties
         });
     }
 

@@ -23,7 +23,6 @@ function gameover() {
             //         end: end - interaction.start,
             //         spelling: interaction.time.spelling - interaction.start,
             //         grammar: interaction.time.grammar - interaction.start,
-            //         email: interaction.time["good email"] - interaction.start,
             //         styling: interaction.time.styling - interaction.start,
             //         spoof: interaction.time.spoof - interaction.start,
             //         links: interaction.time.links - interaction.start,

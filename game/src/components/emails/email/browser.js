@@ -252,6 +252,7 @@ function BrowserCustom({
                 <Button
                     isDisabled={_.isEmpty(email)}
                     onClick={() => {
+                        console.log(email);
                         dispatch(incrementTotalEmails(email.totalSend));
                         dispatch(
                             updateSuccess({
