@@ -85,7 +85,6 @@ export default function createMail(spelling, grammar) {
         body: {
             text: text
         },
-        propertiezs: ["spelling", "grammar"],
         targeted: "generic",
         styled: true
     };

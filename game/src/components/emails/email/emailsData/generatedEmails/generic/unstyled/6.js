@@ -1,105 +1,81 @@
 // no special properties
 
 import { Text } from "@chakra-ui/react";
+import {
+    spellingAndGrammarErrors,
+    spellingErrors,
+    grammarErrors
+} from "../../../utils/generateEmailsData";
 
-const email = {
-    to: "jane_doe@gmail.com",
-    from: "customerservice@gmail.com",
-    subject: "Your account is on hold #62378957",
-    totalSend: 1000,
-    body: {
-        text: [
-            {
-                start: (
-                    <>
-                        <Text>
-                            {
-                                "We've limited access to your account because your account was recently logged into from a new browser."
-                            }
-                        </Text>
-                        <Text fontWeight={"bold"} my={2}>
-                            {"Was that you?"}
-                        </Text>
+export default function createMail(spelling, grammar) {
+    const start = [
+        "We've limited access to your account because your account was recently logged into from a new browser.",
+        "What do I need to do?",
+        "In order to access your account again, you need to verify your identity by following some of our security steps. Use the link below:"
+    ];
 
-                        <Text my={2}>
-                            {"- Browser: Mozilla/5.0 (Windows NT 6.1; rv: 29.0"}
-                        </Text>
+    const allStart = [start];
 
-                        <Text fontWeight={"bold"} my={2}>
-                            What do I need to do?
-                        </Text>
-                        <Text>
-                            In order to access your account again, you need to
-                            verify your identity by following some of our
-                            security steps. Use the link below:
-                        </Text>
-                    </>
-                ),
-                end: <></>,
-                properties: ["spelling", "grammar"]
-            },
-            {
-                start: (
-                    <>
-                        <Text>
-                            {
-                                "We've limited acces to your acount because your acount was recently logged into from a new browser."
-                            }
-                        </Text>
-                        <Text fontWeight={"bold"} my={2}>
-                            {"Was that you?"}
-                        </Text>
+    if (!spelling || !grammar) {
+        const copyStart = [...start];
 
-                        <Text my={2}>
-                            {"- Browser: Mozilla/5.0 (Windows NT 6.1; rv: 29.0"}
-                        </Text>
-
-                        <Text fontWeight={"bold"}>What do I need to do?</Text>
-                        <Text my={2}>
-                            In order to access your account again, you need to
-                            verify your identity by following some of our
-                            security steps. Use the link below:
-                        </Text>
-                    </>
-                ),
-                end: <></>,
-                properties: ["grammar"]
-            },
-            {
-                start: (
-                    <>
-                        <Text>
-                            {
-                                "We limited access to your account because your account recently log into from a new browser."
-                            }
-                        </Text>
-                        <Text fontWeight={"bold"} my={2}>
-                            {"Was that you?"}
-                        </Text>
-                        <Text my={2}>
-                            {"- Browser: Mozilla/5.0 (Windows NT 6.1; rv: 29.0"}
-                        </Text>
-
-                        <Text fontWeight={"bold"} my={2}>
-                            What do I need to do?
-                        </Text>
-                        <Text>
-                            In order to access your account again, you need to
-                            verify your identity by following some of our
-                            security steps. Use the link below:
-                        </Text>
-                    </>
-                ),
-                end: <></>,
-                properties: ["grammar"]
-            }
-        ]
+        if (!spelling && !grammar) {
+            allStart.push(...spellingAndGrammarErrors(copyStart));
+        } else if (!spelling) {
+            allStart.push(...spellingErrors(copyStart));
+        } else if (!grammar) {
+            allStart.push(...grammarErrors(copyStart));
+        }
     }
-};
 
-export default {
-    ...email,
-    properties: ["spelling", "grammar"],
-    targeted: "generic",
-    styled: false
-};
+    const text = [];
+
+    for (let i = 0; i < allStart.length; i++) {
+        const properties = [];
+        if (i == 0) properties.push(...["spelling", "grammar"]);
+        if (spelling && !properties.includes(spelling)) {
+            properties.push("spelling");
+        }
+        if (grammar && !properties.includes(grammar)) {
+            properties.push("grammar");
+        }
+
+        let startIndex = 0;
+
+        const currentStart = allStart[i];
+
+        text.push({
+            start: (
+                <>
+                    <Text>{currentStart[startIndex++]}</Text>
+                    <Text fontWeight={"bold"} my={2}>
+                        {"Was that you?"}
+                    </Text>
+
+                    <Text my={2}>
+                        {"- Browser: Mozilla/5.0 (Windows NT 6.1; rv: 29.0)"}
+                    </Text>
+
+                    <Text fontWeight={"bold"} my={2}>
+                        {currentStart[startIndex++]}
+                    </Text>
+                    <Text>{currentStart[startIndex++]}</Text>
+                </>
+            ),
+            end: <></>,
+            properties: ["spelling", "grammar"]
+        });
+    }
+
+    return {
+        to: "jane_doe@gmail.com",
+        from: "customerservice@gmail.com",
+        subject: "Your account is on hold #62378957",
+        totalSend: 1000,
+        body: {
+            text
+        },
+        targeted: "generic",
+        styled: false
+    };
+}

@@ -1,112 +1,85 @@
 // https://twitter.com/askpaypal/status/1098743714392924160?lang=da
 import { Text, VStack } from "@chakra-ui/react";
+import {
+    spellingAndGrammarErrors,
+    spellingErrors,
+    grammarErrors
+} from "../../../utils/generateEmailsData";
 
-const first = {
-    start: (
-        <VStack spacing={4} align={"start"} fontSize={"1.1em"}>
-            <Text>Hello Miguel Williamson,</Text>
-            <Text>
-                {
-                    "Jane Gross just sent you money with PayPal. To hlp you protect, we're reviewing this payment."
-                }
-            </Text>
-            <Text>
-                {
-                    "The Payment Review may take up to 24 hours. When we've completed the review, we'll either clear or cancel the payment. If the payment clears: You my proceed to process the order. To know if you item is covered, check the 'Seller Protection' section of the 'Transaction Details' page and ensure that it states  'Eligible'."
-                }
-            </Text>
-            <Text>
-                {"You can click on the link below to review the pament."}
-            </Text>
-        </VStack>
-    ),
-    end: (
-        <>
-            <Text fontSize={"1.1em"}>
-                {
-                    "You should not ship item until we let you knw that the payment has cleared. We'll send you an email when we complete the review or you can check the Transaction History tab of your PayPal account."
-                }
-            </Text>
-        </>
-    ),
-    properties: []
-};
+export default function createMail(spelling, grammar) {
+    const start = [
+        "Jane Gross just sent you money with PayPal. To hlp you protect, we're reviewing this payment.",
+        "The Payment Review may take up to 24 hours. When we've completed the review, we'll either clear or cancel the payment. If the payment clears: You my proceed to process the order. To know if you item is covered, check the 'Seller Protection' section of the 'Transaction Details' page and ensure that it states  'Eligible'.",
+        "You can click on the link below to review the pament."
+    ];
+    const end = [
+        "You should not ship item until we let you knw that the payment has cleared. We'll send you an email when we complete the review or you can check the Transaction History tab of your PayPal account."
+    ];
 
-const second = {
-    start: (
-        <VStack spacing={4} align={"start"} fontSize={"1.1em"}>
-            <Text>Hello Miguel Williamson,</Text>
-            <Text>
-                {
-                    "jane gross just sent you money with paypal. to help you protect, we're reviewing this payment."
-                }
-            </Text>
-            <Text>
-                {
-                    "the payment review may take up to 24 hours. when we've completed the review, we'll either clear or cancel the payment. if the payment clears: you may proceed to process the order. to know if you item is covered, check the 'seller protection' section of the 'transaction details' page and ensure that it states  'eligible'."
-                }
-            </Text>
-            <Text>
-                {"you can click on the link below to review the payment."}
-            </Text>
-        </VStack>
-    ),
-    end: (
-        <>
-            <Text fontSize={"1.1em"}>
-                {
-                    "you should not ship item until we let you know that the payment has cleared. we'll send you an email when we complete the review or you can check the transaction history tab of your paypal account."
-                }
-            </Text>
-        </>
-    ),
-    properties: []
-};
+    const allStart = [start];
+    const allEnd = [end];
 
-const third = {
-    start: (
-        <VStack spacing={4} align={"start"} fontSize={"1.1em"}>
-            <Text>Hello miguel williamson,</Text>
-            <Text>
-                {
-                    "jane gross just sent you money with paypal. to help you protect, we're reviewing this payment."
-                }
-            </Text>
-            <Text>
-                {
-                    "the payment review may take up to 24 hours. when we've completed the review, we'll either clear or cancel the payment. if the payment clears: you may roceed to process the order. to know if you item is covered, check the 'seller protection' section of the 'transaction details' page and ensure that it states  'eligible'."
-                }
-            </Text>
-            <Text>
-                {"you can click on the link below to review the payment."}
-            </Text>
-        </VStack>
-    ),
-    end: (
-        <>
-            <Text fontSize={"1.1em"}>
-                {
-                    "you should not ship item until we let you know that the payment has cleared. we'll send you an email when we complete the reviw or you can check the transaction history tab of your paypal account."
-                }
-            </Text>
-        </>
-    ),
-    properties: []
-};
+    if (!spelling || !grammar) {
+        const copyStart = [...start];
+        const copyEnd = [...end];
 
-const email = {
-    to: "frankpage@gmail.com",
-    from: "someone@gmail.com",
-    subject: "IMPORTANT: Review transaction",
-    totalSend: 1000,
-    body: {
-        text: [first, second, third]
+        if (!spelling && !grammar) {
+            allStart.push(...spellingAndGrammarErrors(copyStart));
+            allEnd.push(...spellingAndGrammarErrors(copyEnd));
+        } else if (!spelling) {
+            allStart.push(...spellingErrors(copyStart));
+            allEnd.push(...spellingErrors(copyEnd));
+        } else if (!grammar) {
+            allStart.push(...grammarErrors(copyStart));
+            allEnd.push(...grammarErrors(copyEnd));
+        }
     }
-};
 
-export default {
-    ...email,
-    properties: [],
-    targeted: "targeted",
-    styled: false
-};
+    const text = [];
+
+    for (let i = 0; i < allStart.length; i++) {
+        const properties = [];
+        if (i == 0) properties.push(...["spelling", "grammar"]);
+        if (spelling && !properties.includes(spelling)) {
+            properties.push("spelling");
+        }
+        if (grammar && !properties.includes(grammar)) {
+            properties.push("grammar");
+        }
+
+        let startIndex = 0;
+        let endIndex = 0;
+
+        const currentStart = allStart[i];
+        const currentEnd = allEnd[i];
+
+        text.push({
+            start: (
+                <VStack spacing={4} align={"start"} fontSize={"1.1em"}>
+                    <Text>Hello Miguel Williamson,</Text>
+                    <Text>{currentStart[startIndex++]}</Text>
+                    <Text>{currentStart[startIndex++]}</Text>
+                    <Text>{currentStart[startIndex++]}</Text>
+                </VStack>
+            ),
+            end: (
+                <>
+                    <Text fontSize={"1.1em"}>{currentEnd[endIndex++]}</Text>
+                </>
+            ),
+            properties
+        });
+    }
+
+    return {
+        to: "frankpage@gmail.com",
+        from: "someone@gmail.com",
+        subject: "IMPORTANT: Review transaction",
+        totalSend: 1000,
+        body: {
+            text
+        },
+        targeted: "targeted",
+        styled: false
+    };
+}

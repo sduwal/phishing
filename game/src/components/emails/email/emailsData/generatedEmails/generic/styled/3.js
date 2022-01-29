@@ -115,7 +115,6 @@ export default function createEmail(spelling, grammar) {
         body: {
             text: text
         },
-        properties: [],
         targeted: "generic",
         styled: true
     };

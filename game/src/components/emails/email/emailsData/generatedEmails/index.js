@@ -28,5 +28,28 @@ import d4 from "./targeted/unstyled/4";
 import d5 from "./targeted/unstyled/5";
 
 export default function allEmail(spelling, grammar) {
-    return [a7(spelling, grammar)];
+    return [
+        a1(spelling, grammar),
+        a2(spelling, grammar),
+        a3(spelling, grammar),
+        a4(spelling, grammar),
+        a5(spelling, grammar),
+        a6(spelling, grammar),
+        a7(spelling, grammar),
+        b1(spelling, grammar),
+        b2(spelling, grammar),
+        b3(spelling, grammar),
+        b4(spelling, grammar),
+        b5(spelling, grammar),
+        b6(spelling, grammar),
+        b7(spelling, grammar),
+        b8(spelling, grammar),
+        c1(spelling, grammar),
+        c2(spelling, grammar),
+        d1(spelling, grammar),
+        d2(spelling, grammar),
+        d3(spelling, grammar),
+        d4(spelling, grammar),
+        d5(spelling, grammar)
+    ];
 }
