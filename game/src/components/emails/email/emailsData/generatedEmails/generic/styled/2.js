@@ -10,12 +10,12 @@ import {
 } from "../../../utils/generateEmailsData";
 export default function createMail(spelling, grammar) {
     const start = [
-        "Your account PayPal is limited. You Have To Solve The Problem In 24 Hours.",
-        "We are sorry to inform you that you can't access all your paypal advantages like sending money and purchasing, due to account limitation.",
+        "Your account PayPal is limited. You have to solve the problem In 24 hours.",
+        "We are sorry to inform you that you can't access all your PayPal advantages like sending money and purchasing, due to account limitation.",
         "Why my account PayPal is limited?",
-        " Because we think that your account is in danger from stealing and unauthorized uses",
-        "What can I do yo resolve the problem?",
-        "You have to confirm all your account details on our secure server by clicking the link below and following all the steps"
+        "Because we think that your account is in danger from stealing and unauthorized uses",
+        "What can I do to resolve the problem?",
+        "You have to confirm all your account details on our secure server by clicking the link below and following all the steps."
     ];
 
     const allStart = [start];

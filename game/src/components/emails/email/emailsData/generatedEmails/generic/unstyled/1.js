@@ -9,7 +9,7 @@ import {
 
 export default function createMail(spelling, grammar) {
     const start = [
-        "Some info on your account appears to be missing or incorrect. Please update your information promptly so that you can continue to enjoy all the benefits  of your account. If you don't update your information within 2 days, we'll close your account."
+        "Some info on your account appears to be missing or incorrect. Please update your information promptly so that you can continue to enjoy all the benefits of your account. If you don't update your information within 2 days, we'll close your account."
     ];
     const end = ["New Resolve Limitation:"];
 

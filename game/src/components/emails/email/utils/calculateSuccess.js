@@ -41,16 +41,16 @@ function calculateLinkType(link) {
     let point = 1;
     switch (link) {
         case "normal":
-            point = 1;
+            point = 2;
             break;
         case "hidden":
-            point = 3;
+            point = 6;
             break;
         case "confused":
-            point = 2;
+            point = 3;
             break;
         case "shortner":
-            point = 2;
+            point = 5;
             break;
         default:
             point = 0;
@@ -62,17 +62,17 @@ function calculateLinkType(link) {
 
 function calculateBody(properties) {
     const points =
-        (properties.includes("spelling") ? 2 : 0) +
-        (properties.includes("grammar") ? 2 : 0);
+        (properties.includes("spelling") ? 4 : 0) +
+        (properties.includes("grammar") ? 4 : 0);
     return points;
 }
 export default function calculateSuccess(email, number, domain) {
     const points = {
         "from": 5,
-        "linkType": 3,
-        "spelling": 2,
-        "grammar": 2,
-        "styled": 2
+        "linkType": 6,
+        "spelling": 4,
+        "grammar": 4,
+        "styled": 4
     };
 
     const totalPoints = Object.keys(points).reduce((acc, key) => {
@@ -83,7 +83,7 @@ export default function calculateSuccess(email, number, domain) {
         calculateFromPoints(email.from) +
         calculateLinkType(email.linkType) +
         calculateBody(email.body.text[number].properties) +
-        (email.styled ? 2 : 0);
+        (email.styled ? 4 : 0);
 
     const successRate = userPoints / totalPoints;
     return successRate;

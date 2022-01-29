@@ -10,7 +10,7 @@ import {
 
 export default function createMail(spelling, grammar) {
     const start = [
-        "This email confirms that you have cancelled your billing agreement with Hulu. No further payments will be made from your PayPal account to this merchant. If you have any further questions about the agreement, or wish to reinstate it, please contact Hulu directly. Learn more:"
+        "This email confirms that you have canceled your billing agreement with Hulu. No further payments will be made from your PayPal account to this merchant. If you have any further questions about the agreement or wish to reinstate it, please contact Hulu directly. Learn more:"
     ];
     const end = [
         "Copyright © 1999-2021 PayPal, Inc. All rights reserved. PayPal is located at 2211 N. First St., San Jose, CA 95131."

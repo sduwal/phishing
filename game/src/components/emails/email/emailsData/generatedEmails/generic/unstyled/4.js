@@ -9,7 +9,7 @@ import {
 
 export default function createMail(spelling, grammar) {
     const start = [
-        "Paypal: We've noticed some unusual activity on your account, for your protection your paypal account is now limited. To restore access, please visit the secure link provided and complete the steps necessary: "
+        "Paypal: We've noticed some unusual activity on your account. For your protection, your PayPal account is now limited. To restore access, please visit the secure link provided and complete the steps necessary: "
     ];
 
     const allStart = [start];

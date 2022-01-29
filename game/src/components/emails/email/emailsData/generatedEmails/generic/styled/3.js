@@ -19,7 +19,7 @@ import {
 export default function createEmail(spelling, grammar) {
     const start = [
         "Welcome to PayPal!",
-        "Hello Reply Guy,",
+        "Hello, Reply Guy,",
         "To start using your PayPal account, all you have to do is confirm your email address."
     ];
     const end = [

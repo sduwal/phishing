@@ -9,7 +9,7 @@ import {
 
 export default function createMail(spelling, grammar) {
     const start = [
-        "Thank you for using PayPal. This is to inform you that we have received your shippment details and it has been forwarded to our processing using for verification and completion of the payment. Once the shipment details has been fuullyverified your PayPal account will nofity you of shipment status. You can check the status of you order by clicking on the link below."
+        "Thank you for using PayPal. This is to inform you that we have received your shipment details, and it has been forwarded to our processing for verification and completion of the payment. Once the shipment details have been fully verified, your PayPal account will notify you of the shipment status. You can check the status of your order by clicking on the link below."
     ];
 
     const allStart = [start];

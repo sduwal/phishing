@@ -21,8 +21,8 @@ import {
 
 export default function createMail(spelling, grammar) {
     const start = [
-        "Your account has been suspended, as an error was detected in your informations. The reason for the error is not certain, but for security reasons, we have suspended your account temporarily.",
-        "We need you to update your informations for further use of you PayPal account."
+        "Your account has been suspended, as an error was detected in your information. The reason for the error is not certain, but for security reasons, we have suspended your account temporarily.",
+        "We need you to update your information for further use of your PayPal account."
     ];
     const end = [
         "You are currently made disabled of:",

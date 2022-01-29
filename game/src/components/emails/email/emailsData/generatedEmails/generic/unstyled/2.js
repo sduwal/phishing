@@ -9,7 +9,7 @@ import {
 
 export default function createMail(spelling, grammar) {
     const start = [
-        "Your account has been temporarily suspended due to unauthrized login attempts. Confirm your details at"
+        "Your account has been temporarily suspended due to unauthorized login attempts. Confirm your details at"
     ];
 
     const allStart = [start];

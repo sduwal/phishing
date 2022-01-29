@@ -8,7 +8,7 @@ import {
 
 export default function createEmail(spelling, grammar) {
     const start = [
-        "Looks like you started getting access to buy crypto but didn't finish.",
+        "Looks like you started getting access to buy crypto but did not finish.",
         "To get access, all you need to do is confirm some account info if you have a Cash or Cash Plus account. This lets us know it's ok to enable the ability to buy, sell, and hold crypto with your account.",
         "If you don't have a Cash or Cash Plus account, you'll be able to sign up for one during your first purchase. Finish setting up:"
     ];

@@ -77,13 +77,13 @@ function createEmails(spellingTrained) {
                             <>
                                 <Text>
                                     {
-                                        createGrammaticalErrors(
-                                            spellingTrained
+                                        createGrammaticalErrors({
+                                            description: spellingTrained
                                                 ? message.start
                                                 : createSpellingErrors({
                                                       description: message.start
                                                   })
-                                        )[0]
+                                        })[0]
                                     }
                                 </Text>
                             </>
@@ -91,13 +91,13 @@ function createEmails(spellingTrained) {
                         end: (
                             <>
                                 {
-                                    createGrammaticalErrors(
-                                        spellingTrained
+                                    createGrammaticalErrors({
+                                        description: spellingTrained
                                             ? message.start
                                             : createSpellingErrors({
                                                   description: message.end
                                               })
-                                    )[0]
+                                    })[0]
                                 }
                             </>
                         ),
@@ -108,13 +108,13 @@ function createEmails(spellingTrained) {
                             <>
                                 <Text>
                                     {
-                                        createGrammaticalErrors(
-                                            spellingTrained
+                                        createGrammaticalErrors({
+                                            description: spellingTrained
                                                 ? message.start
                                                 : createSpellingErrors({
                                                       description: message.start
                                                   })
-                                        )[1]
+                                        })[1]
                                     }
                                 </Text>
                             </>
@@ -122,13 +122,13 @@ function createEmails(spellingTrained) {
                         end: (
                             <>
                                 {
-                                    createGrammaticalErrors(
-                                        spellingTrained
+                                    createGrammaticalErrors({
+                                        description: spellingTrained
                                             ? message.start
                                             : createSpellingErrors({
                                                   description: message.end
                                               })
-                                    )[1]
+                                    })[1]
                                 }
                             </>
                         ),

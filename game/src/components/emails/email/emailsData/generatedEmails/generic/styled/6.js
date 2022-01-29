@@ -9,11 +9,11 @@ import {
 
 export default function createEmail(spelling, grammar) {
     const start = [
-        "Congratulaons! We are celebrating $500 MILLION Dollars of Daily Transaction Volume and you are 1 of the 10 users we've selected to claim(1) $1000 Paypal Gift Card",
-        "This is ou]r way of saying thank you for being a loyal PayPal user! Use the link below to claim your gift card"
+        "Congratulations! We are celebrating $500 Million Dollars of daily transaction volume, and you are 1 of the 10 users we've selected to claim(1) $1000 Paypal Gift Card",
+        "This is our way of saying thank you for being a loyal PayPal user! Use the link below to claim your gift card."
     ];
     const end = [
-        "If you have any question, please contact support through the paypal website."
+        "If you have any questions, please contact support through the PayPal website."
     ];
 
     const allStart = [start];
