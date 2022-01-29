@@ -45,7 +45,7 @@ export default function getRandomEmail({ emails, properties, link, attacker }) {
     }
 
     // Gets the required email that fulfils all the requirements
-    const requiredKey = required[Math.floor(Math.random() * required.length)];
+    let requiredKey = required[Math.floor(Math.random() * required.length)];
 
     /**
      * Once the email is generated perform the following operations to have randomness in the game:
@@ -53,7 +53,7 @@ export default function getRandomEmail({ emails, properties, link, attacker }) {
      * 2. Fix the links for the email. We will generate different tiny urls, and such for each iteration of email to have variety in the email links
      */
     // TODO: remove this line after completion of test
-    // requiredKey = Object.keys(emails)[0];
+    requiredKey = Object.keys(emails)[0];
     changeFrom({ emails, key: requiredKey, link });
     return requiredKey;
 }

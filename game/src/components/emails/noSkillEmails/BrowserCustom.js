@@ -58,11 +58,11 @@ function BrowserCustom({
 
             if (required <= 0) {
                 dispatch(setCanCurrentlyTrain(currentTrainingModule));
-                const next =
-                    currentTrainingModule === "spelling"
-                        ? "grammar"
-                        : "good email";
-                dispatch(changeCurrentTrainingMode(next));
+                // const next =
+                //     currentTrainingModule === "spelling"
+                //         ? "grammar"
+                //         : "good email";
+                dispatch(changeCurrentTrainingMode("grammar"));
             }
         } else {
             toast.error("That email had some problems. Let's try this again!", {

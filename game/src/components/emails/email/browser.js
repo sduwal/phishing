@@ -189,21 +189,23 @@ function BrowserCustom({
                                             Choose a different one.
                                         </Text>
                                         <Box>
-                                            {(() => {
-                                                const elements = [];
-                                                for (
-                                                    let i = 0;
-                                                    i < email.body.text.length;
-                                                    i++
-                                                ) {
-                                                    elements.push(
-                                                        numberButton({
-                                                            index: i
-                                                        })
-                                                    );
-                                                }
-                                                return elements;
-                                            })()}
+                                            {email.body.text.length > 1 &&
+                                                (() => {
+                                                    const elements = [];
+                                                    for (
+                                                        let i = 0;
+                                                        i <
+                                                        email.body.text.length;
+                                                        i++
+                                                    ) {
+                                                        elements.push(
+                                                            numberButton({
+                                                                index: i
+                                                            })
+                                                        );
+                                                    }
+                                                    return elements;
+                                                })()}
                                         </Box>
                                     </Flex>
                                 </>

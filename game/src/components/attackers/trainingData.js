@@ -17,15 +17,15 @@ export const language = [
         "time": 0,
         "cost": 2000,
         "value": "grammar"
-    },
-    {
-        "efficiency": 30,
-        "display": "Writing mails",
-        "hint": "Write proper mails! Your helper will write emails with proper formatting.",
-        "time": 0,
-        "cost": 3000,
-        "value": "good email"
     }
+    // {
+    //     "efficiency": 30,
+    //     "display": "Writing mails",
+    //     "hint": "Write proper mails! Your helper will write emails with proper formatting.",
+    //     "time": 0,
+    //     "cost": 3000,
+    //     "value": "good email"
+    // }
 ];
 
 export const skills = [

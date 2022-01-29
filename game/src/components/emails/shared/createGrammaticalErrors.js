@@ -1,4 +1,4 @@
-function createGrammaticalErrors(description, number = 2) {
+function createGrammaticalErrors({ description, number = 2 }) {
     const variations = [];
 
     variations.push(description.toLowerCase());

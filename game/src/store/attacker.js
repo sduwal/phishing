@@ -14,11 +14,6 @@ export const attackerSlice = createSlice({
             //     "display": "Grammar",
             //     "efficiency": 35,
             //     "value": "grammar"
-            // },
-            // {
-            //     "efficiency": 30,
-            //     "display": "Writing mails",
-            //     "value": "good email"
             // }
         ],
         techSkills: [

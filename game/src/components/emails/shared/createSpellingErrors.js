@@ -13,7 +13,7 @@ function setCharAt(str, index, chr) {
 function createSpellingError({ description }) {
     const words = description.split(" ");
 
-    const randomNumber = Math.min(words.length / 3, 7);
+    const randomNumber = Math.min(words.length / 3, 3);
 
     for (let i = 0; i < randomNumber; i++) {
         const index = getRandomInteger(words.length);

@@ -11,228 +11,124 @@ import {
 } from "@chakra-ui/react";
 
 import paypal from "../../../image/paypal.png";
+import {
+    spellingAndGrammarErrors,
+    spellingErrors,
+    grammarErrors
+} from "../../../utils/generateEmailsData";
 
-const email = {
-    to: "randomperson123@gmail.com",
-    from: "paypal@gmail.com",
-    subject: "Welcome to PayPal",
-    totalSend: 1000,
-    body: {
-        text: [
-            {
-                start: (
-                    <>
-                        <Image src={paypal} height={50} />
-                        <Text fontSize={"2em"} color={"blue.300"} mt={2}>
-                            {"You've got cash!"}
-                        </Text>
-                        <Text>
-                            This email confirms that you have received a
-                            payment.
-                        </Text>
+export default function createEmail(spelling, grammar) {
+    const start = [
+        "You've got cash!",
+        "This email confirms that you have received a payment.",
+        "The number above is the buyer's receipt ID for this transaction. Please retain it for your records so that you will be able to reference this transaction for customer service.",
+        "Click the link below to view more details:"
+    ];
+    const end = [
+        "Have you lifted your withdrawal and receiving limits? Just log in to your PayPal account and click View Limits on the Account Overview page."
+    ];
 
-                        <Box
-                            width={"100%"}
-                            backgroundColor={"yellow.100"}
-                            my={"3"}
-                        >
-                            <Center>
-                                <Text>Receipt ID: 21314123</Text>
-                            </Center>
-                        </Box>
-                        <Divider variant={"dashed"} my={2} />
-                        <Text>
-                            {
-                                "The number above is the buyer's receipt ID for this transaction. Please retain it for your records so that you will be able to reference this transaction for customer service."
-                            }
-                        </Text>
-                        <Divider variant={"dashed"} my={2} />
-                        <Text fontWeight={"bold"} mb={2}>
-                            Payment details
-                        </Text>
-                        <Box px={10}>
-                            <HStack>
-                                <VStack align={"start"} spacing={1}>
-                                    <Text>Total amount:</Text>
-                                    <Text>Currency:</Text>
-                                    <Text>Transaction ID:</Text>
-                                    <Text>Quantity:</Text>
-                                    <Text>Buyer:</Text>
-                                </VStack>
+    const allStart = [start];
+    const allEnd = [end];
 
-                                <VStack align={"start"} spacing={1}>
-                                    <Text>$153.00 USD</Text>
-                                    <Text>US Dollars</Text>
-                                    <Text> #23543451</Text>
-                                    <Text>1</Text>
-                                    <Text>
-                                        See attached file for full details
-                                    </Text>
-                                </VStack>
-                            </HStack>
-                        </Box>
-                        <Divider variant={"dashed"} my={2} />
-                        <Divider variant={"dashed"} my={2} />
-                        <Text>Click the link below to view more details:</Text>
-                    </>
-                ),
-                end: (
-                    <>
-                        <Text>
-                            Have you lifted your withdrawal and receiving
-                            limits? Just log in to your PayPal account and click
-                            View Limits on the Account Overview page.
-                        </Text>
-                        <Box m={8} />
-                    </>
-                ),
-                properties: ["spelling", "grammar"]
-            },
-            {
-                start: (
-                    <>
-                        <Image src={paypal} height={50} />
-                        <Text fontSize={"2em"} color={"blue.300"} mt={2}>
-                            {"You've got cash!"}
-                        </Text>
-                        <Text>
-                            This email confirms that you have received a
-                            payment.
-                        </Text>
+    if (!spelling || !grammar) {
+        const copyStart = [...start];
+        const copyEnd = [...end];
 
-                        <Box
-                            width={"100%"}
-                            backgroundColor={"yellow.100"}
-                            my={"3"}
-                        >
-                            <Center>
-                                <Text>Receipt ID: 21314123</Text>
-                            </Center>
-                        </Box>
-                        <Divider variant={"dashed"} my={2} />
-                        <Text>
-                            {
-                                "The number above are the buyer's receipt ID for this transactions. Please retain it for your records so that you will be able to reference this transaction for customer services."
-                            }
-                        </Text>
-                        <Divider variant={"dashed"} my={2} />
-                        <Text fontWeight={"bold"} mb={2}>
-                            Payment details
-                        </Text>
-                        <Box px={10}>
-                            <HStack>
-                                <VStack align={"start"} spacing={1}>
-                                    <Text>Total amount:</Text>
-                                    <Text>Currency:</Text>
-                                    <Text>Transaction ID:</Text>
-                                    <Text>Quantity:</Text>
-                                    <Text>Buyer:</Text>
-                                </VStack>
-
-                                <VStack align={"start"} spacing={1}>
-                                    <Text>$153.00 USD</Text>
-                                    <Text>US Dollars</Text>
-                                    <Text> #23543451</Text>
-                                    <Text>1</Text>
-                                    <Text>
-                                        See attached file for full details
-                                    </Text>
-                                </VStack>
-                            </HStack>
-                        </Box>
-                        <Divider variant={"dashed"} my={2} />
-                        <Divider variant={"dashed"} my={2} />
-                        <Text>Click the link below to view more details:</Text>
-                    </>
-                ),
-                end: (
-                    <>
-                        <Text>
-                            Have you lift your withdrawal and receiving limits?
-                            Just log in to your PayPal account and click View
-                            Limits on the Account Overview page.
-                        </Text>
-                        <Box m={8} />
-                    </>
-                ),
-                properties: ["spelling"]
-            },
-            {
-                start: (
-                    <>
-                        <Image src={paypal} height={50} />
-                        <Text fontSize={"2em"} color={"blue.300"} mt={2}>
-                            {"You've got cash!"}
-                        </Text>
-                        <Text>
-                            This email confirms that you have received a
-                            payment.
-                        </Text>
-
-                        <Box
-                            width={"100%"}
-                            backgroundColor={"yellow.100"}
-                            my={"3"}
-                        >
-                            <Center>
-                                <Text>Receipt ID: 21314123</Text>
-                            </Center>
-                        </Box>
-                        <Divider variant={"dashed"} my={2} />
-                        <Text>
-                            {
-                                "The numbr above is the buyer's receipt ID for this transaction. Please retain it for yor records so that you will be able to refrence this transaction for customer service."
-                            }
-                        </Text>
-                        <Divider variant={"dashed"} my={2} />
-                        <Text fontWeight={"bold"} mb={2}>
-                            Payment details
-                        </Text>
-                        <Box px={10}>
-                            <HStack>
-                                <VStack align={"start"} spacing={1}>
-                                    <Text>Total amount:</Text>
-                                    <Text>Currency:</Text>
-                                    <Text>Transaction ID:</Text>
-                                    <Text>Quantity:</Text>
-                                    <Text>Buyer:</Text>
-                                </VStack>
-
-                                <VStack align={"start"} spacing={1}>
-                                    <Text>$153.00 USD</Text>
-                                    <Text>US Dollars</Text>
-                                    <Text> #23543451</Text>
-                                    <Text>1</Text>
-                                    <Text>
-                                        See attached file for full details
-                                    </Text>
-                                </VStack>
-                            </HStack>
-                        </Box>
-                        <Divider variant={"dashed"} my={2} />
-                        <Divider variant={"dashed"} my={2} />
-                        <Text>Click the link below to view more details:</Text>
-                    </>
-                ),
-                end: (
-                    <>
-                        <Text>
-                            Hae you lifted your withdrawal and reeiving limits?
-                            Just log in to your PayPal account and click View
-                            Limits on the Account Overview page.
-                        </Text>
-                        <Box m={8} />
-                    </>
-                ),
-                properties: ["grammar"]
-            }
-        ]
+        if (!spelling && !grammar) {
+            allStart.push(...spellingAndGrammarErrors(copyStart));
+            allEnd.push(...spellingAndGrammarErrors(copyEnd));
+        } else if (!spelling) {
+            allStart.push(...spellingErrors(copyStart));
+            allEnd.push(...spellingErrors(copyEnd));
+        } else if (!grammar) {
+            allStart.push(...grammarErrors(copyStart));
+            allEnd.push(...grammarErrors(copyEnd));
+        }
     }
-};
 
-export default {
-    ...email,
-    properties: ["spelling", "grammar"],
-    targeted: "generic",
-    styled: true
-};
+    const text = [];
+
+    for (let i = 0; i < allStart.length; i++) {
+        const properties = [];
+        if (i == 0) properties.push(...["spelling", "grammar"]);
+        if (spelling && !properties.includes(spelling)) {
+            properties.push("spelling");
+        }
+        if (grammar && !properties.includes(grammar)) {
+            properties.push("grammar");
+        }
+
+        let startIndex = 0;
+        let endIndex = 0;
+
+        const currentStart = allStart[i];
+        const currentEnd = allEnd[i];
+
+        text.push({
+            start: (
+                <>
+                    <Image src={paypal} height={50} />
+                    <Text fontSize={"2em"} color={"blue.300"} mt={2}>
+                        {currentStart[startIndex++]}
+                    </Text>
+                    <Text>{currentStart[startIndex++]}</Text>
+
+                    <Box width={"100%"} backgroundColor={"yellow.100"} my={"3"}>
+                        <Center>
+                            <Text>Receipt ID: 21314123</Text>
+                        </Center>
+                    </Box>
+                    <Divider variant={"dashed"} my={2} />
+                    <Text>{currentStart[startIndex++]}</Text>
+                    <Divider variant={"dashed"} my={2} />
+                    <Text fontWeight={"bold"} mb={2}>
+                        Payment details
+                    </Text>
+                    <Box px={10}>
+                        <HStack>
+                            <VStack align={"start"} spacing={1}>
+                                <Text>Total amount:</Text>
+                                <Text>Currency:</Text>
+                                <Text>Transaction ID:</Text>
+                                <Text>Quantity:</Text>
+                                <Text>Buyer:</Text>
+                            </VStack>
+
+                            <VStack align={"start"} spacing={1}>
+                                <Text>$153.00 USD</Text>
+                                <Text>US Dollars</Text>
+                                <Text> #23543451</Text>
+                                <Text>1</Text>
+                                <Text>See attached file for full details</Text>
+                            </VStack>
+                        </HStack>
+                    </Box>
+                    <Divider variant={"dashed"} my={2} />
+                    <Divider variant={"dashed"} my={2} />
+                    <Text>{currentStart[startIndex++]}</Text>
+                </>
+            ),
+            end: (
+                <>
+                    <Text>{currentEnd[endIndex++]}</Text>
+                    <Box m={8} />
+                </>
+            ),
+            properties: properties
+        });
+    }
+
+    return {
+        to: "randomperson123@gmail.com",
+        from: "paypal@gmail.com",
+        subject: "Welcome to PayPal",
+        totalSend: 1000,
+        body: {
+            text: text
+        },
+        properties: [],
+        targeted: "generic",
+        styled: true
+    };
+}

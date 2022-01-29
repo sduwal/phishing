@@ -2,6 +2,13 @@
 
 import { Text } from "@chakra-ui/react";
 
+function createFirstEmail({ spelling, grammar }) {
+    const start =
+        "Your account has been temporarily suspended due to unauthrized login attempts. Confirm your details at";
+    const end = "";
+    const text = [];
+}
+
 const email = {
     to: "randomperson123@gmail.com",
     from: "someone@gmail.com",

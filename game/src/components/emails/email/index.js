@@ -19,6 +19,7 @@ function EmailClient({ onClose }) {
     const activeLink = useSelector((state) => state.domain.activeDomain);
     const linkType = useSelector((state) => state.email.linkType);
     const from = useSelector((state) => state.email.from);
+    const attacker = useSelector((state) => state.attacker);
 
     const [emails, setEmails] = useState({});
 
@@ -26,7 +27,7 @@ function EmailClient({ onClose }) {
     const key = useSelector((state) => state.email.key);
 
     useEffect(() => {
-        setEmails(initializeEmails(activeLink));
+        setEmails(initializeEmails(activeLink, attacker));
 
         return () => {
             dispatch(resetKey());
@@ -36,7 +37,7 @@ function EmailClient({ onClose }) {
     }, []);
 
     useEffect(() => {
-        if (key.length == 0) {
+        if (key === "") {
             setCurrentEmail({});
         } else {
             if (from.length == 0) dispatch(spoofEmail(emails[key].from));

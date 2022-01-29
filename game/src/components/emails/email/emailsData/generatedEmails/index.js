@@ -27,32 +27,6 @@ import d3 from "./targeted/unstyled/3";
 import d4 from "./targeted/unstyled/4";
 import d5 from "./targeted/unstyled/5";
 
-// import a from "./targeted/styled/3";
-// const emails = [a];
-
-const emails = [
-    a1,
-    a2,
-    a3,
-    a4,
-    a5,
-    a6,
-    a7,
-    b1,
-    b2,
-    b3,
-    b4,
-    b5,
-    b6,
-    b7,
-    b8,
-    c1,
-    c2,
-    d1,
-    d2,
-    d3,
-    d4,
-    d5
-];
-
-export default emails;
+export default function allEmail(spelling, grammar) {
+    return [a7(spelling, grammar)];
+}

@@ -9,7 +9,8 @@ export const moneySlice = createSlice({
         unsuccessfulEmails: 0,
         isUpdating: false,
         gameWon: false,
-        canCurrentlyTrain: [],
+        // TODO: reset this
+        canCurrentlyTrain: ["spelling", "grammar"],
         count: { "spelling": 0, "grammar": 0 },
         currentTrainingMode: "spelling"
     },
