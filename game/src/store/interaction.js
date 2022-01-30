@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { nanoid } from "nanoid";
 
 export const interactionSlice = createSlice({
     name: "interaction",
     initialState: {
+        "userId": nanoid(),
         "start": 0,
         "end": 0,
         "time": {

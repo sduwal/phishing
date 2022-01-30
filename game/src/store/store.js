@@ -7,6 +7,8 @@ import emailReducer from "./email";
 import stepsReducer from "./steps";
 import interactionReducer from "./interaction";
 
+import logger from "./middleware/logger";
+
 export default configureStore({
     reducer: {
         timer: timerReducer,
@@ -16,5 +18,6 @@ export default configureStore({
         email: emailReducer,
         steps: stepsReducer,
         interaction: interactionReducer
-    }
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 });

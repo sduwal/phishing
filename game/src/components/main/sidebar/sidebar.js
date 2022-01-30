@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import {
     VStack,
     Box,
@@ -51,7 +52,11 @@ function SideButtons({
             <Tooltip
                 label={
                     isDisabled
-                        ? "Can not do this while attacker is training."
+                        ? id === 1
+                            ? "Can not do this while attacker is training."
+                            : id === 2
+                            ? "Unlock spelling and grammar skills first"
+                            : ""
                         : ""
                 }
             >
@@ -65,7 +70,7 @@ function SideButtons({
                     alignContent="center"
                     _hover={{
                         cursor: isDisabled ? "wait" : "pointer",
-                        backgroundColor: "black"
+                        backgroundColor: isDisabled ? "transparent" : "black"
                     }}
                     onClick={isDisabled ? () => {} : onOpen}
                 >
@@ -138,6 +143,7 @@ export default function SideBar() {
             title: "Marketplace",
             desc: "Open Domain Marketplace",
             image: domainImage,
+            isDisabled: canCurrentlyTrain.length < 2,
             color: "green.400",
             modal: <MarketPlace />,
             id: 2

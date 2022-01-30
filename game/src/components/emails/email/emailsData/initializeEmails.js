@@ -1,5 +1,6 @@
 import emails from "./generatedEmails";
 import generateLinks from "./generateLinks";
+import _ from "lodash";
 import { nanoid } from "nanoid";
 
 export default function initializeEmails(link, attacker) {
@@ -9,7 +10,8 @@ export default function initializeEmails(link, attacker) {
     emails(skills.includes("spelling"), skills.includes("grammar")).forEach(
         (email) => {
             const links = generateLinks(link);
-            const body = { ...email.body, link: links };
+            const text = _.shuffle(email.body.text);
+            const body = { text, link: links };
             const key = nanoid(6);
             return (emailsWithLinks[key] = {
                 ...email,

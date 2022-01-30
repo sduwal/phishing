@@ -4,7 +4,7 @@ import { MONEY_PER_SUCCESSFUL_EMAIL, GOAL_AMOUNT } from "../constants";
 export const stepsSlice = createSlice({
     name: "steps",
     initialState: {
-        stepsEnabled: false,
+        stepsEnabled: true,
         initialStep: 0,
         steps: [
             {

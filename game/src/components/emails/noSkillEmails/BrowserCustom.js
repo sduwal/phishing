@@ -48,10 +48,16 @@ function BrowserCustom({
             props.includes(currentTrainingModule)
         ) {
             dispatch(increamentTrainingCount(currentTrainingModule));
-            const message =
+            let message =
                 --required <= 0
-                    ? `Nice! You can now train your attacker with "${currentTrainingModule}" skills. Check it out in the attacker page.`
+                    ? `Nice! You can now train your attacker with "${currentTrainingModule}" skills.`
                     : "Woah! Great catch! Keep up the good work!";
+
+            if (required <= 0 && currentTrainingModule == "grammar") {
+                message +=
+                    "You have also unlocked the technical skills. Check them out in the attacker tab.";
+            }
+
             toast.info(message, {
                 position: "top-center"
             });
@@ -84,7 +90,13 @@ function BrowserCustom({
 
     return (
         <Center>
-            <Box w="80%">
+            <Box
+                w="60%"
+                border="solid 2px black"
+                p={4}
+                rounded={"2xl"}
+                background={"blue.50"}
+            >
                 <Box minH={"50vh"}>
                     <Browser
                         type={"chrome"}

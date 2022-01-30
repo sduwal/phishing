@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const timerSlice = createSlice({
     name: "timer",
     initialState: {
-        value: 1500,
+        value: 300,
         price: 2500,
         factor: 1
     },

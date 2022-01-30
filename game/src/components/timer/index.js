@@ -1,5 +1,5 @@
 import { IconButton } from "@chakra-ui/button";
-import { Box, Flex, Text, Tooltip } from "@chakra-ui/react";
+import { Box, Flex, Text, Center } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -19,27 +19,34 @@ function Timer({ second }) {
     };
 
     return (
-        <Box border="1px solid" pl="2">
-            <Flex direction="row" align="center">
-                <Text
-                    fontSize="24"
-                    fontWeight="semibold"
-                    lineHeight="110%"
-                    mr="3"
-                >
-                    {formatTime(time)}
-                </Text>
-                <div className="addTime">
-                    <Tooltip label={`Cost: \$${cost} for 120 sec`}>
-                        <IconButton
-                            aria-label="add time"
-                            icon={<AddIcon />}
-                            onClick={addTime}
-                            isDisabled={money < cost}
-                        />
-                    </Tooltip>
-                </div>
-            </Flex>
+        <Box border={"1px solid black"} rounded={"xl"} p={1}>
+            <Text zIndex={999} fontSize={"0.7em"} color={"gray.500"}>
+                Cost: ${cost} for 120 seconds
+            </Text>
+            <Center>
+                <Box>
+                    <Flex direction="row" align="center">
+                        <Text
+                            fontSize="24"
+                            fontWeight="semibold"
+                            lineHeight="110%"
+                            mr="3"
+                        >
+                            {formatTime(time)}
+                        </Text>
+                        <div className="addTime">
+                            <IconButton
+                                aria-label="add time"
+                                icon={<AddIcon />}
+                                onClick={addTime}
+                                isDisabled={money < cost}
+                            />
+                        </div>
+                    </Flex>
+                </Box>
+            </Center>
+            {/* <Center> */}
+            {/* </Center> */}
         </Box>
     );
 }

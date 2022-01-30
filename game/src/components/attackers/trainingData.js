@@ -4,7 +4,7 @@
 export const language = [
     {
         "display": "Spellings",
-        "hint": "Train your helper with new vocabulary and spellings. Your helper will make less typos while creating the emails. ",
+        "hint": "Train your helper with new vocabulary and spellings. Your attacker will stop making typos after you train him with this skill.",
         "efficiency": 35,
         "time": 0,
         "cost": 1000,
@@ -13,7 +13,7 @@ export const language = [
     {
         "display": "Grammar",
         "efficiency": 35,
-        "hint": "Back to basics! Your helper will write emails with better grammar and reduce grammatical errors.",
+        "hint": "Back to basics! Your helper will write emails with better grammar and stop making grammatical errors.",
         "time": 0,
         "cost": 2000,
         "value": "grammar"
