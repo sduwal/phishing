@@ -30,7 +30,7 @@ export default function App() {
     useEffect(() => {
         const timer = setInterval(() => tick(), 1000);
         return () => clearInterval(timer);
-    }, [stepsEnabled]);
+    });
 
     function onExit() {
         dispatch(setStepsEnabled(false));
