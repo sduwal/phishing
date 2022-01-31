@@ -49,17 +49,7 @@ function SideButtons({
         <>
             <Box margin={0} padding={0} height={0} ref={finalRef}></Box>
 
-            <Tooltip
-                label={
-                    isDisabled
-                        ? id === 1
-                            ? "Can not do this while attacker is training."
-                            : id === 2
-                            ? "Unlock spelling and grammar skills first"
-                            : ""
-                        : ""
-                }
-            >
+            <Tooltip label={isDisabled ? "Cannot do this right now." : ""}>
                 <Box
                     px="2"
                     pt="2"
@@ -137,7 +127,7 @@ export default function SideBar() {
             view: canCurrentlyTrain.length < 2 ? true : false,
             modal: <EmailClient />,
             id: 1,
-            isDisabled: isTraining
+            isDisabled: false // TODO: if training, disable
         },
         {
             title: "Marketplace",
