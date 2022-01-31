@@ -25,10 +25,14 @@ export const interactionSlice = createSlice({
         },
         changeTime(state, action) {
             state.time[action.payload.type] = Date.now();
+        },
+        changeUserId: (state, action) => {
+            state.userId = action.payload;
         }
     }
 });
 
-export const { changeStart, changeEnd, changeTime } = interactionSlice.actions;
+export const { changeStart, changeEnd, changeTime, changeUserId } =
+    interactionSlice.actions;
 
 export default interactionSlice.reducer;
