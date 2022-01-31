@@ -56,11 +56,11 @@ function createTinyUrl(link) {
     );
 }
 
-function createConfusion() {
+function createConfusion(link) {
     const options = [
-        "https://www.messenger.com/messenger_media/?thread_id=100061447191794&attachment_id=658829708769779&message_id=mid.%24cAAAB8izE8NGEhxGrpF-Vcxf9q23V",
-        "https://nam12.safelinks.protection.outlook.com/?url=http%3A%2F%2Fe.chase.com%2FT%2Fv60000017e5535b8f398cf0d6e965fc958%2F2ecbebd2842842a10000021ef3a0bcc2%2F2ecbebd2-8428-42a1-9a19-628e61ffd998%3F__F__%3Dv0fUYvjHMDjRPMSh3tviDHXIoXcPxvDgUUCCPvXMWoX_0IA9a7wNY25qD5G3eSEu8x69SjfXe0ZmyTEiVt9VkO79Xb5mJgupIKHeNl1Bm0s5lrOV5AGQsV73MZd9_X5pwxeJr8MA-6YD_VgabzdKW1h4Lct5O56FrHshjIvd7fuL3GxX-BhWjrugzcfPxvUIPv7Bn1X3eWiphMeqaxN9emin1SocbycPh-fBTiDGGRxdry-nXERnaFjc5SZnPY5Fp5irD96TN7mKVGC2n8l4hjUZ4t_sjpMUegAvhW2lkMD2KpvFw4-IYQ3CjIW9ocLhvrPI8ymDrWSC-xkKZfrHS01ta1TUHsK5rk&data=04%7C01%7Csduwal%40uno.edu%7Cee9c38b02dad4ad3423608d9d6d67ac3%7C31d4dbf540044469bfeedf294a9de150%7C0%7C0%7C637777038951676375%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&sdata=wDEB2hNjF%2FqzdGkhti0cmlMRCWkj%2BGBpG0ti%2BiSk7qw%3D&reserved=0",
-        "https://www.paypal.com/cgp/app-redirect?intent=xo_email_txn_details&src=RT000064&ref_id=O-7FK89987WL4290639&v=1&utm_source=unp&utm_medium=email&utm_campaign=RT000064&utm_unptid=d2507fca-6a7b-11ec-afaf-3cecef442d84&ppid=RT000064&cnac=US&rsta=en_US%28en-US%29&cust=NR83JED7F9NY4&unptid=d2507fca-6a7b-11ec-afaf-3cecef442d84&calc=fdd292c12b50b&unp_tpcid=email-receipt-xclick-payment&page=main%3Aemail%3ART000064&pgrp=main%3Aemail&e=cl&mchn=em&s=ci&mail=sys&appVersion=1.69.0&xt=104038"
+        `https://paypal.com-help.${link}`,
+        `https://paypal.com-help.${link}/${nanoid(6)}`,
+        `https://paypal.${link}`
     ];
 
     return options[Math.round(Math.random() * options.length)];
@@ -116,7 +116,7 @@ export default function generateLinks(link) {
         confused: (
             <Center>
                 <Container width={"100%"}>
-                    <Link p="0">{createConfusion()}</Link>
+                    <Link p="0">{createConfusion(link)}</Link>
                 </Container>
             </Center>
         ),

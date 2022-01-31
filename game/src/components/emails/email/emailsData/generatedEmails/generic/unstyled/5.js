@@ -80,7 +80,7 @@ export default function createMail(spelling, grammar) {
                     <Text>PayPal Inc.</Text>
                 </>
             ),
-            properties: properties
+            properties
         });
     }
     return {

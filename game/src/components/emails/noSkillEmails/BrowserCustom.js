@@ -143,7 +143,8 @@ function BrowserCustom({
                                             fontStyle="italic"
                                             maxW={"80%"}
                                         >
-                                            Choose the best email.
+                                            Choose the best email (in terms of
+                                            language skills).
                                         </Text>
                                         <Box>
                                             {(() => {

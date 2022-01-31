@@ -63,7 +63,7 @@ export default function createMail(spelling, grammar) {
                 </>
             ),
             end: <></>,
-            properties: ["spelling", "grammar"]
+            properties
         });
     }
 

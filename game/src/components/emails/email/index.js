@@ -1,11 +1,11 @@
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Text, Center } from "@chakra-ui/react";
 
 import BrowserCustom from "./browser";
 import Questions from "./questions/questions";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { changeLinkType, resetKey, spoofEmail } from "@store/email";
@@ -21,6 +21,8 @@ function EmailClient({ onClose }) {
     const from = useSelector((state) => state.email.from);
     const attacker = useSelector((state) => state.attacker);
 
+    const firstTime = useRef(true);
+
     const [emails, setEmails] = useState({});
 
     const [currentEmail, setCurrentEmail] = useState({});
@@ -33,6 +35,7 @@ function EmailClient({ onClose }) {
             dispatch(resetKey());
             dispatch(changeLinkType("normal"));
             dispatch(spoofEmail(""));
+            firstTime.current = false;
         };
     }, []);
 
@@ -45,11 +48,6 @@ function EmailClient({ onClose }) {
         }
     }, [key, from, linkType]);
 
-    // useEffect(() => {
-    //     if (key === "" || _.isEmpty(currentEmail)) return;
-    //     setCurrentEmail({ ...currentEmail, linkType: linkType });
-    // }, [linkType]);
-
     useEffect(() => {
         if (_.isEmpty(currentEmail)) return;
         const link = generateLinks(activeLink);
@@ -60,7 +58,8 @@ function EmailClient({ onClose }) {
 
     return (
         <DndProvider backend={HTML5Backend} height="100vh">
-            <Box p="20px" background="white">
+            <Box p="20px" background="white" ref={firstTime}>
+                {!firstTime.current && <FirstTimeMessage />}
                 <Flex direction="row">
                     <Box flex="2">
                         <Questions emails={emails}></Questions>
@@ -74,4 +73,31 @@ function EmailClient({ onClose }) {
     );
 }
 
+const FirstTimeMessage = () => {
+    return (
+        <Center>
+            <Box
+                p={2}
+                maxW="80%"
+                border={"2px solid black"}
+                rounded={"xl"}
+                mb={4}
+                background={"green.100"}
+                fontWeight={"semibold"}
+                fontSize={"1.1em"}
+            >
+                <Text color="black">
+                    {
+                        "Woah! New options!! You have finished reviewing the helper. You can now ask the helper to create more directed questions."
+                    }
+                </Text>
+                <Text color={"purple"}>
+                    {
+                        "Don't see many options? Train your attacker with more skills!!"
+                    }
+                </Text>
+            </Box>
+        </Center>
+    );
+};
 export { EmailClient };

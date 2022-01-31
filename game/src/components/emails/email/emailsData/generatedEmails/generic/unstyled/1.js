@@ -58,7 +58,7 @@ export default function createMail(spelling, grammar) {
                 </>
             ),
             end: <Text>{currentEnd[endIndex++]} 7</Text>,
-            properties: properties
+            properties
         });
     }
 

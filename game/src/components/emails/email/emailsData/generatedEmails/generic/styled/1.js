@@ -121,7 +121,7 @@ export default function createMail(spelling, grammar) {
                     </Box>
                 </>
             ),
-            properties: properties
+            properties
         });
     }
 

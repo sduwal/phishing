@@ -74,7 +74,7 @@ export default function createMail(spelling, grammar) {
                 </>
             ),
             end: <></>,
-            properties: properties
+            properties
         });
     }
     return {

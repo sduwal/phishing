@@ -57,7 +57,7 @@ export const stepsSlice = createSlice({
             },
             {
                 element: ".stats",
-                intro: `Start crafting emails and reach \$${GOAL_AMOUNT.toLocaleString()}!`
+                intro: `Start crafting emails and reach \$${GOAL_AMOUNT.toLocaleString()}! Let's start by clicking on Email tab.`
             }
         ]
         // hintsEnabled: false

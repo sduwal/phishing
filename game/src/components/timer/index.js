@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { IconButton } from "@chakra-ui/button";
 import { Box, Flex, Text, Center } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
@@ -12,7 +13,6 @@ function Timer({ second }) {
     const money = useSelector((state) => state.status.money);
 
     const dispatch = useDispatch();
-
     const addTime = () => {
         dispatch(buyTime());
         dispatch(decrementByAmount(cost));
@@ -51,6 +51,23 @@ function Timer({ second }) {
     );
 }
 
+const calculateTimeLeft = () => {
+    const year = new Date().getFullYear();
+    const difference = +new Date(`10/01/${year}`) - +new Date();
+
+    let timeLeft = {};
+
+    if (difference > 0) {
+        timeLeft = {
+            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+            minutes: Math.floor((difference / 1000 / 60) % 60),
+            seconds: Math.floor((difference / 1000) % 60)
+        };
+    }
+
+    return timeLeft;
+};
 function formatTime(seconds) {
     if (seconds === 0) return "00:00";
 

@@ -13,6 +13,7 @@ const CircleIcon = (props) => (
 );
 export default function prevEmails() {
     const emails = useSelector((state) => state.email.prevEmails);
+
     return (
         <>
             <Text>
@@ -41,12 +42,14 @@ export default function prevEmails() {
                         </Text>
                     </Flex>
                     <Divider />
-                    {emails.map((email) => (
-                        <Flex key={email.subject + new Date()} my={2}>
-                            <Center px={2}>
-                                <CircleIcon boxSize={2} />
-                            </Center>
-                            <Text>{email.subject}</Text>
+                    {emails.map((email, index) => (
+                        <Flex key={index} my={2} alignItems={"center"}>
+                            {/* <Center px={2}> */}
+                            {/* <CircleIcon boxSize={2} /> */}
+                            {/* </Center> */}
+                            <Text>
+                                {index + 1}. {email.subject}
+                            </Text>
                             <Spacer />
                             <Text>{Math.round(email.successrate * 100)} %</Text>
                         </Flex>

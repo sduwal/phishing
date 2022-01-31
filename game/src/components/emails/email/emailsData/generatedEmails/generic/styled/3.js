@@ -103,7 +103,7 @@ export default function createEmail(spelling, grammar) {
                     <Text>{currentEnd[endIndex++]}</Text>
                 </>
             ),
-            properties: [properties]
+            properties
         });
     }
 

@@ -30,6 +30,16 @@ function NoSkillContainer({ onClose }) {
     return (
         <>
             {count["spelling"] === 0 && renderHelpMessage()}
+            {count["spelling"] > 0 && (
+                <Center>
+                    <Box w="60%" py={2}>
+                        <Text>
+                            Keep up the good work. Select the best email and
+                            access the attacker skills.
+                        </Text>
+                    </Box>
+                </Center>
+            )}
             <BrowserCustom
                 email={email}
                 onClose={onClose}
@@ -44,19 +54,24 @@ function renderHelpMessage() {
     return (
         <Center>
             <Box
-                fontWeight={"bold"}
+                fontWeight={"500"}
                 color={"gray.500"}
                 py={4}
-                fontSize={"1.2em"}
+                fontSize={"1em"}
+                border={"1px dotted black"}
+                my={2}
+                p={3}
+                rounded={"md"}
+                w={"60%"}
             >
                 <Text>
                     {
-                        "Before we start sending emails, let us review some emails. We will not send these emails to the user."
+                        "Let's assess the helper's skills before you start sending emails. This will present you with different opportunities to improve your helper's skills."
                     }
                 </Text>
                 <Text>
                     {
-                        "This will help you assess the skill of the helper and open opportunities to train him further."
+                        "Review the different email variation sent to you by the helper."
                     }
                 </Text>
             </Box>

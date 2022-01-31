@@ -48,7 +48,8 @@ export default function createMail(spelling, grammar) {
                     <Text>{currentStart[startIndex++]}</Text>
                 </>
             ),
-            end: <></>
+            end: <></>,
+            properties
         });
     }
 

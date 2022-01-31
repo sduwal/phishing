@@ -115,7 +115,7 @@ export default function createEmail(spelling, grammar) {
                     <Box m={8} />
                 </>
             ),
-            properties: properties
+            properties
         });
     }
 

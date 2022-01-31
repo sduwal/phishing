@@ -15,21 +15,22 @@ import { decrement } from "../store/timer";
 
 export default function App() {
     const dispatch = useDispatch();
-    const history = useHistory();
 
-    const time = useSelector((state) => state.timer.value);
     const stepsEnabled = useSelector((state) => state.steps.stepsEnabled);
     const initialStep = useSelector((state) => state.steps.initialStep);
+    const time = useSelector((state) => state.timer.value);
     const steps = useSelector((state) => state.steps.steps);
+    const history = useHistory();
 
     const tick = () => {
         if (time <= 0) history.push("/gameover");
         if (time > 0 && !stepsEnabled) dispatch(decrement());
     };
+
     useEffect(() => {
         const timer = setInterval(() => tick(), 1000);
         return () => clearInterval(timer);
-    });
+    }, [stepsEnabled]);
 
     function onExit() {
         dispatch(setStepsEnabled(false));

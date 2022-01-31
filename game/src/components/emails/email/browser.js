@@ -53,6 +53,7 @@ function BrowserCustom({
     const { Tab } = Chrome;
 
     const isUpdating = useSelector((state) => state.status.isUpdating);
+    const activeLink = useSelector((state) => state.domain.activeDomain);
     const dispatch = useDispatch();
 
     const [number, setNumber] = useState(0);
@@ -61,7 +62,7 @@ function BrowserCustom({
     // const [value, setValue] = useState(0);
 
     function send({ totalSend }) {
-        const successrate = calculateSuccess(email, number);
+        const successrate = calculateSuccess(email, number, activeLink);
         let sendNumber = totalSend;
 
         const interval = setInterval(() => {
@@ -252,7 +253,6 @@ function BrowserCustom({
                 <Button
                     isDisabled={_.isEmpty(email)}
                     onClick={() => {
-                        console.log(email);
                         dispatch(incrementTotalEmails(email.totalSend));
                         dispatch(
                             updateSuccess({

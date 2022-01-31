@@ -1,7 +1,6 @@
 import supabase from "../../supabase";
 
 const logger = (store) => (next) => async (action) => {
-    console.log(action.type);
     if (action.type !== "timer/decrement") {
         // await supabase.from("logs").insert({
         //     userId: store.getState().interaction.userId,

@@ -61,7 +61,7 @@ export default function StatusBar() {
                                 />
                             </div>
                         </Tooltip>
-                        <Text>{status.totalEmails}</Text>
+                        <Text>{status.totalEmails.toLocaleString()}</Text>
                     </VStack>
                     <VStack>
                         <Tooltip
@@ -75,7 +75,9 @@ export default function StatusBar() {
                                 <Icon as={MdEmail} color="red" w={10} h={10} />{" "}
                             </div>
                         </Tooltip>
-                        <Text>{status.unsuccessfulEmails}</Text>
+                        <Text>
+                            {status.unsuccessfulEmails.toLocaleString()}
+                        </Text>
                     </VStack>
                     <VStack>
                         <Tooltip
@@ -94,7 +96,7 @@ export default function StatusBar() {
                                 />
                             </div>
                         </Tooltip>
-                        <Text>{status.successEmails}</Text>
+                        <Text>{status.successEmails.toLocaleString()}</Text>
                     </VStack>
                     <VStack>
                         <Tooltip
@@ -113,7 +115,7 @@ export default function StatusBar() {
                                 />{" "}
                             </div>
                         </Tooltip>
-                        <Text>{status.money}</Text>
+                        <Text>{status.money.toLocaleString()}</Text>
                     </VStack>
                 </HStack>
             </Center>
