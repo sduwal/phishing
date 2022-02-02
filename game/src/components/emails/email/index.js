@@ -21,15 +21,20 @@ function EmailClient({ onClose }) {
     const from = useSelector((state) => state.email.from);
     const attacker = useSelector((state) => state.attacker);
 
+    const sentNumber = useSelector((state) => state.email.sentNumber);
     const firstTime = useRef(true);
 
-    const [emails, setEmails] = useState({});
+    // const [emails, setEmails] = useState({});
+    const emails = useMemo(
+        () => initializeEmails(activeLink, attacker),
+        [sentNumber]
+    );
 
     const [currentEmail, setCurrentEmail] = useState({});
     const key = useSelector((state) => state.email.key);
 
     useEffect(() => {
-        setEmails(initializeEmails(activeLink, attacker));
+        // setEmails(initializeEmails(activeLink, attacker));
 
         return () => {
             dispatch(resetKey());

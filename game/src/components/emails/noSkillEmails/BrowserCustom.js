@@ -80,9 +80,11 @@ function BrowserCustom({
                 dispatch(changeCurrentTrainingMode("grammar"));
             }
         } else {
-            toast.error("Users didn't fall for that email.", {
-                position: "top-center"
-            });
+            if (currentTrainingModule !== "spelling" && required !== 2) {
+                toast.error("Users didn't fall for that email.", {
+                    position: "top-center"
+                });
+            }
         }
     }
 
@@ -162,8 +164,8 @@ function BrowserCustom({
                                             fontStyle="italic"
                                             maxW={"80%"}
                                         >
-                                            Click the number to change through
-                                            different emails.
+                                            Click the number to look at
+                                            different variation.
                                         </Text>
                                         <Box>
                                             {(() => {

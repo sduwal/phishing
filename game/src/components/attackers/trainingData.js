@@ -10,7 +10,7 @@ export const language = [
         "cost": 1000,
         "value": "spelling",
         "trained":
-            "Nicely done! Your attacker will not create any spelling errors anymore."
+            "Nicely done! Your attacker will not create any spelling errors."
     },
     {
         "display": "Grammar",
@@ -63,6 +63,6 @@ export const skills = [
         "time": 0,
         "value": "research",
         "trained":
-            "Wooh! You have learned to find info about users! You can now created targetd emails!"
+            "Wooh! You have learned to find info about users! You can now create targeted emails!"
     }
 ];
