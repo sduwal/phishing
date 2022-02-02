@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { nanoid } from "nanoid";
 
 export const moneySlice = createSlice({
     name: "status",
@@ -11,9 +12,13 @@ export const moneySlice = createSlice({
         gameWon: false,
         canCurrentlyTrain: ["spelling", "grammar"],
         count: { "spelling": 0, "grammar": 0 },
-        currentTrainingMode: "spelling"
+        currentTrainingMode: "spelling",
+        username: nanoid(6)
     },
     reducers: {
+        changeUsername: (state, action) => {
+            state.username = action.payload;
+        },
         incrementByAmount: (state, action) => {
             state.money += action.payload;
         },
@@ -57,7 +62,8 @@ export const {
     setGameWon,
     setCanCurrentlyTrain,
     increamentTrainingCount,
-    changeCurrentTrainingMode
+    changeCurrentTrainingMode,
+    changeUsername
 } = moneySlice.actions;
 
 export default moneySlice.reducer;

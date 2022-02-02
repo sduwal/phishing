@@ -35,7 +35,7 @@ const MAX_LEVEL = 4;
 const Basket = ({ emails }) => {
     const dispatch = useDispatch();
     const optionDetails = [
-        "Hey Boss, Before I create the email, I need you to select what kind the options you want to use. You can drag these options to the basket above and click on it to learn more. Let's start with the what kind of email you want?",
+        "Hey Boss, Before I create the email, I need you to select what kind the options you want to use. You can drag these options to the basket above and the option to learn more. Let's start with the what kind of email you want?",
         "Nice! Now let's decide on how to hide the links.",
         "Great! You can pretend to be someone else for better performance. Fill the email below and drag the option to the basket!"
     ];

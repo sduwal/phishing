@@ -5,7 +5,7 @@ import Questions from "./questions/questions";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { changeLinkType, resetKey, spoofEmail } from "@store/email";
@@ -59,7 +59,7 @@ function EmailClient({ onClose }) {
     return (
         <DndProvider backend={HTML5Backend} height="100vh">
             <Box p="20px" background="white" ref={firstTime}>
-                {!firstTime.current && <FirstTimeMessage />}
+                <FirstTimeMessage />
                 <Flex direction="row">
                     <Box flex="2">
                         <Questions emails={emails}></Questions>
@@ -73,7 +73,39 @@ function EmailClient({ onClose }) {
     );
 }
 
-const FirstTimeMessage = () => {
+function FirstTimeMessage() {
+    let messages = [
+        "Woah! New options!! You have unlocked new skills. You can now ask the helper to create more directed questions."
+    ];
+
+    const sentNumber = useSelector((state) => state.email.sentNumber);
+
+    if (sentNumber > 0) {
+        messages = [
+            "Keep working on those emails! You can unlock more options by training the helper.",
+            "Seeing the same options? Train your attacker!"
+        ];
+    }
+
+    if (sentNumber > 5) {
+        messages.push(
+            "Not seeing improvements? Did you checkout the marketplace?"
+        );
+    }
+
+    const techSkills = useSelector((state) => state.attacker.techSkills);
+
+    if (techSkills.includes("spoofing")) {
+        messages.push(
+            "Want more efficient emails? Send the email as someone else!"
+        );
+    }
+    const randomIndex = useMemo(
+        () => Math.floor(Math.random() * messages.length),
+        [sentNumber]
+    );
+    const message = messages[randomIndex];
+
     return (
         <Center>
             <Box
@@ -86,18 +118,9 @@ const FirstTimeMessage = () => {
                 fontWeight={"semibold"}
                 fontSize={"1.1em"}
             >
-                <Text color="black">
-                    {
-                        "Woah! New options!! You have finished reviewing the helper. You can now ask the helper to create more directed questions."
-                    }
-                </Text>
-                <Text color={"purple"}>
-                    {
-                        "Don't see many options? Train your attacker with more skills!!"
-                    }
-                </Text>
+                <Text color="black">{message}</Text>
             </Box>
         </Center>
     );
-};
+}
 export { EmailClient };

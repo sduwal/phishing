@@ -28,7 +28,6 @@ import { decrementByAmount } from "@store/status";
 
 import AttackerCard from "./attackerCard";
 import { language, skills } from "./trainingData";
-import { changeTime } from "@store/interaction";
 
 import { TRAINING_MESSAGE } from "@constants";
 
@@ -39,7 +38,8 @@ function CollapseTrainingOptions({
     time,
     type,
     value,
-    efficiency
+    efficiency,
+    trained
 }) {
     const attacker = useSelector((state) => state.attacker);
     const money = useSelector((state) => state.status.money);
@@ -57,33 +57,35 @@ function CollapseTrainingOptions({
         });
 
     function handleClick() {
-        dispatch(setIsTraining(true));
-        dispatch(setCurrentTraining(display));
+        // dispatch(setIsTraining(true));
+        // dispatch(setCurrentTraining(display));
         dispatch(decrementByAmount(cost));
-        setTimeout(() => {
-            type === "language"
-                ? dispatch(
-                      setLanguageSkills({
-                          display: display,
-                          efficiency: efficiency,
-                          value: value
-                      })
-                  )
-                : dispatch(
-                      setTechSkills({
-                          display: display,
-                          efficiency: efficiency,
-                          value: value
-                      })
-                  );
+        // setTimeout(() => {
+        type === "language"
+            ? dispatch(
+                  setLanguageSkills({
+                      display: display,
+                      efficiency: efficiency,
+                      value: value
+                  })
+              )
+            : dispatch(
+                  setTechSkills({
+                      display: display,
+                      efficiency: efficiency,
+                      value: value
+                  })
+              );
 
-            dispatch(setIsTraining(false));
-            dispatch(changeTime({ type: value }));
-            toast("Training complete", {
-                autoClose: 3000,
-                pauseOnHover: false
-            });
-        }, time * 1000);
+        // dispatch(setIsTraining(false));
+        toast.success(trained, {
+            autoClose: 5000,
+            pauseOnHover: false,
+            position: "top-center",
+            hideProgressBar: true,
+            transition: "zoom"
+        });
+        // }, time * 1000);
     }
     return (
         <>
@@ -105,22 +107,23 @@ function CollapseTrainingOptions({
                             <Text fontWeight="bold" pt="2">
                                 Cost: ${cost}
                             </Text>
-                            <Text fontWeight="bold">Time: {time} sec</Text>
+                            {/* <Text fontWeight="bold">Time: {time} sec</Text> */}
                         </Container>
                     </Collapse>
                 </Box>
                 {
                     <Center>
-                        <Button
-                            disabled={
-                                attacker.isTraining ||
-                                containsSkill ||
-                                money < cost
-                            }
-                            onClick={handleClick}
-                        >
-                            {containsSkill ? "Complete" : "Train"}
-                        </Button>
+                        {containsSkill && (
+                            <Text fontWeight={"bold"}>Complete</Text>
+                        )}
+                        {!containsSkill && (
+                            <Button
+                                disabled={money < cost}
+                                onClick={handleClick}
+                            >
+                                {money < cost ? "Low balance" : "Train"}
+                            </Button>
+                        )}
                     </Center>
                 }
             </Flex>
@@ -190,14 +193,16 @@ function TrainTechnical({ canCurrentlyTrain }) {
     }
 
     return (
-        <Box
-            border={"2px solid black"}
-            rounded={"2xl"}
-            m={2}
-            background={"blue.100"}
-        >
-            {data}
-        </Box>
+        <>
+            <Box
+                border={"2px solid black"}
+                rounded={"2xl"}
+                m={2}
+                background={"blue.100"}
+            >
+                {data}
+            </Box>
+        </>
     );
 }
 
@@ -225,7 +230,7 @@ function Attacker() {
                             Improve Attacker Skills
                         </Text>
                     </Center>
-                    <Text fontSize={"0.8em"} color="grey">
+                    <Text fontSize={"0.9em"} color="blackAlpha.800">
                         {TRAINING_MESSAGE}
                     </Text>
                     <SimpleGrid columns={2} spacing={10}>
@@ -234,6 +239,11 @@ function Attacker() {
                     </SimpleGrid>
                 </Container>
             </Flex>
+            <Center>
+                <Text fontWeight={"bold"}>
+                    You can click on the option to learn more!
+                </Text>
+            </Center>
         </>
     );
 }

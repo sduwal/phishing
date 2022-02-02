@@ -9,7 +9,6 @@ import "intro.js/introjs.css";
 
 import { Sidebar, MainComponent } from "../components/main";
 
-import { changeStart } from "../store/interaction";
 import { setStepsEnabled } from "../store/steps";
 import { decrement } from "../store/timer";
 
@@ -34,7 +33,6 @@ export default function App() {
 
     function onExit() {
         dispatch(setStepsEnabled(false));
-        dispatch(changeStart());
     }
 
     return (

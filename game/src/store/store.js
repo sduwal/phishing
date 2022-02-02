@@ -5,7 +5,6 @@ import attackerReducer from "./attacker";
 import domainReducer from "./domain";
 import emailReducer from "./email";
 import stepsReducer from "./steps";
-import interactionReducer from "./interaction";
 
 import logger from "./middleware/logger";
 
@@ -16,8 +15,7 @@ export default configureStore({
         attacker: attackerReducer,
         domain: domainReducer,
         email: emailReducer,
-        steps: stepsReducer,
-        interaction: interactionReducer
+        steps: stepsReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 });

@@ -55,7 +55,7 @@ function renderHelpMessage() {
         <Center>
             <Box
                 fontWeight={"500"}
-                color={"gray.500"}
+                // color={"gray.500"}
                 py={4}
                 fontSize={"1em"}
                 border={"1px dotted black"}
@@ -66,12 +66,12 @@ function renderHelpMessage() {
             >
                 <Text>
                     {
-                        "Let's assess the helper's skills before you start sending emails. This will present you with different opportunities to improve your helper's skills."
+                        "Your helper has drafted a list of emails for you to choose from. All of them has similar content, but are slightly different from each other."
                     }
                 </Text>
                 <Text>
                     {
-                        "Review the different email variation sent to you by the helper."
+                        "Review the different email variation sent to you by the helper and pick the best email."
                     }
                 </Text>
             </Box>

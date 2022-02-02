@@ -1,14 +1,14 @@
 import supabase from "../../supabase";
 
 const logger = (store) => (next) => async (action) => {
-    // if (action.type !== "timer/decrement") {
-    //     await supabase.from("logs").insert({
-    //         userId: store.getState().interaction.userId,
-    //         type: action.type,
-    //         action: action.payload,
-    //         date: new Date().toString()
-    //     });
-    // }
+    if (action.type !== "timer/decrement") {
+        // await supabase.from("logs").insert({
+        //     userId: store.getState().interaction.userId,
+        //     type: action.type,
+        //     action: action.payload,
+        //     date: new Date().toString()
+        // });
+    }
     const result = next(action);
     return result;
 };

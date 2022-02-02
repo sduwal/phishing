@@ -9,6 +9,7 @@ import {
     ModalOverlay,
     ModalHeader,
     ModalContent,
+    Flex,
     ModalBody,
     ModalCloseButton,
     Tooltip
@@ -49,7 +50,13 @@ function SideButtons({
         <>
             <Box margin={0} padding={0} height={0} ref={finalRef}></Box>
 
-            <Tooltip label={isDisabled ? "Cannot do this right now." : ""}>
+            <Tooltip
+                label={
+                    isDisabled
+                        ? "Unlock spelling and grammar skills first."
+                        : ""
+                }
+            >
                 <Box
                     px="2"
                     pt="2"
@@ -105,7 +112,7 @@ function SideButtons({
                             ))}
                         {id == 2 && <MarketPlace onClose={onClose} />}
                         {id == 3 && <Attacker />}
-                        {id == 4 && <PrevEmails />}
+                        {/* {id == 4 && <PrevEmails />} */}
                     </ModalBody>
                 </ModalContent>
             </Modal>
@@ -145,24 +152,28 @@ export default function SideBar() {
             color: "red.500",
             modal: <Attacker />,
             id: 3
-        },
-        {
-            title: "Prev Emails",
-            desc: "Change Attackers",
-            image: sentImage,
-            color: "purple.200",
-            modal: <PrevEmails />,
-            id: 4
         }
+        // {
+        //     title: "Prev Emails",
+        //     desc: "Change Attackers",
+        //     image: sentImage,
+        //     color: "purple.200",
+        //     modal: <PrevEmails />,
+        //     id: 4
+        // }
     ];
 
     return (
-        <Box width="fit-content" px={"10"} overflowY="auto" maxH="90vh">
-            <VStack spacing="4">
-                {side.map((item, index) => (
-                    <SideButtons key={item.title} {...side[index]} />
-                ))}
-            </VStack>
-        </Box>
+        // <Flex justify={"center"}>
+        <Center>
+            <Box width="fit-content" px={"10"} overflowY="auto" maxH="90vh">
+                <VStack spacing="4" align={"center"}>
+                    {side.map((item, index) => (
+                        <SideButtons key={item.title} {...side[index]} />
+                    ))}
+                </VStack>
+            </Box>
+        </Center>
+        // </Flex>
     );
 }

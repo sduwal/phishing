@@ -1,42 +1,9 @@
 import { Center, Text, VStack, Link } from "@chakra-ui/react";
 import ParticlesBg from "particles-bg";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { changeEnd } from "../store/interaction";
-import supabase from "../supabase";
+import { useSelector } from "react-redux";
 
 function gameover() {
     const won = useSelector((state) => state.status.gameWon);
-    const interaction = useSelector((state) => state.interaction);
-    const dispatch = useDispatch();
-
-    // TODO: HANDLE SUPABASE LOGIC
-    useEffect(() => {
-        (async () => {
-            const end = Date.now();
-            dispatch(changeEnd());
-
-            // TODO: Uncomment this after testing
-            // const { data, error } = await supabase.from("interaction").insert([
-            //     {
-            //         start: 0,
-            //         end: end - interaction.start,
-            //         spelling: interaction.time.spelling - interaction.start,
-            //         grammar: interaction.time.grammar - interaction.start,
-            //         styling: interaction.time.styling - interaction.start,
-            //         spoof: interaction.time.spoof - interaction.start,
-            //         links: interaction.time.links - interaction.start,
-            //         research: interaction.time.research - interaction.start
-            //     }
-            // ]);
-
-            // if (error) {
-            //     console.log(error);
-            // } else {
-            //     console.log(data);
-            // }
-        })();
-    }, []);
 
     return (
         <>

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { IconButton } from "@chakra-ui/button";
 import { Box, Flex, Text, Center } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";

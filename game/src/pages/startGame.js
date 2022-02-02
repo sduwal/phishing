@@ -15,9 +15,8 @@ import {
 import { Link } from "react-router-dom";
 import ParticlesBg from "particles-bg";
 import { useMediaQuery } from "@chakra-ui/react";
-
-import { changeUserId } from "../store/interaction";
 import start from "../assets/images/start.gif";
+import { changeUsername } from "@store/status";
 
 function Start() {
     // TODO: handle this logic
@@ -26,8 +25,8 @@ function Start() {
     const [email, setEmail] = useState("");
 
     const [isAtleast600] = useMediaQuery("(min-width: 1080px)");
-
     const dispatch = useDispatch();
+
     if (!isAtleast600) {
         return (
             <Center height={"100vh"}>
@@ -37,8 +36,7 @@ function Start() {
     }
 
     const handleClick = () => {
-        dispatch(changeUserId(email));
-        console.log(email);
+        dispatch(changeUsername(email));
     };
     return (
         <>

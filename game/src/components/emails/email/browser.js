@@ -21,6 +21,7 @@ import { addSentEmail } from "@store/email";
 import calculateSuccess from "./utils/calculateSuccess";
 
 import { MONEY_PER_SUCCESSFUL_EMAIL } from "@constants";
+import { increaseSent } from "../../../store/email";
 
 // styles
 const Dots = styled.span`
@@ -254,6 +255,7 @@ function BrowserCustom({
                     isDisabled={_.isEmpty(email)}
                     onClick={() => {
                         dispatch(incrementTotalEmails(email.totalSend));
+                        dispatch(increaseSent());
                         dispatch(
                             updateSuccess({
                                 successful: 0,

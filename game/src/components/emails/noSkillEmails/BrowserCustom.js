@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Browser, { Chrome } from "react-browser-ui";
@@ -21,7 +22,8 @@ import Dots from "../shared/dots";
 import {
     increamentTrainingCount,
     setCanCurrentlyTrain,
-    changeCurrentTrainingMode
+    changeCurrentTrainingMode,
+    incrementByAmount
 } from "@store/status";
 
 function BrowserCustom({
@@ -42,32 +44,43 @@ function BrowserCustom({
         toast.dismiss();
         const props = email.body.text[number].properties;
         let required = 2 - count[currentTrainingModule];
+
+        if (currentTrainingModule === "spelling" && required == 2) {
+            toast.success(
+                "Keep an eye on your money to see how efficient your emails are!",
+                {
+                    position: "top-center"
+                }
+            );
+        }
         if (
             props.length > 0 &&
             currentTrainingModule &&
             props.includes(currentTrainingModule)
         ) {
             dispatch(increamentTrainingCount(currentTrainingModule));
-            let message =
-                --required <= 0
-                    ? `Nice! You can now train your attacker with "${currentTrainingModule}" skills.`
-                    : "Woah! Great catch! Keep up the good work!";
-
-            if (required <= 0 && currentTrainingModule == "grammar") {
-                message +=
-                    "You have also unlocked the technical skills. Check them out in the attacker tab.";
+            dispatch(incrementByAmount(500));
+            if (--required <= 0) {
+                toast.info(
+                    `Nice! You have unlocked the "${currentTrainingModule}" skills. You can train your attacker by going to the Attacker tab.`
+                );
             }
 
-            toast.info(message, {
-                position: "top-center"
-            });
+            if (required <= 0 && currentTrainingModule == "grammar") {
+                toast.info(
+                    "You have also unlocked the technical skills. Check them out in the attacker tab.",
+                    {
+                        autoClose: 10000
+                    }
+                );
+            }
 
             if (required <= 0) {
                 dispatch(setCanCurrentlyTrain(currentTrainingModule));
                 dispatch(changeCurrentTrainingMode("grammar"));
             }
         } else {
-            toast.error("That email had some problems. Let's try this again!", {
+            toast.error("Users didn't fall for that email.", {
                 position: "top-center"
             });
         }
@@ -95,7 +108,13 @@ function BrowserCustom({
                 border="solid 2px black"
                 p={4}
                 rounded={"2xl"}
-                background={"blue.50"}
+                background={
+                    number === 0
+                        ? "red.50"
+                        : number === 1
+                        ? "blue.50"
+                        : "purple.50"
+                }
             >
                 <Box minH={"50vh"}>
                     <Browser
@@ -143,8 +162,8 @@ function BrowserCustom({
                                             fontStyle="italic"
                                             maxW={"80%"}
                                         >
-                                            Choose the best email (in terms of
-                                            language skills).
+                                            Click the number to change through
+                                            different emails.
                                         </Text>
                                         <Box>
                                             {(() => {
@@ -179,7 +198,7 @@ function BrowserCustom({
                             onClose();
                         }}
                     >
-                        Review
+                        Send
                     </Button>
                 </Flex>
             </Box>

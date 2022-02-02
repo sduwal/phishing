@@ -8,7 +8,9 @@ export const language = [
         "efficiency": 35,
         "time": 0,
         "cost": 1000,
-        "value": "spelling"
+        "value": "spelling",
+        "trained":
+            "Nicely done! Your attacker will not create any spelling errors anymore."
     },
     {
         "display": "Grammar",
@@ -16,7 +18,9 @@ export const language = [
         "hint": "Back to basics! Your helper will write emails with better grammar and stop making grammatical errors.",
         "time": 0,
         "cost": 2000,
-        "value": "grammar"
+        "value": "grammar",
+        "trained":
+            "Good job! Your attacker has improved his grammar and will not make any grammatical errors."
     }
 ];
 
@@ -27,7 +31,9 @@ export const skills = [
         "hint": "Write better looking emails with better colors, images and headers.",
         "time": 0,
         "cost": 5000,
-        "value": "styling"
+        "value": "styling",
+        "trained":
+            "Looking good! Emails will look better visually and more stylish. "
     },
     {
         "efficiency": 20,
@@ -35,7 +41,9 @@ export const skills = [
         "hint": "Learn new tricks to hide links. Stop giving away the links on the first look.",
         "time": 0,
         "cost": 5000,
-        "value": "links"
+        "value": "links",
+        "trained":
+            "Doing great! You will notice more options to hide links when you create emails!"
     },
     {
         "efficiency": 25,
@@ -43,7 +51,9 @@ export const skills = [
         "hint": "Hide yourself. Pretend to be someone else.",
         "cost": 4000,
         "time": 0,
-        "value": "spoof"
+        "value": "spoof",
+        "trained":
+            "Nice! New skill! You will be able to send emails as someone else. You will see this option while creating the email."
     },
     {
         "efficiency": 15,
@@ -51,6 +61,8 @@ export const skills = [
         "hint": "Learn how to efficiently research targeted group",
         "cost": 10000,
         "time": 0,
-        "value": "research"
+        "value": "research",
+        "trained":
+            "Wooh! You have learned to find info about users! You can now created targetd emails!"
     }
 ];

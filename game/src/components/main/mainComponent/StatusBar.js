@@ -119,6 +119,11 @@ export default function StatusBar() {
                     </VStack>
                 </HStack>
             </Center>
+            <Center>
+                <Text pt={4} opacity={0.6}>
+                    Keep sending emails to earn money
+                </Text>
+            </Center>
         </Box>
     );
 }
