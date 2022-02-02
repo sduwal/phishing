@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import timerReducer from "./timer";
 import moneyReducer from "./status";
 import attackerReducer from "./attacker";
 import domainReducer from "./domain";
@@ -10,7 +9,6 @@ import logger from "./middleware/logger";
 
 export default configureStore({
     reducer: {
-        timer: timerReducer,
         status: moneyReducer,
         attacker: attackerReducer,
         domain: domainReducer,

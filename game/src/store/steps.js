@@ -7,10 +7,6 @@ export const stepsSlice = createSlice({
         stepsEnabled: false,
         initialStep: 0,
         steps: [
-            // {
-            //     element: ".timer",
-            //     intro: "Keep an eye on your time! Once the timer runs out, you lose!"
-            // },
             {
                 element: ".addTime",
                 intro: "You can buy time by paying $2500 for 120 seconds. Price will increase everytime you buy by 50%."
