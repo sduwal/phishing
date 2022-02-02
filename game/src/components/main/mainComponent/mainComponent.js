@@ -11,11 +11,11 @@ export default function mainComponent(props) {
                     <StatusBar />
                 </div>
             </VStack>
-            <Center>
+            {/* <Center>
                 <div className="domain">
                     <Domain />
                 </div>
-            </Center>
+            </Center> */}
         </Box>
     );
 }
