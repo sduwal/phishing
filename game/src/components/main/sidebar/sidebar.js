@@ -112,7 +112,7 @@ function SideButtons({
                             ))}
                         {id == 2 && <MarketPlace onClose={onClose} />}
                         {id == 3 && <Attacker />}
-                        {/* {id == 4 && <PrevEmails />} */}
+                        {id == 4 && <PrevEmails />}
                     </ModalBody>
                 </ModalContent>
             </Modal>
@@ -152,15 +152,15 @@ export default function SideBar() {
             color: "red.500",
             modal: <Attacker />,
             id: 3
+        },
+        {
+            title: "Prev Emails",
+            desc: "Change Attackers",
+            image: sentImage,
+            color: "purple.200",
+            modal: <PrevEmails />,
+            id: 4
         }
-        // {
-        //     title: "Prev Emails",
-        //     desc: "Change Attackers",
-        //     image: sentImage,
-        //     color: "purple.200",
-        //     modal: <PrevEmails />,
-        //     id: 4
-        // }
     ];
 
     return (
