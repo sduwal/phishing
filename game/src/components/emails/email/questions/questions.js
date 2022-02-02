@@ -293,31 +293,31 @@ function Loading({ researchTime }) {
     );
 }
 
-function Hints() {
-    const hint = [
-        "Email not performing well? Did you try the marketplace?",
-        "Did you know that similar domain has higher chance of tricking the user?",
-        "Emails has lot of problems? Try training the attacker?",
-        "Did you know that the attacker can spoof the sender? Can't see it yet? Train the attacker!",
-        "Running short on time? You can buy some time!"
-    ];
+// function Hints() {
+//     const hint = [
+//         "Email not performing well? Did you try the marketplace?",
+//         "Did you know that similar domain has higher chance of tricking the user?",
+//         "Emails has lot of problems? Try training the attacker?",
+//         "Did you know that the attacker can spoof the sender? Can't see it yet? Train the attacker!",
+//         "Running short on time? You can buy some time!"
+//     ];
 
-    const number = Math.floor(Math.random() * hint.length);
-    return (
-        <Center>
-            <Container mt={10}>
-                <Text
-                    fontStyle={"italic"}
-                    letterSpacing={"-0.01em"}
-                    fontWeight={"medium"}
-                    opacity={"0.6"}
-                    fontSize={"0.9em"}
-                >
-                    HINT: {hint[number]}
-                </Text>
-            </Container>
-        </Center>
-    );
-}
+//     const number = Math.floor(Math.random() * hint.length);
+//     return (
+//         <Center>
+//             <Container mt={10}>
+//                 <Text
+//                     fontStyle={"italic"}
+//                     letterSpacing={"-0.01em"}
+//                     fontWeight={"medium"}
+//                     opacity={"0.6"}
+//                     fontSize={"0.9em"}
+//                 >
+//                     HINT: {hint[number]}
+//                 </Text>
+//             </Container>
+//         </Center>
+//     );
+// }
 
 export { Basket as default };
