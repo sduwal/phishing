@@ -20,11 +20,10 @@ import EmailClient from "../shared/emailClient";
 import Dots from "../shared/dots";
 
 import {
-    increamentTrainingCount,
-    setCanCurrentlyTrain,
-    changeCurrentTrainingMode,
-    incrementByAmount
-} from "@store/status";
+    incrementEmailWrote,
+    incrementMoneyGained,
+    incrementPeopleReached
+} from "../../../store/week";
 
 function BrowserCustom({
     onClose,
@@ -41,50 +40,17 @@ function BrowserCustom({
     const [number, setNumber] = useState(0);
 
     function send() {
-        toast.dismiss();
         const props = email.body.text[number].properties;
-        let required = 2 - count[currentTrainingModule];
+        dispatch(incrementEmailWrote());
 
-        if (currentTrainingModule === "spelling" && required == 2) {
-            toast.success(
-                "Keep an eye on your money to see how efficient your emails are!",
-                {
-                    position: "top-center"
-                }
-            );
-        }
-        if (
-            props.length > 0 &&
-            currentTrainingModule &&
-            props.includes(currentTrainingModule)
-        ) {
-            dispatch(increamentTrainingCount(currentTrainingModule));
-            dispatch(incrementByAmount(500));
-            if (--required <= 0) {
-                toast.info(
-                    `Nice! You have unlocked the "${currentTrainingModule}" skills. You can train your attacker by going to the Attacker tab.`
-                );
-            }
+        if (props.includes("spelling") && props.includes("grammar")) {
+            toast("Nice!");
 
-            if (required <= 0 && currentTrainingModule == "grammar") {
-                toast.info(
-                    "You have also unlocked the technical skills. Check them out in the attacker tab.",
-                    {
-                        autoClose: 10000
-                    }
-                );
-            }
-
-            if (required <= 0) {
-                dispatch(setCanCurrentlyTrain(currentTrainingModule));
-                dispatch(changeCurrentTrainingMode("grammar"));
-            }
+            // weekly
+            dispatch(incrementPeopleReached(200));
+            dispatch(incrementMoneyGained(350));
         } else {
-            if (currentTrainingModule !== "spelling" && required !== 2) {
-                toast.error("Users didn't fall for that email.", {
-                    position: "top-center"
-                });
-            }
+            toast("Wrong!");
         }
     }
 

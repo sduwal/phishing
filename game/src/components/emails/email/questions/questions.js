@@ -56,6 +56,23 @@ const Basket = ({ emails }) => {
     const [researchTime, setResearchTime] = useState(0);
 
     useEffect(() => {
+        if (!attacker?.techSkills?.includes("research")) {
+            setBasket([
+                {
+                    "display": "Generate a generic email",
+                    "hint": "Generate a generic email that might be valid for a large group of individuals.",
+                    "displayLevel": 1,
+                    "color": "blue.100",
+                    "value": "generic",
+                    "researchTime": 1,
+                    "displayMessage": "Generate a generic email"
+                }
+            ]);
+            // setLevel(level + 1);
+        }
+    }, []);
+
+    useEffect(() => {
         if (basket.length == 1) {
             const randomKey = getRandomEmail({
                 emails: emails,
@@ -71,8 +88,8 @@ const Basket = ({ emails }) => {
             dispatch(spoofEmail(newEmail));
             setNewEmail("");
         }
-        if (basket.length != 0 && level < MAX_LEVEL) {
-            setResearchTime(0);
+
+        if (level < MAX_LEVEL && basket.length !== 0) {
             setLevel(level + 1);
         }
     }, [basket.length]);
@@ -96,14 +113,7 @@ const Basket = ({ emails }) => {
                 }
             }
 
-            if (level == 1) {
-                setResearchTime(item.researchTime ? item.researchTime : 0);
-                setTimeout(() => {
-                    setBasket([...basket, item]);
-                }, item.researchTime * 1000);
-            } else {
-                setBasket([...basket, item]);
-            }
+            setBasket([...basket, item]);
         },
         collect: (monitor) => ({
             canDrop: monitor.canDrop()
@@ -143,13 +153,19 @@ const Basket = ({ emails }) => {
                 background={canDrop ? "yellow.100" : "transparent"}
             >
                 {level !== 1 && <Heading>You want to: </Heading>}
-                {basket.map((q) => (
+                {basket.map((q, index) => (
                     <UnorderedList key={q.display}>
-                        <ListItem>
-                            <Text fontSize={"1.1em"} fontStyle={"italic"}>
-                                {q.displayMessage}
-                            </Text>
-                        </ListItem>
+                        {index != 0 &&
+                            !attacker?.techSkills?.includes("research") && (
+                                <ListItem>
+                                    <Text
+                                        fontSize={"1.1em"}
+                                        fontStyle={"italic"}
+                                    >
+                                        {q.displayMessage}
+                                    </Text>
+                                </ListItem>
+                            )}
                     </UnorderedList>
                 ))}
 
@@ -245,11 +261,21 @@ const Basket = ({ emails }) => {
                 )
             )}
 
-            <StartOver
+            {/* <Container>
+                <Button
+                    mt="5"
+                    onClick={() => {
+                        setLevel(level + 1);
+                    }}
+                >
+                    Next
+                </Button>
+            </Container> */}
+            {/* <StartOver
                 setLevel={setLevel}
                 setBasket={setBasket}
                 setResearchTime={setResearchTime}
-            />
+            /> */}
 
             {/* <>{level >= MAX_LEVEL && <Hints />}</> */}
         </Box>

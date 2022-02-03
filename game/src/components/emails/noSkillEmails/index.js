@@ -18,18 +18,18 @@ function NoSkillContainer({ onClose }) {
 
     const [email, setEmail] = useState(null);
     useEffect(() => {
-        const index = getRandomInteger(data[currentTrainingModule].length);
-        if (currentTrainingModule === "spelling") {
-            setEmail(data[currentTrainingModule][index]);
-        } else {
-            const emails = createEmails(attacker.includes("spelling"));
-            setEmail(emails[index]);
-        }
+        const index = getRandomInteger(data["grammar"].length);
+        // if (currentTrainingModule === "spelling") {
+        //     setEmail(data[currentTrainingModule][index]);
+        // } else {
+        const emails = createEmails(attacker.includes("spelling"));
+        setEmail(emails[index]);
+        // }
     }, []);
 
     return (
         <>
-            {count["spelling"] === 0 && renderHelpMessage()}
+            {renderHelpMessage()}
             <BrowserCustom
                 email={email}
                 onClose={onClose}

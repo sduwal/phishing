@@ -103,12 +103,12 @@ function SideButtons({
                 <ModalContent>
                     <ModalCloseButton />
                     <ModalBody>
-                        {id == 1 && (
-                            // {/* (view ? ( */}
-                            // {/* <NoSkillEmailClient onClose={onClose} /> */}
-                            // {/* ) : ( */}
-                            <EmailClient onClose={onClose} />
-                        )}
+                        {id == 1 &&
+                            (view ? (
+                                <NoSkillEmailClient onClose={onClose} />
+                            ) : (
+                                <EmailClient onClose={onClose} />
+                            ))}
                         {/* ))} */}
                         {id == 2 && <MarketPlace onClose={onClose} />}
                         {id == 3 && <Attacker />}
@@ -121,17 +121,14 @@ function SideButtons({
 }
 
 export default function SideBar() {
-    const isTraining = useSelector((state) => state.attacker.isTraining);
-    const canCurrentlyTrain = useSelector(
-        (state) => state.status.canCurrentlyTrain
-    );
+    const currentWeek = useSelector((state) => state.week.currentWeek);
     const side = [
         {
             title: "Email",
             desc: "Generate new email",
-            image: isTraining ? trainingImage : emailImage,
-            color: isTraining ? "grey" : "blue.500",
-            view: canCurrentlyTrain.length < 2 ? true : false,
+            image: emailImage,
+            color: "blue.500",
+            view: currentWeek == 0 ? true : false,
             modal: <EmailClient />,
             id: 1,
             isDisabled: false // TODO: if training, disable
@@ -140,7 +137,6 @@ export default function SideBar() {
             title: "Marketplace",
             desc: "Open Domain Marketplace",
             image: domainImage,
-            isDisabled: canCurrentlyTrain.length < 2,
             color: "green.400",
             modal: <MarketPlace />,
             id: 2
@@ -162,15 +158,17 @@ export default function SideBar() {
         //     id: 4
         // }
     ];
-    const currentWeek = useSelector((state) => state.week.currentWeek);
 
     return (
-        // <Flex justify={"center"}>
         <Center>
             <Box width="fit-content" px={"10"} overflowY="auto" maxH="90vh">
                 <VStack spacing="4" align={"center"}>
                     {side.map((item, index) => {
-                        if (item.title === "Marketplace" && currentWeek != 4) {
+                        if (item.title === "Marketplace" && currentWeek != 3) {
+                            return;
+                        }
+
+                        if (item.title === "Attackers" && currentWeek < 1) {
                             return;
                         }
                         return (
@@ -180,6 +178,5 @@ export default function SideBar() {
                 </VStack>
             </Box>
         </Center>
-        // </Flex>
     );
 }

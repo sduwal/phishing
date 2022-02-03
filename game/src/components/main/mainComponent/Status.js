@@ -1,21 +1,47 @@
-import { Box, Text, Flex, Center, Divider, IconButton } from "@chakra-ui/react";
-import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
-
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { Box, Text, Flex, Center, Divider } from "@chakra-ui/react";
+
 import { toast } from "react-toastify";
 
+import { setCanCurrentlyTrain } from "@store/status";
+import { incrementWeek } from "@store/week";
 import StatusBar from "./StatusBar";
+
+const canTrain = [
+    [], // first week
+    ["spelling", "grammar", "links"],
+    ["styling", "spoof", "research"],
+    [] // placeholder for marketplace
+];
 
 function showWeekToast(week, maxEmails, weeklyGoals) {
     const Msg = ({ closeToast, toastProps }) => (
         <Flex justify={"start"} direction={"column"} align={"start"}>
-            <Text fontWeight={"bold"}>Week: {week}</Text>
-            <Text>Number of email to write: {maxEmails[week - 1]}</Text>
-            <Text>This week goal: $ {weeklyGoals[week - 1]}</Text>
+            <Text fontWeight={"bold"}>Week: {week + 1}</Text>
+            <Text>Max emails you can send: {maxEmails[week]}</Text>
+            <Text>This week goal: $ {weeklyGoals[week]}</Text>
         </Flex>
     );
 
+    if (week == 0) {
+        toast(
+            "The first week goal is to familiarize with your helper. Review the different emails sent by your helper and try to reach the goal.",
+            {
+                toastId: "zerothWeek",
+                position: "top-left",
+                autoClose: 15000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: 0,
+                theme: "colored",
+                icon: false
+            }
+        );
+    }
     toast.success(<Msg />, {
         toastId: "weekToast",
         position: "top-left",
@@ -27,11 +53,79 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
         progress: 0,
         theme: "colored",
         icon: false,
-        delay: 1000
+        delay: 200
     });
+
+    if (week === 1) {
+        toast(
+            "You have unlocked the attacker tab. You can train your helper in this tab.",
+            {
+                toastId: "firstweek",
+                position: "top-left",
+                autoClose: 15000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: 0,
+                theme: "colored",
+                icon: false,
+                delay: 400
+            }
+        );
+    }
+
+    if (week !== 0 && week !== 3) {
+        toast.info(`Skills unlocked: ${canTrain[week].join(", ")}`, {
+            toastId: "weekSkills",
+            position: "top-left",
+            autoClose: 15000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: 0,
+            theme: "colored",
+            icon: false,
+            delay: 500
+        });
+    }
+
+    if (week == 3) {
+        toast.info("Marketplace unlocked. You can buy new domains.", {
+            toastId: "weekSkills",
+            position: "top-left",
+            autoClose: 15000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: 0,
+            theme: "colored",
+            icon: false,
+            delay: 500
+        });
+    }
+    // if (week != 0) {
+    //     toast.info("Attackers Skills: Spelling, Grammar", {
+    //         toastId: "weekSkills",
+    //         position: "top-left",
+    //         autoClose: 15000,
+    //         hideProgressBar: true,
+    //         closeOnClick: true,
+    //         pauseOnHover: false,
+    //         draggable: true,
+    //         progress: 0,
+    //         theme: "colored",
+    //         icon: false,
+    //         delay: 2000
+    //     });
+    // }
 }
 
 function Status() {
+    const dispatch = useDispatch();
+    const history = useHistory();
     const {
         currentWeek,
         emailWrote,
@@ -43,19 +137,27 @@ function Status() {
 
     useEffect(() => {
         if (
-            emailWrote == maxEmails[currentWeek - 1] &&
-            moneyGained < weeklyGoals[currentWeek - 1]
+            emailWrote >= maxEmails[currentWeek] &&
+            moneyGained < weeklyGoals[currentWeek]
         ) {
-            console.log("You have reached your weekly goal!");
+            // history.push("/gameover");
+            console.log("You have reached your weekly goal!"); // game over
         }
+
+        if (moneyGained > weeklyGoals[currentWeek]) {
+            dispatch(incrementWeek());
+        }
+
+        // dispatch(incrementTotalEmails(emailWrote));
     }, [emailWrote, moneyGained]);
 
     useEffect(() => {
+        dispatch(setCanCurrentlyTrain(canTrain[currentWeek]));
         showWeekToast(currentWeek, maxEmails, weeklyGoals);
     }, [currentWeek]);
 
     return (
-        <Box background="red.100">
+        <Box>
             <Flex
                 direction="column"
                 justify="space-between"
@@ -75,7 +177,7 @@ function Status() {
                         >
                             <Center>
                                 <Text fontWeight={"bold"} fontSize={"3xl"}>
-                                    This week ({currentWeek}/4)
+                                    This week ({currentWeek + 1}/4)
                                 </Text>
                             </Center>
                             <Box py={2} color={"black"}>
@@ -83,10 +185,10 @@ function Status() {
                             </Box>
                             <Flex justify={"space-between"}>
                                 <Text fontSize={"xl"}>
-                                    Number of email wrote:
+                                    Number of emails sent:
                                 </Text>
                                 <Text fontSize={"xl"}>
-                                    {emailWrote} / {maxEmails[currentWeek - 1]}
+                                    {emailWrote} / {maxEmails[currentWeek]}
                                 </Text>
                             </Flex>
                             <Flex justify={"space-between"}>
@@ -98,27 +200,13 @@ function Status() {
 
                             <Flex justify={"space-between"}>
                                 <Text fontSize={"xl"}>Money gained:</Text>
-                                <Text fontSize={"xl"}>$ {moneyGained}</Text>
+                                <Text fontSize={"xl"}>
+                                    $ {moneyGained} / {weeklyGoals[currentWeek]}
+                                </Text>
                             </Flex>
                         </Box>
                     </Center>
                 </Box>
-                {/* <Spacer /> */}
-                {/* <Flex
-                    justify={"space-around"}
-                    fontSize={"1.2em"}
-                    fontWeight={"semibold"}
-                >
-                    <Box textAlign={"center"}>
-                        <Text>Remaining emails this week:</Text>
-                        <Text>6 / 7</Text>
-                    </Box>
-
-                    <Box textAlign={"center"}>
-                        <Text>Money target this week:</Text>
-                        <Text>$ 4000</Text>
-                    </Box>
-                </Flex> */}
             </Flex>
         </Box>
     );

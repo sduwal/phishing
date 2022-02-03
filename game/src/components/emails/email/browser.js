@@ -22,6 +22,11 @@ import calculateSuccess from "./utils/calculateSuccess";
 
 import { MONEY_PER_SUCCESSFUL_EMAIL } from "@constants";
 import { increaseSent } from "../../../store/email";
+import {
+    incrementEmailWrote,
+    incrementMoneyGained,
+    incrementPeopleReached
+} from "../../../store/week";
 
 // styles
 const Dots = styled.span`
@@ -64,51 +69,38 @@ function BrowserCustom({
 
     function send({ totalSend }) {
         const successrate = calculateSuccess(email, number, activeLink);
-        let sendNumber = totalSend;
+        const sendNumber = totalSend;
 
-        const interval = setInterval(() => {
-            if (sendNumber <= 0) {
-                clearInterval(interval);
-                toast.info(
-                    `Email: ${
-                        email.subject
-                    } has stopped receiving traction. 🎉 Success rate: ${Math.round(
-                        successrate * 100
-                    )}%`
-                );
+        toast.info(
+            `Email: ${
+                email.subject
+            } has stopped receiving traction. 🎉 Success rate: ${Math.round(
+                successrate * 100
+            )}%`
+        );
 
-                dispatch(
-                    addSentEmail({
-                        subject: email.subject,
-                        successrate: successrate
-                    })
-                );
-                return;
-            }
+        dispatch(
+            addSentEmail({
+                subject: email.subject,
+                successrate: successrate
+            })
+        );
 
-            if (!isUpdating) {
-                dispatch(setIsUpdating(true));
-                const victimNumber =
-                    sendNumber > 20
-                        ? Math.floor(Math.random() * (sendNumber + 1))
-                        : sendNumber;
+        const success = Math.ceil(sendNumber * successrate);
+        dispatch(
+            // The amount is 10 for each successful email
+            incrementByAmount(success * MONEY_PER_SUCCESSFUL_EMAIL)
+        );
+        dispatch(
+            updateSuccess({
+                successful: success,
+                unsuccessful: -success
+            })
+        );
 
-                sendNumber -= victimNumber;
-
-                const success = Math.ceil(victimNumber * successrate);
-                dispatch(
-                    // The amount is 10 for each successful email
-                    incrementByAmount(success * MONEY_PER_SUCCESSFUL_EMAIL)
-                );
-                dispatch(
-                    updateSuccess({
-                        successful: success,
-                        unsuccessful: -success
-                    })
-                );
-                dispatch(setIsUpdating(false));
-            }
-        }, (1 + Math.round(Math.random() * 10)) * 1000);
+        dispatch(incrementEmailWrote());
+        dispatch(incrementPeopleReached(totalSend));
+        dispatch(incrementMoneyGained(success * MONEY_PER_SUCCESSFUL_EMAIL));
     }
 
     function numberButton({ index }) {
@@ -264,10 +256,10 @@ function BrowserCustom({
                         );
                         send({ totalSend: email.totalSend });
                         onClose();
-                        toast.success(
-                            "Email sent. Your stats will be updated when the users open them.",
-                            { autoClose: 2000 }
-                        );
+                        // .success(
+                        //  toast   "Email sent. Your stats will be updated when the users open them.",
+                        //     { autoClose: 2000 }
+                        // );
                     }}
                 >
                     Send Email

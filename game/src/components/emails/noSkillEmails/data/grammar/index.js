@@ -70,7 +70,7 @@ function createEmails(spellingTrained) {
                                 <Text>{message.end}</Text>
                             </>
                         ),
-                        properties: ["grammar"]
+                        properties: ["grammar", "spelling"]
                     },
                     {
                         start: (

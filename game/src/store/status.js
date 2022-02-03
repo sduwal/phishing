@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
+import _ from "lodash";
 
 export const moneySlice = createSlice({
     name: "status",
@@ -11,7 +12,7 @@ export const moneySlice = createSlice({
         isUpdating: false,
         gameWon: false,
         canCurrentlyTrain: [],
-        count: { "spelling": 0, "grammar": 0 },
+        // count: { "spelling": 0, "grammar": 0 },
         currentTrainingMode: "spelling",
         username: nanoid(6)
     },
@@ -41,12 +42,14 @@ export const moneySlice = createSlice({
         setCanCurrentlyTrain: (state, action) => {
             state.canCurrentlyTrain = [
                 ...state.canCurrentlyTrain,
-                action.payload
+                ...action.payload
             ];
+
+            state.canCurrentlyTrain = _.uniq(state.canCurrentlyTrain);
         },
-        increamentTrainingCount: (state, action) => {
-            state.count[action.payload] += 1;
-        },
+        // incrementTrainingCount: (state, action) => {
+        //     state.count[action.payload] += 1;
+        // },
         changeCurrentTrainingMode: (state, action) => {
             state.currentTrainingMode = action.payload;
         }
@@ -61,7 +64,7 @@ export const {
     setIsUpdating,
     setGameWon,
     setCanCurrentlyTrain,
-    increamentTrainingCount,
+    incrementTrainingCount,
     changeCurrentTrainingMode,
     changeUsername
 } = moneySlice.actions;

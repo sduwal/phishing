@@ -15,14 +15,9 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    setLanguageSkills,
-    setTechSkills,
-    setIsTraining,
-    setCurrentTraining
-} from "@store/attacker";
+import { setLanguageSkills, setTechSkills } from "@store/attacker";
 
 import { decrementByAmount } from "@store/status";
 
@@ -57,10 +52,8 @@ function CollapseTrainingOptions({
         });
 
     function handleClick() {
-        // dispatch(setIsTraining(true));
-        // dispatch(setCurrentTraining(display));
+        toast.dismiss();
         dispatch(decrementByAmount(cost));
-        // setTimeout(() => {
         type === "language"
             ? dispatch(
                   setLanguageSkills({
@@ -77,15 +70,14 @@ function CollapseTrainingOptions({
                   })
               );
 
-        // dispatch(setIsTraining(false));
         toast.success(trained, {
+            toastId: "trained",
             autoClose: 5000,
             pauseOnHover: false,
             position: "top-center",
-            hideProgressBar: true,
-            transition: "zoom"
+            hideProgressBar: true
+            // transition: "zoom"
         });
-        // }, time * 1000);
     }
     return (
         <>
@@ -162,35 +154,21 @@ function TrainLanguage({ canCurrentlyTrain }) {
 function TrainTechnical({ canCurrentlyTrain }) {
     const attacker = useSelector((state) => state.attacker);
 
-    const [data, setData] = useState([]);
+    // const [data, setData] = useState([]);
 
-    useEffect(() => {
-        const checker = (arr, target) =>
-            target.every((item) => arr.some((el) => el.display === item));
+    const required = skills.filter((skill) =>
+        canCurrentlyTrain.includes(skill.value)
+    );
+    // useEffect(() => {
 
-        const temp = skills.map((skill) => (
-            <Box m={2} key={skill.display} margin={2}>
-                {!skill.requirement ||
-                checker(attacker.techSkills, skill.requirement) ? (
-                    <CollapseTrainingOptions {...skill} />
-                ) : (
-                    <> </>
-                )}
-            </Box>
-        ));
-        setData(temp);
-    }, [attacker.techSkills.length]);
-
-    if (canCurrentlyTrain.length < 2) {
-        return (
-            <Center py={4}>
-                <Text fontWeight={"bold"} opacity={"0.8"} color={"teal.400"}>
-                    Send more emails! Will unlock more training skills with more
-                    experience.
-                </Text>
-            </Center>
-        );
+    if (required.length === 0) {
+        return <> </>;
     }
+    const temp = required.map((skill) => (
+        <Box m={2} key={skill.display} margin={2}>
+            <CollapseTrainingOptions {...skill} />
+        </Box>
+    ));
 
     return (
         <>
@@ -200,7 +178,7 @@ function TrainTechnical({ canCurrentlyTrain }) {
                 m={2}
                 background={"blue.100"}
             >
-                {data}
+                {temp}
             </Box>
         </>
     );
@@ -239,11 +217,14 @@ function Attacker() {
                     </SimpleGrid>
                 </Container>
             </Flex>
-            <Center>
+            <Flex align={"center"} direction={"column"}>
                 <Text fontWeight={"bold"}>
                     You can click on the option to learn more!
                 </Text>
-            </Center>
+                <Text>
+                    More Skills will be unlocked as the game progresses.
+                </Text>
+            </Flex>
         </>
     );
 }

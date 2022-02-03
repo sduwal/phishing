@@ -4,7 +4,6 @@ import {
     Image,
     Text,
     Progress,
-    Box,
     Flex
 } from "@chakra-ui/react";
 
