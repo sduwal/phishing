@@ -33,13 +33,13 @@ export default function StatusBar() {
         <Box
             border="3px solid"
             minW="20vw"
-            p="3"
+            p="10"
             rounded="10"
             width="fit-content"
         >
             <Center>
                 <Text fontStyle={"bold"} fontSize={"1.5em"}>
-                    Stats
+                    Overall Stats
                 </Text>
             </Center>
             <Center>

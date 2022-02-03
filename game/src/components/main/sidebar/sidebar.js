@@ -30,6 +30,7 @@ import trainingImage from "./images/training.gif";
 
 import PrevEmails from "../prevEmails";
 
+import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
 function SideButtons({
@@ -44,6 +45,7 @@ function SideButtons({
     isDisabled = false
 }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
+
     const finalRef = useRef();
     return (
         <>
@@ -68,7 +70,10 @@ function SideButtons({
                         cursor: isDisabled ? "wait" : "pointer",
                         backgroundColor: isDisabled ? "transparent" : "black"
                     }}
-                    onClick={isDisabled ? () => {} : onOpen}
+                    onClick={() => {
+                        toast.dismiss();
+                        onOpen();
+                    }}
                 >
                     <div className={title.split(" ")[0].toLowerCase()}>
                         <Image
@@ -98,15 +103,16 @@ function SideButtons({
                 <ModalContent>
                     <ModalCloseButton />
                     <ModalBody>
-                        {id == 1 &&
-                            (view ? (
-                                <NoSkillEmailClient onClose={onClose} />
-                            ) : (
-                                <EmailClient onClose={onClose} />
-                            ))}
+                        {id == 1 && (
+                            // {/* (view ? ( */}
+                            // {/* <NoSkillEmailClient onClose={onClose} /> */}
+                            // {/* ) : ( */}
+                            <EmailClient onClose={onClose} />
+                        )}
+                        {/* ))} */}
                         {id == 2 && <MarketPlace onClose={onClose} />}
                         {id == 3 && <Attacker />}
-                        {id == 4 && <PrevEmails />}
+                        {/* {id == 4 && <PrevEmails />} */}
                     </ModalBody>
                 </ModalContent>
             </Modal>
@@ -146,25 +152,31 @@ export default function SideBar() {
             color: "red.500",
             modal: <Attacker />,
             id: 3
-        },
-        {
-            title: "Prev Emails",
-            desc: "Change Attackers",
-            image: sentImage,
-            color: "purple.200",
-            modal: <PrevEmails />,
-            id: 4
         }
+        // {
+        //     title: "Prev Emails",
+        //     desc: "Change Attackers",
+        //     image: sentImage,
+        //     color: "purple.200",
+        //     modal: <PrevEmails />,
+        //     id: 4
+        // }
     ];
+    const currentWeek = useSelector((state) => state.week.currentWeek);
 
     return (
         // <Flex justify={"center"}>
         <Center>
             <Box width="fit-content" px={"10"} overflowY="auto" maxH="90vh">
                 <VStack spacing="4" align={"center"}>
-                    {side.map((item, index) => (
-                        <SideButtons key={item.title} {...side[index]} />
-                    ))}
+                    {side.map((item, index) => {
+                        if (item.title === "Marketplace" && currentWeek != 4) {
+                            return;
+                        }
+                        return (
+                            <SideButtons key={item.title} {...side[index]} />
+                        );
+                    })}
                 </VStack>
             </Box>
         </Center>

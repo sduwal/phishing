@@ -8,24 +8,24 @@ import GameOver from "./gameover";
 
 function App() {
     return (
-        <Box w="100vw" h="100vh">
-            <Router>
-                <Switch>
-                    <Route path="/" exact>
-                        <StartGame />
-                    </Route>
-                    <Route path="/introduction">
-                        <Introduction />
-                    </Route>
-                    <Route path="/main">
-                        <Profile />
-                    </Route>
-                    <Route path="/gameover">
-                        <GameOver />
-                    </Route>
-                </Switch>
-            </Router>
-        </Box>
+        // <Box w="100vw" h="100vh">
+        <Router>
+            <Switch>
+                <Route path="/" exact>
+                    <StartGame />
+                </Route>
+                <Route path="/introduction">
+                    <Introduction />
+                </Route>
+                <Route path="/main">
+                    <Profile />
+                </Route>
+                <Route path="/gameover">
+                    <GameOver />
+                </Route>
+            </Switch>
+        </Router>
+        // </Box>
     );
 }
 

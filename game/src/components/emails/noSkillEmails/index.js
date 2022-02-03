@@ -30,16 +30,6 @@ function NoSkillContainer({ onClose }) {
     return (
         <>
             {count["spelling"] === 0 && renderHelpMessage()}
-            {/* {count["spelling"] > 0 && (
-                <Center>
-                    <Box w="60%" py={2}>
-                        <Text>
-                            Keep up the good work. Select the best email and
-                            access the attacker skills.
-                        </Text>
-                    </Box>
-                </Center>
-            )} */}
             <BrowserCustom
                 email={email}
                 onClose={onClose}

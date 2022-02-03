@@ -1,21 +1,13 @@
-import { Box, Center, VStack } from "@chakra-ui/react";
+import { Box, Center, VStack, Flex } from "@chakra-ui/react";
 import StatusBar from "./StatusBar";
 import Domain from "./domain";
 
+import Status from "./Status";
+
 export default function mainComponent(props) {
     return (
-        <Box width="85vw" height="100%" p={5}>
-            <VStack alignItems={"center"} mb="10">
-                {/* <Top /> */}
-                <div className="stats">
-                    <StatusBar />
-                </div>
-            </VStack>
-            {/* <Center>
-                <div className="domain">
-                    <Domain />
-                </div>
-            </Center> */}
-        </Box>
+        <div className="stats">
+            <Status />
+        </div>
     );
 }

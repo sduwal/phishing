@@ -1,4 +1,4 @@
-import { VStack, Box, Flex, Spacer } from "@chakra-ui/react";
+import { VStack, Box, Flex, Spacer, Text } from "@chakra-ui/react";
 import { ToastContainer } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -32,7 +32,7 @@ export default function App() {
                 }}
             />
 
-            <Box
+            {/* <Box
                 h="100vh"
                 bg="#eee8d5"
                 overflowY="auto"
@@ -40,17 +40,18 @@ export default function App() {
                 px={0}
                 width={"100vw"}
                 overflowX={"hidden"}
-            >
-                <VStack>
-                    <ToastContainer />
+            > */}
+            {/* <VStack width={"100%"}> */}
+            <ToastContainer />
 
-                    <Flex>
-                        <MainComponent />
-                        <Spacer />
-                        <Sidebar />
-                    </Flex>
-                </VStack>
-            </Box>
+            <Flex background={"#fdf6e3"}>
+                <Box flex="1" h="100vh">
+                    <MainComponent />
+                </Box>
+                <Sidebar />
+            </Flex>
+            {/* </VStack> */}
+            {/* </Box> */}
         </>
     );
 }
