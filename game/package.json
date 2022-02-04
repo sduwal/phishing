@@ -33,6 +33,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-toastify": "^8.1.0",
+    "react-transition-group": "^4.4.2",
     "string-similarity": "^4.0.4",
     "use-deep-compare-effect": "^1.8.1",
     "web-vitals": "^1.1.2"

@@ -5,6 +5,7 @@ import domainReducer from "./domain";
 import emailReducer from "./email";
 import stepsReducer from "./steps";
 import weekReducer from "./week";
+import animateReducer from "./animate";
 
 import logger from "./middleware/logger";
 
@@ -15,7 +16,8 @@ export default configureStore({
         domain: domainReducer,
         email: emailReducer,
         steps: stepsReducer,
-        week: weekReducer
-    },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
+        week: weekReducer,
+        animate: animateReducer
+    }
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 });

@@ -56,7 +56,7 @@ const Basket = ({ emails }) => {
     const [researchTime, setResearchTime] = useState(0);
 
     useEffect(() => {
-        if (!attacker?.techSkills?.includes("research")) {
+        if (!storeAttacker.techSkills.some((i) => i.value === "research")) {
             setBasket([
                 {
                     "display": "Generate a generic email",
@@ -68,7 +68,6 @@ const Basket = ({ emails }) => {
                     "displayMessage": "Generate a generic email"
                 }
             ]);
-            // setLevel(level + 1);
         }
     }, []);
 

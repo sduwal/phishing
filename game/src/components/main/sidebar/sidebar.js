@@ -164,7 +164,7 @@ export default function SideBar() {
             <Box width="fit-content" px={"10"} overflowY="auto" maxH="90vh">
                 <VStack spacing="4" align={"center"}>
                     {side.map((item, index) => {
-                        if (item.title === "Marketplace" && currentWeek != 3) {
+                        if (item.title === "Marketplace" && currentWeek != 2) {
                             return;
                         }
 

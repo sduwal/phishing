@@ -1,19 +1,36 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Box, Text, Flex, Center, Divider } from "@chakra-ui/react";
+import {
+    Box,
+    Text,
+    Flex,
+    Center,
+    Divider,
+    VStack,
+    HStack
+} from "@chakra-ui/react";
 
 import { toast } from "react-toastify";
 
 import { setCanCurrentlyTrain } from "@store/status";
 import { incrementWeek } from "@store/week";
 import StatusBar from "./StatusBar";
+import { setGameWon } from "@store/status";
+import { decrementByAmount } from "../../../store/status";
+
+import {
+    DragControls,
+    motion,
+    useAnimation,
+    AnimatePresence
+} from "framer-motion";
 
 const canTrain = [
     [], // first week
     ["spelling", "grammar", "links"],
-    ["styling", "spoof", "research"],
-    [] // placeholder for marketplace
+    ["styling", "research"],
+    ["spoof"] // placeholder for marketplace
 ];
 
 function showWeekToast(week, maxEmails, weeklyGoals) {
@@ -24,14 +41,13 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
             <Text>This week goal: $ {weeklyGoals[week]}</Text>
         </Flex>
     );
-
     if (week == 0) {
         toast(
             "The first week goal is to familiarize with your helper. Review the different emails sent by your helper and try to reach the goal.",
             {
                 toastId: "zerothWeek",
                 position: "top-left",
-                autoClose: 15000,
+                autoClose: false,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: false,
@@ -45,15 +61,15 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
     toast.success(<Msg />, {
         toastId: "weekToast",
         position: "top-left",
-        autoClose: 15000,
+        autoClose: false,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: false,
         draggable: true,
-        progress: 0,
+        progress: 1,
         theme: "colored",
         icon: false,
-        delay: 200
+        delay: 1000
     });
 
     if (week === 1) {
@@ -62,7 +78,7 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
             {
                 toastId: "firstweek",
                 position: "top-left",
-                autoClose: 15000,
+                autoClose: false,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: false,
@@ -70,7 +86,7 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
                 progress: 0,
                 theme: "colored",
                 icon: false,
-                delay: 400
+                delay: 1500
             }
         );
     }
@@ -79,7 +95,7 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
         toast.info(`Skills unlocked: ${canTrain[week].join(", ")}`, {
             toastId: "weekSkills",
             position: "top-left",
-            autoClose: 15000,
+            autoClose: false,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: false,
@@ -87,15 +103,33 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
             progress: 0,
             theme: "colored",
             icon: false,
-            delay: 500
+            delay: 2000
         });
+    }
+    if (week == 3) {
+        toast.info(
+            "Victim are paying closer attention to the domain names. Marketplace has been disabled as its effectiveness has decreased. New skill unlocked: Spoofing.",
+            {
+                toastId: "marketplace",
+                position: "top-left",
+                autoClose: false,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: 0,
+                theme: "colored",
+                icon: false,
+                delay: 2000
+            }
+        );
     }
 
-    if (week == 3) {
+    if (week == 2) {
         toast.info("Marketplace unlocked. You can buy new domains.", {
-            toastId: "weekSkills",
+            toastId: "marketplace",
             position: "top-left",
-            autoClose: 15000,
+            autoClose: false,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: false,
@@ -103,24 +137,9 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
             progress: 0,
             theme: "colored",
             icon: false,
-            delay: 500
+            delay: 2000
         });
     }
-    // if (week != 0) {
-    //     toast.info("Attackers Skills: Spelling, Grammar", {
-    //         toastId: "weekSkills",
-    //         position: "top-left",
-    //         autoClose: 15000,
-    //         hideProgressBar: true,
-    //         closeOnClick: true,
-    //         pauseOnHover: false,
-    //         draggable: true,
-    //         progress: 0,
-    //         theme: "colored",
-    //         icon: false,
-    //         delay: 2000
-    //     });
-    // }
 }
 
 function Status() {
@@ -146,6 +165,11 @@ function Status() {
 
         if (moneyGained > weeklyGoals[currentWeek]) {
             dispatch(incrementWeek());
+
+            // if (currentWeek == 3) {
+            //     dispatch(setGameWon(true));
+            //     history.push("/gameover");
+            // }
         }
 
         // dispatch(incrementTotalEmails(emailWrote));
@@ -154,8 +178,53 @@ function Status() {
     useEffect(() => {
         dispatch(setCanCurrentlyTrain(canTrain[currentWeek]));
         showWeekToast(currentWeek, maxEmails, weeklyGoals);
+
+        // if (currentWeek != 0) {
+        //     dispatch(decrementByAmount(weeklyGoals[currentWeek - 1]));
+        //     toast.warn("This week payment has been made!", {
+        //         toastId: "payment",
+        //         position: "top-left",
+        //         autoClose: false,
+        //         hideProgressBar: true,
+        //         closeOnClick: true,
+        //         pauseOnHover: false,
+        //         draggable: true,
+        //         progress: 0,
+        //         theme: "colored",
+        //         icon: false
+        //     });
+        // }
     }, [currentWeek]);
 
+    const controls = useAnimation();
+    const weekAnimationControls = useAnimation();
+
+    const animateParams = useSelector((state) => state.animate);
+    useEffect(() => {
+        controls.start((i) => ({
+            opacity: [1, 0.8, 0.5, 0.3, 0.1, 0],
+            color: "yellow",
+            scale: [1, 1.2, 1],
+            transition: { delay: i * 0.3, duration: 3 }
+        }));
+
+        return controls.stop;
+    });
+
+    useEffect(() => {
+        weekAnimationControls.start((i) => ({
+            opacity: [0, 1],
+            // translateY: [1, -4, 1],
+            // color: "yellow",
+            // scale: [1, 1.2, 1],
+            transition: { duration: 3 }
+        }));
+
+        // weekAnimationControls.onAnimationEnd(() => {
+        //     color: "black";
+        // });
+        return weekAnimationControls.stop;
+    }, [currentWeek]);
     return (
         <Box>
             <Flex
@@ -173,36 +242,63 @@ function Status() {
                             border="2px solid black"
                             rounded={"xl"}
                             p={5}
-                            minWidth="30vw"
+                            background={"red.500"}
+                            minWidth="50vw"
                         >
                             <Center>
-                                <Text fontWeight={"bold"} fontSize={"3xl"}>
-                                    This week ({currentWeek + 1}/4)
-                                </Text>
+                                <HStack fontWeight={"bold"} fontSize={"3xl"}>
+                                    <Text>This week (</Text>
+                                    <motion.div
+                                        custom={0}
+                                        animate={weekAnimationControls}
+                                    >
+                                        {currentWeek + 1}
+                                    </motion.div>
+                                    <Text> / 4)</Text>
+                                </HStack>
                             </Center>
                             <Box py={2} color={"black"}>
                                 <Divider />
                             </Box>
                             <Flex justify={"space-between"}>
-                                <Text fontSize={"xl"}>
-                                    Number of emails sent:
-                                </Text>
-                                <Text fontSize={"xl"}>
-                                    {emailWrote} / {maxEmails[currentWeek]}
-                                </Text>
-                            </Flex>
-                            <Flex justify={"space-between"}>
-                                <Text fontSize={"xl"}>
-                                    Number of people reached:
-                                </Text>
-                                <Text fontSize={"xl"}> {peopleReached}</Text>
-                            </Flex>
-
-                            <Flex justify={"space-between"}>
-                                <Text fontSize={"xl"}>Money gained:</Text>
-                                <Text fontSize={"xl"}>
-                                    $ {moneyGained} / {weeklyGoals[currentWeek]}
-                                </Text>
+                                <Flex
+                                    direction={"column"}
+                                    fontSize={"xl"}
+                                    align={"start"}
+                                >
+                                    <Text>Number of emails sent:</Text>
+                                    <Text>Number of people reached:</Text>
+                                    <Text>Weekly Goals:</Text>
+                                </Flex>
+                                <Flex
+                                    direction="column"
+                                    fontSize={"xl"}
+                                    align="center"
+                                >
+                                    <motion.div custom={0} animate={controls}>
+                                        +{animateParams.animateWeeklyEmails}
+                                    </motion.div>
+                                    <motion.div custom={1} animate={controls}>
+                                        +{animateParams.animateWeeklyPeople}
+                                    </motion.div>
+                                    <motion.div custom={2} animate={controls}>
+                                        +{animateParams.animateWeeklyMoney}
+                                    </motion.div>
+                                </Flex>{" "}
+                                <Flex
+                                    direction="column"
+                                    fontSize={"xl"}
+                                    align="end"
+                                >
+                                    <Text>
+                                        {emailWrote} / {maxEmails[currentWeek]}
+                                    </Text>
+                                    <Text> {peopleReached}</Text>
+                                    <Text>
+                                        $ {moneyGained} /{" "}
+                                        {weeklyGoals[currentWeek]}
+                                    </Text>
+                                </Flex>
                             </Flex>
                         </Box>
                     </Center>

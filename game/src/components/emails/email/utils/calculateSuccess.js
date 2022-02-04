@@ -17,7 +17,6 @@ function calculateFromPoints(from) {
         }
     } else {
         const similarity = stringSimilarity.compareTwoStrings(base, domain);
-
         if (similarity > 0.9) {
             pointEarned += 20;
         } else if (similarity > 0.8) {
@@ -82,7 +81,6 @@ export default function calculateSuccess(email, number, domain) {
     const totalPoints = Object.keys(points).reduce((acc, key) => {
         return acc + points[key];
     }, 0);
-
     const userPoints =
         calculateFromPoints(email.from) +
         calculateLinkType(email.linkType, domain) +
@@ -91,5 +89,5 @@ export default function calculateSuccess(email, number, domain) {
         (email.targeted === "generic" ? 0 : 20);
 
     const successRate = userPoints / totalPoints;
-    return successRate * 0.9;
+    return successRate;
 }

@@ -14,15 +14,17 @@ export const weekSlice = createSlice({
     },
     reducers: {
         incrementWeek: (state) => {
-            state.weeklyStats.push({
-                emailWrote: state.emailWrote,
-                peopleReached: state.peopleReached,
-                moneyGained: state.moneyGained
-            });
-            state.currentWeek += 1;
-            state.emailWrote = 0;
-            state.peopleReached = 0;
-            state.moneyGained = 0;
+            if (state.currentWeek < 3) {
+                state.weeklyStats.push({
+                    emailWrote: state.emailWrote,
+                    peopleReached: state.peopleReached,
+                    moneyGained: state.moneyGained
+                });
+                state.currentWeek += 1;
+                state.emailWrote = 0;
+                state.peopleReached = 0;
+                state.moneyGained = 0;
+            }
         },
         incrementEmailWrote: (state) => {
             state.emailWrote += 1;

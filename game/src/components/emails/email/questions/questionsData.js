@@ -4,7 +4,7 @@ const targeted = [
         display: "Generate Targeted Emails",
         hint: "Generate email targeted to a specific group of users. This will take a while but will generate personalized emails (maybe name, address, etc).",
         displayLevel: 1,
-        value: "group",
+        value: "targeted",
         color: "green.100",
         researchTime: 10,
         requirement: ["Research Targeted group"]

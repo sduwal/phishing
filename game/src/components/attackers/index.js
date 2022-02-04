@@ -15,7 +15,7 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLanguageSkills, setTechSkills } from "@store/attacker";
 
@@ -159,7 +159,6 @@ function TrainTechnical({ canCurrentlyTrain }) {
     const required = skills.filter((skill) =>
         canCurrentlyTrain.includes(skill.value)
     );
-    // useEffect(() => {
 
     if (required.length === 0) {
         return <> </>;
@@ -188,6 +187,13 @@ function Attacker() {
     const canCurrentlyTrain = useSelector(
         (state) => state.status.canCurrentlyTrain
     );
+
+    useEffect(() => {
+        return () => {
+            toast.dismiss();
+        };
+    }, []);
+
     return (
         <>
             <Flex>

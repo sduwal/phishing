@@ -25,6 +25,14 @@ import {
     incrementPeopleReached
 } from "../../../store/week";
 
+import {
+    incrementByAmount,
+    incrementTotalEmails,
+    updateSuccess
+} from "../../../store/status";
+import { MONEY_PER_SUCCESSFUL_EMAIL } from "@constants";
+import { updateAnimateNumber } from "../../../store/animate";
+
 function BrowserCustom({
     onClose,
     email,
@@ -41,17 +49,51 @@ function BrowserCustom({
 
     function send() {
         const props = email.body.text[number].properties;
-        dispatch(incrementEmailWrote());
 
-        if (props.includes("spelling") && props.includes("grammar")) {
-            toast("Nice!");
+        const successrate = props.length * 0.05;
+        const sendNumber = 500;
+        const success = Math.ceil(sendNumber * successrate);
 
-            // weekly
-            dispatch(incrementPeopleReached(200));
-            dispatch(incrementMoneyGained(350));
-        } else {
-            toast("Wrong!");
+        function SentMessage() {
+            return (
+                <Box>
+                    <Text fontWeight={"bold"}>
+                        Email subject: {email.subject}
+                    </Text>
+                    <Text>Success rate: {Math.round(successrate * 100)}%</Text>
+                    <Text>
+                        Money earned: ${success * MONEY_PER_SUCCESSFUL_EMAIL}
+                    </Text>
+                </Box>
+            );
         }
+        toast.info(<SentMessage />, { icon: false });
+
+        dispatch(
+            // The amount is 10 for each successful email
+            incrementByAmount(success * MONEY_PER_SUCCESSFUL_EMAIL)
+        );
+        dispatch(
+            updateSuccess({
+                successful: success,
+                unsuccessful: sendNumber - success
+            })
+        );
+
+        dispatch(incrementEmailWrote());
+        dispatch(incrementTotalEmails(sendNumber));
+        dispatch(incrementPeopleReached(sendNumber));
+        dispatch(incrementMoneyGained(success * MONEY_PER_SUCCESSFUL_EMAIL));
+
+        dispatch(
+            updateAnimateNumber({
+                animateWeeklyPeople: sendNumber,
+                animateWeeklyMoney: success * MONEY_PER_SUCCESSFUL_EMAIL,
+                animateWeeklyEmails: 1
+            })
+        );
+        //    }
+        // }
     }
 
     function numberButton({ index }) {

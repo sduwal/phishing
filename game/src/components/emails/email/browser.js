@@ -12,7 +12,6 @@ import { toast } from "react-toastify";
 
 import {
     incrementTotalEmails,
-    setIsUpdating,
     updateSuccess,
     incrementByAmount
 } from "@store/status";
@@ -28,6 +27,7 @@ import {
     incrementPeopleReached
 } from "../../../store/week";
 
+import { updateAnimateNumber } from "../../../store/animate";
 // styles
 const Dots = styled.span`
     &::after {
@@ -60,6 +60,9 @@ function BrowserCustom({
 
     const isUpdating = useSelector((state) => state.status.isUpdating);
     const activeLink = useSelector((state) => state.domain.activeDomain);
+    const languageSkills = useSelector(
+        (state) => state.attacker.languageSkills
+    );
     const dispatch = useDispatch();
 
     const [number, setNumber] = useState(0);
@@ -71,13 +74,20 @@ function BrowserCustom({
         const successrate = calculateSuccess(email, number, activeLink);
         const sendNumber = totalSend;
 
-        toast.info(
-            `Email: ${
-                email.subject
-            } has stopped receiving traction. 🎉 Success rate: ${Math.round(
-                successrate * 100
-            )}%`
-        );
+        function SentMessage() {
+            return (
+                <Box>
+                    <Text fontWeight={"bold"}>
+                        Email subject: {email.subject}
+                    </Text>
+                    <Text>Success rate: {Math.round(successrate * 100)}%</Text>
+                    <Text>
+                        Money earned: ${success * MONEY_PER_SUCCESSFUL_EMAIL}
+                    </Text>
+                </Box>
+            );
+        }
+        toast.info(<SentMessage />, { icon: false });
 
         dispatch(
             addSentEmail({
@@ -101,6 +111,49 @@ function BrowserCustom({
         dispatch(incrementEmailWrote());
         dispatch(incrementPeopleReached(totalSend));
         dispatch(incrementMoneyGained(success * MONEY_PER_SUCCESSFUL_EMAIL));
+        dispatch(
+            updateAnimateNumber({
+                animateWeeklyPeople: sendNumber,
+                animateWeeklyMoney: success * MONEY_PER_SUCCESSFUL_EMAIL,
+                animateWeeklyEmails: sendNumber
+            })
+        );
+    }
+
+    function renderMultipleEmails() {
+        return (
+            <Flex
+                justify={"center"}
+                alignItems={"center"}
+                minW={"100%"}
+                direction={"column"}
+            >
+                {languageSkills.length < 2 && (
+                    <Text
+                        opacity={"0.8"}
+                        letterSpacing={"-0.5px"}
+                        fontStyle="italic"
+                        maxW={"80%"}
+                    >
+                        See some problem in the email? Choose a different one.
+                    </Text>
+                )}
+                <Box pt={2}>
+                    {email.body.text.length > 1 &&
+                        (() => {
+                            const elements = [];
+                            for (let i = 0; i < email.body.text.length; i++) {
+                                elements.push(
+                                    numberButton({
+                                        index: i
+                                    })
+                                );
+                            }
+                            return elements;
+                        })()}
+                </Box>
+            </Flex>
+        );
     }
 
     function numberButton({ index }) {
@@ -115,6 +168,31 @@ function BrowserCustom({
             >
                 {index + 1}
             </Button>
+        );
+    }
+
+    function SendEmailButton() {
+        return (
+            <Flex>
+                <Spacer />
+                <Button
+                    isDisabled={_.isEmpty(email)}
+                    onClick={() => {
+                        dispatch(incrementTotalEmails(email.totalSend));
+                        dispatch(increaseSent());
+                        dispatch(
+                            updateSuccess({
+                                successful: 0,
+                                unsuccessful: email.totalSend
+                            })
+                        );
+                        send({ totalSend: email.totalSend });
+                        onClose();
+                    }}
+                >
+                    Send Email
+                </Button>
+            </Flex>
         );
     }
     return (
@@ -132,139 +210,32 @@ function BrowserCustom({
                         title={"Email"}
                         onClose={() => {}}
                     >
-                        {
-                            _.isEmpty(email) ? (
-                                <Box px={10} py={20}>
-                                    <Dots>Waiting for input</Dots>
-                                </Box>
-                            ) : (
-                                //     isLoading ? (
-                                //     <Box px={10} py={20}>
-                                //         <Dots>Loading</Dots>
-                                //         <Progress
-                                //             value={value}
-                                //             max={TOTAL_EMAIL_REVISE_TIME * 1000}
-                                //             isAnimated={true}
-                                //             hasStripe={true}
-                                //             colorScheme={"green"}
-                                //         />
-                                //     </Box>
-                                // ) : (
-                                <>
-                                    <EmailClient
-                                        title={email.subject}
-                                        name={email.name}
-                                        from={email.from}
-                                        to={email.to}
-                                        body={{
-                                            ...email.body.text[number],
-                                            link: email.body.link
-                                        }}
-                                        linkType={email.linkType}
-                                    />
-                                    <Divider
-                                        mt={4}
-                                        color={"black"}
-                                        opacity={1}
-                                    />
-                                    <Flex
-                                        justify={"center"}
-                                        alignItems={"center"}
-                                        minW={"100%"}
-                                        direction={"column"}
-                                    >
-                                        <Text
-                                            opacity={"0.8"}
-                                            letterSpacing={"-0.5px"}
-                                            fontStyle="italic"
-                                            maxW={"80%"}
-                                        >
-                                            See some problem in the email?
-                                            Choose a different one.
-                                        </Text>
-                                        <Box>
-                                            {email.body.text.length > 1 &&
-                                                (() => {
-                                                    const elements = [];
-                                                    for (
-                                                        let i = 0;
-                                                        i <
-                                                        email.body.text.length;
-                                                        i++
-                                                    ) {
-                                                        elements.push(
-                                                            numberButton({
-                                                                index: i
-                                                            })
-                                                        );
-                                                    }
-                                                    return elements;
-                                                })()}
-                                        </Box>
-                                    </Flex>
-                                </>
-                            )
-                            // )
-                        }
+                        {_.isEmpty(email) ? (
+                            <Box px={10} py={20}>
+                                <Dots>Waiting for input</Dots>
+                            </Box>
+                        ) : (
+                            <>
+                                <EmailClient
+                                    title={email.subject}
+                                    name={email.name}
+                                    from={email.from}
+                                    to={email.to}
+                                    body={{
+                                        ...email.body.text[number],
+                                        link: email.body.link
+                                    }}
+                                    linkType={email.linkType}
+                                />
+                                <Divider mt={4} color={"black"} opacity={1} />
+                                {renderMultipleEmails()}
+                            </>
+                        )}
                     </Tab>
                 </Browser>
             </Box>
 
-            <Flex>
-                {/* <Tooltip
-                    label={
-                        "Not satisfied with this email? Click here to generate a modified email."
-                    }
-                    openDelay={1000}
-                >
-                    <Button
-                        isDisabled={_.isEmpty(email)}
-                        onClick={() => {
-                            setIsLoading(true);
-
-                            const randomNumber = Math.floor(
-                                Math.random() * email.body.text.length
-                            );
-
-                            const interval = setInterval(() => {
-                                setValue((value) => value + 50);
-                            }, 50);
-
-                            setTimeout(() => {
-                                setNumber(randomNumber);
-                                setIsLoading(false);
-                                clearInterval(interval);
-                                setValue(0);
-                            }, TOTAL_EMAIL_REVISE_TIME * 1000);
-                        }}
-                    >
-                        Revise the email
-                    </Button>
-                </Tooltip> */}
-
-                <Spacer />
-                <Button
-                    isDisabled={_.isEmpty(email)}
-                    onClick={() => {
-                        dispatch(incrementTotalEmails(email.totalSend));
-                        dispatch(increaseSent());
-                        dispatch(
-                            updateSuccess({
-                                successful: 0,
-                                unsuccessful: email.totalSend
-                            })
-                        );
-                        send({ totalSend: email.totalSend });
-                        onClose();
-                        // .success(
-                        //  toast   "Email sent. Your stats will be updated when the users open them.",
-                        //     { autoClose: 2000 }
-                        // );
-                    }}
-                >
-                    Send Email
-                </Button>
-            </Flex>
+            <SendEmailButton />
         </Box>
     );
 }
