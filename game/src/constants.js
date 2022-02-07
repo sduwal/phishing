@@ -1,4 +1,4 @@
-export const MONEY_PER_SUCCESSFUL_EMAIL = 13;
+export const MONEY_PER_SUCCESSFUL_EMAIL = 10;
 export const BUY_TIME_DURATION = 120;
 export const GOAL_AMOUNT = 100_000;
 

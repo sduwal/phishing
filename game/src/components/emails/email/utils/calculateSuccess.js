@@ -23,8 +23,6 @@ function calculateFromPoints(from) {
             pointEarned += 18;
         } else if (similarity > 0.6) {
             pointEarned += 7;
-        } else {
-            pointEarned += 3;
         }
     }
 
@@ -41,10 +39,11 @@ function calculateFromPoints(from) {
 function calculateLinkType(link, domain) {
     const similarity = stringSimilarity.compareTwoStrings("paypal.com", domain);
 
-    let point = 1;
+    let point = 0;
     switch (link) {
         case "normal":
-            point = similarity > 0.7 ? 20 : domain.includes("paypal") ? 15 : 10;
+            point = similarity > 0.7 ? 20 : domain.includes("paypal") ? 15 : 3;
+            break;
         case "hidden":
             point = 18;
             break;

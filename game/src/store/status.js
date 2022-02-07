@@ -5,15 +5,13 @@ import _ from "lodash";
 export const moneySlice = createSlice({
     name: "status",
     initialState: {
-        money: 1_000,
+        money: 0,
         totalEmails: 0,
         successEmails: 0,
         unsuccessfulEmails: 0,
         isUpdating: false,
         gameWon: false,
         canCurrentlyTrain: [],
-        // count: { "spelling": 0, "grammar": 0 },
-        currentTrainingMode: "spelling",
         username: nanoid(6)
     },
     reducers: {
@@ -46,12 +44,6 @@ export const moneySlice = createSlice({
             ];
 
             state.canCurrentlyTrain = _.uniq(state.canCurrentlyTrain);
-        },
-        // incrementTrainingCount: (state, action) => {
-        //     state.count[action.payload] += 1;
-        // },
-        changeCurrentTrainingMode: (state, action) => {
-            state.currentTrainingMode = action.payload;
         }
     }
 });
@@ -64,8 +56,6 @@ export const {
     setIsUpdating,
     setGameWon,
     setCanCurrentlyTrain,
-    incrementTrainingCount,
-    changeCurrentTrainingMode,
     changeUsername
 } = moneySlice.actions;
 

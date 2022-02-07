@@ -42,7 +42,7 @@ export default function App() {
                 overflowX={"hidden"}
             > */}
             {/* <VStack width={"100%"}> */}
-            <ToastContainer />
+            <ToastContainer limit={3} />
 
             <Flex background={"#fdf6e3"}>
                 <Box flex="1" h="100vh">

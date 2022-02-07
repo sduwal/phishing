@@ -163,6 +163,8 @@ function TrainTechnical({ canCurrentlyTrain }) {
     if (required.length === 0) {
         return <> </>;
     }
+
+    // required = _.sortBy(required, ["value"]);
     const temp = required.map((skill) => (
         <Box m={2} key={skill.display} margin={2}>
             <CollapseTrainingOptions {...skill} />

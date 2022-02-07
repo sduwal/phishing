@@ -54,7 +54,7 @@ export default function getRandomEmail({ emails, properties, link, attacker }) {
      */
     // TODO: remove this line after completion of test
     // requiredKey = Object.keys(emails)[0];
-    changeFrom({ emails, key: requiredKey, link });
+    // changeFrom({ emails, key: requiredKey, link });
     return requiredKey;
 }
 

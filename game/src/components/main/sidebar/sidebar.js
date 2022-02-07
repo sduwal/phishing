@@ -12,7 +12,9 @@ import {
     Flex,
     ModalBody,
     ModalCloseButton,
-    Tooltip
+    Tooltip,
+    Circle,
+    HStack
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { useRef } from "react";
@@ -32,7 +34,7 @@ import PrevEmails from "../prevEmails";
 
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-
+import { motion } from "framer-motion";
 function SideButtons({
     title,
     desc,
@@ -42,11 +44,13 @@ function SideButtons({
     modal,
     id,
     view = true, // only for the email client
-    isDisabled = false
+    isDisabled = false,
+    canTrain = 0
 }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const finalRef = useRef();
+
     return (
         <>
             <Box margin={0} padding={0} height={0} ref={finalRef}></Box>
@@ -86,9 +90,24 @@ function SideButtons({
                         />
                     </div>
                     <Center>
-                        <Text py="2" fontWeight="bold" color="white">
-                            {title}
-                        </Text>
+                        <HStack align={"center"} justify="center">
+                            <Text py="2" fontWeight="bold" color="white">
+                                {title}
+                            </Text>
+                            {title === "Attackers" && canTrain > 0 && (
+                                <Circle
+                                    // position={"absolute"}
+                                    m="1"
+                                    background={"green"}
+                                    size="25px"
+                                    shadow={"0px 0px 5px green"}
+                                >
+                                    <Text fontWeight={"bold"} color={"white"}>
+                                        {canTrain}
+                                    </Text>
+                                </Circle>
+                            )}
+                        </HStack>
                     </Center>
                 </Box>
             </Tooltip>
@@ -122,6 +141,16 @@ function SideButtons({
 
 export default function SideBar() {
     const currentWeek = useSelector((state) => state.week.currentWeek);
+    const canCurrentlyTrain = useSelector(
+        (state) => state.status.canCurrentlyTrain
+    );
+
+    const { languageSkills, techSkills } = useSelector(
+        (state) => state.attacker
+    );
+
+    const canTrain =
+        canCurrentlyTrain.length - languageSkills.length - techSkills.length;
     const side = [
         {
             title: "Email",
@@ -172,7 +201,24 @@ export default function SideBar() {
                             return;
                         }
                         return (
-                            <SideButtons key={item.title} {...side[index]} />
+                            <motion.div
+                                key={item.title}
+                                animate={{
+                                    x: 0,
+                                    // backgroundColor: "#000",
+                                    opacity: [0, 1]
+                                    // position: "fixed"
+                                    // transitionEnd: {
+                                    //     display: "none"
+                                    // }
+                                }}
+                            >
+                                <SideButtons
+                                    key={item.title}
+                                    {...side[index]}
+                                    canTrain={canTrain}
+                                />
+                            </motion.div>
                         );
                     })}
                 </VStack>

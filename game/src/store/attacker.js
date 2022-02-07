@@ -5,28 +5,28 @@ export const attackerSlice = createSlice({
 
     initialState: {
         languageSkills: [
-            // {
-            //     "display": "Spellings",
-            //     "efficiency": 35,
-            //     "value": "spelling"
-            // },
-            // {
-            //     "display": "Grammar",
-            //     "efficiency": 35,
-            //     "value": "grammar"
-            // }
+            {
+                "display": "Spellings",
+                "efficiency": 35,
+                "value": "spelling"
+            },
+            {
+                "display": "Grammar",
+                "efficiency": 35,
+                "value": "grammar"
+            }
         ],
         techSkills: [
-            // {
-            //     "efficiency": 20,
-            //     "display": "Styling",
-            //     "value": "styling"
-            // },
-            // {
-            //     "efficiency": 20,
-            //     "display": "Links",
-            //     "value": "links"
-            // },
+            {
+                "efficiency": 20,
+                "display": "Styling",
+                "value": "styling"
+            },
+            {
+                "efficiency": 20,
+                "display": "Links",
+                "value": "links"
+            },
             // {
             //     "efficiency": 25,
             //     "display": "Spoof the sender",
@@ -35,11 +35,11 @@ export const attackerSlice = createSlice({
             //     "time": 12,
             //     "value": "spoof"
             // },
-            // {
-            //     "efficiency": 15,
-            //     "display": "Research Targeted group",
-            //     "value": "research"
-            // }
+            {
+                "efficiency": 15,
+                "display": "Research Targeted group",
+                "value": "research"
+            }
         ],
         isTraining: false,
         totalAmount: 0,

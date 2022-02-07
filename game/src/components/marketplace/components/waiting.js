@@ -14,11 +14,11 @@ function waiting() {
                         HINT: Domain that look similar to your target site will
                         perform better, but might cost more.
                     </Text>
-                    <Text>
+                    {/* <Text>
                         REMEMBER: Subdomains are free and might perform really
                         well if used properly. You can add any text as subdomain
                         (Sub domains can be added through the main page).
-                    </Text>
+                    </Text> */}
                 </Box>
             </VStack>
         </Center>

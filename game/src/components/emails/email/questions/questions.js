@@ -33,6 +33,7 @@ import helper from "./images/helper.gif";
 const MAX_LEVEL = 4;
 
 const Basket = ({ emails }) => {
+    const currentWeek = useSelector((state) => state.week.currentWeek);
     const dispatch = useDispatch();
     const optionDetails = [
         "Hey Boss, Before I create the email, I need you to select what kind the options you want to use. You can drag these options to the basket above and the option to learn more. Let's start with the what kind of email you want?",
@@ -53,8 +54,6 @@ const Basket = ({ emails }) => {
         (key) => storeAttacker.techSkills[key].display
     );
 
-    const [researchTime, setResearchTime] = useState(0);
-
     useEffect(() => {
         if (!storeAttacker.techSkills.some((i) => i.value === "research")) {
             setBasket([
@@ -64,7 +63,6 @@ const Basket = ({ emails }) => {
                     "displayLevel": 1,
                     "color": "blue.100",
                     "value": "generic",
-                    "researchTime": 1,
                     "displayMessage": "Generate a generic email"
                 }
             ]);
@@ -181,107 +179,107 @@ const Basket = ({ emails }) => {
                 </Center>
             </Container>
 
-            {researchTime > 0 ? (
-                <Loading researchTime={researchTime} />
-            ) : level === 3 && !attacker.includes("Spoof the sender") ? (
-                setLevel(level + 1)
-            ) : (
-                level < MAX_LEVEL && (
-                    <Container
-                        border="2px solid"
-                        mt="10px"
-                        rounded="2xl"
-                        p={3}
-                        maxH={"40vh"}
-                        overflowY="auto"
-                    >
-                        <Center marginBottom={"10px"}>
-                            <HStack>
-                                <Image src={helper} maxH={"60px"} />
+            {level === 3 && !attacker.includes("Spoof the sender")
+                ? setLevel(level + 1)
+                : level < MAX_LEVEL && (
+                      <Container
+                          border="2px solid"
+                          mt="10px"
+                          rounded="2xl"
+                          p={3}
+                          maxH={"40vh"}
+                          overflowY="auto"
+                      >
+                          <Center marginBottom={"10px"}>
+                              <HStack>
+                                  <Image src={helper} maxH={"60px"} />
 
-                                <VStack>
-                                    <Text
-                                        fontSize="1em"
-                                        fontWeight={"semibold"}
-                                    >
-                                        {optionDetails[level - 1]}
-                                    </Text>
-                                    {level === 2 &&
-                                        !attacker.includes("Links") && (
-                                            <Text color={"gray.400"}>
-                                                {
-                                                    "Don't see options? Train your attacker with links!"
-                                                }
-                                            </Text>
-                                        )}
-                                </VStack>
-                            </HStack>
-                        </Center>
+                                  <VStack>
+                                      <Text
+                                          fontSize="1em"
+                                          fontWeight={"semibold"}
+                                      >
+                                          {optionDetails[level - 1]}
+                                      </Text>
+                                      {level === 2 &&
+                                          !attacker.includes("Links") && (
+                                              <Text color={"gray.400"}>
+                                                  {
+                                                      "Don't see options? Train your attacker with links!"
+                                                  }
+                                              </Text>
+                                          )}
+                                      {currentWeek === 2 && (
+                                          <Text>
+                                              Link properties have been disabled
+                                              for this week as users are getting
+                                              more suspicious of the hidden
+                                              link. Use marketplace for better
+                                              result.
+                                          </Text>
+                                      )}
+                                  </VStack>
+                              </HStack>
+                          </Center>
 
-                        {/* <Text fontSize="1em">{optionDetails[level - 1]}</Text> */}
+                          {/* <Text fontSize="1em">{optionDetails[level - 1]}</Text> */}
 
-                        {level === 3 && (
-                            <Box mt="3">
-                                <Input
-                                    varianty="flushed"
-                                    placeholder="spoof@newemail.com"
-                                    onChange={(event) =>
-                                        setNewEmail(event.target.value)
-                                    }
-                                />
-                                <Text fontSize="0.8em">
-                                    Enter valid email address, then drag the
-                                    option.
-                                </Text>
-                            </Box>
-                        )}
-                        {questionsData.map(
-                            (q) =>
-                                level === q.displayLevel &&
-                                (!q.requirement ||
-                                    attacker.some((a) =>
-                                        q.requirement.includes(a)
-                                    )) && (
-                                    <QuestionCard
-                                        key={q.display}
-                                        display={q.display}
-                                        hint={q.hint}
-                                        displayLevel={q.displayLevel}
-                                        attackerLevel={q.attackerLevel}
-                                        value={q.value}
-                                        color={q.color}
-                                        researchTime={
-                                            q.researchTime ? q.researchTime : 0
-                                        }
-                                    />
+                          {level === 3 && (
+                              <Box mt="3">
+                                  <Input
+                                      varianty="flushed"
+                                      placeholder="spoof@newemail.com"
+                                      onChange={(event) =>
+                                          setNewEmail(event.target.value)
+                                      }
+                                  />
+                                  <Text fontSize="0.8em">
+                                      Enter valid email address, then drag the
+                                      option.
+                                  </Text>
+                              </Box>
+                          )}
+                          {currentWeek == 2
+                              ? questionsData.map(
+                                    (q) =>
+                                        level === q.displayLevel &&
+                                        !q?.requirement?.includes("Links") && (
+                                            <QuestionCard
+                                                key={q.display}
+                                                display={q.display}
+                                                hint={q.hint}
+                                                displayLevel={q.displayLevel}
+                                                attackerLevel={q.attackerLevel}
+                                                value={q.value}
+                                                color={q.color}
+                                            />
+                                        )
                                 )
-                        )}
-                    </Container>
-                )
-            )}
-
-            {/* <Container>
-                <Button
-                    mt="5"
-                    onClick={() => {
-                        setLevel(level + 1);
-                    }}
-                >
-                    Next
-                </Button>
-            </Container> */}
-            {/* <StartOver
-                setLevel={setLevel}
-                setBasket={setBasket}
-                setResearchTime={setResearchTime}
-            /> */}
-
-            {/* <>{level >= MAX_LEVEL && <Hints />}</> */}
+                              : questionsData.map(
+                                    (q) =>
+                                        level === q.displayLevel &&
+                                        (!q.requirement ||
+                                            attacker.some((a) =>
+                                                q.requirement.includes(a)
+                                            )) && (
+                                            <QuestionCard
+                                                key={q.display}
+                                                display={q.display}
+                                                hint={q.hint}
+                                                displayLevel={q.displayLevel}
+                                                attackerLevel={q.attackerLevel}
+                                                value={q.value}
+                                                color={q.color}
+                                            />
+                                        )
+                                )}
+                      </Container>
+                  )}
         </Box>
     );
 };
 
-function StartOver({ setLevel, setBasket, setResearchTime }) {
+function StartOver({ setLevel, setBasket }) {
     const dispatch = useDispatch();
     return (
         <Container>
@@ -290,7 +288,6 @@ function StartOver({ setLevel, setBasket, setResearchTime }) {
                 onClick={() => {
                     setLevel(1);
                     setBasket([]);
-                    // setResearchTime(0);
                     dispatch(resetKey());
                     dispatch(changeLinkType("normal"));
                     dispatch(spoofEmail(""));
@@ -301,13 +298,10 @@ function StartOver({ setLevel, setBasket, setResearchTime }) {
         </Container>
     );
 }
-function Loading({ researchTime }) {
+
+function Loading() {
     return (
         <>
-            {/* <Center mt="3">
-                <Spinner size="xl" />
-            </Center>
-            <Center mt="3">Email will be ready in {researchTime}</Center> */}
             <Center mt="3">
                 <VStack>
                     <Spinner size={"xl"} />
@@ -317,32 +311,5 @@ function Loading({ researchTime }) {
         </>
     );
 }
-
-// function Hints() {
-//     const hint = [
-//         "Email not performing well? Did you try the marketplace?",
-//         "Did you know that similar domain has higher chance of tricking the user?",
-//         "Emails has lot of problems? Try training the attacker?",
-//         "Did you know that the attacker can spoof the sender? Can't see it yet? Train the attacker!",
-//         "Running short on time? You can buy some time!"
-//     ];
-
-//     const number = Math.floor(Math.random() * hint.length);
-//     return (
-//         <Center>
-//             <Container mt={10}>
-//                 <Text
-//                     fontStyle={"italic"}
-//                     letterSpacing={"-0.01em"}
-//                     fontWeight={"medium"}
-//                     opacity={"0.6"}
-//                     fontSize={"0.9em"}
-//                 >
-//                     HINT: {hint[number]}
-//                 </Text>
-//             </Container>
-//         </Center>
-//     );
-// }
 
 export { Basket as default };

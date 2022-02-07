@@ -19,18 +19,13 @@ import StatusBar from "./StatusBar";
 import { setGameWon } from "@store/status";
 import { decrementByAmount } from "../../../store/status";
 
-import {
-    DragControls,
-    motion,
-    useAnimation,
-    AnimatePresence
-} from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 
 const canTrain = [
     [], // first week
     ["spelling", "grammar", "links"],
-    ["styling", "research"],
-    ["spoof"] // placeholder for marketplace
+    ["styling", "research"], // placeholder for marketplace
+    ["spoof"]
 ];
 
 function showWeekToast(week, maxEmails, weeklyGoals) {
@@ -38,14 +33,14 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
         <Flex justify={"start"} direction={"column"} align={"start"}>
             <Text fontWeight={"bold"}>Week: {week + 1}</Text>
             <Text>Max emails you can send: {maxEmails[week]}</Text>
-            <Text>This week goal: $ {weeklyGoals[week]}</Text>
+            <Text>This week goal: $ {weeklyGoals[week].toLocaleString()}</Text>
         </Flex>
     );
     if (week == 0) {
-        toast(
-            "The first week goal is to familiarize with your helper. Review the different emails sent by your helper and try to reach the goal.",
+        toast.info(
+            "You can click on these notifications to dismiss them. Notifications on the left stay open until you click on them or navigate to new page.",
             {
-                toastId: "zerothWeek",
+                toastId: "info",
                 position: "top-left",
                 autoClose: false,
                 hideProgressBar: true,
@@ -57,6 +52,21 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
                 icon: false
             }
         );
+        // toast(
+        //     "The first week goal is to familiarize with your helper. Review the different emails sent by your helper and try to reach the goal.",
+        //     {
+        //         toastId: "zerothWeek",
+        //         position: "top-left",
+        //         autoClose: false,
+        //         hideProgressBar: true,
+        //         closeOnClick: true,
+        //         pauseOnHover: false,
+        //         draggable: true,
+        //         progress: 0,
+        //         theme: "colored",
+        //         icon: false
+        //     }
+        // );
     }
     toast.success(<Msg />, {
         toastId: "weekToast",
@@ -154,46 +164,51 @@ function Status() {
         weeklyGoals
     } = useSelector((state) => state.week);
 
+    const money = useSelector((state) => state.status.money);
+
     useEffect(() => {
         if (
             emailWrote >= maxEmails[currentWeek] &&
-            moneyGained < weeklyGoals[currentWeek]
+            money < weeklyGoals[currentWeek]
         ) {
             // history.push("/gameover");
             console.log("You have reached your weekly goal!"); // game over
         }
 
-        if (moneyGained > weeklyGoals[currentWeek]) {
+        if (money >= weeklyGoals[currentWeek]) {
             dispatch(incrementWeek());
-
             // if (currentWeek == 3) {
             //     dispatch(setGameWon(true));
             //     history.push("/gameover");
             // }
         }
-
-        // dispatch(incrementTotalEmails(emailWrote));
     }, [emailWrote, moneyGained]);
 
     useEffect(() => {
         dispatch(setCanCurrentlyTrain(canTrain[currentWeek]));
-        showWeekToast(currentWeek, maxEmails, weeklyGoals);
 
-        // if (currentWeek != 0) {
-        //     dispatch(decrementByAmount(weeklyGoals[currentWeek - 1]));
-        //     toast.warn("This week payment has been made!", {
-        //         toastId: "payment",
-        //         position: "top-left",
-        //         autoClose: false,
-        //         hideProgressBar: true,
-        //         closeOnClick: true,
-        //         pauseOnHover: false,
-        //         draggable: true,
-        //         progress: 0,
-        //         theme: "colored",
-        //         icon: false
-        //     });
-        // }
+        if (currentWeek != 0) {
+            // TODO: uncomment this
+            // dispatch(decrementByAmount(weeklyGoals[currentWeek - 1]));
+            toast.warn(
+                `Week ${currentWeek} payment has been made: \$${weeklyGoals[
+                    currentWeek - 1
+                ].toLocaleString()}`,
+                {
+                    toastId: "payment",
+                    position: "top-left",
+                    autoClose: false,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: 0,
+                    theme: "colored",
+                    icon: false
+                }
+            );
+        }
+        showWeekToast(currentWeek, maxEmails, weeklyGoals);
     }, [currentWeek]);
 
     const controls = useAnimation();
@@ -214,17 +229,12 @@ function Status() {
     useEffect(() => {
         weekAnimationControls.start((i) => ({
             opacity: [0, 1],
-            // translateY: [1, -4, 1],
-            // color: "yellow",
-            // scale: [1, 1.2, 1],
             transition: { duration: 3 }
         }));
 
-        // weekAnimationControls.onAnimationEnd(() => {
-        //     color: "black";
-        // });
         return weekAnimationControls.stop;
     }, [currentWeek]);
+
     return (
         <Box>
             <Flex
@@ -267,7 +277,7 @@ function Status() {
                                     align={"start"}
                                 >
                                     <Text>Number of emails sent:</Text>
-                                    <Text>Number of people reached:</Text>
+                                    {/* <Text>Number of people reached:</Text> */}
                                     <Text>Weekly Goals:</Text>
                                 </Flex>
                                 <Flex
@@ -278,9 +288,9 @@ function Status() {
                                     <motion.div custom={0} animate={controls}>
                                         +{animateParams.animateWeeklyEmails}
                                     </motion.div>
-                                    <motion.div custom={1} animate={controls}>
+                                    {/* <motion.div custom={1} animate={controls}>
                                         +{animateParams.animateWeeklyPeople}
-                                    </motion.div>
+                                    </motion.div> */}
                                     <motion.div custom={2} animate={controls}>
                                         +{animateParams.animateWeeklyMoney}
                                     </motion.div>
@@ -293,10 +303,9 @@ function Status() {
                                     <Text>
                                         {emailWrote} / {maxEmails[currentWeek]}
                                     </Text>
-                                    <Text> {peopleReached}</Text>
+                                    {/* <Text> {peopleReached}</Text> */}
                                     <Text>
-                                        $ {moneyGained} /{" "}
-                                        {weeklyGoals[currentWeek]}
+                                        $ {money} / {weeklyGoals[currentWeek]}
                                     </Text>
                                 </Flex>
                             </Flex>

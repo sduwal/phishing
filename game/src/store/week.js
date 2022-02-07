@@ -3,14 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 export const weekSlice = createSlice({
     name: "week",
     initialState: {
-        currentWeek: 0,
+        currentWeek: 3,
         emailWrote: 0,
         peopleReached: 0,
         moneyGained: 0,
         weeklyStats: [],
         victims: 0,
-        maxEmails: [5, 10, 15, 15],
-        weeklyGoals: [1000, 5000, 10000, 15000]
+        maxEmails: [5, 10, 10, 10],
+        weeklyGoals: [1500, 15000, 40_000, 100_000]
     },
     reducers: {
         incrementWeek: (state) => {

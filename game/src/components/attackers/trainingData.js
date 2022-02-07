@@ -17,7 +17,7 @@ export const language = [
         "efficiency": 35,
         "hint": "Back to basics! Your helper will write emails with better grammar and stop making grammatical errors.",
         "time": 0,
-        "cost": 2000,
+        "cost": 1000,
         "value": "grammar",
         "trained":
             "Good job! Your attacker has improved his grammar and will not make any grammatical errors."
@@ -30,7 +30,7 @@ export const skills = [
         "display": "Styling",
         "hint": "Write better looking emails with better colors, images and headers.",
         "time": 0,
-        "cost": 5000,
+        "cost": 2000,
         "value": "styling",
         "trained":
             "Looking good! Emails will look better visually and more stylish. "
@@ -40,7 +40,7 @@ export const skills = [
         "display": "Links",
         "hint": "Learn new tricks to hide links. Stop giving away the links on the first look.",
         "time": 0,
-        "cost": 5000,
+        "cost": 3000,
         "value": "links",
         "trained":
             "Doing great! You will notice more options to hide links when you create emails!"
@@ -59,7 +59,7 @@ export const skills = [
         "efficiency": 15,
         "display": "Research Targeted group",
         "hint": "Learn how to efficiently research targeted group",
-        "cost": 10000,
+        "cost": 3000,
         "time": 0,
         "value": "research",
         "trained":
