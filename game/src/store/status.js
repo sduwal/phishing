@@ -12,14 +12,7 @@ export const moneySlice = createSlice({
         isUpdating: false,
         gameWon: false,
         // TODO: reset
-        canCurrentlyTrain: [
-            "spelling",
-            "grammar",
-            "links",
-            "spoof",
-            "research",
-            "styling"
-        ],
+        canCurrentlyTrain: [],
         username: nanoid(6),
         initialOpen: true
     },
@@ -59,6 +52,9 @@ export const moneySlice = createSlice({
         },
         toggleInitialOpen: (state) => {
             state.initialOpen = !state.initialOpen;
+        },
+        resetCanCurrentlyTrain: (state) => {
+            state.canCurrentlyTrain = [];
         }
     }
 });
@@ -73,7 +69,8 @@ export const {
     setCanCurrentlyTrain,
     changeUsername,
     resetStatus,
-    toggleInitialOpen
+    toggleInitialOpen,
+    resetCanCurrentlyTrain
 } = moneySlice.actions;
 
 export default moneySlice.reducer;
