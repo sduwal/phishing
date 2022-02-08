@@ -31,7 +31,7 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
     const Msg = ({ closeToast, toastProps }) => (
         <Flex justify={"start"} direction={"column"} align={"start"}>
             <Text fontWeight={"bold"}>Week: {week + 1}</Text>
-            <Text>Max emails you can send: {maxEmails[week]}</Text>
+            <Text>Max emails attacker will create: {maxEmails[week]}</Text>
             <Text>This week goal: $ {weeklyGoals[week].toLocaleString()}</Text>
         </Flex>
     );
@@ -53,7 +53,7 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
         );
 
         toast.info(
-            "New skills will be unlocked as you progress through the game.",
+            "New skills will be unlocked as you progress through the game. Your attacker will only draft limited number of emails per week.",
             {
                 toastId: "info_2",
                 position: "top-left",
@@ -293,7 +293,7 @@ function Status() {
                                     fontSize={"xl"}
                                     align={"start"}
                                 >
-                                    <Text>Number of emails sent:</Text>
+                                    <Text>Number of emails drafted:</Text>
                                     {/* <Text>Number of people reached:</Text> */}
                                     <Text>Weekly Goals:</Text>
                                 </Flex>

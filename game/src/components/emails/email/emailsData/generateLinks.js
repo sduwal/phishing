@@ -27,11 +27,13 @@ function createRandomLink(link) {
     ];
     const generated = options[Math.round(Math.random() * options.length)];
     return (
-        <HStack spacing={0}>
-            <Text opacity={0.5}>https://</Text>
-            <Text>{`${link}`}</Text>
-            <Text opacity={0.5}>/{generated}</Text>
-        </HStack>
+        <Tooltip label={`https://${link}`}>
+            <HStack spacing={0}>
+                <Text opacity={0.5}>https://</Text>
+                <Text>{`${link}`}</Text>
+                <Text opacity={0.5}>/{generated}</Text>
+            </HStack>
+        </Tooltip>
     );
 }
 function createTinyUrl(link) {
@@ -92,9 +94,11 @@ function createHiddenLink(link) {
         "Go to PayPal"
     ];
     const aTag = (
-        <Link target={link}>
-            {aTagOptions[Math.round(Math.random() * aTagOptions.length)]}
-        </Link>
+        <Tooltip label={`https://${link}`}>
+            <Link target={link}>
+                {aTagOptions[Math.round(Math.random() * aTagOptions.length)]}
+            </Link>
+        </Tooltip>
     );
     return Math.random() > 0.5 ? button : aTag;
 }

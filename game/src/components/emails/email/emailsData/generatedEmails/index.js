@@ -19,6 +19,7 @@ import b8 from "./generic/unstyled/8";
 // targeted styled
 import c1 from "./targeted/styled/1";
 import c2 from "./targeted/styled/2";
+import c3 from "./targeted/styled/3";
 
 // targeted unstyled
 import d1 from "./targeted/unstyled/1";
@@ -46,6 +47,7 @@ export default function allEmail(spelling, grammar) {
         b8(spelling, grammar),
         c1(spelling, grammar),
         c2(spelling, grammar),
+        c3(spelling, grammar),
         d1(spelling, grammar),
         d2(spelling, grammar),
         d3(spelling, grammar),
