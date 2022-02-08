@@ -72,7 +72,7 @@ function Introduction() {
         },
         {
             "image": stopTime,
-            "description": "Earn enough money before the time runs out!"
+            "description": "Reach the weekly goals and pay off your debt!"
         }
     ];
 

@@ -1,7 +1,8 @@
 /* eslint-disable operator-linebreak */
 import React, { useEffect, useState } from "react";
 import { useDrag } from "react-dnd";
-import { Container, Collapse, Text } from "@chakra-ui/react";
+import { Container, Collapse, Text, Flex } from "@chakra-ui/react";
+import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
 
 export const QuestionCard = ({
     display,
@@ -59,8 +60,10 @@ export const QuestionCard = ({
                     cursor: "pointer"
                 }}
             >
-                <Text fontWeight="bold">{display}</Text>
-
+                <Flex justify={"space-between"} align="center">
+                    <Text fontWeight="bold">{display}</Text>
+                    {show ? <ArrowUpIcon h={6} /> : <ArrowDownIcon h={6} />}
+                </Flex>
                 <Collapse mt="2" in={show}>
                     <Container mt={4}>
                         <Text>{hint}</Text>

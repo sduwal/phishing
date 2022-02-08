@@ -11,8 +11,17 @@ export const moneySlice = createSlice({
         unsuccessfulEmails: 0,
         isUpdating: false,
         gameWon: false,
-        canCurrentlyTrain: [],
-        username: nanoid(6)
+        // TODO: reset
+        canCurrentlyTrain: [
+            "spelling",
+            "grammar",
+            "links",
+            "spoof",
+            "research",
+            "styling"
+        ],
+        username: nanoid(6),
+        initialOpen: true
     },
     reducers: {
         changeUsername: (state, action) => {
@@ -23,6 +32,9 @@ export const moneySlice = createSlice({
         },
         decrementByAmount: (state, action) => {
             state.money -= action.payload;
+        },
+        resetStatus: (state) => {
+            state.money = 0;
         },
         incrementTotalEmails: (state, action) => {
             state.totalEmails += action.payload;
@@ -44,6 +56,9 @@ export const moneySlice = createSlice({
             ];
 
             state.canCurrentlyTrain = _.uniq(state.canCurrentlyTrain);
+        },
+        toggleInitialOpen: (state) => {
+            state.initialOpen = !state.initialOpen;
         }
     }
 });
@@ -56,7 +71,9 @@ export const {
     setIsUpdating,
     setGameWon,
     setCanCurrentlyTrain,
-    changeUsername
+    changeUsername,
+    resetStatus,
+    toggleInitialOpen
 } = moneySlice.actions;
 
 export default moneySlice.reducer;

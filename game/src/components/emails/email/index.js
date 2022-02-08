@@ -5,7 +5,14 @@ import Questions from "./questions/questions";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+    createContext,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { changeLinkType, resetKey, spoofEmail } from "@store/email";
@@ -13,6 +20,8 @@ import initializeEmails from "./emailsData/initializeEmails";
 
 import _ from "lodash";
 import generateLinks from "./emailsData/generateLinks";
+import { toggleCanSend } from "../../../store/email";
+// import { EmailSendContext } from "./EmailSendContext";
 
 function EmailClient({ onClose }) {
     const dispatch = useDispatch();
@@ -22,9 +31,7 @@ function EmailClient({ onClose }) {
     const attacker = useSelector((state) => state.attacker);
 
     const sentNumber = useSelector((state) => state.email.sentNumber);
-    const firstTime = useRef(true);
 
-    // const [emails, setEmails] = useState({});
     const emails = useMemo(
         () => initializeEmails(activeLink, attacker),
         [sentNumber]
@@ -34,13 +41,11 @@ function EmailClient({ onClose }) {
     const key = useSelector((state) => state.email.key);
 
     useEffect(() => {
-        // setEmails(initializeEmails(activeLink, attacker));
-
         return () => {
             dispatch(resetKey());
             dispatch(changeLinkType("normal"));
             dispatch(spoofEmail(""));
-            firstTime.current = false;
+            dispatch(toggleCanSend(false));
         };
     }, []);
 
@@ -61,9 +66,12 @@ function EmailClient({ onClose }) {
         setCurrentEmail({ ...currentEmail, body });
     }, [activeLink]);
 
+    const [canSend, setCanSend] = useState(false);
+
     return (
         <DndProvider backend={HTML5Backend} height="100vh">
-            <Box p="20px" background="white" ref={firstTime}>
+            {/* <EmailSendContext.Provider value={true}> */}
+            <Box p="20px" background="white">
                 <FirstTimeMessage />
                 <Flex direction="row">
                     <Box flex="2">
@@ -74,6 +82,7 @@ function EmailClient({ onClose }) {
                     </Box>
                 </Flex>
             </Box>
+            {/* </EmailSendContext.Provider> */}
         </DndProvider>
     );
 }

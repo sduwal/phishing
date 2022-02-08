@@ -39,6 +39,38 @@ function createEmails(spellingTrained) {
             from: "utofefru@eftumvik.pf",
             start: "Your PayPal account has been temprorarily restricted. We have found suspicious activity on your credit cards linked to your PayPal account. Learn more:",
             end: "After you complete the requrested task, we will review the account and contact you about its status within 5 working days."
+        },
+        {
+            subject: "Limited Account",
+            name: "Beatrice Freeman",
+            from: "ilofafad@ze.bz",
+            to: "wugawvep@durutuw.ck",
+            start: "Recently, we have limited your account access due to suspected and illegal uses. Please check your account as soon as possible by clicking the button below.",
+            end: ""
+        },
+        {
+            subject: "Secure your account",
+            name: "Rena Quinn",
+            from: "hecsoz@gi.mr",
+            to: "war@fazjasmin.mw",
+            start: "We need your help securing your account to prevent unauthorized access. For your safety, click the link below to confirm your information.",
+            end: ""
+        },
+        {
+            subject: "Login",
+            name: "Rosie Curtis",
+            from: "leusa@uldacpe.ir",
+            to: "vaete@zonkok.sy",
+            start: "Due to a connection from an unknown device, your account has been frozen temporarily. To protect it, please click on the following link to confirm it.",
+            end: "This will help protect you in the future. This process does not take more than 3 minutes."
+        },
+        {
+            subject: "Login",
+            name: "Rosie Curtis",
+            from: "leusa@uldacpe.ir",
+            to: "vaete@zonkok.sy",
+            start: "Please be aware that your PayPal Account expires in less than 48 H. Therefore, it is indispensable to perform an audit of your data. Otherwise, your account will be destroyed. Just click the link below.",
+            end: ""
         }
     ];
 
@@ -149,6 +181,7 @@ function createEmails(spellingTrained) {
         };
     });
 
+    messages = _.shuffle(messages);
     return messages;
 }
 

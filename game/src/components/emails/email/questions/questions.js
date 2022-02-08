@@ -27,8 +27,15 @@ import { toast } from "react-toastify";
 import questionsData from "./questionsData";
 import getRandomEmail from "../emailsData";
 
-import { changeKey, changeLinkType, resetKey, spoofEmail } from "@store/email";
-import { changeActiveDomain } from "@store/domain";
+import {
+    changeKey,
+    changeLinkType,
+    resetKey,
+    spoofEmail,
+    toggleCanSend
+} from "@store/email";
+
+// import { changeActiveDomain } from "@store/domain";
 import helper from "./images/helper.gif";
 const MAX_LEVEL = 4;
 
@@ -37,7 +44,7 @@ const Basket = ({ emails }) => {
     const dispatch = useDispatch();
     const optionDetails = [
         "Hey Boss, Before I create the email, I need you to select what kind the options you want to use. You can drag these options to the basket above and the option to learn more. Let's start with the what kind of email you want?",
-        "Nice! Now let's decide on how to hide the links.",
+        "Now let's decide on how to hide the links.",
         "Great! You can pretend to be someone else for better performance. Fill the email below and drag the option to the basket!"
     ];
     let domains = useSelector((state) => state.domain);
@@ -70,6 +77,13 @@ const Basket = ({ emails }) => {
     }, []);
 
     useEffect(() => {
+        console.log(basket);
+        if (level >= MAX_LEVEL) {
+            dispatch(toggleCanSend(true));
+        }
+    }, [level]);
+
+    useEffect(() => {
         if (basket.length == 1) {
             const randomKey = getRandomEmail({
                 emails: emails,
@@ -87,7 +101,7 @@ const Basket = ({ emails }) => {
         }
 
         if (level < MAX_LEVEL && basket.length !== 0) {
-            setLevel(level + 1);
+            setLevel((level) => level + 1);
         }
     }, [basket.length]);
 
@@ -119,26 +133,6 @@ const Basket = ({ emails }) => {
 
     return (
         <Box overflow={"auto"} py={2}>
-            {level != 1 && (
-                <Container mb="5">
-                    <Text fontSize={"0.8em"} opacity={"0.7"}>
-                        Think a different domain will work better?
-                    </Text>
-                    <Select
-                        defaultValue={activeDomain}
-                        variant="filled"
-                        onChange={(e) => {
-                            dispatch(changeActiveDomain(e.target.value));
-                        }}
-                    >
-                        {domains.map((domain) => (
-                            <option key={domain} value={domain}>
-                                {domain}
-                            </option>
-                        ))}
-                    </Select>
-                </Container>
-            )}
             <Container
                 border="2px solid"
                 width="100%"
@@ -152,17 +146,28 @@ const Basket = ({ emails }) => {
                 {level !== 1 && <Heading>You want to: </Heading>}
                 {basket.map((q, index) => (
                     <UnorderedList key={q.display}>
-                        {index != 0 &&
-                            !attacker?.techSkills?.includes("research") && (
-                                <ListItem>
-                                    <Text
-                                        fontSize={"1.1em"}
-                                        fontStyle={"italic"}
-                                    >
-                                        {q.displayMessage}
-                                    </Text>
-                                </ListItem>
+                        {storeAttacker?.techSkills?.some(
+                            (e) => e.value === "research"
+                        ) &&
+                            index == 0 && (
+                                <>
+                                    <ListItem>
+                                        <Text
+                                            fontSize={"1.1em"}
+                                            fontStyle={"italic"}
+                                        >
+                                            {q.displayMessage}
+                                        </Text>
+                                    </ListItem>
+                                </>
                             )}
+                        {index != 0 && (
+                            <ListItem>
+                                <Text fontSize={"1.1em"} fontStyle={"italic"}>
+                                    {q.displayMessage}
+                                </Text>
+                            </ListItem>
+                        )}
                     </UnorderedList>
                 ))}
 
@@ -209,7 +214,7 @@ const Basket = ({ emails }) => {
                                                   }
                                               </Text>
                                           )}
-                                      {currentWeek === 2 && (
+                                      {currentWeek === 2 && level == 2 && (
                                           <Text>
                                               Link properties have been disabled
                                               for this week as users are getting

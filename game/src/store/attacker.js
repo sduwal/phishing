@@ -27,14 +27,14 @@ export const attackerSlice = createSlice({
                 "display": "Links",
                 "value": "links"
             },
-            // {
-            //     "efficiency": 25,
-            //     "display": "Spoof the sender",
-            //     "hint": "Hide yourself. Pretend to be someone else.",
-            //     "cost": 4000,
-            //     "time": 12,
-            //     "value": "spoof"
-            // },
+            {
+                "efficiency": 25,
+                "display": "Spoof the sender",
+                "hint": "Hide yourself. Pretend to be someone else.",
+                "cost": 4000,
+                "time": 12,
+                "value": "spoof"
+            },
             {
                 "efficiency": 15,
                 "display": "Research Targeted group",

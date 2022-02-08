@@ -7,7 +7,8 @@ export const emailSlice = createSlice({
         key: "",
         linkType: "normal",
         from: "",
-        sentNumber: 0
+        sentNumber: 0,
+        canSend: false
     },
     reducers: {
         spoofEmail: (state, action) => {
@@ -25,8 +26,11 @@ export const emailSlice = createSlice({
         resetKey: (state, action) => {
             state.key = "";
         },
-        increaseSent(state) {
+        increaseSent: (state) => {
             state.sentNumber += 1;
+        },
+        toggleCanSend: (state, action) => {
+            state.canSend = action.payload;
         }
     }
 });
@@ -37,7 +41,8 @@ export const {
     addSentEmail,
     changeKey,
     resetKey,
-    increaseSent
+    increaseSent,
+    toggleCanSend
 } = emailSlice.actions;
 
 export default emailSlice.reducer;

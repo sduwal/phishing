@@ -10,7 +10,7 @@ export const weekSlice = createSlice({
         weeklyStats: [],
         victims: 0,
         maxEmails: [5, 10, 10, 10],
-        weeklyGoals: [1500, 15000, 40_000, 100_000]
+        weeklyGoals: [1500, 15000, 35_000, 85_000]
     },
     reducers: {
         incrementWeek: (state) => {
@@ -20,6 +20,7 @@ export const weekSlice = createSlice({
                     peopleReached: state.peopleReached,
                     moneyGained: state.moneyGained
                 });
+
                 state.currentWeek += 1;
                 state.emailWrote = 0;
                 state.peopleReached = 0;

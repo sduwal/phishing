@@ -45,7 +45,8 @@ function SideButtons({
     id,
     view = true, // only for the email client
     isDisabled = false,
-    canTrain = 0
+    canTrain = 0,
+    trainable = 0
 }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -90,22 +91,57 @@ function SideButtons({
                         />
                     </div>
                     <Center>
-                        <HStack align={"center"} justify="center">
+                        <HStack
+                            align={"center"}
+                            justify="center"
+                            width={"100%"}
+                        >
                             <Text py="2" fontWeight="bold" color="white">
                                 {title}
                             </Text>
                             {title === "Attackers" && canTrain > 0 && (
-                                <Circle
-                                    // position={"absolute"}
-                                    m="1"
-                                    background={"green"}
-                                    size="25px"
-                                    shadow={"0px 0px 5px green"}
-                                >
-                                    <Text fontWeight={"bold"} color={"white"}>
-                                        {canTrain}
-                                    </Text>
-                                </Circle>
+                                <>
+                                    <Tooltip
+                                        placement="left"
+                                        label="Currently can train"
+                                    >
+                                        <Circle
+                                            position={"relative"}
+                                            m="1"
+                                            background={"green"}
+                                            size="25px"
+                                            shadow={"0px 0px 5px green"}
+                                            left="30px"
+                                        >
+                                            <Text
+                                                fontWeight={"bold"}
+                                                color={"white"}
+                                            >
+                                                {trainable}
+                                            </Text>
+                                        </Circle>
+                                    </Tooltip>
+                                    <Tooltip
+                                        label="Currently unlocked untrained skills"
+                                        placement="left"
+                                    >
+                                        <Circle
+                                            position={"relative"}
+                                            m="1"
+                                            background={"yellow.700"}
+                                            size="25px"
+                                            shadow={"0px 0px 5px green"}
+                                            left="30px"
+                                        >
+                                            <Text
+                                                fontWeight={"bold"}
+                                                color={"white"}
+                                            >
+                                                {canTrain}
+                                            </Text>
+                                        </Circle>
+                                    </Tooltip>
+                                </>
                             )}
                         </HStack>
                     </Center>
@@ -147,6 +183,23 @@ export default function SideBar() {
 
     const { languageSkills, techSkills } = useSelector(
         (state) => state.attacker
+    );
+
+    // * If training attacker training data change, this has to change too. Abstract this out.
+    const cost = {
+        spelling: 1000,
+        grammar: 1000,
+        links: 3000,
+        styling: 2000,
+        research: 3000,
+        spoof: 4000
+    };
+    const money = useSelector((state) => state.status.money);
+    const trainable = canCurrentlyTrain.filter(
+        (skill) =>
+            cost[skill] <= money &&
+            !languageSkills.some((e) => e.value === skill) &&
+            !techSkills.some((e) => e.value === skill)
     );
 
     const canTrain =
@@ -217,6 +270,7 @@ export default function SideBar() {
                                     key={item.title}
                                     {...side[index]}
                                     canTrain={canTrain}
+                                    trainable={trainable.length}
                                 />
                             </motion.div>
                         );

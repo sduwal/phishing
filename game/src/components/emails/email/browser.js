@@ -50,15 +50,10 @@ const Dots = styled.span`
     }
 `;
 
-function BrowserCustom({
-    onClose,
-    email,
-    showHeader = false,
-    sendDisabled = true
-}) {
+function BrowserCustom({ onClose, email, showHeader = false }) {
     const { Tab } = Chrome;
 
-    const isUpdating = useSelector((state) => state.status.isUpdating);
+    const canSend = useSelector((state) => state.email.canSend);
     const activeLink = useSelector((state) => state.domain.activeDomain);
     const languageSkills = useSelector(
         (state) => state.attacker.languageSkills
@@ -66,9 +61,6 @@ function BrowserCustom({
     const dispatch = useDispatch();
 
     const [number, setNumber] = useState(0);
-    // const [isLoading, setIsLoading] = useState(false);
-
-    // const [value, setValue] = useState(0);
 
     function send({ totalSend }) {
         const successrate = calculateSuccess(email, number, activeLink);
@@ -171,12 +163,12 @@ function BrowserCustom({
         );
     }
 
-    function SendEmailButton() {
+    function SendEmailButton({ canSend }) {
         return (
             <Flex>
                 <Spacer />
                 <Button
-                    isDisabled={_.isEmpty(email)}
+                    isDisabled={_.isEmpty(email) || !canSend}
                     onClick={() => {
                         dispatch(incrementTotalEmails(email.totalSend));
                         dispatch(increaseSent());
@@ -235,7 +227,7 @@ function BrowserCustom({
                 </Browser>
             </Box>
 
-            <SendEmailButton />
+            <SendEmailButton canSend={canSend} />
         </Box>
     );
 }

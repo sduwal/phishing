@@ -16,9 +16,8 @@ import { toast } from "react-toastify";
 import { setCanCurrentlyTrain } from "@store/status";
 import { incrementWeek } from "@store/week";
 import StatusBar from "./StatusBar";
-import { setGameWon } from "@store/status";
-import { decrementByAmount } from "../../../store/status";
-
+import { setGameWon, resetStatus } from "@store/status";
+import { changeDomain } from "@store/domain";
 import { motion, useAnimation } from "framer-motion";
 
 const canTrain = [
@@ -50,6 +49,23 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
                 progress: 0,
                 theme: "colored",
                 icon: false
+            }
+        );
+
+        toast.info(
+            "New skills will be unlocked as you progress through the game.",
+            {
+                toastId: "info_2",
+                position: "top-left",
+                autoClose: false,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: 0,
+                theme: "colored",
+                icon: false,
+                delay: 200
             }
         );
         // toast(
@@ -177,23 +193,24 @@ function Status() {
 
         if (money >= weeklyGoals[currentWeek]) {
             dispatch(incrementWeek());
-            // if (currentWeek == 3) {
-            //     dispatch(setGameWon(true));
-            //     history.push("/gameover");
-            // }
+            dispatch(resetStatus());
+            if (currentWeek == 3) {
+                dispatch(setGameWon(true));
+                history.push("/gameover");
+            }
         }
     }, [emailWrote, moneyGained]);
 
     useEffect(() => {
         dispatch(setCanCurrentlyTrain(canTrain[currentWeek]));
+        dispatch(changeDomain("xyz.xyz"));
 
         if (currentWeek != 0) {
-            // TODO: uncomment this
             // dispatch(decrementByAmount(weeklyGoals[currentWeek - 1]));
             toast.warn(
                 `Week ${currentWeek} payment has been made: \$${weeklyGoals[
                     currentWeek - 1
-                ].toLocaleString()}`,
+                ].toLocaleString()}. Goals reset!`,
                 {
                     toastId: "payment",
                     position: "top-left",
