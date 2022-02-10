@@ -55,7 +55,7 @@ function Start() {
                         <Text color="white">
                             Click{" "}
                             <ChakraLink
-                                href="https://google.com"
+                                href="https://docs.google.com/forms/d/e/1FAIpQLSfP5F_r9z12VfJfl-rqq8BpGoCXAtVQjB2o7b22HJPR9ETv_A/viewform?usp=sf_link"
                                 color="blue.400"
                                 isExternal
                             >

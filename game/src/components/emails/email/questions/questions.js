@@ -73,7 +73,6 @@ const Basket = ({ emails }) => {
     }, []);
 
     useEffect(() => {
-        console.log(basket);
         if (level >= MAX_LEVEL) {
             dispatch(toggleCanSend(true));
         }

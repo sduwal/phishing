@@ -180,7 +180,6 @@ function Status() {
             money < weeklyGoals[currentWeek]
         ) {
             history.push("/gameover");
-            console.log("You have reached your weekly goal!"); // game over
         }
 
         if (money >= weeklyGoals[currentWeek]) {
