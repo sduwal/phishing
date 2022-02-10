@@ -18,6 +18,6 @@ export default configureStore({
         steps: stepsReducer,
         week: weekReducer,
         animate: animateReducer
-    }
-    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 });

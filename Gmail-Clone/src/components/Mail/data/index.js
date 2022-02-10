@@ -1,5 +1,5 @@
 import accountsuspended from "./accountSuspended";
-import cancelvalid from "./cancel_valid";
+import cancel_valid from "./cancel_valid";
 import cancel from "./cancel";
 import email1 from "./email1";
 import email2 from "./email2";
@@ -16,7 +16,7 @@ import valid1 from "./valid1";
 const emails = {
     accountsuspended,
     cancel,
-    cancelvalid,
+    cancel_valid,
     email1,
     email2,
     free,

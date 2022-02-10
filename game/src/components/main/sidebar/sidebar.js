@@ -7,9 +7,7 @@ import {
     Center,
     Modal,
     ModalOverlay,
-    ModalHeader,
     ModalContent,
-    Flex,
     ModalBody,
     ModalCloseButton,
     Tooltip,
@@ -27,10 +25,10 @@ import NoSkillEmailClient from "@components/emails/noSkillEmails";
 import domainImage from "./images/domain.jpg";
 import attackerImage from "./images/attacker.png";
 import emailImage from "./images/mail.png";
-import sentImage from "./images/sent.gif";
-import trainingImage from "./images/training.gif";
+// import sentImage from "./images/sent.gif";
+// import trainingImage from "./images/training.gif";
 
-import PrevEmails from "../prevEmails";
+// import PrevEmails from "../prevEmails";
 
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";

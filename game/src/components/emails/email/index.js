@@ -5,14 +5,7 @@ import Questions from "./questions/questions";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import {
-    createContext,
-    useCallback,
-    useEffect,
-    useMemo,
-    useRef,
-    useState
-} from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { changeLinkType, resetKey, spoofEmail } from "@store/email";
@@ -65,8 +58,6 @@ function EmailClient({ onClose }) {
 
         setCurrentEmail({ ...currentEmail, body });
     }, [activeLink]);
-
-    const [canSend, setCanSend] = useState(false);
 
     return (
         <DndProvider backend={HTML5Backend} height="100vh">

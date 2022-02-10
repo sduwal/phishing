@@ -42,7 +42,7 @@ function calculateLinkType(link, domain) {
     let point = 0;
     switch (link) {
         case "normal":
-            point = similarity > 0.7 ? 20 : domain.includes("paypal") ? 15 : 3;
+            point = similarity > 0.82 ? 20 : domain.includes("paypal") ? 15 : 3;
             break;
         case "hidden":
             point = 18;

@@ -1,4 +1,4 @@
-import { VStack, Box, Flex, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { ToastContainer } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 

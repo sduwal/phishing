@@ -1,4 +1,4 @@
-import { Text, HStack, VStack } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 
 import Footer from "./footer";
 import Logo from "./logo";

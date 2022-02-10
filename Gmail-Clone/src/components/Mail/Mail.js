@@ -97,6 +97,7 @@ function Mail() {
                     <p className="mail-time">{selectedMail?.time}</p>
                 </div>
 
+                {console.log(selectedMail?.description)}
                 <div className="mail-message">
                     <div
                         dangerouslySetInnerHTML={{

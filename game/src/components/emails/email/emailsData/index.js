@@ -6,10 +6,10 @@ export default function getRandomEmail({ emails, properties, link, attacker }) {
         return acc;
     }, []);
 
-    const languageSkills = attacker.languageSkills.reduce((acc, curr) => {
-        acc = [...acc, curr.value];
-        return acc;
-    }, []);
+    // const languageSkills = attacker.languageSkills.reduce((acc, curr) => {
+    //     acc = [...acc, curr.value];
+    //     return acc;
+    // }, []);
 
     const techSkills = attacker.techSkills.reduce((acc, curr) => {
         acc = [...acc, curr.value];
@@ -58,12 +58,12 @@ export default function getRandomEmail({ emails, properties, link, attacker }) {
     return requiredKey;
 }
 
-function changeFrom({ emails, key, link }) {
-    const random = Math.random();
-    if (random < 0.5) return emails;
+// function changeFrom({ emails, key, link }) {
+//     const random = Math.random();
+//     if (random < 0.5) return emails;
 
-    const currentEmail = emails[key];
-    currentEmail.from = currentEmail.from.split("@")[0] + "@" + link;
+//     const currentEmail = emails[key];
+//     currentEmail.from = currentEmail.from.split("@")[0] + "@" + link;
 
-    return { ...emails, currentEmail };
-}
+//     return { ...emails, currentEmail };
+// }

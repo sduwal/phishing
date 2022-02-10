@@ -8,7 +8,9 @@ import {
     Flex,
     Spacer,
     Collapse,
-    Button
+    Button,
+    Circle,
+    HStack
 } from "@chakra-ui/react";
 
 import _ from "lodash";
@@ -25,6 +27,7 @@ import AttackerCard from "./attackerCard";
 import { language, skills } from "./trainingData";
 
 import { TRAINING_MESSAGE } from "@constants";
+import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
 
 function CollapseTrainingOptions({
     display,
@@ -88,9 +91,20 @@ function CollapseTrainingOptions({
                         onClick={handleToggle}
                         p={1}
                     >
-                        <Text fontWeight={show ? "bold" : "normal"}>
-                            {display}
-                        </Text>
+                        <HStack>
+                            <Circle
+                                w={6}
+                                h={6}
+                                background={!show ? "yellow.100" : "red.100"}
+                                mx={1}
+                            >
+                                {!show && <ArrowDownIcon />}
+                                {show && <ArrowUpIcon />}
+                            </Circle>
+                            <Text fontWeight={show ? "bold" : "normal"}>
+                                {display}
+                            </Text>
+                        </HStack>
                     </Box>
 
                     <Collapse in={show}>
@@ -103,21 +117,15 @@ function CollapseTrainingOptions({
                         </Container>
                     </Collapse>
                 </Box>
-                {
-                    <Center>
-                        {containsSkill && (
-                            <Text fontWeight={"bold"}>Complete</Text>
-                        )}
-                        {!containsSkill && (
-                            <Button
-                                disabled={money < cost}
-                                onClick={handleClick}
-                            >
-                                {money < cost ? "Low balance" : "Train"}
-                            </Button>
-                        )}
-                    </Center>
-                }
+
+                <Center>
+                    {containsSkill && <Text fontWeight={"bold"}>Complete</Text>}
+                    {!containsSkill && (
+                        <Button disabled={money < cost} onClick={handleClick}>
+                            {money < cost ? "Low balance" : "Train"}
+                        </Button>
+                    )}
+                </Center>
             </Flex>
         </>
     );
@@ -152,7 +160,7 @@ function TrainLanguage({ canCurrentlyTrain }) {
 }
 
 function TrainTechnical({ canCurrentlyTrain }) {
-    const attacker = useSelector((state) => state.attacker);
+    // const attacker = useSelector((state) => state.attacker);
 
     // const [data, setData] = useState([]);
 

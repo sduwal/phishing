@@ -1,15 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import {
-    Box,
-    Text,
-    Flex,
-    Center,
-    Divider,
-    VStack,
-    HStack
-} from "@chakra-ui/react";
+import { Box, Text, Flex, Center, Divider, HStack } from "@chakra-ui/react";
 
 import { toast } from "react-toastify";
 
@@ -174,7 +166,7 @@ function Status() {
     const {
         currentWeek,
         emailWrote,
-        peopleReached,
+        // peopleReached,
         moneyGained,
         maxEmails,
         weeklyGoals
@@ -187,7 +179,7 @@ function Status() {
             emailWrote >= maxEmails[currentWeek] &&
             money < weeklyGoals[currentWeek]
         ) {
-            // history.push("/gameover");
+            history.push("/gameover");
             console.log("You have reached your weekly goal!"); // game over
         }
 

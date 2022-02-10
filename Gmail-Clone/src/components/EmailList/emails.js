@@ -12,12 +12,12 @@ const data = [
     {
         from: "Netflix <info@mailer.netflix.com>",
         subject:
-            "John give us another chance? We;ve got thousands of new TV shows and movies.",
+            "John give us another chance? We've got thousands of new TV shows and movies.",
         description: "rejoinvalid",
     },
     {
         from: "Netflix <info@mailer.netflix.com",
-        subject: "Your number has beeen updated.",
+        subject: "Your number has been updated.",
         description: "phonevalid",
     },
     {

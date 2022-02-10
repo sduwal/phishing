@@ -11,7 +11,6 @@ export const moneySlice = createSlice({
         unsuccessfulEmails: 0,
         isUpdating: false,
         gameWon: false,
-        // TODO: reset
         canCurrentlyTrain: [],
         username: nanoid(6),
         initialOpen: true

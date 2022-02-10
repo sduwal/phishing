@@ -1,10 +1,11 @@
-import { Box } from "@chakra-ui/react";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Introduction from "./introduction";
 import StartGame from "./startGame";
 import Profile from "./profile";
 import GameOver from "./gameover";
+
+// import MarketPlace from "./../components/marketplace";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 </Route>
                 <Route path="/main">
                     <Profile />
+                    {/* <MarketPlace /> */}
                 </Route>
                 <Route path="/gameover">
                     <GameOver />

@@ -14,10 +14,7 @@ import {
     Center,
     Text,
     Heading,
-    Button,
-    Spinner,
     Input,
-    Select,
     VStack,
     HStack,
     Image
@@ -30,7 +27,6 @@ import getRandomEmail from "../emailsData";
 import {
     changeKey,
     changeLinkType,
-    resetKey,
     spoofEmail,
     toggleCanSend
 } from "@store/email";
@@ -47,8 +43,8 @@ const Basket = ({ emails }) => {
         "Now let's decide on how to hide the links.",
         "Great! You can pretend to be someone else for better performance. Fill the email below and drag the option to the basket!"
     ];
-    let domains = useSelector((state) => state.domain);
-    domains = [domains.name, ...domains.subdomains];
+    // let domains = useSelector((state) => state.domain);
+    // domains = [domains.name, ...domains.subdomains];
 
     const activeDomain = useSelector((state) => state.domain.activeDomain);
 
@@ -173,11 +169,16 @@ const Basket = ({ emails }) => {
 
                 <Center mt="100px">
                     {level < MAX_LEVEL && (
-                        <Box p="5" background="goldenrod" rounded="2xl">
+                        <Box
+                            p="5"
+                            rounded="2xl"
+                            fontWeight={"400%"}
+                            fontSize={"1.2em"}
+                        >
                             <Text>
                                 {canDrop
                                     ? "Release here to drop"
-                                    : "Drop Here!"}
+                                    : "Drag the option from the red box and drop Here!"}
                             </Text>
                         </Box>
                     )}
@@ -194,6 +195,7 @@ const Basket = ({ emails }) => {
                           p={3}
                           maxH={"40vh"}
                           overflowY="auto"
+                          background={"red.200"}
                       >
                           <Center marginBottom={"10px"}>
                               <HStack>
@@ -284,37 +286,37 @@ const Basket = ({ emails }) => {
     );
 };
 
-function StartOver({ setLevel, setBasket }) {
-    const dispatch = useDispatch();
-    return (
-        <Container>
-            <Button
-                mt="5"
-                onClick={() => {
-                    setLevel(1);
-                    setBasket([]);
-                    dispatch(resetKey());
-                    dispatch(changeLinkType("normal"));
-                    dispatch(spoofEmail(""));
-                }}
-            >
-                Start Over
-            </Button>
-        </Container>
-    );
-}
+// function StartOver({ setLevel, setBasket }) {
+//     const dispatch = useDispatch();
+//     return (
+//         <Container>
+//             <Button
+//                 mt="5"
+//                 onClick={() => {
+//                     setLevel(1);
+//                     setBasket([]);
+//                     dispatch(resetKey());
+//                     dispatch(changeLinkType("normal"));
+//                     dispatch(spoofEmail(""));
+//                 }}
+//             >
+//                 Start Over
+//             </Button>
+//         </Container>
+//     );
+// }
 
-function Loading() {
-    return (
-        <>
-            <Center mt="3">
-                <VStack>
-                    <Spinner size={"xl"} />
-                    <Text>Generating email..</Text>
-                </VStack>
-            </Center>
-        </>
-    );
-}
+// function Loading() {
+//     return (
+//         <>
+//             <Center mt="3">
+//                 <VStack>
+//                     <Spinner size={"xl"} />
+//                     <Text>Generating email..</Text>
+//                 </VStack>
+//             </Center>
+//         </>
+//     );
+// }
 
 export { Basket as default };
