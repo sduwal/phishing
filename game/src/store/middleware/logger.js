@@ -12,9 +12,13 @@ const logger = (store) => (next) => async (action) => {
         }
     } catch (err) {
         if (process.env.REACT_APP_ENV !== "development") {
-            await supabase.from("errors").insert({
-                error: err.message
-            });
+            try {
+                await supabase.from("errors").insert({
+                    error: err.message
+                });
+            } catch (err) {
+                // console.log(err);
+            }
         }
     } finally {
         const result = next(action);
