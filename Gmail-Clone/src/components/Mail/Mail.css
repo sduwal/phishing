@@ -27,19 +27,21 @@
     /* display: flex; */
     align-items: center;
     border-bottom: 1px solid whitesmoke;
-    padding: 20px;
+    padding: 0 20px;
     position: relative;
 }
 
 .mail-from {
     display: flex;
     padding: 20px 0px;
+    min-height: 80px;
     margin: 2px;
 }
-/*
+
 .mail-fromName {
-    margin: 20px 0;
-} */
+    /* margin: 20px 0; */
+    /* z-index: 999; */
+}
 
 .from-avatar {
     margin: 0px 20px 0px 5px;
