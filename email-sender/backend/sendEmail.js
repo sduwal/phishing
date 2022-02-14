@@ -1,29 +1,42 @@
-module.exports = async function () {
-    let nodemailer = require("nodemailer");
+// https://app-smtp.sendinblue.com/real-time
+const fs = require("fs");
+const path = require("path");
+const nodemailer = require("nodemailer");
+const { promisify } = require("util");
 
-    let transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            type: "OAuth2",
-            user: process.env.EMAIL,
-            pass: process.env.WORD,
-            clientId: process.env.OAUTH_CLIENTID,
-            clientSecret: process.env.OAUTH_CLIENT_SECRET,
-            refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-        },
-    });
+const readFile = promisify(fs.readFile);
 
-    let info = await transporter.sendMail({
-        from: '"Fred Foo 👻" <foo@example.com>', // sender address
-        to: "sarose012@gmail.com", // list of receivers
-        subject: "Hello ✔", // Subject line
-        text: "Hello world?", // plain text body
-        html: "<b>Hello world?</b>", // html body
-    });
+module.exports = async function ({ to }) {
+    let data = require("./data/index");
 
-    console.log("Message sent: %s", info.messageId);
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    try {
+        const transporter = nodemailer.createTransport({
+            host: "smtp-relay.sendinblue.com", // hostname
+            port: 587, // port for secure SMTP
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+        });
 
-    // Preview only available when sending through an Ethereal account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+        data = data.map(async (item) => {
+            const mailOptions = {
+                from: item.from,
+                to: to,
+                subject: item.subject,
+                html: await readFile(
+                    path.join(__dirname, `./data/htmls/${item.file}`),
+                    "utf8"
+                ),
+            };
+
+            transporter.sendMail(mailOptions);
+        });
+
+        await Promise.all(data);
+        return { ok: true, message: "Email sent" };
+    } catch (err) {
+        console.log(err.message);
+        return { ok: false, message: err.message };
+    }
 };

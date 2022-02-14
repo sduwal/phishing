@@ -1,23 +1,23 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import timerReducer from "./timer";
+import { configureStore } from "@reduxjs/toolkit";
 import moneyReducer from "./status";
 import attackerReducer from "./attacker";
 import domainReducer from "./domain";
 import emailReducer from "./email";
+import stepsReducer from "./steps";
+import weekReducer from "./week";
+import animateReducer from "./animate";
+
+import logger from "./middleware/logger";
 
 export default configureStore({
     reducer: {
-        timer: timerReducer,
         status: moneyReducer,
         attacker: attackerReducer,
         domain: domainReducer,
-        email: emailReducer
+        email: emailReducer,
+        steps: stepsReducer,
+        week: weekReducer,
+        animate: animateReducer
     },
-    /*
-     * NOTE: This is deperecated.
-     * If there are better alternative, change this later
-     */
-    middleware: getDefaultMiddleware({
-        serializableCheck: false
-    })
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 });
