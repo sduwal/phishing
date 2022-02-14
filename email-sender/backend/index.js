@@ -1,13 +1,38 @@
+const express = require("express");
+const sendMail = require("./sendEmail");
+const cors = require("cors");
+const helmet = require("helmet");
 async function main() {
-    const express = require("express");
-    const sendMail = require("./sendEmail");
+    require("dotenv").config();
 
     const app = express();
+    app.use(express.json());
+    app.use(
+        cors({
+            origin: "*",
+            methods: ["GET"],
+        })
+    );
+    app.use(helmet());
+    // app.use(express.urlencoded({ extended: true }));
+
     const port = 8080;
 
-    app.get("/", (req, res) => {
-        sendMail();
-        res.send("Hello World!");
+    app.get("/", async (req, res) => {
+        if (!req.query.to) {
+            res.status(400).send({
+                ok: true,
+                message: "OK",
+            });
+            return;
+        }
+
+        const message = await sendMail({ to: req.query.to });
+        res.json(message);
+    });
+
+    app.get("/health", (req, res) => {
+        res.json({ ok: true });
     });
 
     app.listen(port, () => {
@@ -16,5 +41,5 @@ async function main() {
 }
 
 main().then(() => {
-    console.log("done");
+    // console.log("done");
 });

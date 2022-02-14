@@ -8,7 +8,9 @@ import {
     Flex,
     Spacer,
     Collapse,
-    Button
+    Button,
+    Circle,
+    HStack
 } from "@chakra-ui/react";
 
 import _ from "lodash";
@@ -17,18 +19,15 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    setLanguageSkills,
-    setTechSkills,
-    setIsTraining,
-    setCurrentTraining
-} from "../../store/attacker";
+import { setLanguageSkills, setTechSkills } from "@store/attacker";
+
+import { decrementByAmount } from "@store/status";
 
 import AttackerCard from "./attackerCard";
 import { language, skills } from "./trainingData";
 
-const trainingMessage =
-    "Your attacker will create better emails with better training. You can train your attacker to have better email writing skills and create better looking emails. Training your attacker will cost you money and require some time. Your attacker won't be able to create emails while training.";
+import { TRAINING_MESSAGE } from "@constants";
+import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
 
 function CollapseTrainingOptions({
     display,
@@ -36,9 +35,12 @@ function CollapseTrainingOptions({
     cost,
     time,
     type,
-    efficiency
+    value,
+    efficiency,
+    trained
 }) {
     const attacker = useSelector((state) => state.attacker);
+    const money = useSelector((state) => state.status.money);
 
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
@@ -52,45 +54,33 @@ function CollapseTrainingOptions({
             display: display
         });
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            if (!attacker.isTraining || attacker.currentTraining !== display) {
-                dispatch(setCurrentTraining(""));
-                clearInterval(timer);
-            } else {
-                // dispatch(setTrainingProgress(100 / time));
-            }
-        }, 1000);
-
-        return () => clearInterval(timer);
-    }, [attacker.isTraining]);
-
     function handleClick() {
-        dispatch(setIsTraining(true));
-        dispatch(setCurrentTraining(display));
-        // dispatch(setTrainingEnd(new Date()));
-        setTimeout(() => {
-            type === "language"
-                ? dispatch(
-                      setLanguageSkills({
-                          display: display,
-                          efficiency: efficiency
-                      })
-                  )
-                : dispatch(
-                      setTechSkills({
-                          display: display,
-                          efficiency: efficiency
-                      })
-                  );
+        toast.dismiss();
+        dispatch(decrementByAmount(cost));
+        type === "language"
+            ? dispatch(
+                  setLanguageSkills({
+                      display: display,
+                      efficiency: efficiency,
+                      value: value
+                  })
+              )
+            : dispatch(
+                  setTechSkills({
+                      display: display,
+                      efficiency: efficiency,
+                      value: value
+                  })
+              );
 
-            dispatch(setIsTraining(false));
-
-            toast("Training complete", {
-                autoClose: 3000,
-                pauseOnHover: false
-            });
-        }, time * 1000);
+        toast.success(trained, {
+            toastId: "trained",
+            autoClose: 5000,
+            pauseOnHover: false,
+            position: "top-center",
+            hideProgressBar: true
+            // transition: "zoom"
+        });
     }
     return (
         <>
@@ -101,9 +91,20 @@ function CollapseTrainingOptions({
                         onClick={handleToggle}
                         p={1}
                     >
-                        <Text fontWeight={show ? "bold" : "normal"}>
-                            {display}
-                        </Text>
+                        <HStack>
+                            <Circle
+                                w={6}
+                                h={6}
+                                background={!show ? "yellow.100" : "red.100"}
+                                mx={1}
+                            >
+                                {!show && <ArrowDownIcon />}
+                                {show && <ArrowUpIcon />}
+                            </Circle>
+                            <Text fontWeight={show ? "bold" : "normal"}>
+                                {display}
+                            </Text>
+                        </HStack>
                     </Box>
 
                     <Collapse in={show}>
@@ -112,26 +113,34 @@ function CollapseTrainingOptions({
                             <Text fontWeight="bold" pt="2">
                                 Cost: ${cost}
                             </Text>
-                            <Text fontWeight="bold">Time: {time} </Text>
+                            {/* <Text fontWeight="bold">Time: {time} sec</Text> */}
                         </Container>
                     </Collapse>
                 </Box>
-                {
-                    <Center>
-                        <Button
-                            disabled={attacker.isTraining || containsSkill}
-                            onClick={handleClick}
-                        >
-                            {containsSkill ? "Complete" : "Train"}
+
+                <Center>
+                    {containsSkill && <Text fontWeight={"bold"}>Complete</Text>}
+                    {!containsSkill && (
+                        <Button disabled={money < cost} onClick={handleClick}>
+                            {money < cost ? "Low balance" : "Train"}
                         </Button>
-                    </Center>
-                }
+                    )}
+                </Center>
             </Flex>
         </>
     );
 }
-function TrainLanguage() {
-    const data = language.map((skill) => (
+
+function TrainLanguage({ canCurrentlyTrain }) {
+    if (canCurrentlyTrain.length === 0) {
+        return <Box></Box>;
+    }
+
+    const required = language.filter((skill) =>
+        canCurrentlyTrain.includes(skill.value)
+    );
+
+    const data = required.map((skill) => (
         <Box m={2} key={skill.display} margin={2}>
             <CollapseTrainingOptions {...skill} type="language" />
         </Box>
@@ -150,41 +159,51 @@ function TrainLanguage() {
     );
 }
 
-function TrainTechnical() {
-    const attacker = useSelector((state) => state.attacker);
+function TrainTechnical({ canCurrentlyTrain }) {
+    // const attacker = useSelector((state) => state.attacker);
 
-    const [data, setData] = useState([]);
+    // const [data, setData] = useState([]);
 
-    useEffect(() => {
-        const checker = (arr, target) =>
-            target.every((item) => arr.some((el) => el.display === item));
+    const required = skills.filter((skill) =>
+        canCurrentlyTrain.includes(skill.value)
+    );
 
-        const temp = skills.map((skill) => (
-            <Box m={2} key={skill.display} margin={2}>
-                {!skill.requirement ||
-                checker(attacker.techSkills, skill.requirement) ? (
-                    <CollapseTrainingOptions {...skill} />
-                ) : (
-                    <> </>
-                )}
-            </Box>
-        ));
-        setData(temp);
-    }, [attacker.techSkills.length]);
+    if (required.length === 0) {
+        return <> </>;
+    }
+
+    // required = _.sortBy(required, ["value"]);
+    const temp = required.map((skill) => (
+        <Box m={2} key={skill.display} margin={2}>
+            <CollapseTrainingOptions {...skill} />
+        </Box>
+    ));
 
     return (
-        <Box
-            border={"2px solid black"}
-            rounded={"2xl"}
-            m={2}
-            background={"blue.100"}
-        >
-            {data}
-        </Box>
+        <>
+            <Box
+                border={"2px solid black"}
+                rounded={"2xl"}
+                m={2}
+                background={"blue.100"}
+            >
+                {temp}
+            </Box>
+        </>
     );
 }
 
 function Attacker() {
+    const canCurrentlyTrain = useSelector(
+        (state) => state.status.canCurrentlyTrain
+    );
+
+    useEffect(() => {
+        return () => {
+            toast.dismiss();
+        };
+    }, []);
+
     return (
         <>
             <Flex>
@@ -205,14 +224,22 @@ function Attacker() {
                             Improve Attacker Skills
                         </Text>
                     </Center>
-                    <Text fontSize={"0.8em"} color="grey">
-                        {trainingMessage}
+                    <Text fontSize={"0.9em"} color="blackAlpha.800">
+                        {TRAINING_MESSAGE}
                     </Text>
                     <SimpleGrid columns={2} spacing={10}>
-                        <TrainLanguage />
-                        <TrainTechnical />
+                        <TrainLanguage canCurrentlyTrain={canCurrentlyTrain} />
+                        <TrainTechnical canCurrentlyTrain={canCurrentlyTrain} />
                     </SimpleGrid>
                 </Container>
+            </Flex>
+            <Flex align={"center"} direction={"column"}>
+                <Text fontWeight={"bold"}>
+                    You can click on the option to learn more!
+                </Text>
+                <Text>
+                    More Skills will be unlocked as the game progresses.
+                </Text>
             </Flex>
         </>
     );
