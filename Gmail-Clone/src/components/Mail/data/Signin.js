@@ -149,7 +149,7 @@ a[x-apple-data-detectors='true'] {
   <div style="line-height: 150%; text-align: left; word-wrap: break-word;">
     <p style="font-size: 14px; line-height: 150%;">Hi John,</p>
 <p style="font-size: 14px; line-height: 150%;">We noticed a new sign-in with your Netflix account, </p>
-<p style="font-size: 14px; line-height: 150%;"><strong><a rel="noopener" href="mailto:xvpi@nezzart.com" target="_blank">john@nezzart.com</a>.</strong></p>
+<p style="font-size: 14px; line-height: 150%;"><strong><a rel="noopener" href="mailto:john@nezzart.com" target="_blank">john@nezzart.com</a>.</strong></p>
 <p style="font-size: 14px; line-height: 150%;">&nbsp;</p>
 <p style="font-size: 14px; line-height: 150%;"><span style="font-size: 16px; line-height: 24px;"><strong>The details</strong></span></p>
 <p style="font-size: 14px; line-height: 150%;"><span style="font-family: helvetica, sans-serif; font-size: 14px; line-height: 21px; color: #7e8c8d;">Device</span></p>

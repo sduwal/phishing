@@ -1159,7 +1159,7 @@ module.exports = `
                                                                             was
                                                                             mailed
                                                                             to
-                                                                            [xvpi@nezzart.com]
+                                                                            [john@nezzart.com]
                                                                             by
                                                                             Netflix.</span
                                                                         ><br /><span
