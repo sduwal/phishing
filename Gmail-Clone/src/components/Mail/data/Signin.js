@@ -149,7 +149,7 @@ a[x-apple-data-detectors='true'] {
   <div style="line-height: 150%; text-align: left; word-wrap: break-word;">
     <p style="font-size: 14px; line-height: 150%;">Hi John,</p>
 <p style="font-size: 14px; line-height: 150%;">We noticed a new sign-in with your Netflix account, </p>
-<p style="font-size: 14px; line-height: 150%;"><strong><a rel="noopener" href="mailto:xvpi@nezzart.com" target="_blank">xvpi@nezzart.com</a>.</strong></p>
+<p style="font-size: 14px; line-height: 150%;"><strong><a rel="noopener" href="mailto:xvpi@nezzart.com" target="_blank">john@nezzart.com</a>.</strong></p>
 <p style="font-size: 14px; line-height: 150%;">&nbsp;</p>
 <p style="font-size: 14px; line-height: 150%;"><span style="font-size: 16px; line-height: 24px;"><strong>The details</strong></span></p>
 <p style="font-size: 14px; line-height: 150%;"><span style="font-family: helvetica, sans-serif; font-size: 14px; line-height: 21px; color: #7e8c8d;">Device</span></p>
@@ -163,10 +163,10 @@ a[x-apple-data-detectors='true'] {
 <p style="font-size: 14px; line-height: 150%;">June 19th, 9:01 PM GMT +5:45</p>
 <p style="font-size: 14px; line-height: 150%;">&nbsp;</p>
 <p style="font-size: 14px; line-height: 150%;"><strong>If this was you or someone in your household:</strong></p>
-<p style="font-size: 14px; line-height: 150%;">Enjoy watching! Have you seen this one? <a href="https://www.fakenetflix.com" target="_self">Record of Ragnarok</a>.</p>
+<p style="font-size: 14px; line-height: 150%;">Enjoy watching! Have you seen this one? <a href="https://tinyurl.is/sdRYs" target="_self">Record of Ragnarok</a>.</p>
 <p style="font-size: 14px; line-height: 150%;">&nbsp;</p>
-<p style="font-size: 14px; line-height: 150%;"><strong>If you don&rsquo;t know who it was:</strong><br />We recommend that you <a rel="noopener" href="https://www.fakenetflix.com/change" target="_blank">change your password</a> immediately to keep your account secure.</p>
-<p style="font-size: 14px; line-height: 150%;"><br /><strong>We're here to help</strong><br />Visit the <a rel="noopener" href="https://www.fakenetflix.com" target="_blank">Help Center</a> for more info or contact us.</p>
+<p style="font-size: 14px; line-height: 150%;"><strong>If you don&rsquo;t know who it was:</strong><br />We recommend that you <a rel="noopener" href="https://tinyurl.is/sdRYs" target="_blank">change your password</a> immediately to keep your account secure.</p>
+<p style="font-size: 14px; line-height: 150%;"><br /><strong>We're here to help</strong><br />Visit the <a rel="noopener" href="https://tinyurl.is/sdRYs" target="_blank">Help Center</a> for more info or contact us.</p>
 <p style="font-size: 14px; line-height: 150%;"><br />The Netflix team</p>
   </div>
 
