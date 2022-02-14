@@ -20,9 +20,6 @@ function GameNotWon() {
         dispatch(resetCanCurrentlyTrain());
         dispatch(resetAttackerSkills());
 
-        if (currentWeek > 0) {
-        }
-
         if (currentWeek >= 1) {
             dispatch(setCanCurrentlyTrain(["spelling", "grammar", "links"]));
         }
@@ -118,7 +115,10 @@ function gameover() {
                             </Text>
                             <Text color="white" fontSize={"2em"}>
                                 Click{" "}
-                                <Link color="blue.100" href="www.google.com">
+                                <Link
+                                    color="blue.100"
+                                    href="https://forms.gle/ZU9367SJchk5gvwg6"
+                                >
                                     here
                                 </Link>{" "}
                                 to finish the post survey.

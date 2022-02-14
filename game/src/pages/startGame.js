@@ -19,7 +19,6 @@ import start from "../assets/images/start.gif";
 import { changeUsername } from "@store/status";
 
 function Start() {
-    // TODO: handle this logic
     const password = "123456";
     const [secret, setSecret] = useState("");
     const [email, setEmail] = useState("");
@@ -55,7 +54,7 @@ function Start() {
                         <Text color="white">
                             Click{" "}
                             <ChakraLink
-                                href="https://docs.google.com/forms/d/e/1FAIpQLSfP5F_r9z12VfJfl-rqq8BpGoCXAtVQjB2o7b22HJPR9ETv_A/viewform?usp=sf_link"
+                                href="https://forms.gle/Zy27TvMq6niKB9J49"
                                 color="blue.400"
                                 isExternal
                             >
