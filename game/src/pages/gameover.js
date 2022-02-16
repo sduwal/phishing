@@ -20,62 +20,91 @@ function GameNotWon() {
     const dispatch = useDispatch();
     const currentWeek = useSelector((state) => state.week.currentWeek);
     function resetWeek() {
-        dispatch(resetWeekStats());
-        dispatch(resetCanCurrentlyTrain());
-        dispatch(resetAttackerSkills());
-        dispatch(resetStatus());
-
-        if (currentWeek >= 1) {
-            dispatch(setCanCurrentlyTrain(["spelling", "grammar", "links"]));
+        function actionCreator() {
+            return (dispatch) =>
+                Promise.all([
+                    dispatch(resetWeekStats()),
+                    dispatch(resetStatus()),
+                    dispatch(resetAttackerSkills()),
+                    dispatch(resetCanCurrentlyTrain())
+                ]).then(() => {
+                    if (currentWeek >= 1) {
+                        Promise.all([
+                            dispatch(
+                                setCanCurrentlyTrain([
+                                    "spelling",
+                                    "grammar",
+                                    "links"
+                                ])
+                            )
+                        ]).then(() => {
+                            if (currentWeek >= 2) {
+                                Promise.all([
+                                    dispatch(
+                                        setLanguageSkills({
+                                            "display": "Spellings",
+                                            "efficiency": 35,
+                                            "value": "spelling"
+                                        })
+                                    ),
+                                    dispatch(
+                                        setLanguageSkills({
+                                            "display": "Grammar",
+                                            "efficiency": 35,
+                                            "value": "grammar"
+                                        })
+                                    ),
+                                    dispatch(
+                                        setTechSkills({
+                                            "efficiency": 20,
+                                            "display": "Links",
+                                            "value": "links"
+                                        })
+                                    ),
+                                    dispatch(
+                                        setCanCurrentlyTrain([
+                                            "research",
+                                            "styling"
+                                        ])
+                                    )
+                                ]).then(() => {
+                                    if (currentWeek >= 3) {
+                                        Promise.all([
+                                            dispatch(
+                                                setTechSkills({
+                                                    "efficiency": 20,
+                                                    "display": "Styling",
+                                                    "value": "styling"
+                                                })
+                                            ),
+                                            dispatch(
+                                                setTechSkills({
+                                                    "efficiency": 15,
+                                                    "display":
+                                                        "Research Targeted group",
+                                                    "value": "research"
+                                                })
+                                            ),
+                                            dispatch(
+                                                setCanCurrentlyTrain(["spoof"])
+                                            )
+                                        ]).then(() => {
+                                            history.push("/main");
+                                        });
+                                    } else {
+                                        history.push("/main");
+                                    }
+                                });
+                            } else {
+                                history.push("/main");
+                            }
+                        });
+                    } else {
+                        history.push("/main");
+                    }
+                });
         }
-
-        if (currentWeek >= 2) {
-            dispatch(
-                setLanguageSkills({
-                    "display": "Spellings",
-                    "efficiency": 35,
-                    "value": "spelling"
-                })
-            );
-
-            dispatch(
-                setLanguageSkills({
-                    "display": "Grammar",
-                    "efficiency": 35,
-                    "value": "grammar"
-                })
-            );
-
-            dispatch(
-                setTechSkills({
-                    "efficiency": 20,
-                    "display": "Links",
-                    "value": "links"
-                })
-            );
-            dispatch(setCanCurrentlyTrain(["research", "styling "]));
-        }
-
-        if (currentWeek >= 3) {
-            dispatch(
-                setTechSkills({
-                    "efficiency": 20,
-                    "display": "Styling",
-                    "value": "styling"
-                })
-            );
-
-            dispatch(
-                setTechSkills({
-                    "efficiency": 15,
-                    "display": "Research Targeted group",
-                    "value": "research"
-                })
-            );
-
-            dispatch(setCanCurrentlyTrain(["spoof"]));
-        }
-        history.push("/main");
+        dispatch(actionCreator());
     }
     return (
         <>

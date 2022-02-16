@@ -8,6 +8,7 @@ import weekReducer from "./week";
 import animateReducer from "./animate";
 
 import logger from "./middleware/logger";
+import thunk from "redux-thunk";
 
 export default configureStore({
     reducer: {
@@ -19,5 +20,6 @@ export default configureStore({
         week: weekReducer,
         animate: animateReducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({ thunk }).concat(logger)
 });
