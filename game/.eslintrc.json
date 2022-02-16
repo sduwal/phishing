@@ -20,6 +20,7 @@
     ],
     "rules": {
         "require-jsdoc": "off",
+        "space-before-function-paren": "warn",
         "valid-jsdoc": "off",
         "max-len": "off",
         "indent": [

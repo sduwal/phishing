@@ -1,0 +1,568 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                           APPENDIX A 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\phantomsection
+
+\chapter{Code snippets}
+\label{chap:codesnippets}
+
+\begin{lstlisting}[language=JavaScript, caption=DynamicCompressor fingerprint generation code, label=dynamicCompressorFingerprintGenerationCode]
+  getDynamicCompressorFingerprint(): Promise<any>  {
+    let sumBuffer = 0;
+    let sumBufferHash = null;
+    return new Promise((resolve, reject) => {
+      try {
+        let offlineAudioCtx = new ((<any>window).OfflineAudioContext || (<any>window).webkitOfflineAudioContext)(OFFLINEAUDIOCTX.numberOfChannels, OFFLINEAUDIOCTX.length, OFFLINEAUDIOCTX.sampleRate);
+        if (offlineAudioCtx) {
+          let oscillator =  offlineAudioCtx.createOscillator();
+          oscillator.type = SIGNAL_TYPE;
+          oscillator.frequency.value = FREQUENCY;
+          
+          // Create and configure compressor
+          let compressor = offlineAudioCtx.createDynamicsCompressor();
+          compressor.threshold && (compressor.threshold.value = COMPRESSOR.threshold);
+          compressor.knee && (compressor.knee.value = COMPRESSOR.knee);
+          compressor.ratio && (compressor.ratio.value = COMPRESSOR.ratio);
+          // compressor.reduction && (compressor.reduction.value = -20);
+          compressor.attack && (compressor.attack.value = COMPRESSOR.attack);
+          compressor.release && (compressor.release.value = COMPRESSOR.release);
+
+          // Connect nodes
+          oscillator.connect(compressor);
+          compressor.connect(offlineAudioCtx.destination);
+
+          // Start audio processing
+          oscillator.start(0);
+          offlineAudioCtx.startRendering();
+          offlineAudioCtx.oncomplete = ((evnt: any) => {
+            sumBuffer = 0;
+            let MD5 =  CryptoJS.algo.MD5.create();
+            for (let i = 0; i < evnt.renderedBuffer.length; i++) {
+              MD5.update(evnt.renderedBuffer.getChannelData(0)[i].toString());
+            }
+            const hash = MD5.finalize();
+            sumBufferHash = hash.toString(CryptoJS.enc.Hex);
+            for (let i = 4500; 5e3 > i; i++) {
+              sumBuffer += Math.abs(evnt.renderedBuffer.getChannelData(0)[i]);
+            }
+            oscillator.disconnect();
+            //console.log({"dynamicCompressor": sumBufferHash, "sum": sumBuffer});
+            //alert("dynamiccompressor " +sumBufferHash)
+            resolve({"hash": sumBufferHash, "sum": sumBuffer, "noFingerprint": false});
+          });
+        } else {
+          reject({"hash": sumBufferHash, "sum": sumBuffer, "noFingerprint": true});
+        }
+      } catch (u) {
+        reject({"hash": sumBufferHash, "sum": sumBuffer, "noFingerprint": true});
+      }
+    });
+  }
+\end{lstlisting}
+
+\begin{lstlisting}[language=JavaScript, caption=OscillatorNode fingerprint generation code, label=oscillatorNodeFingerprintGenerationCode]
+  getOscillatorNodeFingerprint(): Promise<any>  {
+    let oscillatorNode = [];
+    let hash = null;
+    return new Promise((resolve, reject) => {
+      try {
+        let audioCtx = new ((<any>window).AudioContext || (<any>window).webkitAudioContext)();
+        if (audioCtx) {
+          let oscillator = audioCtx.createOscillator();
+          let analyser = audioCtx.createAnalyser();
+          let gain = audioCtx.createGain();
+          let scriptProcessor = audioCtx.createScriptProcessor(SCRIPT_PROCESSOR.bufferSize, SCRIPT_PROCESSOR.numberOfInputChannels, SCRIPT_PROCESSOR.numberOfOutputChannels);
+          gain.gain.value = 1; // Disable volume
+          analyser.fftSize = 2048;
+          oscillator.type = SIGNAL_TYPE // Set oscillator to output wave
+          oscillator.connect(analyser); // Connect oscillator output to analyser input
+          analyser.connect(scriptProcessor); // Connect analyser output to scriptProcessor input
+          scriptProcessor.connect(gain); // Connect scriptProcessor output to gain input
+          gain.connect(audioCtx.destination); // Connect gain output to audiocontext destination
+          scriptProcessor.onaudioprocess = (async (event) => {
+              const bins = new Float32Array(analyser.frequencyBinCount);
+              analyser.getFloatFrequencyData(bins);
+              for (let i = 0; i < bins.length; i++) {
+                oscillatorNode.push(bins[i]);
+              }
+              analyser.disconnect();
+              scriptProcessor.disconnect();
+              gain.disconnect();
+              const audioFP = JSON.stringify(oscillatorNode);
+              hash = CryptoJS.MD5(audioFP).toString();
+              await audioCtx.close();
+              resolve({"hash": hash, "values": oscillatorNode, "noFingerprint": false});
+          });
+          oscillator.start(0);
+        } else {
+          reject({"hash": hash, "values": oscillatorNode, "noFingerprint": true});
+        }
+      } catch (u) {
+        reject({"hash": hash, "values": oscillatorNode, "noFingerprint": true});
+      }
+    });
+  }
+\end{lstlisting}
+
+\begin{lstlisting}[language=JavaScript, caption=Hybrid fingerprint generation code, label=hybridFingerprintGenerationCode]
+  getHybridFingerprintWithAudioCtx(): Promise<any>  {
+    let hybridOscillatorNode = [];
+    let hybridHash = null;
+    return new Promise((resolve,reject) => {
+      try {
+        let audioCtx = new ((<any>window).AudioContext || (<any>window).webkitAudioContext)();
+        if (audioCtx) {
+          let oscillator = audioCtx.createOscillator();
+          let analyser = audioCtx.createAnalyser();
+          let gain = audioCtx.createGain();
+          let scriptProcessor = audioCtx.createScriptProcessor(SCRIPT_PROCESSOR.bufferSize, SCRIPT_PROCESSOR.numberOfInputChannels, SCRIPT_PROCESSOR.numberOfOutputChannels);
+
+          // Create and configure compressor
+          let compressor = audioCtx.createDynamicsCompressor();
+          compressor.threshold.setValueAtTime(COMPRESSOR.threshold, audioCtx.currentTime);
+          compressor.knee.setValueAtTime(COMPRESSOR.knee, audioCtx.currentTime);
+          compressor.ratio.setValueAtTime(COMPRESSOR.ratio, audioCtx.currentTime);
+          compressor.attack.setValueAtTime(COMPRESSOR.attack, audioCtx.currentTime);
+          compressor.release.setValueAtTime(COMPRESSOR.release, audioCtx.currentTime);
+
+          gain.gain.value = 0; // Disable volume
+          analyser.fftSize = 2048;
+          oscillator.type = SIGNAL_TYPE // Set oscillator to output triangle wave
+          oscillator.connect(compressor); // Connect oscillator output to dynamic compressor
+          compressor.connect(analyser); // Connect compressor to analyser
+          analyser.connect(scriptProcessor); // Connect analyser output to scriptProcessor input
+          scriptProcessor.connect(gain); // Connect scriptProcessor output to gain input
+          gain.connect(audioCtx.destination); // Connect gain output to audiocontext destination
+          scriptProcessor.onaudioprocess = (async (bins: any) => {
+              bins = new Float32Array(analyser.frequencyBinCount);
+              analyser.getFloatFrequencyData(bins);
+              for (let i = 0; i < bins.length; i++) {
+                  hybridOscillatorNode.push(bins[i]);
+              }
+              analyser.disconnect();
+              scriptProcessor.disconnect();
+              gain.disconnect();
+              const audioFP = JSON.stringify(hybridOscillatorNode);
+              hybridHash = CryptoJS.MD5(audioFP).toString();
+              await audioCtx.close();
+              resolve({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": false});
+          });
+          oscillator.start(0);
+        } else {
+          reject({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": true});
+        }
+      } catch (u) {
+        reject({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": true});
+      }
+    });
+  }
+\end{lstlisting}
+
+\begin{lstlisting}[language=JavaScript, caption=Custom Signal Hybrid fingerprint generation code, label=customSignalHybridFingerprintGenerationCode]
+  getCustomSignalHybridFingerprintAudioCtx(): Promise<any>  {
+    let hybridOscillatorNode = [];
+    let hybridHash = null;
+    return new Promise(async (resolve, reject) => {
+      try {
+        let audioCtx = new ((<any>window).AudioContext || (<any>window).webkitAudioContext)();
+        if (audioCtx) {
+          const OFFSET = 0.7;
+          const pi = Math.PI;
+          // https://medium.com/web-audio/phase-offsets-with-web-audio-wavetables-c7dc85ac3218
+          // https://meettechniek.info/additional/additive-synthesis.html
+          const real = new Float32Array(11);
+          const imag = new Float32Array(11);
+          real[0] = 0.360;
+          real[1] = 0.760;
+          real[2] = 0.120;
+          real[3] = 0.745;
+          real[4] = 0.235;
+          real[5] = 0.145;
+          real[6] = 0.545;
+          real[7] = 0.675;
+          real[8] = 0.585;
+          real[9] = 0.685;
+          real[10] = 0.115;
+          real[11] = 0.660;
+
+          imag[0] = pi/2;
+          imag[1] = 0;
+          imag[2] = pi/2;
+          imag[3] = 0;
+          imag[4] = pi/2;
+          imag[5] = 0;
+          imag[6] = pi/2;
+          imag[7] = 0;
+          imag[8] = pi/2;
+          imag[9] = 0;
+          imag[10] = pi/2;
+          imag[11] = 0
+
+          const wave = audioCtx.createPeriodicWave(real, imag, { disableNormalization: true });
+          let oscillator =  audioCtx.createOscillator();
+          oscillator.frequency.value = 440;
+          oscillator.setPeriodicWave(wave);
+          const offset = audioCtx.createConstantSource();
+          offset.offset.value = OFFSET;
+          let analyser = audioCtx.createAnalyser();
+          let gain = audioCtx.createGain();
+          let scriptProcessor = audioCtx.createScriptProcessor(SCRIPT_PROCESSOR.bufferSize, SCRIPT_PROCESSOR.numberOfInputChannels, SCRIPT_PROCESSOR.numberOfOutputChannels);
+
+          let compressor = audioCtx.createDynamicsCompressor();
+          compressor.threshold.setValueAtTime(COMPRESSOR.threshold, audioCtx.currentTime);
+          compressor.knee.setValueAtTime(COMPRESSOR.knee, audioCtx.currentTime);
+          compressor.ratio.setValueAtTime(COMPRESSOR.ratio, audioCtx.currentTime);
+          compressor.attack.setValueAtTime(COMPRESSOR.attack, audioCtx.currentTime);
+          compressor.release.setValueAtTime(COMPRESSOR.release, audioCtx.currentTime);
+
+          gain.gain.value = 0; // Disable volume
+          analyser.fftSize = 2048;
+          oscillator.connect(compressor); // Connect oscillator output to dynamic compressor
+          compressor.connect(analyser); // Connect oscillator output to dynamic compressor
+          analyser.connect(scriptProcessor); // Connect analyser output to scriptProcessor input
+          scriptProcessor.connect(gain); // Connect scriptProcessor output to gain input
+          gain.connect(audioCtx.destination); // Connect gain output to audiocontext destination
+
+          scriptProcessor.onaudioprocess = (async (bins: any) => {
+            bins = new Float32Array(analyser.frequencyBinCount);
+            analyser.getFloatFrequencyData(bins);
+            for (let i = 0; i < bins.length; i++) {
+              hybridOscillatorNode.push(bins[i]);
+            }
+            analyser.disconnect();
+            scriptProcessor.disconnect();
+            gain.disconnect();
+            const audioFP = JSON.stringify(hybridOscillatorNode);
+            hybridHash = CryptoJS.MD5(audioFP).toString();
+            await audioCtx.close();
+            resolve({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": false});
+          });
+          oscillator.start(0);
+          offset.start();
+        } else {
+          reject({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": true});
+        } 
+      } catch (u) {
+        reject({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": true});
+      }
+    });
+  }
+\end{lstlisting}
+
+\begin{lstlisting}[language=JavaScript, caption=Audio Source Hybrid fingerprint generation code, label=audioSourceHybridFingerprintGenerationCode]
+  getAudioSourceHybridFingeprintAudioCtx(): Promise<any> {
+    let audioData = null;
+    let hash= null;
+    let analyserNodeData = [];
+    return new Promise((resolve, reject) => {
+      try {
+        const audioContext = new ((<any>window).AudioContext || (<any>window).webkitAudioContext)();
+        if (audioContext) {
+          const sourceNode = audioContext.createBufferSource();
+          const analyserNode = audioContext.createAnalyser();
+          const gain = audioContext.createGain();
+          const scriptProcessor = audioContext.createScriptProcessor(SCRIPT_PROCESSOR.bufferSize, SCRIPT_PROCESSOR.numberOfInputChannels, SCRIPT_PROCESSOR.numberOfOutputChannels);
+           // Create and configure compressor
+          const compressor = audioContext.createDynamicsCompressor();
+          compressor.threshold.setValueAtTime(COMPRESSOR.threshold, audioContext.currentTime);
+          compressor.knee.setValueAtTime(COMPRESSOR.knee, audioContext.currentTime);
+          compressor.ratio.setValueAtTime(COMPRESSOR.ratio, audioContext.currentTime);
+          compressor.attack.setValueAtTime(COMPRESSOR.attack, audioContext.currentTime);
+          compressor.release.setValueAtTime(COMPRESSOR.release, audioContext.currentTime);
+          gain.gain.value = 0; // Disable volume
+          analyserNode.fftSize = 2048;
+
+          // Now connect the nodes together
+          sourceNode.connect(compressor);
+          compressor.connect(analyserNode);
+          analyserNode.connect(scriptProcessor);
+          scriptProcessor.connect(gain);
+          gain.connect(audioContext.destination);
+
+          scriptProcessor.onaudioprocess = (async (event: any) => {
+            const bins = new Float32Array(analyserNode.frequencyBinCount);
+            analyserNode.getFloatFrequencyData(bins);
+            for (let i = 0; i < bins.length; i++) {
+              analyserNodeData.push(bins[i]);
+            }
+            const audioFP = JSON.stringify(analyserNodeData);
+            hash = CryptoJS.MD5(audioFP).toString();
+            gain.disconnect();
+            scriptProcessor.disconnect();
+            analyserNode.disconnect();
+            await audioContext.close();
+            resolve({"hash": hash, "values": analyserNodeData, "noFingerprint": false});
+          });
+          // Load the Audio the first time through, otherwise play it from the buffer
+          if(audioData == null) {
+            const request = new XMLHttpRequest();
+            request.open('GET', '../../../assets/viper-05.ogg', true);
+            request.responseType = 'arraybuffer';
+            request.onload = (() => {
+              audioContext.decodeAudioData(request.response, function(buffer){
+                audioData = buffer;
+                sourceNode.buffer = buffer;
+                sourceNode.start(0);    // Play the sound now
+                sourceNode.loop = false;
+              },
+              function(e){"Error with decoding audio data" + e});
+            });
+            request.send()
+          } else {
+            sourceNode.buffer = audioData;
+            sourceNode.start(0);    // Play the sound now
+            sourceNode.loop = false;
+          }
+        } else {
+          reject({"hash": hash, "values": analyserNodeData, "noFingerprint": true});
+        }  
+      } catch(u) {
+        reject({"hash": hash, "values": analyserNodeData, "noFingerprint": true});
+      }  
+    });
+  }
+\end{lstlisting}
+
+\begin{lstlisting}[language=JavaScript, caption=Channel Merge Hybrid fingerprint generation code, label=channelMergeHybridFingerprintGenerationCode]
+  getChannelMergeHybridFingerprintAudioCtx(): Promise<any> {
+    let hybridHash = null;
+    let hybridOscillatorNode = [];
+    return new Promise((resolve, reject) => {
+      try {
+        let audioCtx = new ((<any>window).AudioContext || (<any>window).webkitAudioContext)();
+        if (audioCtx) {
+          let oscillator1 = audioCtx.createOscillator();
+          oscillator1.type = "sine";
+          oscillator1.frequency.setValueAtTime(440, audioCtx.currentTime);
+          let oscillator2 = audioCtx.createOscillator();
+          oscillator2.type = "triangle";
+          oscillator2.frequency.setValueAtTime(10000,audioCtx.currentTime);
+          let oscillator3 = audioCtx.createOscillator();
+          oscillator3.type = "square";
+          oscillator3.frequency.setValueAtTime(1880,audioCtx.currentTime);
+          let oscillator4 = audioCtx.createOscillator();
+          oscillator4.type = "sawtooth";
+          oscillator4.frequency.setValueAtTime(22000,audioCtx.currentTime);
+
+          let channelMerger = audioCtx.createChannelMerger(4)
+          oscillator1.connect(channelMerger, 0, 0);
+          oscillator2.connect(channelMerger, 0, 1);
+          oscillator3.connect(channelMerger, 0, 2);
+          oscillator4.connect(channelMerger, 0, 3);
+
+          let compressor = audioCtx.createDynamicsCompressor();
+          let analyser = audioCtx.createAnalyser();
+          let gain = audioCtx.createGain();
+          let scriptProcessor = audioCtx.createScriptProcessor(SCRIPT_PROCESSOR.bufferSize, SCRIPT_PROCESSOR.numberOfInputChannels, SCRIPT_PROCESSOR.numberOfOutputChannels);
+
+          compressor.threshold.setValueAtTime(COMPRESSOR.threshold, audioCtx.currentTime);
+          compressor.knee.setValueAtTime(COMPRESSOR.knee, audioCtx.currentTime);
+          compressor.ratio.setValueAtTime(COMPRESSOR.ratio, audioCtx.currentTime);
+          compressor.attack.setValueAtTime(COMPRESSOR.attack, audioCtx.currentTime);
+          compressor.release.setValueAtTime(COMPRESSOR.release, audioCtx.currentTime);
+
+          gain.gain.value = 0; // Disable volume
+          analyser.fftSize = 4096;
+          
+          channelMerger.connect(compressor); // Connect merger to compressor
+          compressor.connect(analyser); // Connect compressor to analyser
+          analyser.connect(scriptProcessor); // Connect analyser output to scriptProcessor input
+          scriptProcessor.connect(gain); // Connect scriptProcessor output to gain input
+          gain.connect(audioCtx.destination); // Connect gain output to audiocontext destination
+    
+          scriptProcessor.onaudioprocess = (async (bins: any) => {
+              bins = new Float32Array(analyser.frequencyBinCount);
+              analyser.getFloatFrequencyData(bins);
+              for (let i = 0; i < bins.length; i++) {
+                hybridOscillatorNode.push(bins[i]);
+              }
+              analyser.disconnect();
+              scriptProcessor.disconnect();
+              gain.disconnect();
+              const audioFP = JSON.stringify(hybridOscillatorNode);
+              hybridHash = CryptoJS.MD5(audioFP).toString();
+              await audioCtx.close();
+              resolve({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": false});
+          });
+          //start source
+          oscillator1.start(0);
+          oscillator2.start(0);
+          oscillator3.start(0);
+          oscillator4.start(0);
+        } else {
+          reject({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": true});
+        }
+      } catch (u) {
+        reject({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": true});
+      }
+    });
+  }
+\end{lstlisting}
+
+\begin{lstlisting}[language=JavaScript, caption=Amplitude Modulation Hybrid fingerprint generation code, label=amplitudeModualtionHybridFingerprintGenerationCode]
+  getAmplitudeModulationHybridFingerprintAudioCtx(): Promise<any> {
+    let hybridOscillatorNode = [];
+    let hybridHash = null;
+    return new Promise((resolve,reject) => {
+      try {
+        let audioCtx = new ((<any>window).AudioContext || (<any>window).webkitAudioContext)();
+        if (audioCtx) {
+          let mod = audioCtx.createOscillator();
+          mod.frequency.setValueAtTime(18, audioCtx.currentTime);
+          mod.type = "square"
+  
+          let modGain = audioCtx.createGain();
+          modGain.gain.value = 30;
+  
+          let mod1 = audioCtx.createOscillator();
+          mod1.frequency.setValueAtTime(440, audioCtx.currentTime);
+          mod1.type = "triangle"
+      
+          let modGain1 = audioCtx.createGain();
+          modGain1.gain.value = 60;
+  
+          let carrier = audioCtx.createOscillator();
+          carrier.type = "sine"
+          carrier.frequency.setValueAtTime(10000, audioCtx.currentTime);
+          
+          let carrierGain = audioCtx.createGain();
+          carrierGain.gain.value = 1;
+
+          let analyser = audioCtx.createAnalyser();
+          let masterGain = audioCtx.createGain();
+          masterGain.gain.value = 0; // Disable volume
+          let scriptProcessor = audioCtx.createScriptProcessor(SCRIPT_PROCESSOR.bufferSize, SCRIPT_PROCESSOR.numberOfInputChannels, SCRIPT_PROCESSOR.numberOfOutputChannels);
+
+          mod.connect(modGain);
+          mod1.connect(modGain1);
+          mod.connect(carrierGain.gain);
+          mod1.connect(carrierGain.gain);
+          carrier.connect(carrierGain);
+          // Create and configure compressor
+          let compressor = audioCtx.createDynamicsCompressor();
+          compressor.threshold.setValueAtTime(COMPRESSOR.threshold, audioCtx.currentTime);
+          compressor.knee.setValueAtTime(COMPRESSOR.knee, audioCtx.currentTime);
+          compressor.ratio.setValueAtTime(COMPRESSOR.ratio, audioCtx.currentTime);
+          compressor.attack.setValueAtTime(COMPRESSOR.attack, audioCtx.currentTime);
+          compressor.release.setValueAtTime(COMPRESSOR.release, audioCtx.currentTime);
+          
+          analyser.fftSize = 4096;
+
+          carrierGain.connect(compressor); // Connect carrier oscillator output to dynamic compressor
+          compressor.connect(analyser); // Connect compressor to analyser
+          analyser.connect(scriptProcessor); // Connect analyser output to scriptProcessor input
+          scriptProcessor.connect(masterGain); // Connect scriptProcessor output to gain input
+          masterGain.connect(audioCtx.destination); // Connect gain output to audiocontext destination
+          scriptProcessor.onaudioprocess = (async (bins: any) => {
+              bins = new Float32Array(analyser.frequencyBinCount);
+              analyser.getFloatFrequencyData(bins);
+              for (let i = 0; i < bins.length; i++) {
+                  hybridOscillatorNode.push(bins[i]);
+              }
+              analyser.disconnect();
+              scriptProcessor.disconnect();
+              masterGain.disconnect();
+              const audioFP = JSON.stringify(hybridOscillatorNode);
+              hybridHash = CryptoJS.MD5(audioFP).toString();
+              await audioCtx.close();
+              resolve({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": false});
+          });
+          carrier.start(0);
+          mod.start(0);
+          mod1.start(0);
+        } else {
+          reject({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": true});
+        }
+      } catch (u) {
+        reject({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": true});
+      }
+    });
+  }
+\end{lstlisting}
+
+\begin{lstlisting}[language=JavaScript, caption=Frequency Modulation Hybrid  fingerprint generation code, label=frequencyModualtionHybridFingerprintGenerationCode]
+  getFrequencyModulationHybridFingerprintAudioCtx(): Promise<any> {
+    let hybridOscillatorNode = [];
+    let hybridHash = null;
+    return new Promise((resolve,reject) => {
+      try {
+        let audioCtx = new ((<any>window).AudioContext || (<any>window).webkitAudioContext)();
+        if (audioCtx) {
+          let mod = audioCtx.createOscillator();
+          mod.frequency.setValueAtTime(18, audioCtx.currentTime);
+          mod.type = "square"
+  
+          let modGain = audioCtx.createGain();
+          modGain.gain.value = 30;
+  
+          let mod1 = audioCtx.createOscillator();
+          mod1.frequency.setValueAtTime(440, audioCtx.currentTime);
+          mod1.type = "triangle"
+      
+          let modGain1 = audioCtx.createGain();
+          modGain1.gain.value = 60;
+  
+          let carrier = audioCtx.createOscillator();
+          carrier.type = "sine"
+          carrier.frequency.setValueAtTime(10000, audioCtx.currentTime);
+          
+          let carrierGain = audioCtx.createGain();
+          carrierGain.gain.value = 1;
+
+          let analyser = audioCtx.createAnalyser();
+          let masterGain = audioCtx.createGain();
+          masterGain.gain.value = 0; // Disable volume
+          let scriptProcessor = audioCtx.createScriptProcessor(SCRIPT_PROCESSOR.bufferSize, SCRIPT_PROCESSOR.numberOfInputChannels, SCRIPT_PROCESSOR.numberOfOutputChannels);
+
+          mod1.connect(modGain1);
+          modGain1.connect(carrier.frequency);
+    
+          mod.connect(modGain);
+          modGain.connect(carrier.frequency);
+
+          // Create and configure compressor
+          let compressor = audioCtx.createDynamicsCompressor();
+          compressor.threshold.setValueAtTime(COMPRESSOR.threshold, audioCtx.currentTime);
+          compressor.knee.setValueAtTime(COMPRESSOR.knee, audioCtx.currentTime);
+          compressor.ratio.setValueAtTime(COMPRESSOR.ratio, audioCtx.currentTime);
+          compressor.attack.setValueAtTime(COMPRESSOR.attack, audioCtx.currentTime);
+          compressor.release.setValueAtTime(COMPRESSOR.release, audioCtx.currentTime);
+
+          carrier.connect(compressor); // Connect carrier output to analyser input
+          compressor.connect(analyser); // Connect compressor to analyser
+          analyser.connect(scriptProcessor); // Connect analyser output to scriptProcessor input
+          scriptProcessor.connect(masterGain); // Connect scriptProcessor output to gain input
+          masterGain.connect(audioCtx.destination); // Connect gain output to audiocontext destination
+          scriptProcessor.onaudioprocess = (async (bins: any) => {
+              bins = new Float32Array(analyser.frequencyBinCount);
+              analyser.getFloatFrequencyData(bins);
+              for (let i = 0; i < bins.length; i++) {
+                  hybridOscillatorNode.push(bins[i]);
+              }
+              analyser.disconnect();
+              scriptProcessor.disconnect();
+              masterGain.disconnect();
+              const audioFP = JSON.stringify(hybridOscillatorNode);
+              hybridHash = CryptoJS.MD5(audioFP).toString();
+              await audioCtx.close();
+              resolve({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": false});
+          });
+          carrier.start(0);
+          mod.start(0);
+          mod1.start(0);
+        } else {
+          reject({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": true});
+        }
+      } catch (u) {
+        reject({"hash": hybridHash, "values": hybridOscillatorNode, "noFingerprint": true});
+      }
+    });
+  }
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=JavaScript, caption=Expanded Font list, label=expandedfontlist]
+["sans-serif-thin","ARNO PRO","Agency FB","Arabic Typesetting","Arial Unicode MS","AvantGarde Bk BT","BankGothic Md BT","Batang","Bitstream Vera Sans Mono","Calibri","Century","Century Gothic","Clarendon","EUROSTILE","Franklin Gothic","Futura Bk BT","Futura Md BT","GOTHAM","Gill Sans","HELV","Haettenschweiler","Helvetica Neue","Humanst521 BT","Leelawadee","Letter Gothic","Levenim MT","Lucida Bright","Lucida Sans","Menlo","MS Mincho","MS Outlook","MS Reference Specialty","MS UI Gothic","MT Extra","MYRIAD PRO","Marlett","Meiryo UI","Microsoft Uighur","Minion Pro","Monotype Corsiva","PMingLiU","Pristina","SCRIPTINA","Segoe UI Light","Serifa","SimHei","Small Fonts","Staccato222 BT","TRAJAN PRO","Univers CE 55 Medium","Vrinda","ZWAdobeF",".Aqua Kana",".Helvetica LT MM",".Times LT MM","18thCentury","8514oem","AR BERKLEY","AR JULIAN","AR PL UKai CN","AR PL UMing CN","AR PL UMing HK","AR PL UMing TW","AR PL UMing TW MBE","Aakar","Abadi MT Condensed Extra Bold","Abadi MT Condensed Light","Abyssinica SIL","AcmeFont","Adobe Arabic","Agency FB","Aharoni","Aharoni Bold","Al Bayan","Al Bayan Bold","Al Bayan Plain","Al Nile","Al Tarikh","Aldhabi","Alfredo","Algerian","Alien Encounters","Almonte Snow","American Typewriter","American Typewriter Bold","American Typewriter Condensed","American Typewriter Light","Amethyst","Andale Mono","Andale Mono Version","Andalus","Angsana New","AngsanaUPC","Ani","AnjaliOldLipi","Aparajita","Apple Braille","Apple Braille Outline 6 Dot","Apple Braille Outline 8 Dot","Apple Braille Pinpoint 6 Dot","Apple Braille Pinpoint 8 Dot","Apple Chancery","Apple Color Emoji","Apple LiGothic Medium","Apple LiSung Light","Apple SD Gothic Neo","Apple SD Gothic Neo Regular","Apple SD GothicNeo ExtraBold","Apple Symbols","AppleGothic","AppleGothic Regular","AppleMyungjo","AppleMyungjo Regular","AquaKana","Arabic Transparent","Arabic Typesetting","Arial","Arial Baltic","Arial Black","Arial Bold","Arial Bold Italic","Arial CE","Arial CYR","Arial Greek","Arial Hebrew","Arial Hebrew Bold","Arial Italic","Arial Narrow","Arial Narrow Bold","Arial Narrow Bold Italic","Arial Narrow Italic","Arial Rounded Bold","Arial Rounded MT Bold","Arial TUR","Arial Unicode MS","ArialHB","Arimo","Asimov","Autumn","Avenir","Avenir Black","Avenir Book","Avenir Next","Avenir Next Bold","Avenir Next Condensed","Avenir Next Condensed Bold","Avenir Next Demi Bold","Avenir Next Heavy","Avenir Next Regular","Avenir Roman","Ayuthaya","BN Jinx","BN Machine","BOUTON International Symbols","BabyKruffy","Baghdad","Bahnschrift","Balthazar","Bangla MN","Bangla MN Bold","Bangla Sangam MN","Bangla Sangam MN Bold","Baskerville","Baskerville Bold","Baskerville Bold Italic","Baskerville Old Face","Baskerville SemiBold","Baskerville SemiBold Italic","Bastion","Batang","BatangChe","Bauhaus 93","Beirut","Bell MT","Bell MT Bold","Bell MT Italic","Bellerose","Berlin Sans FB","Berlin Sans FB Demi","Bernard MT Condensed","BiauKai","Big Caslon","Big Caslon Medium","Birch Std","Bitstream Charter","Bitstream Vera Sans","Blackadder ITC","Blackoak Std","Bobcat","Bodoni 72","Bodoni MT","Bodoni MT Black","Bodoni MT Poster Compressed","Bodoni Ornaments","BolsterBold","Book Antiqua","Book Antiqua Bold","Bookman Old Style","Bookman Old Style Bold","Bookshelf Symbol 7","Borealis","Bradley Hand","Bradley Hand ITC","Braggadocio","Brandish","Britannic Bold","Broadway","Browallia New","BrowalliaUPC","Brush Script","Brush Script MT","Brush Script MT Italic","Brush Script Std","Brussels","Calibri","Calibri Bold","Calibri Light","Californian FB","Calisto MT","Calisto MT Bold","Calligraphic","Calvin","Cambria","Cambria Bold","Cambria Math","Candara","Candara Bold","Candles","Carrois Gothic SC","Castellar","Centaur","Century","Century Gothic","Century Gothic Bold","Century Schoolbook","Century Schoolbook Bold","Century Schoolbook L","Chalkboard","Chalkboard Bold","Chalkboard SE","Chalkboard SE Bold","ChalkboardBold","Chalkduster","Chandas","Chaparral Pro","Chaparral Pro Light","Charlemagne Std","Charter","Chilanka","Chiller","Chinyen","Clarendon","Cochin","Cochin Bold","Colbert","Colonna MT","Comic Sans MS","Comic Sans MS Bold","Commons","Consolas","Consolas Bold","Constantia","Constantia Bold","Coolsville","Cooper Black","Cooper Std Black","Copperplate","Copperplate Bold","Copperplate Gothic Bold","Copperplate Light","Corbel","Corbel Bold","Cordia New","CordiaUPC","Corporate","Corsiva","Corsiva Hebrew","Corsiva Hebrew Bold","Courier","Courier 10 Pitch","Courier Bold","Courier New","Courier New Baltic","Courier New Bold","Courier New CE","Courier New Italic","Courier Oblique","Cracked Johnnie","Creepygirl","Curlz MT","Cursor","Cutive Mono","DFKai-SB","DIN Alternate","DIN Condensed","Damascus","Damascus Bold","Dancing Script","DaunPenh","David","Dayton","DecoType Naskh","Deja Vu","DejaVu LGC Sans","DejaVu Sans","DejaVu Sans Mono","DejaVu Serif","Deneane","Desdemona","Detente","Devanagari MT","Devanagari MT Bold","Devanagari Sangam MN","Didot","Didot Bold","Digifit","DilleniaUPC","Dingbats","Distant Galaxy","Diwan Kufi","Diwan Kufi Regular","Diwan Thuluth","Diwan Thuluth Regular","DokChampa","Dominican","Dotum","DotumChe","Droid Sans","Droid Sans Fallback","Droid Sans Mono","Dyuthi","Ebrima","Edwardian Script ITC","Elephant","Emmett","Engravers MT","Engravers MT Bold","Enliven","Eras Bold ITC","Estrangelo Edessa","Ethnocentric","EucrosiaUPC","Euphemia","Euphemia UCAS","Euphemia UCAS Bold","Eurostile","Eurostile Bold","Expressway Rg","FangSong","Farah","Farisi","Felix Titling","Fingerpop","Fixedsys","Flubber","Footlight MT Light","Forte","FrankRuehl","Frankfurter Venetian TT","Franklin Gothic Book","Franklin Gothic Book Italic","Franklin Gothic Medium","Franklin Gothic Medium Cond","Franklin Gothic Medium Italic","FreeMono","FreeSans","FreeSerif","FreesiaUPC","Freestyle Script","French Script MT","Futura","Futura Condensed ExtraBold","Futura Medium","GB18030 Bitmap","Gabriola","Gadugi","Garamond","Garamond Bold","Gargi","Garuda","Gautami","Gazzarelli","Geeza Pro","Geeza Pro Bold","Geneva","GenevaCY","Gentium","Gentium Basic","Gentium Book Basic","GentiumAlt","Georgia","Georgia Bold","Geotype TT","Giddyup Std","Gigi","Gill","Gill Sans","Gill Sans Bold","Gill Sans MT","Gill Sans MT Bold","Gill Sans MT Condensed","Gill Sans MT Ext Condensed Bold","Gill Sans MT Italic","Gill Sans Ultra Bold","Gill Sans Ultra Bold Condensed","Gisha","Glockenspiel","Gloucester MT Extra Condensed","Good Times","Goudy","Goudy Old Style","Goudy Old Style Bold","Goudy Stout","Greek Diner Inline TT","Gubbi","Gujarati MT","Gujarati MT Bold","Gujarati Sangam MN","Gujarati Sangam MN Bold","Gulim","GulimChe","GungSeo Regular","Gungseouche","Gungsuh","GungsuhChe","Gurmukhi","Gurmukhi MN","Gurmukhi MN Bold","Gurmukhi MT","Gurmukhi Sangam MN","Gurmukhi Sangam MN Bold","Haettenschweiler","Hand Me Down S (BRK)","Hansen","Harlow Solid Italic","Harrington","Harvest","HarvestItal","Haxton Logos TT","HeadLineA Regular","HeadlineA","Heavy Heap","Hei","Hei Regular","Heiti SC","Heiti SC Light","Heiti SC Medium","Heiti TC","Heiti TC Light","Heiti TC Medium","Helvetica","Helvetica Bold","Helvetica CY Bold","Helvetica CY Plain","Helvetica LT Std","Helvetica Light","Helvetica Neue","Helvetica Neue Bold","Helvetica Neue Medium","Helvetica Oblique","HelveticaCY","HelveticaNeueLT Com 107 XBlkCn","Herculanum","High Tower Text","Highboot","Hiragino Kaku Gothic Pro W3","Hiragino Kaku Gothic Pro W6","Hiragino Kaku Gothic ProN W3","Hiragino Kaku Gothic ProN W6","Hiragino Kaku Gothic Std W8","Hiragino Kaku Gothic StdN W8","Hiragino Maru Gothic Pro W4","Hiragino Maru Gothic ProN W4","Hiragino Mincho Pro W3","Hiragino Mincho Pro W6","Hiragino Mincho ProN W3","Hiragino Mincho ProN W6","Hiragino Sans GB W3","Hiragino Sans GB W6","Hiragino Sans W0","Hiragino Sans W1","Hiragino Sans W2","Hiragino Sans W3","Hiragino Sans W4","Hiragino Sans W5","Hiragino Sans W6","Hiragino Sans W7","Hiragino Sans W8","Hiragino Sans W9","Hobo Std","Hoefler Text","Hoefler Text Black","Hoefler Text Ornaments","Hollywood Hills","Hombre","Huxley Titling","ITC Stone Serif","ITF Devanagari","ITF Devanagari Marathi","ITF Devanagari Medium","Impact","Imprint MT Shadow","InaiMathi","Induction","Informal Roman","Ink Free","IrisUPC","Iskoola Pota","Italianate","Jamrul","JasmineUPC","JavaneseText","Jokerman","JuiceITC","KacstArt","KacstBook","KacstDecorative","KacstDigital","KacstFarsi","KacstLetter","KacstNaskh","KacstOffice","KacstOne","KacstPen","KacstPoster","KacstQurn","KacstScreen","KacstTitle","KacstTitleL","Kai","Kai Regular","KaiTi","Kailasa","Kailasa Regular","Kaiti SC","Kaiti SC Black","Kalapi","Kalimati","Kalinga","Kannada MN","Kannada MN Bold","Kannada Sangam MN","Kannada Sangam MN Bold","Kartika","Karumbi","Kedage","Kefa","Kefa Bold","Keraleeyam","Keyboard","Khmer MN","Khmer MN Bold","Khmer OS","Khmer OS System","Khmer Sangam MN","Khmer UI","Kinnari","Kino MT","KodchiangUPC","Kohinoor Bangla","Kohinoor Devanagari","Kohinoor Telugu","Kokila","Kokonor","Kokonor Regular","Kozuka Gothic Pr6N B","Kristen ITC","Krungthep","KufiStandardGK","KufiStandardGK Regular","Kunstler Script","Laksaman","Lao MN","Lao Sangam MN","Lao UI","LastResort","Latha","Leelawadee","Letter Gothic Std","LetterOMatic!","Levenim MT","LiHei Pro","LiSong Pro","Liberation Mono","Liberation Sans","Liberation Sans Narrow","Liberation Serif","Likhan","LilyUPC","Limousine","Lithos Pro Regular","LittleLordFontleroy","Lohit Assamese","Lohit Bengali","Lohit Devanagari","Lohit Gujarati","Lohit Gurmukhi","Lohit Hindi","Lohit Kannada","Lohit Malayalam","Lohit Odia","Lohit Punjabi","Lohit Tamil","Lohit Tamil Classical","Lohit Telugu","Loma","Lucida Blackletter","Lucida Bright","Lucida Bright Demibold","Lucida Bright Demibold Italic","Lucida Bright Italic","Lucida Calligraphy","Lucida Calligraphy Italic","Lucida Console","Lucida Fax","Lucida Fax Demibold","Lucida Fax Regular","Lucida Grande","Lucida Grande Bold","Lucida Handwriting","Lucida Handwriting Italic","Lucida Sans","Lucida Sans Demibold Italic","Lucida Sans Typewriter","Lucida Sans Typewriter Bold","Lucida Sans Unicode","Luminari","Luxi Mono","MS Gothic","MS Mincho","MS Outlook","MS PGothic","MS PMincho","MS Reference Sans Serif","MS Reference Specialty","MS Sans Serif","MS Serif","MS UI Gothic","MT Extra","MV Boli","Mael","Magneto","Maiandra GD","Malayalam MN","Malayalam MN Bold","Malayalam Sangam MN","Malayalam Sangam MN Bold","Malgun Gothic","Mallige","Mangal","Manorly","Marion","Marion Bold","Marker Felt","Marker Felt Thin","Marlett","Martina","Matura MT Script Capitals","Meera","Meiryo","Meiryo Bold","Meiryo UI","MelodBold","Menlo","Menlo Bold","Mesquite Std","Microsoft","Microsoft Himalaya","Microsoft JhengHei","Microsoft JhengHei UI","Microsoft New Tai Lue","Microsoft PhagsPa","Microsoft Sans Serif","Microsoft Tai Le","Microsoft Tai Le Bold","Microsoft Uighur","Microsoft YaHei","Microsoft YaHei UI","Microsoft Yi Baiti","Minerva","MingLiU","MingLiU-ExtB","MingLiU_HKSCS","Minion Pro","Miriam","Mishafi","Mishafi Gold","Mistral","Modern","Modern No. 20","Monaco","Mongolian Baiti","Monospace","Monotype Corsiva","Monotype Sorts","MoolBoran","Moonbeam","MotoyaLMaru","Mshtakan","Mshtakan Bold","Mukti Narrow","Muna","Myanmar MN","Myanmar MN Bold","Myanmar Sangam MN","Myanmar Text","Mycalc","Myriad Arabic","Myriad Hebrew","Myriad Pro","NISC18030","NSimSun","Nadeem","Nadeem Regular","Nakula","Nanum Barun Gothic","Nanum Gothic","Nanum Myeongjo","NanumBarunGothic","NanumGothic","NanumGothic Bold","NanumGothicCoding","NanumMyeongjo","NanumMyeongjo Bold","Narkisim","Nasalization","Navilu","Neon Lights","New Peninim MT","New Peninim MT Bold","News Gothic MT","News Gothic MT Bold","Niagara Engraved","Niagara Solid","Nimbus Mono L","Nimbus Roman No9 L","Nimbus Sans L","Nimbus Sans L Condensed","Nina","Nirmala UI","Nirmala.ttf","Norasi","Noteworthy","Noteworthy Bold","Noto Color Emoji","Noto Emoji","Noto Mono","Noto Naskh Arabic","Noto Nastaliq Urdu","Noto Sans","Noto Sans Armenian","Noto Sans Bengali","Noto Sans CJK","Noto Sans Canadian Aboriginal","Noto Sans Cherokee","Noto Sans Devanagari","Noto Sans Ethiopic","Noto Sans Georgian","Noto Sans Gujarati","Noto Sans Gurmukhi","Noto Sans Hebrew","Noto Sans JP","Noto Sans KR","Noto Sans Kannada","Noto Sans Khmer","Noto Sans Lao","Noto Sans Malayalam","Noto Sans Myanmar","Noto Sans Oriya","Noto Sans SC","Noto Sans Sinhala","Noto Sans Symbols","Noto Sans TC","Noto Sans Tamil","Noto Sans Telugu","Noto Sans Thai","Noto Sans Yi","Noto Serif","Notram","November","Nueva Std","Nueva Std Cond","Nyala","OCR A Extended","OCR A Std","Old English Text MT","OldeEnglish","Onyx","OpenSymbol","OpineHeavy","Optima","Optima Bold","Optima Regular","Orator Std","Oriya MN","Oriya MN Bold","Oriya Sangam MN","Oriya Sangam MN Bold","Osaka","Osaka-Mono","OsakaMono","PCMyungjo Regular","PCmyoungjo","PMingLiU","PMingLiU-ExtB","PR Celtic Narrow","PT Mono","PT Sans","PT Sans Bold","PT Sans Caption Bold","PT Sans Narrow Bold","PT Serif","Padauk","Padauk Book","Padmaa","Pagul","Palace Script MT","Palatino","Palatino Bold","Palatino Linotype","Palatino Linotype Bold","Papyrus","Papyrus Condensed","Parchment","Parry Hotter","PenultimateLight","Perpetua","Perpetua Bold","Perpetua Titling MT","Perpetua Titling MT Bold","Phetsarath OT","Phosphate","Phosphate Inline","Phosphate Solid","PhrasticMedium","PilGi Regular","Pilgiche","PingFang HK","PingFang SC","PingFang TC","Pirate","Plantagenet Cherokee","Playbill","Poor Richard","Poplar Std","Pothana2000","Prestige Elite Std","Pristina","Purisa","QuiverItal","Raanana","Raanana Bold","Raavi","Rachana","Rage Italic","RaghuMalayalam","Ravie","Rekha","Roboto","Rockwell","Rockwell Bold","Rockwell Condensed","Rockwell Extra Bold","Rockwell Italic","Rod","Roland","Rondalo","Rosewood Std Regular","RowdyHeavy","Russel Write TT","SF Movie Poster","STFangsong","STHeiti","STIXGeneral","STIXGeneral-Bold","STIXGeneral-Regular","STIXIntegralsD","STIXIntegralsD-Bold","STIXIntegralsSm","STIXIntegralsSm-Bold","STIXIntegralsUp","STIXIntegralsUp-Bold","STIXIntegralsUp-Regular","STIXIntegralsUpD","STIXIntegralsUpD-Bold","STIXIntegralsUpD-Regular","STIXIntegralsUpSm","STIXIntegralsUpSm-Bold","STIXNonUnicode","STIXNonUnicode-Bold","STIXSizeFiveSym","STIXSizeFiveSym-Regular","STIXSizeFourSym","STIXSizeFourSym-Bold","STIXSizeOneSym","STIXSizeOneSym-Bold","STIXSizeThreeSym","STIXSizeThreeSym-Bold","STIXSizeTwoSym","STIXSizeTwoSym-Bold","STIXVariants","STIXVariants-Bold","STKaiti","STSong","STXihei","SWGamekeys MT","Saab","Sahadeva","Sakkal Majalla","Salina","Samanata","Samyak Devanagari","Samyak Gujarati","Samyak Malayalam","Samyak Tamil","Sana","Sana Regular","Sans","Sarai","Sathu","Savoye LET Plain:1.0","Sawasdee","Script","Script MT Bold","Segoe MDL2 Assets","Segoe Print","Segoe Pseudo","Segoe Script","Segoe UI","Segoe UI Emoji","Segoe UI Historic","Segoe UI Semilight","Segoe UI Symbol","Serif","Shonar Bangla","Showcard Gothic","Shree Devanagari 714","Shruti","SignPainter-HouseScript","Silom","SimHei","SimSun","SimSun-ExtB","Simplified Arabic","Simplified Arabic Fixed","Sinhala MN","Sinhala MN Bold","Sinhala Sangam MN","Sinhala Sangam MN Bold","Sitka","Skia","Skia Regular","Skinny","Small Fonts","Snap ITC","Snell Roundhand","Snowdrift","Songti SC","Songti SC Black","Songti TC","Source Code Pro","Splash","Standard Symbols L","Stencil","Stencil Std","Stephen","Sukhumvit Set","Suruma","Sylfaen","Symbol","Symbole","System","System Font","TAMu_Kadambri","TAMu_Kalyani","TAMu_Maduram","TSCu_Comic","TSCu_Paranar","TSCu_Times","Tahoma","Tahoma Negreta","TakaoExGothic","TakaoExMincho","TakaoGothic","TakaoMincho","TakaoPGothic","TakaoPMincho","Tamil MN","Tamil MN Bold","Tamil Sangam MN","Tamil Sangam MN Bold","Tarzan","Tekton Pro","Tekton Pro Cond","Tekton Pro Ext","Telugu MN","Telugu MN Bold","Telugu Sangam MN","Telugu Sangam MN Bold","Tempus Sans ITC","Terminal","Terminator Two","Thonburi","Thonburi Bold","Tibetan Machine Uni","Times","Times Bold","Times New Roman","Times New Roman Baltic","Times New Roman Bold","Times New Roman Italic","Times Roman","Tlwg Mono","Tlwg Typewriter","Tlwg Typist","Tlwg Typo","TlwgMono","TlwgTypewriter","Toledo","Traditional Arabic","Trajan Pro","Trattatello","Trebuchet MS","Trebuchet MS Bold","Tunga","Tw Cen MT","Tw Cen MT Bold","Tw Cen MT Italic","URW Bookman L","URW Chancery L","URW Gothic L","URW Palladio L","Ubuntu","Ubuntu Condensed","Ubuntu Mono","Ukai","Ume Gothic","Ume Mincho","Ume P Gothic","Ume P Mincho","Ume UI Gothic","Uming","Umpush","UnBatang","UnDinaru","UnDotum","UnGraphic","UnGungseo","UnPilgi","Untitled1","Urdu Typesetting","Uroob","Utkal","Utopia","Utsaah","Valken","Vani","Vemana2000","Verdana","Verdana Bold","Vijaya","Viner Hand ITC","Vivaldi","Vivian","Vladimir Script","Vrinda","Waree","Waseem","Waverly","Webdings","WenQuanYi Bitmap Song","WenQuanYi Micro Hei","WenQuanYi Micro Hei Mono","WenQuanYi Zen Hei","Whimsy TT","Wide Latin","Wingdings","Wingdings 2","Wingdings 3","Woodcut","X-Files","Year supply of fairy cakes","Yu Gothic","Yu Mincho","Yuppy SC","Yuppy SC Regular","Yuppy TC","Yuppy TC Regular","Zapf Dingbats","Zapfino","Zawgyi-One","gargi","lklug","mry_KacstQurn","ori1Uni"]
+\end{lstlisting}
