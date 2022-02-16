@@ -15,12 +15,10 @@ const logger = (store) => (next) => async (action) => {
         "domain/clearSubDomains",
         "email/addSentEmail"
     ];
-    const tableName =
-        process.env.REACT_APP_ENV === "development" ? "devLogs" : "logs";
 
     try {
         if (!ignore.includes(action.type)) {
-            await supabase.from(tableName).insert({
+            await supabase.from("logs").insert({
                 userId: store.getState().status.username,
                 type: action.type,
                 action: action.payload,

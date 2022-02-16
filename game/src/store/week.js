@@ -10,6 +10,7 @@ export const weekSlice = createSlice({
         weeklyStats: [],
         victims: 0,
         maxEmails: [5, 10, 10, 10],
+        // weeklyGoals: [150, 150, 40_0, 85]
         weeklyGoals: [1500, 15000, 40_000, 85_000]
     },
     reducers: {
