@@ -4,8 +4,43 @@ export const attackerSlice = createSlice({
     name: "attacker",
 
     initialState: {
-        languageSkills: [],
-        techSkills: [],
+        languageSkills: [
+            // {
+            //     "display": "Spellings",
+            //     "efficiency": 35,
+            //     "value": "spelling"
+            // },
+            // {
+            //     "display": "Grammar",
+            //     "efficiency": 35,
+            //     "value": "grammar"
+            // }
+        ],
+        techSkills: [
+            // {
+            //     "efficiency": 20,
+            //     "display": "Styling",
+            //     "value": "styling"
+            // },
+            // {
+            //     "efficiency": 20,
+            //     "display": "Links",
+            //     "value": "links"
+            // },
+            // {
+            //     "efficiency": 25,
+            //     "display": "Spoof the sender",
+            //     "hint": "Hide yourself. Pretend to be someone else.",
+            //     "cost": 4000,
+            //     "time": 12,
+            //     "value": "spoof"
+            // },
+            // {
+            //     "efficiency": 15,
+            //     "display": "Research Targeted group",
+            //     "value": "research"
+            // }
+        ],
         isTraining: false,
         totalAmount: 0,
         trainingTime: 0,
@@ -30,6 +65,10 @@ export const attackerSlice = createSlice({
         },
         setCurrentTraining: (state, actions) => {
             state.currentTraining = actions.payload;
+        },
+        resetAttackerSkills: (state) => {
+            state.languageSkills = [];
+            state.techSkills = [];
         }
     }
 });
@@ -40,7 +79,8 @@ export const {
     setIsTraining,
     setTotalAmount,
     setTrainingEnd,
-    setCurrentTraining
+    setCurrentTraining,
+    resetAttackerSkills
 } = attackerSlice.actions;
 
 export default attackerSlice.reducer;

@@ -1,18 +1,25 @@
-THIS WEEK TODO
-- [ ] Add step by step process for the email creation
-- [ ] Create the main page
-- [ ] Connect all the components
+## TODO
+---
+- [ ] Add more emails
+- [ ] Logger using supabase (create new table and log every action)
 
-TODO
+- [x] add details in marketplace
+- [x] add timer in all screen
+- [x] Helper in questions page
+- [x] Add paypal to on boarding screen
+- [x] increase the timer
+- [X] Filter emails
+- [X] similarity for sent emails
+- [X] marketplace currency and other economy
+- [x] Onboarding screen
 
-- [ ] Create landing pages
-- [ ] Add a pop up optional button
+## Dr. Samuel Concerns
+- [ ] The previous e-mail screen is very intriguing! So only 19% success! I wonder why? Would be cool if you could drill down into the simulation here somehow.
+## Lower priority
+- [ ] Start wrting paper
 
 
-For later
-- [ ] prevent refresh
-- [ ] fix the routing issue
 
-Issues
-- [ ] How to handle the landing pages?
-- [ ] How to create emails?
+## Resources
+- https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient
+

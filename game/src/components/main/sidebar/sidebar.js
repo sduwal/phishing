@@ -1,27 +1,38 @@
-import { VStack, Box, Text, Image, Center } from "@chakra-ui/react";
+/* eslint-disable indent */
+import {
+    VStack,
+    Box,
+    Text,
+    Image,
+    Center,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalBody,
+    ModalCloseButton,
+    Tooltip,
+    Circle,
+    HStack
+} from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { useRef } from "react";
 
-import {
-    Modal,
-    ModalOverlay,
-    ModalHeader,
-    ModalContent,
-    ModalBody,
-    ModalCloseButton
-} from "@chakra-ui/react";
-
-import MarketPlace from "../../marketplace/index";
-import Attacker from "../../attackers";
-import { EmailClient } from "../../email";
+import MarketPlace from "@components/marketplace/index";
+import Attacker from "@components/attackers";
+import { EmailClient } from "@components/emails/email";
+import NoSkillEmailClient from "@components/emails/noSkillEmails";
 
 import domainImage from "./images/domain.jpg";
 import attackerImage from "./images/attacker.png";
 import emailImage from "./images/mail.png";
-import sentImage from "./images/sent.gif";
+// import sentImage from "./images/sent.gif";
+// import trainingImage from "./images/training.gif";
 
-import PrevEmails from "./prevEmails";
+// import PrevEmails from "../prevEmails";
 
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 function SideButtons({
     title,
     desc,
@@ -29,40 +40,111 @@ function SideButtons({
     color = "red",
     onClick,
     modal,
-    id
+    id,
+    view = true, // only for the email client
+    isDisabled = false,
+    canTrain = 0,
+    trainable = 0
 }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
+
     const finalRef = useRef();
+
     return (
         <>
             <Box margin={0} padding={0} height={0} ref={finalRef}></Box>
-            <Box
-                px="2"
-                pt="2"
-                m="0"
-                background={color}
-                rounded="10"
-                minW="200px"
-                alignContent="center"
-                _hover={{
-                    cursor: "pointer",
-                    backgroundColor: "black"
-                }}
-                onClick={onOpen}
+
+            <Tooltip
+                label={
+                    isDisabled
+                        ? "Unlock spelling and grammar skills first."
+                        : ""
+                }
             >
-                <Image
-                    src={image}
-                    background="transparent"
-                    h={130}
-                    w={190}
-                    objectFit="cover"
-                />
-                <Center>
-                    <Text py="2" fontWeight="bold" color="white">
-                        {title}
-                    </Text>
-                </Center>
-            </Box>
+                <Box
+                    px="2"
+                    pt="2"
+                    m="0"
+                    background={color}
+                    rounded="10"
+                    minW="200px"
+                    alignContent="center"
+                    _hover={{
+                        cursor: isDisabled ? "wait" : "pointer",
+                        backgroundColor: isDisabled ? "transparent" : "black"
+                    }}
+                    onClick={() => {
+                        toast.dismiss();
+                        onOpen();
+                    }}
+                >
+                    <div className={title.split(" ")[0].toLowerCase()}>
+                        <Image
+                            src={image}
+                            background="transparent"
+                            h={130}
+                            w={190}
+                            objectFit="cover"
+                            color={"white"}
+                        />
+                    </div>
+                    <Center>
+                        <HStack
+                            align={"center"}
+                            justify="center"
+                            width={"100%"}
+                        >
+                            <Text py="2" fontWeight="bold" color="white">
+                                {title}
+                            </Text>
+                            {title === "Attackers" && canTrain > 0 && (
+                                <>
+                                    <Tooltip
+                                        placement="left"
+                                        label="Currently can train"
+                                    >
+                                        <Circle
+                                            position={"relative"}
+                                            m="1"
+                                            background={"green"}
+                                            size="25px"
+                                            shadow={"0px 0px 5px green"}
+                                            left="30px"
+                                        >
+                                            <Text
+                                                fontWeight={"bold"}
+                                                color={"white"}
+                                            >
+                                                {trainable}
+                                            </Text>
+                                        </Circle>
+                                    </Tooltip>
+                                    <Tooltip
+                                        label="Currently unlocked untrained skills"
+                                        placement="left"
+                                    >
+                                        <Circle
+                                            position={"relative"}
+                                            m="1"
+                                            background={"yellow.700"}
+                                            size="25px"
+                                            shadow={"0px 0px 5px green"}
+                                            left="30px"
+                                        >
+                                            <Text
+                                                fontWeight={"bold"}
+                                                color={"white"}
+                                            >
+                                                {canTrain}
+                                            </Text>
+                                        </Circle>
+                                    </Tooltip>
+                                </>
+                            )}
+                        </HStack>
+                    </Center>
+                </Box>
+            </Tooltip>
 
             <Modal
                 finalFocusRef={finalRef}
@@ -72,13 +154,18 @@ function SideButtons({
             >
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>{title}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        {id == 1 && <EmailClient onClose={onClose} />}
+                        {id == 1 &&
+                            (view ? (
+                                <NoSkillEmailClient onClose={onClose} />
+                            ) : (
+                                <EmailClient onClose={onClose} />
+                            ))}
+                        {/* ))} */}
                         {id == 2 && <MarketPlace onClose={onClose} />}
                         {id == 3 && <Attacker />}
-                        {id == 4 && <PrevEmails />}
+                        {/* {id == 4 && <PrevEmails />} */}
                     </ModalBody>
                 </ModalContent>
             </Modal>
@@ -87,14 +174,44 @@ function SideButtons({
 }
 
 export default function SideBar() {
+    const currentWeek = useSelector((state) => state.week.currentWeek);
+    const canCurrentlyTrain = useSelector(
+        (state) => state.status.canCurrentlyTrain
+    );
+
+    const { languageSkills, techSkills } = useSelector(
+        (state) => state.attacker
+    );
+
+    // * If training attacker training data change, this has to change too. Abstract this out.
+    const cost = {
+        spelling: 1000,
+        grammar: 1000,
+        links: 3000,
+        styling: 2000,
+        research: 3000,
+        spoof: 4000
+    };
+    const money = useSelector((state) => state.status.money);
+    const trainable = canCurrentlyTrain.filter(
+        (skill) =>
+            cost[skill] <= money &&
+            !languageSkills.some((e) => e.value === skill) &&
+            !techSkills.some((e) => e.value === skill)
+    );
+
+    const canTrain =
+        canCurrentlyTrain.length - languageSkills.length - techSkills.length;
     const side = [
         {
             title: "Email",
             desc: "Generate new email",
             image: emailImage,
             color: "blue.500",
+            view: currentWeek == 0 ? true : false,
             modal: <EmailClient />,
-            id: 1
+            id: 1,
+            isDisabled: false // TODO: if training, disable
         },
         {
             title: "Marketplace",
@@ -111,24 +228,53 @@ export default function SideBar() {
             color: "red.500",
             modal: <Attacker />,
             id: 3
-        },
-        {
-            title: "Prev Emails",
-            desc: "Change Attackers",
-            image: sentImage,
-            color: "grey",
-            modal: <PrevEmails />,
-            id: 4
         }
+        // {
+        //     title: "Prev Emails",
+        //     desc: "Change Attackers",
+        //     image: sentImage,
+        //     color: "purple.200",
+        //     modal: <PrevEmails />,
+        //     id: 4
+        // }
     ];
 
     return (
-        <Box width="fit-content" px={"10"} overflowY="auto" maxH="90vh">
-            <VStack spacing="4">
-                {side.map((item, index) => (
-                    <SideButtons key={item.title} {...side[index]} />
-                ))}
-            </VStack>
-        </Box>
+        <Center>
+            <Box width="fit-content" px={"10"} overflowY="auto" maxH="90vh">
+                <VStack spacing="4" align={"center"}>
+                    {side.map((item, index) => {
+                        if (item.title === "Marketplace" && currentWeek != 2) {
+                            return;
+                        }
+
+                        if (item.title === "Attackers" && currentWeek < 1) {
+                            return;
+                        }
+                        return (
+                            <motion.div
+                                key={item.title}
+                                animate={{
+                                    x: 0,
+                                    // backgroundColor: "#000",
+                                    opacity: [0, 1]
+                                    // position: "fixed"
+                                    // transitionEnd: {
+                                    //     display: "none"
+                                    // }
+                                }}
+                            >
+                                <SideButtons
+                                    key={item.title}
+                                    {...side[index]}
+                                    canTrain={canTrain}
+                                    trainable={trainable.length}
+                                />
+                            </motion.div>
+                        );
+                    })}
+                </VStack>
+            </Box>
+        </Center>
     );
 }

@@ -1,26 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { nanoid } from "nanoid";
+import _ from "lodash";
 
 export const moneySlice = createSlice({
     name: "status",
     initialState: {
-        money: 1000,
+        money: 0,
         totalEmails: 0,
         successEmails: 0,
         unsuccessfulEmails: 0,
-        isUpdating: false
+        isUpdating: false,
+        gameWon: false,
+        canCurrentlyTrain: [],
+        username: nanoid(6),
+        initialOpen: true
     },
     reducers: {
-        increment: (state) => {
-            state.money += 1;
-        },
-        decrement: (state) => {
-            state.money -= 1;
+        changeUsername: (state, action) => {
+            state.username = action.payload;
         },
         incrementByAmount: (state, action) => {
             state.money += action.payload;
         },
         decrementByAmount: (state, action) => {
             state.money -= action.payload;
+        },
+        resetStatus: (state) => {
+            state.money = 0;
         },
         incrementTotalEmails: (state, action) => {
             state.totalEmails += action.payload;
@@ -31,18 +37,39 @@ export const moneySlice = createSlice({
         },
         setIsUpdating: (state, action) => {
             state.isUpdating = action.payload;
+        },
+        setGameWon: (state, action) => {
+            state.gameWon = action.payload;
+        },
+        setCanCurrentlyTrain: (state, action) => {
+            state.canCurrentlyTrain = [
+                ...state.canCurrentlyTrain,
+                ...action.payload
+            ];
+
+            state.canCurrentlyTrain = _.uniq(state.canCurrentlyTrain);
+        },
+        toggleInitialOpen: (state) => {
+            state.initialOpen = !state.initialOpen;
+        },
+        resetCanCurrentlyTrain: (state) => {
+            state.canCurrentlyTrain = [];
         }
     }
 });
 
 export const {
-    increment,
-    decrement,
     incrementByAmount,
     decrementByAmount,
     incrementTotalEmails,
     updateSuccess,
-    setIsUpdating
+    setIsUpdating,
+    setGameWon,
+    setCanCurrentlyTrain,
+    changeUsername,
+    resetStatus,
+    toggleInitialOpen,
+    resetCanCurrentlyTrain
 } = moneySlice.actions;
 
 export default moneySlice.reducer;

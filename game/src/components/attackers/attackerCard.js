@@ -1,10 +1,18 @@
-import { Container, Center, Image, Text, Progress } from "@chakra-ui/react";
+import {
+    Container,
+    Center,
+    Image,
+    Text,
+    Progress,
+    Flex
+} from "@chakra-ui/react";
 
 import { useSelector } from "react-redux";
 import helper from "./helper.png";
 
 function AttackerCard() {
     const attacker = useSelector((state) => state.attacker);
+    const money = useSelector((state) => state.status.money);
     return (
         <Container
             margin="5"
@@ -23,12 +31,6 @@ function AttackerCard() {
             <Center>
                 <Image height="150px" src={helper} borderRadius="full" />
             </Center>
-            <Center mt="6">
-                <Text>Cost: {attacker.totalAmount}</Text>
-            </Center>
-            <Center>
-                <Text>Time: {attacker.trainingTime}</Text>
-            </Center>
             <Text width="100%" fontWeight="bold" pt="10px">
                 Efficiency
             </Text>
@@ -38,7 +40,11 @@ function AttackerCard() {
                 size="sm"
                 margin="2px"
             />
-            {attacker.isTraining && (
+            <Flex fontWeight={"bold"} justify={"center"} pt={4}>
+                <Text>Balance </Text>
+                <Text> {`\: $${money}`}</Text>
+            </Flex>
+            {/* {attacker.isTraining && (
                 <>
                     <Center mt={4}>
                         <Text>Training...</Text>
@@ -49,7 +55,7 @@ function AttackerCard() {
                         size={"sm"}
                     />
                 </>
-            )}
+            )} */}
         </Container>
     );
 }

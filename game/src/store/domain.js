@@ -10,6 +10,7 @@ export const domainSlice = createSlice({
     reducers: {
         changeDomain: (state, action) => {
             state.name = action.payload;
+            state.activeDomain = action.payload;
         },
         addSubDomain: (state, action) => {
             state.subdomains = [...state.subdomains, action.payload];
