@@ -167,7 +167,7 @@ function Status() {
         currentWeek,
         emailWrote,
         // peopleReached,
-        moneyGained,
+        // moneyGained,
         maxEmails,
         weeklyGoals
     } = useSelector((state) => state.week);
@@ -190,7 +190,7 @@ function Status() {
                 history.push("/gameover");
             }
         }
-    }, [emailWrote, moneyGained]);
+    }, [emailWrote]);
 
     useEffect(() => {
         dispatch(setCanCurrentlyTrain(canTrain[currentWeek]));
