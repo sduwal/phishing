@@ -65,7 +65,7 @@ function createConfusion(link) {
         `https://paypal.${link}`
     ];
 
-    return options[Math.round(Math.random() * options.length)];
+    return options[Math.floor(Math.random() * options.length)];
 }
 function createHiddenLink(link) {
     const buttonOptions = [

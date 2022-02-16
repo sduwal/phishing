@@ -1,8 +1,22 @@
 import supabase from "../../supabase";
 
 const logger = (store) => (next) => async (action) => {
+    const ignore = [
+        "week/incrementPeopleReached",
+        "status/incrementTotalEmails",
+        "animate/updateAnimateNumber",
+        "week/incrementMoneyGained",
+        "status/updateSuccess",
+        "email/toggleCanSend",
+        "status/incrementByAmount",
+        "week/incrementEmailWrote",
+        "status/resetStatus"
+    ];
     try {
-        if (process.env.REACT_APP_ENV !== "development") {
+        if (
+            process.env.REACT_APP_ENV !== "development" &&
+            !ignore.includes(action.type)
+        ) {
             await supabase.from("logs").insert({
                 userId: store.getState().status.username,
                 type: action.type,

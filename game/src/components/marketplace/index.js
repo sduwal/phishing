@@ -3,7 +3,7 @@ import { domains } from "./data/topDomains";
 import { topLevel } from "./data/toplevel";
 
 import { SearchIcon } from "@chakra-ui/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Waiting from "./components/waiting";
 import DomainTaken from "./components/domainTaken";
@@ -11,6 +11,8 @@ import Incomplete from "./components/incomplete";
 import Invalid from "./components/invalidTop";
 import DomainAvailable from "./components/domainAvailable";
 
+import supabase from "../../supabase";
+import { useSelector } from "react-redux";
 function Marketplace({ onClose }) {
     // const [data, setData] = useState([]);
     const [userLink, setUserLink] = useState("");
@@ -28,6 +30,24 @@ function Marketplace({ onClose }) {
         setUserLink(e.target.value);
         setUserState(0);
     };
+
+    const username = useSelector((state) => state.status.username);
+
+    useEffect(() => {
+        const writeToLog = async () => {
+            try {
+                await supabase.from("logs").insert({
+                    userId: username,
+                    type: "marketplace/open",
+                    action: "opened marketplace",
+                    date: new Date().toString()
+                });
+            } catch (err) {}
+        };
+
+        writeToLog();
+    }, []);
+
     return (
         <>
             <Center width="100%">

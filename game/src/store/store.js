@@ -3,7 +3,7 @@ import moneyReducer from "./status";
 import attackerReducer from "./attacker";
 import domainReducer from "./domain";
 import emailReducer from "./email";
-import stepsReducer from "./steps";
+// import stepsReducer from "./steps";
 import weekReducer from "./week";
 import animateReducer from "./animate";
 
@@ -15,7 +15,7 @@ export default configureStore({
         attacker: attackerReducer,
         domain: domainReducer,
         email: emailReducer,
-        steps: stepsReducer,
+        // steps: stepsReducer,
         week: weekReducer,
         animate: animateReducer
     },
