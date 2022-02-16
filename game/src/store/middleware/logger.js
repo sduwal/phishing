@@ -19,7 +19,7 @@ const logger = (store) => (next) => async (action) => {
         process.env.REACT_APP_ENV === "development" ? "devLogs" : "logs";
 
     try {
-        if (!ignore.contains(action.type)) {
+        if (!ignore.includes(action.type)) {
             await supabase.from(tableName).insert({
                 userId: store.getState().status.username,
                 type: action.type,
