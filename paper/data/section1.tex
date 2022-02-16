@@ -9,7 +9,7 @@
 
 
 \chapter{Introduction}
-The rapid internet adoption in everyday life and the workplace has presented us with new security challenges. Users are more active on the internet, giving attackers more opportunities to attack unsuspecting victims. There are various technical security measures such as firewall, encryption, threat hunting software, and engaging automation to mitigate these challenges. However, studies have shown that the human layer is the weakest link in the security chain \cite{jampen} and attackers usually start by targeting the most vulnerable link before performing other detrimental attacks. These attacks with human interaction are generally known as "Social Engineering Attacks." Prevalent social engineering attacks such as phishing, pretexting, baiting, quid pro quo, and tailgating use psychological manipulation to trick users into making security mistakes or giving away sensitive information. This thesis will cover strategies to help people understand phishing and different detection techniques through our role-playing gameplay.
+The rapid internet adoption in everyday life and the workplace has presented us with new security challenges. Users are more active on the internet, giving attackers more opportunities to attack unsuspecting victims. There are various technical security measures such as firewall, encryption, threat hunting software, and engaging automation to mitigate these challenges. However, studies have shown that the human layer is the weakest link in the security chain \cite{jampen} and attackers usually start by targeting the most vulnerable link before performing other detrimental attacks. These attacks with human interaction are generally known as "Social Engineering Attacks." Prevalent social engineering attacks such as phishing, pretexting, baiting, quid pro quo, and tailgating use psychological manipulation to trick users into making security mistakes or giving away sensitive information. This thesis will focus on phishing and different detection techniques through our role-playing gameplay.
 
 \section{What is phishing?}
 Phishing is one of the most prevalent social engineering attacks in which attackers target users by contacting them through email, telephone, or text message by attackers posing as a legitimate entity \cite{phishing, apwg}. Unfortunately, these attacks are challenging to detect as attackers use the computing infrastructure to fool the victim into doing something but are doing something else while the computing system is working as intended. Due to this, even users with a high-end security system can be victims. An example of such is the infamous case of John Podesta \cite{Podesta}, Hilary Clinton's campaign chairman for the 2016 presidential election. The "googlemail.com" in the domain successfully tricked John Podesta and the Clinton campaign's computer help desk to trust the email (See fig:\ref{fig:Podesta}).
@@ -18,7 +18,7 @@ Phishing attacks are constantly evolving with different tricks. For example, alt
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[scale=0.7]{{./podesta.png}}
+    \includegraphics[scale=0.7]{{./section1/podesta.png}}
     \caption[Phishing email sent to John Podesta]{Phishing email sent to John Podesta}
     \label{fig:Podesta}
 \end{figure}
@@ -34,7 +34,7 @@ If the attacks reach the user, the next step to secure the user is by warning th
 
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.7]{{./browser_cues.png}}
+    \includegraphics[scale=0.7]{{./section1/browser_cues.png}}
     \caption[Browser cues on links]{Browsers uses different shades to indicate the primary link.}
     \label{fig:browser_cues}
 \end{figure}
@@ -46,12 +46,41 @@ We have seen new and existing training materials incorporating gaming techniques
 Gamification has improved the interactivity with the user, but existing training videos fail to cover the technical details that are commonly found in phishing emails. Our gameplay covers various technical aspects commonly found in phishing emails, such as domains, spoofing, and link hiding techniques attackers use to trick users.
 
 \section{Litearature Review}
-The gaming approach in education endeavors is not novel and has been used for over a decade \cite{almeida_2012}. There have been arguments for gaming in education. Prensky \cite{prensky} in "Digital game-based learning" shows that playing "action" video and computer games has a positive impact on enhancing students' visual selective attention. He further argues that video games are the best opportunity to engage kids in real learning. This argument was further studied by Almeida \cite{almeida_2012} and verified that when games are used against the control group, significant increases in factual knowledge occur.
+\subsection{Serious games}
+The gaming approach in education is not novel and has been used for over a decade \cite{almeida_2012}. There is a dedicated genre of games (typically online applications), termed as serious games, dedicated to using video games to communicate specific information that helps introduce relevant concepts and apply those concepts to solve problems.  The primary purpose of these games is not entertainment but to promote learning. Because of game design techniques, users are more engaged and immersed in playing by using rewards, story progression, or other feedback systems. Virtual world also provides users with a safe space to experiment without real-life consequences.
 
-Several studies have used different gaming approaches to train phishing campaigns again. Hendrix et al. \cite{hendrix_al_sherbaz_bloom_2016} investigated whether games can be effective cyber security training tools with some of the popular games designed for cyber security training. Their study indicated positive signs, although there was insufficient evidence to draw definite conclusions. We will look at some popular work below, separated by category.
+We can see serious games in many fields such as education, healthcare, training, and consultancy. Below are examples of some serious games targeted at different audiences:
+\begin{itemize}
+    \item “Garfield’s Count Me In”\cite{count_me_in} helps children in (special education) primary school practice their arithmetic skills.  This math game contains different exercises or ‘brick’, which form the foundation for a new layer of exercises. The game design help students master the first layer of exercises before moving to the next layer.
+
+    \item “Killer Flu”\cite{killer_flu} (one of many games by “Persuasive Games”) is an attempt to explain how flu mutates and spreads and how challenging it can be for a deadly strain to affect a large population geographically. The player takes the role of the flu itself, trying to mutate and then spread it in a variety of conditions.
+
+    \item  “Pulse!!”\cite{pulse} is a serious training game that simulates nearly every aspect of modern surgery. The game gives the player a chance to move through case-based learning modules and practice on a virtual patient. This gives the player to hone their skills without harming real patients.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{./section1/garfield.jpeg}
+    \end{minipage} \hfill
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{./section1/killer_flu.jpg} % second figure itself
+    \end{minipage} \hfill
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{./section1/pulse.jpg} % second figure itself
+    \end{minipage}
+    \caption[Example of serious games]{Screenshot of serious games. From left to right: a. Garfield’s Count Me, b. Killer Flu, c. Pulse!!}
+\end{figure}
+
+There have been various attempts to use serious games as a practical phishing training module. Hendrix et al. \cite{hendrix_al_sherbaz_bloom_2016} compared the effectiveness of cyber security training tools with some popular games designed for cyber security training and found some positive signs.
+
+We will discuss some previous work below, separated by category.
 
 \subsection{Board and card games}
-There have been some studies based on non-computer-based games. For example, Control-Alt-Hack \cite{control_alt_hack} tries to educate the user with the help of a card game. Similarly, "Smells Phishy?" is another non-computer-based game that tries to raise awareness about online phishing scams. Both these game depends on cards to divide the task and learn skills. Although both the games had shown promise in their approach, non-computer-based games have some inherent limitations. The games require pre-setup (with the need for the cards and boards) and make it harder to use than computer-based games. Furthermore, the current approaches only teach users about phishing attacks. The limited skills these games provide may not be best suited as an individual training module.
+There have been some studies based on non-computer-based games. For example, Control-Alt-Hack \cite{control_alt_hack} tries to educate the user with the help of a card game. Similarly, "Smells Phishy?"\cite{smels_phishy} is another non-computer-based game that tries to raise awareness about online phishing scams. Both these game depends on cards to divide the task and learn skills. Although both the games had shown promise in their approach, non-computer-based games have some inherent limitations. The games require pre-setup (with the need for the cards and boards) and make it harder to use than computer-based games. Furthermore, the current approaches only teach users about phishing attacks. The limited skills these games provide may not be best suited as an individual training module.
 
 \subsection{Phishing Link training}
 There have been numerous computer games about phishing. One common category many studies focus on is training users to verify phishing links. Anti-Phishing Phil \cite{anti_phishing_phil} is one of the pioneers in this field. Their gameplay puts the user as a fish. The goal of the fish is to grow larger by eating the good bugs (non-phishing links). Phish Phinder \cite{phish_phinder} is another example of link based training game that has similar gameplay and story to Anti-Phishing Phil but builds upon the game with more levels and interaction. Baral et al. \cite{gamified_appraoch} has a similar concept with a balloon shooting game. The goal of these games is to differentiate the phishing links and actual links. However, these games do not consider the context of the email. Attackers use psychological manipulation such as creating a sense of urgency, fake giveaways or making it seem like an email from somebody you know to trick people into clicking these links.
