@@ -24,6 +24,8 @@ export default function domainAvailable({ name, onClick }) {
         dispatch(decrementByAmount(cost));
         onClick();
         toast.success("Domain has been changed successfully");
+
+        console.log(name);
     };
     return (
         <Center>

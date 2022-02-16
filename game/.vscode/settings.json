@@ -18,5 +18,17 @@
         "titleBar.inactiveBackground": "#4146a399",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.color": "#4146a3"
+    "peacock.color": "#4146a3",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "db.uodzevvjhwhgwiuhdchp.supabase.co",
+            "port": 6543,
+            "driver": "PostgreSQL",
+            "username": "postgres",
+            "name": "Supabase",
+            "database": "postgres",
+            "password": "c9T7TauGfvLM3za"
+        }
+    ]
 }

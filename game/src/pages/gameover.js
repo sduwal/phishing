@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { resetWeekStats } from "@store/week";
-import { resetCanCurrentlyTrain, setCanCurrentlyTrain } from "../store/status";
+import {
+    resetCanCurrentlyTrain,
+    resetStatus,
+    setCanCurrentlyTrain
+} from "../store/status";
 import {
     resetAttackerSkills,
     setLanguageSkills,
@@ -19,6 +23,7 @@ function GameNotWon() {
         dispatch(resetWeekStats());
         dispatch(resetCanCurrentlyTrain());
         dispatch(resetAttackerSkills());
+        dispatch(resetStatus());
 
         if (currentWeek >= 1) {
             dispatch(setCanCurrentlyTrain(["spelling", "grammar", "links"]));

@@ -226,7 +226,7 @@ function Status() {
     useEffect(() => {
         controls.start((i) => ({
             opacity: [1, 0.8, 0.5, 0.3, 0.1, 0],
-            color: "yellow",
+            // color: "yellow",
             scale: [1, 1.2, 1],
             transition: { delay: i * 0.3, duration: 3 }
         }));
@@ -269,6 +269,7 @@ function Status() {
                                     <motion.div
                                         custom={0}
                                         animate={weekAnimationControls}
+                                        style={{ color: "yellow" }}
                                     >
                                         {currentWeek + 1}
                                     </motion.div>
@@ -293,13 +294,21 @@ function Status() {
                                     fontSize={"xl"}
                                     align="center"
                                 >
-                                    <motion.div custom={0} animate={controls}>
+                                    <motion.div
+                                        custom={0}
+                                        animate={controls}
+                                        style={{ color: "yellow" }}
+                                    >
                                         +{animateParams.animateWeeklyEmails}
                                     </motion.div>
                                     {/* <motion.div custom={1} animate={controls}>
                                         +{animateParams.animateWeeklyPeople}
                                     </motion.div> */}
-                                    <motion.div custom={2} animate={controls}>
+                                    <motion.div
+                                        custom={2}
+                                        animate={controls}
+                                        style={{ color: "yellow" }}
+                                    >
                                         +{animateParams.animateWeeklyMoney}
                                     </motion.div>
                                 </Flex>{" "}

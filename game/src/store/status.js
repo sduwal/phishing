@@ -27,6 +27,9 @@ export const moneySlice = createSlice({
         },
         resetStatus: (state) => {
             state.money = 0;
+            state.totalEmails = 0;
+            state.successEmails = 0;
+            state.unsuccessfulEmails = 0;
         },
         incrementTotalEmails: (state, action) => {
             state.totalEmails += action.payload;
