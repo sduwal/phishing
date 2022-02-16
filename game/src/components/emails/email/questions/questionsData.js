@@ -57,7 +57,7 @@ const linkHiding = [
 const spoofing = [
     {
         display: "Spoof email address",
-        hint: "Use <a> tags </a> to hide your link behing the text.",
+        hint: "Pretend to be someone else! Enter any email address.",
         displayLevel: 3,
         attackerLevel: 3,
         value: true,
@@ -65,7 +65,7 @@ const spoofing = [
     },
     {
         display: "No Spoof email address",
-        hint: "Use <a> tags </a> to hide your link behing the text.",
+        hint: "Send the email with the current sender. Do not change the email address.",
         displayLevel: 3,
         attackerLevel: 3,
         value: false,
