@@ -108,15 +108,7 @@ function GameNotWon() {
     }
     return (
         <>
-            <Text
-                transform={"uppercase"}
-                color="white"
-                fontSize={"4em"}
-                casing={"uppercase"}
-            >
-                GameOver!!
-            </Text>
-            <Text color="white">
+            <Text color="white" fontSize={"em"} fontWeight="bold">
                 You have to win the game to get the post survey link.
             </Text>
             <Button
