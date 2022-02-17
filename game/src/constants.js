@@ -7,4 +7,4 @@ export const TOTAL_EMAIL_REVISE_TIME = 5; // seconds
 
 // FOR ATTACKERS
 export const TRAINING_MESSAGE =
-    "Train your attacker with different language skill to avoid typos and grammatical errors. You can train attacker with various technical skills to increase the email effectiveness and open more techniques.";
+    "Train your attacker with skills used to create phishing emails. Each skills can be used to create more sophisticated phishing emails.";
