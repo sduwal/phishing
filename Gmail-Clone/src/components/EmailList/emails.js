@@ -1,9 +1,9 @@
 const data = [
-    {
-        from: "Karl Simpson <karl@xyz.com>",
-        subject: "Meeting tomorrow?",
-        description: "valid1",
-    },
+    // {
+    //     from: "Karl Simpson <karl@xyz.com>",
+    //     subject: "Meeting tomorrow?",
+    //     description: "valid1",
+    // },
     {
         from: "Netflix <contact@netflix.com>",
         subject: "Your payment has been declined",
@@ -35,16 +35,16 @@ const data = [
         subject: "Free Netflix for 30 days",
         description: "free",
     },
-    {
-        from: "Karl Simpson <karl@xyz.com>",
-        subject: "Urgent Help",
-        description: "email2",
-    },
-    {
-        from: "Karl Simpson <karl@xyz.com>",
-        subject: "Can you help me?",
-        description: "email1",
-    },
+    // {
+    //     from: "Karl Simpson <karl@xyz.com>",
+    //     subject: "Urgent Help",
+    //     description: "email2",
+    // },
+    // {
+    //     from: "Karl Simpson <karl@xyz.com>",
+    //     subject: "Can you help me?",
+    //     description: "email1",
+    // },
     {
         from: "Netflix <info@mailer.netflix.com>",
         subject: "We are sorry to say goodbye",
