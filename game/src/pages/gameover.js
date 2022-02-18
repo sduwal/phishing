@@ -19,6 +19,12 @@ function GameNotWon() {
     const history = useHistory();
     const dispatch = useDispatch();
     const currentWeek = useSelector((state) => state.week.currentWeek);
+    const hints = [
+        "Look at the emails. Not all emails are the same.",
+        "Maybe try hiding the links with different approaches?",
+        "Did you look at the marketplace? Remember you want to close to PayPal.",
+        "Not enough money? Pretend to be PayPal when sending emails (spoofing)."
+    ];
     function resetWeek() {
         function actionCreator() {
             return (dispatch) =>
@@ -108,7 +114,7 @@ function GameNotWon() {
     }
     return (
         <>
-            <Text color="white" fontSize={"em"} fontWeight="bold">
+            <Text color="white" fontSize={"1.5em"} fontWeight="bold">
                 You have to win the game to get the post survey link.
             </Text>
             <Button
@@ -118,6 +124,9 @@ function GameNotWon() {
             >
                 Start from the last week
             </Button>
+            <Text color="white" fontWeight={"bold"} fontStyle={"italic"}>
+                HINT for this week: {hints[currentWeek]}
+            </Text>
         </>
     );
 }
