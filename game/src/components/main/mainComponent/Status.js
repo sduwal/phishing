@@ -190,7 +190,7 @@ function Status() {
                 history.push("/gameover");
             }
         }
-    }, [emailWrote, money]);
+    }, [emailWrote]);
 
     useEffect(() => {
         dispatch(setCanCurrentlyTrain(canTrain[currentWeek]));

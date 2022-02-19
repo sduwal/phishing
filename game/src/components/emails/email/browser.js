@@ -108,8 +108,6 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
         function actionCreator() {
             return (dispatch) =>
                 Promise.all([
-                    dispatch(incrementEmailWrote()),
-                    dispatch(incrementPeopleReached(totalSend)),
                     dispatch(
                         // The amount is 10 for each successful email
                         incrementByAmount(success * MONEY_PER_SUCCESSFUL_EMAIL)
@@ -118,8 +116,12 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
                         incrementMoneyGained(
                             success * MONEY_PER_SUCCESSFUL_EMAIL
                         )
-                    )
-                ]);
+                    ),
+
+                    dispatch(incrementPeopleReached(totalSend))
+                ]).then(() => {
+                    dispatch(incrementEmailWrote());
+                });
         }
 
         dispatch(actionCreator());
