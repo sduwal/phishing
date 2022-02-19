@@ -89,10 +89,7 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
         );
 
         const success = Math.ceil(sendNumber * successrate);
-        dispatch(
-            // The amount is 10 for each successful email
-            incrementByAmount(success * MONEY_PER_SUCCESSFUL_EMAIL)
-        );
+
         dispatch(
             updateSuccess({
                 successful: success,
@@ -100,9 +97,6 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
             })
         );
 
-        dispatch(incrementEmailWrote());
-        dispatch(incrementPeopleReached(totalSend));
-        dispatch(incrementMoneyGained(success * MONEY_PER_SUCCESSFUL_EMAIL));
         dispatch(
             updateAnimateNumber({
                 animateWeeklyPeople: sendNumber,
@@ -110,6 +104,25 @@ function BrowserCustom({ onClose, email, showHeader = false }) {
                 animateWeeklyEmails: sendNumber
             })
         );
+
+        function actionCreator() {
+            return (dispatch) =>
+                Promise.all([
+                    dispatch(incrementEmailWrote()),
+                    dispatch(incrementPeopleReached(totalSend)),
+                    dispatch(
+                        // The amount is 10 for each successful email
+                        incrementByAmount(success * MONEY_PER_SUCCESSFUL_EMAIL)
+                    ),
+                    dispatch(
+                        incrementMoneyGained(
+                            success * MONEY_PER_SUCCESSFUL_EMAIL
+                        )
+                    )
+                ]);
+        }
+
+        dispatch(actionCreator());
     }
 
     function renderMultipleEmails() {
