@@ -11,7 +11,7 @@ export const weekSlice = createSlice({
         victims: 0,
         maxEmails: [5, 10, 10, 10],
         // weeklyGoals: [150, 150, 40_0, 85]
-        weeklyGoals: [1500, 15000, 38_000, 80_000]
+        weeklyGoals: [1500, 15000, 37_000, 80_000]
     },
     reducers: {
         incrementWeek: (state) => {
