@@ -241,7 +241,8 @@ const Basket = ({ emails }) => {
                                   />
                                   <Text fontSize="0.8em">
                                       Enter valid email address, then drag the
-                                      option.
+                                      option. HINT: Business usually have
+                                      business email with their domain.
                                   </Text>
                               </Box>
                           )}

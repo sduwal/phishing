@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const weekSlice = createSlice({
     name: "week",
     initialState: {
-        currentWeek: 0,
+        currentWeek: 3,
         emailWrote: 0,
         peopleReached: 0,
         moneyGained: 0,

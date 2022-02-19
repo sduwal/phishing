@@ -23,14 +23,14 @@ function calculateFromPoints(from) {
             pointEarned += 18;
         } else if (similarity > 0.6) {
             pointEarned += 7;
+        } else {
+            if (name === "paypal") {
+                pointEarned += 10;
+            }
         }
     }
 
-    if (
-        ["contact", "help", "paypal", "info", "no-reply", "noreply"].includes(
-            name
-        )
-    ) {
+    if (["contact", "help", "info", "no-reply", "noreply"].includes(name)) {
         pointEarned += 5;
     }
     return pointEarned;
