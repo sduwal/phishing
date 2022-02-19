@@ -35,6 +35,7 @@ const data = [
         subject: "Free Netflix for 30 days",
         description: "free",
     },
+
     // {
     //     from: "Karl Simpson <karl@xyz.com>",
     //     subject: "Urgent Help",
@@ -69,6 +70,11 @@ const data = [
         from: "Netflix <netflix@gmail.com>",
         subject: "Your account has been compromised",
         description: "resetpassword",
+    },
+    {
+        from: "Karl <karl@xyz.com>",
+        subject: "Spreadsheet",
+        description: "spreadsheet",
     },
 ];
 

@@ -12,6 +12,7 @@ import resetpassword from "./ResetPassword";
 import signin from "./Signin";
 import subpaymentfailue from "./subPaymentFailue";
 import valid1 from "./valid1";
+import spreadsheet from "./spreadsheet";
 
 const emails = {
     accountsuspended,
@@ -28,6 +29,7 @@ const emails = {
     signin,
     subpaymentfailue,
     valid1,
+    spreadsheet,
 };
 
 export default emails;
