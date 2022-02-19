@@ -82,7 +82,12 @@ function Marketplace({ onClose }) {
                             return <Waiting />;
                             break;
                         case 1:
-                            return <DomainTaken domainName={userLink} />;
+                            return (
+                                <DomainTaken
+                                    domainName={userLink}
+                                    onClick={onClose}
+                                />
+                            );
                             break;
                         case 2:
                             return (

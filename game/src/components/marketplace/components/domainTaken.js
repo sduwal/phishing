@@ -5,7 +5,7 @@ import { domains } from "../data/topDomains";
 import notAvailable from "../images/notAvailable.png";
 import DomainCard from "./domainCard";
 
-function domainTaken({ domainName }) {
+function domainTaken({ domainName, onClick }) {
     const alternatives = getAlternateDomain(domainName.split(".")[0]);
 
     return (
@@ -26,6 +26,7 @@ function domainTaken({ domainName }) {
                             key={alternative}
                             link={alternative}
                             index={index}
+                            onClick={onClick}
                         />
                     ))}
                 </VStack>

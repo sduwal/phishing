@@ -15,17 +15,18 @@ import {
     changeActiveDomain
 } from "@store/domain";
 import { decrementByAmount } from "@store/status";
+import { toast } from "react-toastify";
 
-export default function domainCard({ link, price, index }) {
+export default function domainCard({ link, price, index, onClick }) {
     const cost = Math.round(50 * Math.sqrt(10 - index)) * 25;
     const money = useSelector((state) => state.status.money);
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        dispatch(changeDomain(name));
+        dispatch(changeDomain(link));
         dispatch(clearSubDomains());
         dispatch(decrementByAmount(cost));
-        dispatch(changeActiveDomain(name));
+        dispatch(changeActiveDomain(link));
         onClick();
         toast.success("Domain has been changed successfully");
     };
