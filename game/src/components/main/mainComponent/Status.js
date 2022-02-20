@@ -126,7 +126,7 @@ function showWeekToast(week, maxEmails, weeklyGoals) {
     }
     if (week == 3) {
         toast.info(
-            "Victim are paying closer attention to the domain names. Marketplace has been disabled as its effectiveness has decreased. New skill unlocked: Spoofing.",
+            "Victim are paying closer attention to the domain names. Marketplace has been disabled as its effectiveness has decreased. Domain has been reset to initial domain. New skill unlocked: Spoofing.",
             {
                 toastId: "marketplace",
                 position: "top-left",
