@@ -15,7 +15,7 @@
 
 \usepackage{tamuconfig}
 \usepackage{array}
-\usepackage{booktabs}
+\usepackage{tabularx,booktabs}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{subfig}
@@ -26,7 +26,13 @@
 \definecolor{lightgray}{rgb}{.9,.9,.9}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
-\usepackage[bottom]{footmisc}
+
+%  for checkmark
+\usepackage{amssymb}
+
+
+\setlength{\tabcolsep}{20pt}
+\renewcommand{\arraystretch}{1.5}
 
 \lstdefinestyle{Python}{
     backgroundcolor=\color{backcolour},
@@ -159,13 +165,8 @@
 \include{data/abstract}
 \include{data/section1}
 \include{data/section2}
-% \include{data/section3}
-% \include{data/section4}
-% \include{data/section5}
-%The next line is the format for inserting new sections.
-%Replace the name "newsection"  with the name of your
-%new section file.
-%\include{data/newsection}
+\include{data/section3}
+\include{data/section4}
 
 %fix spacing in bibliography, if any...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
