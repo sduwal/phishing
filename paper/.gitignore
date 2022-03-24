@@ -12,6 +12,9 @@
 *.cb2
 .*.lb
 
+# papers
+literature papers
+
 ## Intermediate documents:
 *.dvi
 *.xdv
