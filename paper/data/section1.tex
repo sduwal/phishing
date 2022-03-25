@@ -9,10 +9,15 @@
 
 
 \chapter{Introduction}
-The rapid internet adoption in everyday life and the workplace has presented us with new security challenges. Many users are more active on the internet, giving attackers more opportunities to attack these unsuspecting victims. There are various technical security measures such as firewall, encryption, threat hunting software, and engaging automation to mitigate these challenges. However, studies have shown that the human layer is the weakest link in the security chain \cite{jampen} and attackers usually start by targeting the most vulnerable link before performing other detrimental attacks. These attacks with human interaction are generally known as "Social Engineering Attacks." Prevalent social engineering attacks such as phishing, pretexting, baiting, quid pro quo, and tailgating use psychological manipulation to trick users into making security mistakes or giving away sensitive information. This thesis will focus on phishing and different detection techniques through our role-playing gameplay.
+The rapid internet adoption in everyday life and the workplace has presented us with new security challenges. Many users are more active on the internet, giving attackers more opportunities to attack these unsuspecting victims. There are various technical security measures such as firewall, encryption, threat hunting software, and engaging automation to mitigate these challenges. However, studies have shown that the human layer is the weakest link in the security chain \cite{jampen} and attackers usually start by targeting the most vulnerable link before performing other detrimental attacks. These attacks with human interaction are generally known as "Social Engineering Attacks."
+
+Prevalent social engineering attacks such as phishing, pretexting (inventing a scenario to convince victims to divulge information they should not divulge), baiting (promising an item or good to trick the victim), quid pro quo (promising something in exchange for information), and tailgating (someone without the proper authentication follows an authenticated employee into a restricted area) use psychological manipulation to trick users into making security mistakes or giving away sensitive information. This thesis will focus on phishing and different detection techniques through our role-playing gameplay.
 
 \section{What is phishing?}
-Phishing is one of the most prevalent social engineering attacks in which attackers target users by contacting them through email, telephone, or text message by posing as a legitimate entity \cite{phishing, apwg}. Unfortunately, these attacks are challenging to detect because attackers use the computing infrastructure to trick the victim into doing something while the computing system is working as intended. Due to this, even users with a high-end security system can be victims. An example of such is the infamous case of John Podesta \cite{Podesta}, Hilary Clinton's campaign chairman for the 2016 presidential election. The "googlemail.com" in the domain successfully tricked John Podesta and the Clinton campaign's computer help desk to trust the email (See fig:\ref{fig:Podesta}).
+Phishing is one of the most prevalent social engineering attacks in which attackers target users by contacting them through email, telephone, or text message by posing as a legitimate entity \cite{phishing, apwg} to gain trust. Phishers try to obtain personal (potentially sensitive) data, including login credentials and credit card numbers. They can use this information to create fake accounts, ruin credit, steal money, or identity.
+
+Unfortunately, these attacks are challenging to detect because attackers use the computing infrastructure to trick the victim into doing something while the computing system is working as intended. Due to this, even users with a high-end security system can be victims. An example of such is the infamous case of John Podesta \cite{Podesta}, Hilary Clinton's campaign chairman for the 2016 presidential election. The "googlemail.com" in the domain successfully tricked John Podesta and the Clinton campaign's computer help desk to trust the email (See fig:\ref{fig:Podesta}).
+
 
 Phishing attacks are constantly evolving with different tricks. For example, Podesta's email shows it was initially generated from "googlemail.com," making it seem like it might be from Google, but it was not true. Attackers can use different spoofing techniques to hide the sender's identity. Another common trick attackers use (also present in Podesta's email) is to confuse the user with links hidden behind some text/button or confuse the user with redirecting links (example: TinyURL). As a result, the displayed text/link might not be the final destination. Podesta's team's failure to deal with this phishing email led to leaks of more than 11,000 emails which included private conversations with 2016 presidential nominee Hillary Clinton \cite{anderson_2016}.
 
@@ -25,10 +30,10 @@ Phishing attacks are constantly evolving with different tricks. For example, Pod
 
 Successful phishing attacks are expensive to organizations. In 2020 alone, phishing attacks cost US businesses more than \$1.8 billion, up from \$1.7 billion in 2019 \cite{vade}. These attacks can lead to credential/account compromise, giving the attacker access to sensitive information, et cetera. Attackers may try to use these data for extortion. For example: In 2014, an attack was successful on an invasion of celebrity iCloud accounts, leading to the leaking of nude photos. The leak was initially considered due to a breach on Apple services, but it was a phishing attack. The attackers pretended to be Apple and Google and asked users to change their password \cite{duke_2014, guardian_2014}.
 
-Phishing attacks are continuously rising and have doubled since early 2020. In July 2021 alone, APWG saw 260,642 phishing attacks \cite{apwg}. Additionally, Proofpoint found that more than 75\% of organizations faced phishing attacks in 2021 \cite{proofpoint}. These uprising trends in phishing attacks have shown some serious need for mitigations.
+Phishing attacks are continuously rising and have doubled since early 2020. In July 2021 alone, the Anti-Phishing Working Group (APWG), an international consortium that attempts to eliminate fraud and identity theft caused by phishing, saw 260,642 phishing attacks \cite{apwg}. Additionally, Proofpoint, a security enterprise that provides cybersecurity products relating to emails and digital information, found that more than 75\% of organizations faced phishing attacks in 2021 \cite{proofpoint}. These uprising trends in phishing attacks have shown some serious need for mitigations.
 
 \section{Current Mitigations}
-The prevention of phishing attacks can be divided into three steps \cite{vayansky}—the first step in preventing the attack from reaching the end-user. We have seen multiple studies on phishing prevention with the help of the machine learning models \cite{yang_zheng_wu_wu_wang_2021, sahingoz_buber_demir_diri_2019}. Machine learning approaches such as K-nearest, XGBoost, CNN, RCNN, Random forest, et cetera. are commonly used to detect patterns and generalize phishing attacks. Some of the models have shown promises with more than 90\% accuracy—however, a study conducted by What.Hack has shown that only one of the ten anti-phishing tools tested could correctly identify over 90\% of phishing websites. That tool also incorrectly identified 42\% of legitimate websites as fraudulent \cite{what_hack}. Moreover, attackers are always looking for the best way to bypass these automated systems and develop new techniques. The evolving nature of phishing attacks calls for an additional layer of security on top of the prevention layer.
+The prevention of phishing attacks can be divided into three steps \cite{vayansky}—the first step is preventing the attack from reaching the end-user. We have seen multiple studies on phishing prevention with the help of the machine learning models \cite{yang_zheng_wu_wu_wang_2021, sahingoz_buber_demir_diri_2019}. Machine learning approaches such as K-nearest, XGBoost, CNN, RCNN, Random forest, et cetera. are commonly used to detect patterns and generalize phishing attacks. Some of the models have shown promises with more than 90\% accuracy—however, a study conducted by What.Hack has shown that only one of the ten anti-phishing tools tested could correctly identify over 90\% of phishing websites. That tool also incorrectly identified 42\% of legitimate websites as fraudulent \cite{what_hack}. Moreover, attackers are always looking for the best way to bypass these automated systems and develop new techniques. The evolving nature of phishing attacks calls for an additional layer of security on top of the prevention layer.
 
 If the attacks reach the user, the next step to secure the user is by warning them. Most modern web browsers and email clients warn users of any suspicious activities they detect. For example, the browser actively warns users with pop up for probable phishing sites. In addition, browsers provide passive hints to understand URLs better. Browsers use different shades of white to inform the user about a "fully qualified domain name (FQDN)" (also called absolute domain name), the complete domain name for a specific host on the internet. Figure \ref*{fig:browser_cues} shows a use case for such a hint. Attackers will intentionally have a confusing link to trick users into clicking the link. For example, although "help.google.com.bubble.com/changepassword" seems like an email from Google, the actual domain is bubble.com. The domain owner can add any subdomain to domains they own, such as help.google.com.bubble.com, which can potentially be used in phishing attacks. Modern email clients provide similar hints for spam emails and notify the users if they can not verify the sender. Active warnings are more effective than passive signs \cite{vayansky}. Still, attackers can easily bypass these warnings by creating new sites and context-aware websites or emails every time they are flagged.
 
@@ -71,7 +76,9 @@ Serious games are used in many fields such as education, healthcare, and trainin
     \end{minipage} \hfill
 \end{figure}
 
-There have been various studies about using games as a practical phishing training module. Hendrix et al. \cite{hendrix_al_sherbaz_bloom_2016} compared the effectiveness of cyber security training tools with some popular games designed for cyber security training and found some positive signs. Prevailing works can be classified into three main categories (discussed below).
+There have been various studies about using games as a practical phishing training module. Hendrix et al. \cite{hendrix_al_sherbaz_bloom_2016} compared the effectiveness of cyber security training tools with some popular games designed for cyber security training. They found that existing games, in general, had a positive impact on learning, with positive education experience.
+
+We can broadly classify current training games into three main categories. We discuss each of these categories and provide some examples of each type in the following sections.
 
 \subsection{Board and card games}
 There have been studies based on non-computer-based games. For example, Control-Alt-Hack \cite{control_alt_hack} and "smells phishy" \cite{smels_phishy} are card games aimed to train users against phishing. Both the games show promise in their approaches and teach the user what to be aware of (such as spelling mistakes, phishing links) through their gameplay. After playing the game, users reported higher efficiency and ability to detect phishing emails.
@@ -79,11 +86,13 @@ There have been studies based on non-computer-based games. For example, Control-
 Although both the games show promise in their approach, non-computer-based games have some inherent limitations. The games have a barrier of entry as it requires pre-setup (with the need for the cards and boards). Furthermore, once the games are deployed, they are permanent, limiting their ability to train and evolve against new phishing attacks. Finally, board and card games fail to communicate the context of the attack and lack examples of where they might be used. For example, although the game might have a "hiding links" card, the users lack knowledge on how and when it might be used. The limited skills these games provide may not be best suited as an individual training module.
 
 \subsection{Phishing Link (URL) training}
-There have been numerous computer games about phishing. However, many studies focus on one common category: training users to verify phishing links. Anti-Phishing Phil \cite{anti_phishing_phil} is one of the pioneers in this field. Their gameplay puts the user as a fish. The goal of the fish is to grow larger by eating the good bugs (non-phishing links) and avoiding the bait (phishing links). The game has four different levels. Players have to recognize six out of eight URLs to move to the next level.
+There have been numerous computer games about phishing. However, many studies focus on one common category: training users to verify phishing links. Anti-Phishing Phil \cite{anti_phishing_phil} is one of the pioneers in this field. Their gameplay puts the user as a fish. The goal of the fish is to grow larger by eating the good bugs (non-phishing links) and avoiding the bait (phishing links). The game has four different levels, with each round focusing on another type of deceptive URL. Players move to the next level after correctly identifying six out of eight URLs.
 
-There are other similar games to Anti-Phishing Phil. Phish Phinder \cite{phish_phinder} builds upon Anti-Phishing Phil with more user interaction, such as asking for hints and levels. Another example of a link training game is developed by Baral et al. \cite{gamified_approach}. Baral et al.'s game story is based on a ballon shooter where the main character has to shoot balloons with legitimate URLs.
+There are other similar games to Anti-Phishing Phil. For example, Phish Phinder \cite{phish_phinder} builds upon the Anti-Phishing Phil storyline and game design. However, it differentiates itself from Anti-Phishing Phil by integrating self-efficacy in the game design to enhance phishing avoidance motivation and behavior among users. They were able to positively impact self-efficacy by adding conceptual knowledge (through challenges) and procedural knowledge (through increasing levels and repetition of conceptual knowledge).
 
-All these games have one thing in common: they teach users how to identify legitimate URLs through their gameplay. As URLs are one of the most critical factors while detecting phishing emails, gameplay dedicated to recognizing phishing URLs will serve as a suitable training module. Anti-Phishing Phil results show that their game has a good impact compared to existing training material while detecting legitimate sites.
+"Building Confidence not to be Phished"\cite{gamified_approach} by Baral et al. developed a game prototype aimed to enhance an individual's self-efficacy in phishing threat avoidance. They developed a ballon shooter game where the main character has to shoot balloons with legitimate URLs (similar to previous games). Although the links and hints are displayed in a different context, this game tries to achieve the same goal as previous games.
+
+All these games have one thing in common: they teach users how to identify legitimate URLs through their gameplay. As URLs are one of the most critical factors while detecting phishing emails, gameplay dedicated to recognizing phishing URLs serves as a suitable training module. Anti-Phishing Phil results show that their game has a good impact compared to existing training material to differentiate legitimate links from phishing links.
 
 However, these games might not be suitable as standalone training against phishing. Although URL training games are a sound training module, these games fail to train users on some common tricks seen in phishing attacks. For example, one of the most significant limitations of these games is the lack of context on where the link might appear. As such, attackers can use different link hiding techniques to trick the user into clicking the link. Moreover, attackers use psychological manipulation to trick users into clicking the link by creating a sense of urgency, fake giveaways, or making it seem like an email from somebody individuals know to trick people into clicking the link.
 
@@ -96,7 +105,7 @@ However, these games might not be suitable as standalone training against phishi
     \caption{What.Hack gameplay}
 \end{figure}
 
-"What.Hack" gameplay incorporates previous studies' different techniques and builds upon them. In addition, its context-based email training module solves one of the drawbacks of link-based training games. Since players are looking at real emails (both phishing and legitimate), users can better recognize the context of the email and what to look out for in emails to stay protected. Moreover, the emails generated in this game were able to incorporate the primary link-based game goals.
+"What.Hack" gameplay incorporates previous studies' different techniques and builds upon them. In addition, its context-based email training module solves one of the drawbacks of link-based training games. Since players are looking at full emails (both phishing and legitimate) obtained from the real world, users can better recognize the context of the email and what to look out for in emails to stay protected. Moreover, the emails generated in this game successfully incorporate the objective of primary link-based game goals.
 
 The result from "What.Hack" shows clear improvement regarding link-based games. In comparison to Anti-Phishing Phil, "What.Hack" improved players correctness in identifying phishing emails by 36.7\% \cite{what_hack}.
 
@@ -108,7 +117,8 @@ Current phishing training programs focus on training the user as a victim. Our g
 
 \begin{table}[!ht]
     \resizebox{\textwidth}{!}{%
-        \begin{tabular}{p{0.13\textwidth} p{0.45\textwidth} l l l}
+        \addtolength{\tabcolsep}{-10pt}
+        \begin{tabular}{p{0.13\textwidth} p{0.48\textwidth} l l l}
             \hline
             \textbf{Game Type}   & \textbf{Description}                                                                                 & \textbf{URL}          & \textbf{Spear} & \textbf{Spoof} \\
             \hline
@@ -119,7 +129,9 @@ Current phishing training programs focus on training the user as a victim. Our g
             \textbf{Our Game}    & Teach players to recognize and defend against phishing attempts by role playinig as a victim         & \checkmark            & \checkmark     &                \\
             \hline
         \end{tabular}%
+        \addtolength{\tabcolsep}{10pt}
     }
+
     \caption{Different type of training games and their main objectives}
     \label{tab:game-type}
 \end{table}
@@ -127,9 +139,9 @@ Current phishing training programs focus on training the user as a victim. Our g
 Our goals for the study can be summarized as:
 
 \begin{itemize}
-    % \setlength\itemsep{-0.6em}
-    \item Teach email phishing defense by creating realistic emails as an attacker
-    \item Engage the player by setting clear goals and tasks that requires player to explore more skills
+    \item We designed and developed a phishing training game that attempts to incorporate the objectives of the current existing games and build upon them. Our game includes link hiding training and provides context to those links.
+    \item We compare the participants' performance before and after playing the game. We evaluate users' results and try to understand user thought processes behind each decision.
+    \item Finally, we list some of the insights found during the survey and list potential mitigation and training.
 \end{itemize}
 
 

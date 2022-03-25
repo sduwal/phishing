@@ -42,9 +42,9 @@ To evaluate engagement, we ask the participants various 5-point Likert scale rat
 
 \section{Results}
 \subsection{Pre-Survey}
-The pre-survey responses provided the participant's pre-existing knowledge of phishing scams. We provide an optional text area to explain the user choice.
+The pre-survey responses provided the participant's pre-existing knowledge of phishing scams. Participants chose one of three options (as discussed above in test design): Phishing, Legitimate, and Need more information (maybe phishing). To understand user thought behind their selection, we provide an optional text area to explain the user choice.
 
-Table \ref{tab:pre_survey_responses} shows participant performance on classifying email as phishing or legitimate. We classify the user answer into five different categories:
+Each user option is classified as below:
 
 \begin{enumerate}
     \setlength{\itemsep}{0pt}
@@ -52,28 +52,43 @@ Table \ref{tab:pre_survey_responses} shows participant performance on classifyin
     \setlength{\topsep}{0pt}
     \item \textbf{True Positive}: The user correctly classified the email as phishing.
     \item \textbf{True Negative}: The user correctly classified the email as legitimate.
-    \item \textbf{False Positive}: The user incorrectly classified the phishing email as legitimate.
-    \item \textbf{False Negative}: The user incorrectly classified the legitimate email as phishing.
-    \item \textbf{Marked Maybe}: The user thinks it is potentially phishing and needs more information.
+    \item \textbf{False Positive}: The user incorrectly classified legitimate emails as phishing emails.
+    \item \textbf{False Negative}: The user incorrectly classified phishing emails as legitimate emails.
 \end{enumerate}
 
+Since participants could mark emails, they are not confident with as "Maybe," we analyze our data in two separate ways, first by neglecting emails marked as "Maybe," and second by including all the results. On average, participants marked 17.41\% of questions as "Maybe" in our presurvey. Since marking an email as "Maybe" shows caution and does not engage the user, we treat these results as "Marked phishing." Hence, phishing emails marked as "Maybe" are classified as "True Positive," and legitimate emails marked as "Maybe" are classified as "False Positive."
+
+Table \ref{tab:pre_survey_responses} shows the average performance (in percent) of each user when we ignore questions marked as "Maybe" and Table \ref{tab:pre_survey_responses_all} show the average perfomance (in percent) when we include all the result and treat "Maybe" as phishing.
+
 \begin{table}[!ht]
-    \centering
-    \begin{tabular}{l l}
-        \hline
-        \textbf{Answer} & \textbf{Average Score} \\
-        \hline
-        True Positive   & 4.45                   \\
-        True Negative   & 3                      \\
-        False Positive  & 2.09                   \\
-        False Negative  & 0.37                   \\
-        Marked Maybe    & 2.09                   \\
-    \end{tabular}
-    \caption{Pre-Survey Responses and average scores of each answer}
-    \label{tab:pre_survey_responses}
+    \begin{center}
+
+        \begin{tabular}{c | c c}
+            Actual              & \multicolumn{2}{c}{User response}                       \\
+                                & \textbf{Phishing}                 & \textbf{Legitimate} \\
+            \textbf{Phishing}   & 63\%                              & 37\%                \\
+            \textbf{Legitimate} & 7\%                               & 93\%                \\
+        \end{tabular}
+        \caption{Average performance in pre-survey when we ignore emails marked as "Maybe"}
+        \label{tab:pre_survey_responses}
+    \end{center}
 \end{table}
 
-% Our pre-survey result showed that participants had some knowledge about phishing. On average, they correctly classified more than half of phishing emails. However, we can see that participants misclassified some legitimate emails as "Maybe Phishing" or marked "Phishing."
+\begin{table}[!ht]
+    \begin{center}
+
+        \begin{tabular}{c | c c}
+            Actual              & \multicolumn{2}{c}{User response}                       \\
+                                & \textbf{Phishing}                 & \textbf{Legitimate} \\
+            \textbf{Phishing}   & 74\%                              & 26\%                \\
+            \textbf{Legitimate} & 23\%                              & 77\%                \\
+        \end{tabular}
+        \caption{Average performance in pre-survey when we include all the results and treat "Maybe" as marked phishing}
+        \label{tab:pre_survey_responses_all}
+    \end{center}
+\end{table}
+
+Based on these result (Table \ref{tab:pre_survey_responses} and \ref{tab:pre_survey_responses_all}), we assume participants have some  beforehand knowledge about phishing emails. However, we can also see some confusion with legitimate vs. phishing emails based on the number of emails marked as "Maybe" (17.41\%)
 
 We manually reviewed the user text responses to understand why they made each decision. We noticed similar thought processes in many of the participants:
 
@@ -83,7 +98,7 @@ We manually reviewed the user text responses to understand why they made each de
 \end{enumerate}
 
 \subsection{Game}
-Users start the game after the pre-survey. Since we distributed the game through email, we need to verify that the user completed the survey before attempting the game. Therefore, we passcode lock the game and give the passcode at the end of the pre-survey.
+Users start the game after the pre-survey. Since we distributed the game through email, we need to verify that the user completed the survey before attempting the game. Therefore, we lock the game with a passcode, provided at the end of the pre-survey.
 
 Participants took a little over 25 minutes to complete the game. The fastest recorded time was 18 minutes, and the longest was 43 minutes. We noticed that participants took the longest in Week 3, where they had to play around with different domains. Table \ref{tab:game_time} shows the average time user took for each week.
 
@@ -102,7 +117,7 @@ Participants took a little over 25 minutes to complete the game. The fastest rec
     \label{tab:game_time}
 \end{table}
 
-We can see that participants quickly figured out spelling and grammar errors in Week 1. Similarly, participants did not have trouble understanding different link hiding techniques. However, many participants had to redo Week 3 as they could not find good domains to try. Some participants tried domains that had no connection with PayPal, such as "starbucks.com," "fredmeyer.com," and "youtube.org." However, participants figured out that purchasing similar domains provided better efficiency. Table \ref{tab:marketplace_domains} shows different domains used in the game.
+Participants quickly figured out spelling and grammar errors in Week 1 and did not have trouble understanding different link hiding techniques in Week 2. However, many participants had to redo Week 3 as they could not find good domains to try. Some participants tried domains that had no connection with PayPal, such as "starbucks.com," "fredmeyer.com," and "youtube.org." However, participants successfully figured out that purchasing similar domains provided better efficiency. Table \ref{tab:marketplace_domains} shows different domains used in the game.
 
 \begin{table}[!ht]
     \centering
@@ -130,7 +145,7 @@ We can see that participants quickly figured out spelling and grammar errors in 
     \label{tab:marketplace_domains}
 \end{table}
 
-Although, most participants chose domains with the alternate ending as suggested by the game (when they enter paypal.com). Some users were creative and figured our purchasing paypaI.com (with i) would make it look visually similar and be more efficient.
+Although most participants chose domains with the alternate ending as suggested by the game (when they enter paypal.com), some users were creative and figured our purchasing paypaI.com (with i) would make it look visually similar and be more efficient. We did not consider visual similarity in this iteration, and it can be something to consider in future iterations.
 
 A few participants had a problem with spoofing, but generally, participants quickly understood spoofing and used efficient email addresses. Table \ref{tab:spoofing_emails} shows different emails used by participants during spoofing. Participants used efficient domains (paypal.com) with commonly seen names such as accounts, contact, support, etc.
 
@@ -157,23 +172,45 @@ A few participants had a problem with spoofing, but generally, participants quic
     \label{tab:spoofing_emails}
 \end{table}
 
+Overall, we believe participants were able to play the game smoothly and complete all the game objectives without any hiccups. Furthermore, based on the game logs, players explored all the goals in the game (even though most players had to play the game at least a couple of times).
+
 \subsection{Post-Survey}
-The post-survey responses give us an idea of our game's effectiveness by allowing us to compare the before and after game scores. In addition to classifying the emails, we ask the participants 5-point Likert scale questions. Table \ref{tab:post_survey_responses} shows participant performance on classifying email.
+The post-survey responses give us an idea of our game's effectiveness by allowing us to compare the before and after game scores. In addition to classifying the emails, we ask the participants 5-point Likert scale questions.
+
+Like pre-evaluation, we evaluate the user performance on two different scales, one without emails marked as "Maybe" and one with all the emails. We repeat the same process for the second part (with maybe) as done in the presurvey. Emails marked as "Maybe" are treated as "Phishing."
+
+After playing the game, we noticed participants were more confident in their answers, and on average, participants marked only 10.5\% emails as "Maybe" (7\% improvement from pre-survey).
+
+Table \ref{tab:post_survey_responses} and \ref{tab:post_survey_responses_all} shows participant performance on classifying email after playing the game.
+
 
 \begin{table}[!ht]
-    \centering
-    \begin{tabular}{l l}
-        \hline
-        \textbf{Answer} & \textbf{Average Score} \\
-        \hline
-        True Positive   & 5.73                   \\
-        True Negative   & 1.45                   \\
-        False Positive  & 2.54                   \\
-        False Negative  & 1.09                   \\
-        Marked Maybe    & 1.27                   \\
-    \end{tabular}
-    \caption{Post-Survey Responses and average scores of each answer}
-    \label{tab:post_survey_responses}
+    \begin{center}
+
+        \begin{tabular}{c | c c}
+            Actual              & \multicolumn{2}{c}{User response}                       \\
+                                & \textbf{Phishing}                 & \textbf{Legitimate} \\
+            \textbf{Phishing}   & 80\%                              & 20\%                \\
+            \textbf{Legitimate} & 35\%                              & 65\%                \\
+        \end{tabular}
+        \caption{Average performance in post-survey when we include all the results and treat "Maybe" as marked phishing}
+        \label{tab:post_survey_responses}
+    \end{center}
+\end{table}
+
+
+\begin{table}[!ht]
+    \begin{center}
+
+        \begin{tabular}{c | c c}
+            Actual              & \multicolumn{2}{c}{User response}                       \\
+                                & \textbf{Phishing}                 & \textbf{Legitimate} \\
+            \textbf{Phishing}   & 83\%                              & 17\%                \\
+            \textbf{Legitimate} & 36\%                              & 64\%                \\
+        \end{tabular}
+        \caption{Average performance in post-survey when we include all the results and treat "Maybe" as marked phishing}
+        \label{tab:post_survey_responses_all}
+    \end{center}
 \end{table}
 
 We manually reviewed user text responses on why they made certain choices (similar to what we did in the pre-survey). We noticed a few common thoughts:
@@ -189,27 +226,50 @@ Table \ref{tab:pre_vs_post} shows the change in the average score of the partici
 
 \begin{table}[!ht]
     \centering
-    \begin{tabular}{l r}
+    \begin{tabular}{l r r}
         \hline
-        \textbf{Answer} & \textbf{Change in averge score} \\
+        \textbf{Answer} & \textbf{A. Change in averge score} & \textbf{B. Change in averge score} \\
         \hline
-        True Positive   & 1.27                   \\
-        True Negative   & -0.45                   \\
-        False Positive  &   -0.64                \\
-        False Negative  & 0.73                 \\
-        Marked Maybe    & -0.82                  \\
+        True Positive   & 17\%                               & 9\%                                \\
+        True Negative   & 2\%                                & -14\%                              \\
+        False Positive  & 28\%                               & 14\%                               \\
+        False Negative  & -17\%                              & -9\%                               \\
+        \hline
     \end{tabular}
-    \caption{Change in average score in pre-survey vs post-survey. Positive score indicate higher average score in the post survey.}
+    \caption{Change in average score in pre-survey vs post-survey. Column A. represents change in score when we ignore emails marked as "Maybe" and Column B. represents all the emails when we consider emails marked "Maybe" as phishing.}
     \label{tab:pre_vs_post}
 \end{table}
 
-Participants were more confident in their email classification and marked their email either phishing or non-phishing. For example, one of the participants went from six "Maybe Phishing" to two. Only two out of eleven participants marked more emails as maybe phishing (+1 compared to pre-survey).
+First, participants were more confident in their email classification and marked their email either phishing or non-phishing. Emails marked as "Maybe" decreased from 17\% to 10\%. For example, one of the participants went from six "Maybe Phishing" to two. Only two out of eleven participants marked more emails as maybe phishing (+1 compared to pre-survey).
 
-Participants were correctly identifying more phishing emails. We see, on average, participants correctly identified 1.27 more phishing emails. In addition, we also saw a decrease in false positives. Only one participant had a lower true positive score (the participants missed one email (-1 true positive)).
+Participants were correctly identifying more phishing emails. We see, on average, participants correctly identified 17\% more phishing emails when we ignore emails where participants could not be sure. In addition, participants' performance improved by 9\% even when we treated emails they could not confidently identify as "Phishing."
 
-Our results show that participants were also more skeptical of legitimate emails. Six participants were marking at least one of the legitimate emails as phishing.
+Our results show that participants were also more skeptical of legitimate emails after playing the game. Participants marked 28\% more legitimate emails as phishing (when we don't consider maybe) and 14\% more legitimate emails as "Phishing" when we consider all the emails. We saw six participants out of eleven marked at least one of the legitimate emails as phishing.
 
-We can see that the game had positive impact on the participants. Participants were better at identifying phishing emails and all the participants had at least a partial knowledge about protective actions. Based on participants comments, we  can see they had at least some knowledge about different objectives of the game: spoofing, link hiding, and language skills.
+Overall, we can see that the game positively impacted the participants. Participants were better at identifying phishing emails and all the participants had at least a partial knowledge about protective actions after playing the game. In addition, based on participants' comments, we can see they had at least some knowledge about different objectives of the game: spoofing, link hiding, and language skills.
+
+\section{Game Time vs perfomance}
+We wanted to check if participants spending more time to complete the game performs better. To compare participants' performance before and after the game, we compute the f1-score\footnote{\url{https://en.wikipedia.org/wiki/F-score}} of each participant separately.
+
+\begin{figure}[!ht]
+    \begin{center}
+
+        \subfloat[Ignoring "Maybe"]{
+            \includegraphics[width=0.9\textwidth]{section3/f1_without.png}
+        } \\
+        \hfill
+        \subfloat[All emails]{
+            \includegraphics[width=0.9\textwidth]{section3/f1_with.png}
+        }
+        \hfill
+        \caption{Comparison of f1-score before and after playing the game with time (Maybe answers are included)}
+        \label{fig:f1_with_time}
+    \end{center}
+
+\end{figure}
+
+
+Figure \ref{fig:f1_with_time} show f1-score of each participants with game time. Based on the chart, we can not conclude that higher game time results in better performance. However, we believe that with subtle hints and more emails, player playing longer will have better performance.
 
 \section{Questionaire}
 Table \ref{tab:game_questions} shows different opinion-based questions asked in the post-survey. The focus of the questionnaire was to assess participants' perceptions and opinions of the game and collect additional feedback about potential improvements.  Likert-scale questions used a 5-point scale ranging from 1 = strongly disagree to 5 = strongly agree.
@@ -218,19 +278,19 @@ Table \ref{tab:game_questions} shows different opinion-based questions asked in 
     \centering
     \begin{tabular}{|r p{0.5\textwidth} r|}
         \hline
-         & \textbf{Question}                                                                   & \textbf{Average Rating} \\
-        1. & The game showed phishing tricks.                                                    & 4.90                    \\
-        2. &I better understand phishing scams after playing the game.                          & 4.54                    \\
-        3. &I will use the techniques mentioned in the game to avoid phishing.                  & 3.9                     \\
-        4. &I understand spoofing better.                                                       & 4.18                    \\
-        5. &The game taught me how to protect myself from phishing.                             & 4.27                    \\
-        6. &I learned something new.                                                             & 4.72                    \\
-        7. & I know more about different link hiding techniques and what to look out for. & 4.27 \\
+            & \textbf{Question}                                                                   & \textbf{Average Rating} \\
+        1.  & The game showed phishing tricks.                                                    & 4.90                    \\
+        2.  & I better understand phishing scams after playing the game.                          & 4.54                    \\
+        3.  & I will use the techniques mentioned in the game to avoid phishing.                  & 3.9                     \\
+        4.  & I understand spoofing better.                                                       & 4.18                    \\
+        5.  & The game taught me how to protect myself from phishing.                             & 4.27                    \\
+        6.  & I learned something new.                                                            & 4.72                    \\
+        7.  & I know more about different link hiding techniques and what to look out for.        & 4.27                    \\
         \hline
-        8. &I would like to play the game again.                                                & 2.9                     \\
-        9. &The game is complicated.                                                            & 2.63                    \\
-        10. &I prefer reading an educational document to playing a game to learn about phishing. & 1.81                    \\
-        11.& Education games are important to understand security.                              & 4.45                    \\
+        8.  & I would like to play the game again.                                                & 2.9                     \\
+        9.  & The game is complicated.                                                            & 2.63                    \\
+        10. & I prefer reading an educational document to playing a game to learn about phishing. & 1.81                    \\
+        11. & Education games are important to understand security.                               & 4.45                    \\
         \hline
     \end{tabular}
     \caption{Likert questions relating opinion of the game; Higher score means more positive response}
@@ -242,7 +302,7 @@ Questions 1-7 (in table \ref{tab:game_questions}) focus on the educational featu
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.8\textwidth]{section3/user_reponse_1.png}
-    \caption{Participants response to the first 7 questions. The numbers correspond to the question numbers in table \ref{tab:game_questions}.}
+    \caption[Responses to the first 7 questions]{Participants response to the first 7 questions. The numbers correspond to the question numbers in table \ref{tab:game_questions}.}
     \label{fig:phishing_game_questions_1}
 \end{figure}
 
@@ -256,7 +316,7 @@ Finally, we asked participants their opinion on game-based learning. We can see 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.8\textwidth]{section3/user_response_2.png}
-    \caption{Participants response to questions 8-11. The numbers correspond to the question numbers in table \ref{tab:game_questions}.}
+    \caption[Responses to the 2nd set of questions]{Participants response to questions 8-11. The numbers correspond to the question numbers in table \ref{tab:game_questions}.}
     \label{fig:phishing_game_questions_2}
 \end{figure}
 
