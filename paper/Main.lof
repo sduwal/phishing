@@ -30,11 +30,12 @@
 \addvspace {10\p@ }
 \vskip -10pt
 \contentsline {figure}{\numberline {3.1}{\ignorespaces The Gmail clone used during evaluation with list of custom emails\relax }}{32}{figure.caption.29}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Comparison of f1-score before and after playing the game with time (Maybe answers are included)\relax }}{40}{figure.caption.38}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Ignoring "Maybe"}}}{40}{subfigure.2.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {All emails}}}{40}{subfigure.2.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Responses to the first 7 questions}}{42}{figure.caption.40}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Responses to the 2nd set of questions}}{43}{figure.caption.41}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Participants performance on the phishing emails in the evaluation\relax }}{40}{figure.caption.38}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Comparison of f1-score before and after playing the game with time (Maybe answers are included)\relax }}{41}{figure.caption.39}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Ignoring "Maybe"}}}{41}{subfigure.3.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {All emails}}}{41}{subfigure.3.2}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Responses to the first 7 questions}}{43}{figure.caption.41}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Responses to the 2nd set of questions}}{44}{figure.caption.42}%
 \addvspace {10\p@ }
 \vskip -10pt
-\contentsline {figure}{\numberline {4.1}{\ignorespaces An email sent by Lyft}}{45}{figure.caption.42}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces An email sent by Lyft}}{46}{figure.caption.43}%

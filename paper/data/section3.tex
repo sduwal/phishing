@@ -248,6 +248,19 @@ Our results show that participants were also more skeptical of legitimate emails
 
 Overall, we can see that the game positively impacted the participants. Participants were better at identifying phishing emails and all the participants had at least a partial knowledge about protective actions after playing the game. In addition, based on participants' comments, we can see they had at least some knowledge about different objectives of the game: spoofing, link hiding, and language skills.
 
+\subsection{Evaluating emails in post survey}
+Out of the eight phishing emails, there were only two emails (Column 1 and Column 5 in figure \ref{fig:emails}) where the user performed significantly worse than other emails. Both the emails had a common theme. All the details looked legitimate, but we hid the actual link under a button. We used "netfiix.com," which is visually similar to "netflix.com," to trick the users.
+
+\begin{figure}[!ht]
+    \begin{center}
+        \includegraphics[width=\textwidth]{section3/emails.png}
+        \caption{Participants performance on the phishing emails in the evaluation}
+        \label{fig:emails}
+    \end{center}
+\end{figure}
+
+Participants perfomed well when the sender is not netflix domain (netflix.com). Obvious fake domains such as fakenetflix.com, netflx.com, tinyurl.is and phishing.com were caught by the user (Column 6, Column 7, Column 8).
+
 \section{Game Time vs perfomance}
 We wanted to check if participants spending more time to complete the game performs better. To compare participants' performance before and after the game, we compute the f1-score\footnote{\url{https://en.wikipedia.org/wiki/F-score}} of each participant separately.
 
