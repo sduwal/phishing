@@ -845,6 +845,9 @@ INPUT data/section3.aux
 INPUT ./data/section4.aux
 INPUT data/section4.aux
 INPUT data/section4.aux
+INPUT ./data/vita.aux
+INPUT data/vita.aux
+INPUT data/vita.aux
 OUTPUT Main.aux
 INPUT /usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -1196,6 +1199,16 @@ INPUT ./Main.bbl
 INPUT Main.bbl
 INPUT ./Main.bbl
 INPUT Main.bbl
+INPUT ./data/vita.tex
+INPUT ./data/vita.tex
+INPUT ./data/vita.tex
+OUTPUT data/vita.aux
+INPUT ./data/vita.tex
+INPUT ./data/vita.tex
+INPUT ./data/vita.tex
+INPUT data/vita.tex
+INPUT ./data/vita.tex
+INPUT data/vita.tex
 INPUT Main.aux
 INPUT ./data/titlepage.aux
 INPUT data/titlepage.aux
@@ -1218,6 +1231,9 @@ INPUT data/section3.aux
 INPUT ./data/section4.aux
 INPUT data/section4.aux
 INPUT data/section4.aux
+INPUT ./data/vita.aux
+INPUT data/vita.aux
+INPUT data/vita.aux
 INPUT ./Main.out
 INPUT ./Main.out
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc
