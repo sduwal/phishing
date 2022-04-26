@@ -1,0 +1,1150 @@
+[
+  {
+    id: '8595',
+    created_at: 2022-02-25T19:58:54.955Z,
+    userId: 'dldekerl@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 13:58:54 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8880',
+    created_at: 2022-02-25T20:03:32.202Z,
+    userId: 'dldekerl@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:03:32 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9488',
+    created_at: 2022-02-25T20:09:41.241Z,
+    userId: 'dldekerl@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:09:41 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9492',
+    created_at: 2022-02-25T20:09:41.435Z,
+    userId: 'dldekerl@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:09:41 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9496',
+    created_at: 2022-02-25T20:09:41.559Z,
+    userId: 'dldekerl@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:09:41 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9926',
+    created_at: 2022-02-25T20:13:29.820Z,
+    userId: 'dldekerl@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:13:29 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9927',
+    created_at: 2022-02-25T20:13:29.929Z,
+    userId: 'dldekerl@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:13:29 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9932',
+    created_at: 2022-02-25T20:13:30.167Z,
+    userId: 'dldekerl@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:13:29 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10253',
+    created_at: 2022-02-25T20:16:18.435Z,
+    userId: 'dldekerl@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:16:18 GMT-0600 (Central Standard Time)'
+  }
+]
+[
+  {
+    id: '7368',
+    created_at: 2022-02-24T01:46:15.169Z,
+    userId: 'jmseder@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '[]',
+    date: 'Wed Feb 23 2022 19:46:13 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7370',
+    created_at: 2022-02-24T01:48:30.256Z,
+    userId: 'jmseder@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Wed Feb 23 2022 19:48:28 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7438',
+    created_at: 2022-02-24T01:53:28.391Z,
+    userId: 'jmseder@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Wed Feb 23 2022 19:53:26 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7581',
+    created_at: 2022-02-24T01:57:33.220Z,
+    userId: 'jmseder@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Wed Feb 23 2022 19:57:31 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7708',
+    created_at: 2022-02-24T02:02:39.344Z,
+    userId: 'jmseder@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Wed Feb 23 2022 20:02:37 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7710',
+    created_at: 2022-02-24T02:02:39.458Z,
+    userId: 'jmseder@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Wed Feb 23 2022 20:02:37 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7713',
+    created_at: 2022-02-24T02:02:39.656Z,
+    userId: 'jmseder@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Wed Feb 23 2022 20:02:38 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7717',
+    created_at: 2022-02-24T02:02:39.970Z,
+    userId: 'jmseder@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Wed Feb 23 2022 20:02:38 GMT-0600 (Central Standard Time)'
+  }
+]
+[
+  {
+    id: '8656',
+    created_at: 2022-02-25T20:00:19.767Z,
+    userId: 'benjamin.m.samuel@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '[]',
+    date: 'Fri Feb 25 2022 14:00:19 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8812',
+    created_at: 2022-02-25T20:02:53.386Z,
+    userId: 'benjamin.m.samuel@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:02:53 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9474',
+    created_at: 2022-02-25T20:09:23.339Z,
+    userId: 'benjamin.m.samuel@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:09:23 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10169',
+    created_at: 2022-02-25T20:15:47.823Z,
+    userId: 'benjamin.m.samuel@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:15:47 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10171',
+    created_at: 2022-02-25T20:15:47.911Z,
+    userId: 'benjamin.m.samuel@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:15:47 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10174',
+    created_at: 2022-02-25T20:15:48.119Z,
+    userId: 'benjamin.m.samuel@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:15:47 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10396',
+    created_at: 2022-02-25T20:17:43.295Z,
+    userId: 'benjamin.m.samuel@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:17:43 GMT-0600 (Central Standard Time)'
+  }
+]
+[
+  {
+    id: '8542',
+    created_at: 2022-02-25T19:57:15.653Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '[]',
+    date: 'Fri Feb 25 2022 13:57:15 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8603',
+    created_at: 2022-02-25T19:59:02.115Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 13:59:01 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8846',
+    created_at: 2022-02-25T20:03:12.847Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:03:12 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9157',
+    created_at: 2022-02-25T20:06:07.663Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:06:07 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9160',
+    created_at: 2022-02-25T20:06:07.779Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:06:07 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9162',
+    created_at: 2022-02-25T20:06:08.019Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:06:07 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9341',
+    created_at: 2022-02-25T20:08:14.285Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:08:14 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9347',
+    created_at: 2022-02-25T20:08:14.482Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:08:14 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9351',
+    created_at: 2022-02-25T20:08:14.713Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:08:14 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9564',
+    created_at: 2022-02-25T20:10:20.310Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:10:19 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9565',
+    created_at: 2022-02-25T20:10:20.403Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:10:20 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9570',
+    created_at: 2022-02-25T20:10:20.832Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:10:20 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9834',
+    created_at: 2022-02-25T20:12:43.045Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:12:42 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9835',
+    created_at: 2022-02-25T20:12:43.166Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:12:42 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9840',
+    created_at: 2022-02-25T20:12:43.439Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:12:43 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10026',
+    created_at: 2022-02-25T20:14:28.752Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:14:28 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10533',
+    created_at: 2022-02-25T20:19:04.922Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:19:04 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10535',
+    created_at: 2022-02-25T20:19:05.097Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:19:04 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10539',
+    created_at: 2022-02-25T20:19:05.261Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:19:05 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10542',
+    created_at: 2022-02-25T20:19:05.567Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:19:05 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10805',
+    created_at: 2022-02-25T20:21:24.074Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:21:23 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10809',
+    created_at: 2022-02-25T20:21:24.270Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:21:23 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10811',
+    created_at: 2022-02-25T20:21:24.395Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:21:24 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10813',
+    created_at: 2022-02-25T20:21:24.652Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:21:24 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11037',
+    created_at: 2022-02-25T20:23:45.130Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:23:44 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11039',
+    created_at: 2022-02-25T20:23:45.293Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:23:45 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11044',
+    created_at: 2022-02-25T20:23:45.471Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:23:45 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11045',
+    created_at: 2022-02-25T20:23:45.593Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:23:45 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11198',
+    created_at: 2022-02-25T20:26:13.188Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:26:12 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11201',
+    created_at: 2022-02-25T20:26:13.306Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:26:13 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11204',
+    created_at: 2022-02-25T20:26:13.502Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:26:13 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11207',
+    created_at: 2022-02-25T20:26:13.672Z,
+    userId: 'snguye11@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:26:13 GMT-0600 (Central Standard Time)'
+  }
+]
+[
+  {
+    id: '8443',
+    created_at: 2022-02-25T19:55:23.530Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '[]',
+    date: 'Fri Feb 25 2022 13:55:23 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8576',
+    created_at: 2022-02-25T19:58:12.041Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 13:58:11 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9014',
+    created_at: 2022-02-25T20:04:56.270Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:04:56 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9743',
+    created_at: 2022-02-25T20:11:56.554Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:11:56 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9747',
+    created_at: 2022-02-25T20:11:56.686Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:11:56 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9749',
+    created_at: 2022-02-25T20:11:56.838Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:11:56 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10234',
+    created_at: 2022-02-25T20:16:12.280Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:16:12 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10241',
+    created_at: 2022-02-25T20:16:12.411Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:16:12 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10242',
+    created_at: 2022-02-25T20:16:12.560Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:16:12 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10722',
+    created_at: 2022-02-25T20:20:32.570Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:20:32 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10726',
+    created_at: 2022-02-25T20:20:32.691Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:20:32 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10727',
+    created_at: 2022-02-25T20:20:32.830Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:20:32 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10998',
+    created_at: 2022-02-25T20:23:06.644Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:23:06 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11230',
+    created_at: 2022-02-25T20:26:36.859Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '[]',
+    date: 'Fri Feb 25 2022 14:26:36 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11240',
+    created_at: 2022-02-25T20:27:06.762Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:27:06 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11363',
+    created_at: 2022-02-25T20:28:29.612Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:28:29 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11365',
+    created_at: 2022-02-25T20:28:29.832Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:28:29 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11434',
+    created_at: 2022-02-25T20:29:12.393Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:29:12 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11526',
+    created_at: 2022-02-25T20:30:24.435Z,
+    userId: 'normanleenola@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:30:24 GMT-0600 (Central Standard Time)'
+  }
+]
+[
+  {
+    id: '7899',
+    created_at: 2022-02-24T03:44:18.142Z,
+    userId: 'grantikinsr@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '[]',
+    date: 'Wed Feb 23 2022 21:44:17 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7901',
+    created_at: 2022-02-24T03:46:22.695Z,
+    userId: 'grantikinsr@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Wed Feb 23 2022 21:46:22 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7958',
+    created_at: 2022-02-24T03:50:33.492Z,
+    userId: 'grantikinsr@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Wed Feb 23 2022 21:50:33 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8037',
+    created_at: 2022-02-24T03:55:27.480Z,
+    userId: 'grantikinsr@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Wed Feb 23 2022 21:55:27 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8040',
+    created_at: 2022-02-24T03:55:27.574Z,
+    userId: 'grantikinsr@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Wed Feb 23 2022 21:55:27 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8042',
+    created_at: 2022-02-24T03:55:27.671Z,
+    userId: 'grantikinsr@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Wed Feb 23 2022 21:55:27 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8116',
+    created_at: 2022-02-24T03:57:09.588Z,
+    userId: 'grantikinsr@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Wed Feb 23 2022 21:57:09 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8119',
+    created_at: 2022-02-24T03:57:09.677Z,
+    userId: 'grantikinsr@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Wed Feb 23 2022 21:57:09 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8121',
+    created_at: 2022-02-24T03:57:09.746Z,
+    userId: 'grantikinsr@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Wed Feb 23 2022 21:57:09 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8189',
+    created_at: 2022-02-24T03:58:38.953Z,
+    userId: 'grantikinsr@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Wed Feb 23 2022 21:58:38 GMT-0600 (Central Standard Time)'
+  }
+]
+[
+  {
+    id: '8331',
+    created_at: 2022-02-25T19:52:11.971Z,
+    userId: 'nknguye5@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '[]',
+    date: 'Fri Feb 25 2022 13:52:11 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8392',
+    created_at: 2022-02-25T19:54:01.241Z,
+    userId: 'nknguye5@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 13:54:01 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8584',
+    created_at: 2022-02-25T19:58:25.335Z,
+    userId: 'nknguye5@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 13:58:25 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8921',
+    created_at: 2022-02-25T20:04:06.366Z,
+    userId: 'nknguye5@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:04:06 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8925',
+    created_at: 2022-02-25T20:04:06.497Z,
+    userId: 'nknguye5@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:04:06 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8926',
+    created_at: 2022-02-25T20:04:06.662Z,
+    userId: 'nknguye5@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:04:06 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9153',
+    created_at: 2022-02-25T20:06:03.097Z,
+    userId: 'nknguye5@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:06:02 GMT-0600 (Central Standard Time)'
+  }
+]
+[
+  {
+    id: '8269',
+    created_at: 2022-02-25T19:46:11.302Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '[]',
+    date: 'Fri Feb 25 2022 13:46:10 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8271',
+    created_at: 2022-02-25T19:48:01.778Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 13:48:01 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8274',
+    created_at: 2022-02-25T19:48:29.710Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 13:48:29 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8339',
+    created_at: 2022-02-25T19:52:16.414Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 13:52:16 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8412',
+    created_at: 2022-02-25T19:54:23.447Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 13:54:23 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8503',
+    created_at: 2022-02-25T19:56:44.226Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 13:56:43 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8507',
+    created_at: 2022-02-25T19:56:44.335Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 13:56:44 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8510',
+    created_at: 2022-02-25T19:56:44.494Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 13:56:44 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8511',
+    created_at: 2022-02-25T19:56:44.644Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 13:56:44 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8518',
+    created_at: 2022-02-25T19:56:57.298Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 13:56:57 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8522',
+    created_at: 2022-02-25T19:56:57.403Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 13:56:57 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8526',
+    created_at: 2022-02-25T19:56:57.487Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 13:56:57 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8528',
+    created_at: 2022-02-25T19:56:57.678Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 13:56:57 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8818',
+    created_at: 2022-02-25T20:02:57.301Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:02:57 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8820',
+    created_at: 2022-02-25T20:02:57.459Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:02:57 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8823',
+    created_at: 2022-02-25T20:02:57.628Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:02:57 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '8826',
+    created_at: 2022-02-25T20:02:57.863Z,
+    userId: 'rmdummet@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:02:57 GMT-0600 (Central Standard Time)'
+  }
+]
+[
+  {
+    id: '9136',
+    created_at: 2022-02-25T20:05:58.572Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '[]',
+    date: 'Fri Feb 25 2022 14:05:58 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9348',
+    created_at: 2022-02-25T20:08:14.581Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:08:14 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '9998',
+    created_at: 2022-02-25T20:14:13.578Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:14:13 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10420',
+    created_at: 2022-02-25T20:18:03.853Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:18:04 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10421',
+    created_at: 2022-02-25T20:18:03.935Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:18:04 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10426',
+    created_at: 2022-02-25T20:18:04.187Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:18:04 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10866',
+    created_at: 2022-02-25T20:22:00.550Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:22:00 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10867',
+    created_at: 2022-02-25T20:22:00.647Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:22:01 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '10871',
+    created_at: 2022-02-25T20:22:00.815Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Fri Feb 25 2022 14:22:01 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11130',
+    created_at: 2022-02-25T20:25:07.070Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:25:07 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11538',
+    created_at: 2022-02-25T20:30:31.415Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:30:31 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11542',
+    created_at: 2022-02-25T20:30:31.632Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:30:31 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11543',
+    created_at: 2022-02-25T20:30:31.732Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:30:32 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11547',
+    created_at: 2022-02-25T20:30:31.963Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:30:32 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11701',
+    created_at: 2022-02-25T20:36:47.433Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:36:47 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11705',
+    created_at: 2022-02-25T20:36:47.647Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:36:47 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11708',
+    created_at: 2022-02-25T20:36:47.846Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:36:48 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11710',
+    created_at: 2022-02-25T20:36:48.045Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:36:48 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11799',
+    created_at: 2022-02-25T20:45:51.657Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Fri Feb 25 2022 14:45:51 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11800',
+    created_at: 2022-02-25T20:45:51.837Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Fri Feb 25 2022 14:45:52 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11806',
+    created_at: 2022-02-25T20:45:52.156Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:45:52 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11808',
+    created_at: 2022-02-25T20:45:52.429Z,
+    userId: 'ljgilmor@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Fri Feb 25 2022 14:45:52 GMT-0600 (Central Standard Time)'
+  }
+]
+[
+  {
+    id: '7373',
+    created_at: 2022-02-24T01:49:27.863Z,
+    userId: 'kmnguye5@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '[]',
+    date: 'Wed Feb 23 2022 19:49:27 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7390',
+    created_at: 2022-02-24T01:51:09.349Z,
+    userId: 'kmnguye5@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Wed Feb 23 2022 19:51:09 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7544',
+    created_at: 2022-02-24T01:56:19.183Z,
+    userId: 'kmnguye5@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Wed Feb 23 2022 19:56:19 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7772',
+    created_at: 2022-02-24T02:03:49.431Z,
+    userId: 'kmnguye5@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Wed Feb 23 2022 20:03:49 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7774',
+    created_at: 2022-02-24T02:03:49.561Z,
+    userId: 'kmnguye5@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["research","styling"]',
+    date: 'Wed Feb 23 2022 20:03:49 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '7778',
+    created_at: 2022-02-24T02:03:49.896Z,
+    userId: 'kmnguye5@uno.edu',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Wed Feb 23 2022 20:03:49 GMT-0600 (Central Standard Time)'
+  }
+]
+[
+  {
+    id: '11911',
+    created_at: 2022-03-01T04:51:50.573Z,
+    userId: 'juliemiller14@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '[]',
+    date: 'Mon Feb 28 2022 22:51:53 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11914',
+    created_at: 2022-03-01T04:53:26.815Z,
+    userId: 'juliemiller14@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spelling","grammar","links"]',
+    date: 'Mon Feb 28 2022 22:53:30 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '11966',
+    created_at: 2022-03-01T04:56:02.843Z,
+    userId: 'juliemiller14@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["styling","research"]',
+    date: 'Mon Feb 28 2022 22:56:06 GMT-0600 (Central Standard Time)'
+  },
+  {
+    id: '12037',
+    created_at: 2022-03-01T04:58:52.369Z,
+    userId: 'juliemiller14@gmail.com',
+    type: 'status/setCanCurrentlyTrain',
+    action: '["spoof"]',
+    date: 'Mon Feb 28 2022 22:58:56 GMT-0600 (Central Standard Time)'
+  }
+]
