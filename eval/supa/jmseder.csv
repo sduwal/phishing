@@ -1,0 +1,13 @@
+subject,real,pre,post
+Your payment has been declined,Yes,Maybe,Maybe
+John give us another chance? We've got thousands of new TV shows and movies.,No,No,No
+Your number has been updated.,No,Maybe,No
+Update your payment details,No,Maybe,Yes
+Please update your payment details,Yes,Maybe,Yes
+Free Netflix for 30 days,Yes,No,No
+We are sorry to say goodbye,No,No,No
+Your cancellation confirmation,Yes,No,Maybe
+Account suspended,Yes,Maybe,Yes
+New sign-in to Netflix,Yes,Yes,No
+Your account has been compromised,Yes,Maybe,Yes
+Spreadsheet,Yes,No,No
